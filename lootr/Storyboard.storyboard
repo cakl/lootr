@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6rX-bH-e1F">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Loot View View Controller - Loot View-->
+        <scene sceneID="Yzh-Vj-hGD">
+            <objects>
+                <viewController id="PDh-Fz-UnH" customClass="LootViewViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j7O-Yv-fGG"/>
+                        <viewControllerLayoutGuide type="bottom" id="ddi-XD-bLk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Hj-jQ-5Y3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="08a-Js-DbU">
+                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Loot View" id="5uk-2o-rew"/>
+                    <connections>
+                        <outlet property="mapView" destination="08a-Js-DbU" id="UwZ-1y-qkY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uyx-Sd-kbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="443" y="-374"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="aJ1-eT-Jq0">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="6rX-bH-e1F" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="Dpm-vj-6pM">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="PDh-Fz-UnH" kind="relationship" relationship="viewControllers" id="xAX-lC-QRP"/>
+                        <segue destination="9nX-ep-pAU" kind="relationship" relationship="viewControllers" id="pB7-lS-IGW"/>
+                        <segue destination="NId-H3-z0k" kind="relationship" relationship="viewControllers" id="4Fm-cq-wr0"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lmq-N5-f87" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-91" y="-47"/>
+        </scene>
+        <!--View Controller - Settings-->
+        <scene sceneID="SXj-fc-TIS">
+            <objects>
+                <viewController id="NId-H3-z0k" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pa4-tC-d9O"/>
+                        <viewControllerLayoutGuide type="bottom" id="RrM-ZA-PlY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kGL-Wz-HZa">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Settings" id="rGI-rL-2hs"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vhn-wr-qNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="443" y="939"/>
+        </scene>
+        <!--View Controller - Loot List-->
+        <scene sceneID="O9v-3i-UUI">
+            <objects>
+                <viewController id="9nX-ep-pAU" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HJc-DZ-Pxz"/>
+                        <viewControllerLayoutGuide type="bottom" id="RJX-1I-6VD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HVP-tO-ujQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Loot List" id="odB-HR-sdw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0FM-fj-TfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="443" y="279"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

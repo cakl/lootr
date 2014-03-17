@@ -28,7 +28,8 @@
 
 - (void)testExample
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    [NSThread sleepForTimeInterval:5.0];
+    NSLog(@"done");
 }
 
 @end
