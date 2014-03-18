@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2725968318D837E3003BF04E /* MappingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2725968018D837E3003BF04E /* MappingTests.m */; };
+		2725968418D837E3003BF04E /* RKResponseDescriptorWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2725968218D837E3003BF04E /* RKResponseDescriptorWrapper.m */; };
+		2725968818D838D5003BF04E /* loots.json in Resources */ = {isa = PBXBuildFile; fileRef = 2725968718D838D5003BF04E /* loots.json */; };
 		27491F4518D74B86005E3F38 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27491F4418D74B86005E3F38 /* Storyboard.storyboard */; };
 		27491F4718D74C0C005E3F38 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
@@ -44,6 +47,10 @@
 
 /* Begin PBXFileReference section */
 		13391FF8791D4B9BB6C83794 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2725968018D837E3003BF04E /* MappingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappingTests.m; sourceTree = "<group>"; };
+		2725968118D837E3003BF04E /* RKResponseDescriptorWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKResponseDescriptorWrapper.h; sourceTree = "<group>"; };
+		2725968218D837E3003BF04E /* RKResponseDescriptorWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKResponseDescriptorWrapper.m; sourceTree = "<group>"; };
+		2725968718D838D5003BF04E /* loots.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loots.json; path = Fixtures/loots.json; sourceTree = "<group>"; };
 		27491F4418D74B86005E3F38 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		27491F4618D74C0C005E3F38 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		27C7BF3818D7498100761C84 /* lootr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lootr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2725968918D838DE003BF04E /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				2725968718D838D5003BF04E /* loots.json */,
+			);
+			name = Fixtures;
+			sourceTree = "<group>";
+		};
 		27C7BF2F18D7498100761C84 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +192,10 @@
 			isa = PBXGroup;
 			children = (
 				27C7BF6618D7498200761C84 /* lootrTests.m */,
+				2725968018D837E3003BF04E /* MappingTests.m */,
+				2725968118D837E3003BF04E /* RKResponseDescriptorWrapper.h */,
+				2725968218D837E3003BF04E /* RKResponseDescriptorWrapper.m */,
+				2725968918D838DE003BF04E /* Fixtures */,
 				27C7BF6118D7498100761C84 /* Supporting Files */,
 			);
 			path = lootrTests;
@@ -288,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27C7BF6518D7498200761C84 /* InfoPlist.strings in Resources */,
+				2725968818D838D5003BF04E /* loots.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +365,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2725968418D837E3003BF04E /* RKResponseDescriptorWrapper.m in Sources */,
+				2725968318D837E3003BF04E /* MappingTests.m in Sources */,
 				27C7BF6718D7498200761C84 /* lootrTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -481,6 +503,7 @@
 		};
 		27C7BF6E18D7498200761C84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13391FF8791D4B9BB6C83794 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/lootr.app/lootr";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -494,7 +517,13 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = "lootrTests/lootrTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -503,6 +532,7 @@
 		};
 		27C7BF6F18D7498200761C84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13391FF8791D4B9BB6C83794 /* Pods.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/lootr.app/lootr";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -512,7 +542,13 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "lootr/lootr-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(BUILT_PRODUCTS_DIR)/../../Headers\"",
+				);
 				INFOPLIST_FILE = "lootrTests/lootrTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

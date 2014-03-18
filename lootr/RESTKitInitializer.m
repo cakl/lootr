@@ -41,8 +41,11 @@
                                                          @"description": @"description",
                                                          @"latitude": @"latitude",
                                                          @"longitude" : @"longitude",
-                                                         @"title" : @"title"
+                                                         @"title" : @"title",
+                                                         @"accuracy" : @"accuracy"
                                                          }];
+    
+    [_lootsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:self.userMapping]];
     
     return _lootsMapping;
 }

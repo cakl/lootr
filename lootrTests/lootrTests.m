@@ -30,6 +30,8 @@
 {
     [NSThread sleepForTimeInterval:5.0];
     NSLog(@"done");
+    XCTAssertTrue(true, @"test always true");
+    
 }
 
 @end
