@@ -1,0 +1,68 @@
+{
+    "loots": [
+        {
+            "radius": 25,
+            "creator": {
+                "username": "Baristamaniac"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "Share your delicious drinks",
+            "id": 1,
+            "title": "Starbucks",
+            "coordinate": {
+                "latitude": 47.22693,
+                "longitude": 8.8189,
+                "location": "Rapperswil"
+            }
+        },
+        {
+            "radius": 25,
+            "creator": {
+                "username": "Surfer"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "S läbe isch schön i Rappi",
+            "id": 2,
+            "title": "Rappi Hangout",
+            "coordinate": {
+                "latitude": 47.22254,
+                "longitude": 8.81624,
+                "location": "Rapperswil"
+            }
+        },
+        {
+            "radius": 25,
+            "creator": {
+                "username": "HSR"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "All what's important for students",
+            "id": 3,
+            "title": "Life@HSR",
+            "coordinate": {
+                "latitude": 47.22732,
+                "longitude": 8.81609,
+                "location": "Rapperswil"
+            }
+        },
+        {
+            "radius": 25,
+            "creator": {
+                "username": "BrummiDriver91"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "The hot cars from Rapperswil",
+            "id": 4,
+            "title": "Cars and stuff",
+            "coordinate": {
+                "latitude": 47.22378,
+                "longitude": 8.81725,
+                "location": "Rapperswil"
+            }
+        }
+    ]
+}

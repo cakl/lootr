@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Loot.h"
 
 @implementation AppDelegate
 

@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2725968318D837E3003BF04E /* MappingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2725968018D837E3003BF04E /* MappingTests.m */; };
+		2725968318D837E3003BF04E /* RestKitInitializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2725968018D837E3003BF04E /* RestKitInitializerTests.m */; };
 		2725968418D837E3003BF04E /* RKResponseDescriptorWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 2725968218D837E3003BF04E /* RKResponseDescriptorWrapper.m */; };
-		2725968818D838D5003BF04E /* loots.json in Resources */ = {isa = PBXBuildFile; fileRef = 2725968718D838D5003BF04E /* loots.json */; };
+		2732B94018DFB8130068E18B /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B93F18DFB8130068E18B /* Coordinate.m */; };
+		2732B94318DFC0F20068E18B /* lootList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2732B94218DFC0F20068E18B /* lootList.json */; };
+		2732B94518DFC1140068E18B /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2732B94418DFC1140068E18B /* lootSingle.json */; };
 		27491F4518D74B86005E3F38 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27491F4418D74B86005E3F38 /* Storyboard.storyboard */; };
 		27491F4718D74C0C005E3F38 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
@@ -47,10 +49,13 @@
 
 /* Begin PBXFileReference section */
 		13391FF8791D4B9BB6C83794 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		2725968018D837E3003BF04E /* MappingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MappingTests.m; sourceTree = "<group>"; };
+		2725968018D837E3003BF04E /* RestKitInitializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestKitInitializerTests.m; sourceTree = "<group>"; };
 		2725968118D837E3003BF04E /* RKResponseDescriptorWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKResponseDescriptorWrapper.h; sourceTree = "<group>"; };
 		2725968218D837E3003BF04E /* RKResponseDescriptorWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKResponseDescriptorWrapper.m; sourceTree = "<group>"; };
-		2725968718D838D5003BF04E /* loots.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = loots.json; path = Fixtures/loots.json; sourceTree = "<group>"; };
+		2732B93E18DFB8130068E18B /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
+		2732B93F18DFB8130068E18B /* Coordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinate.m; sourceTree = "<group>"; };
+		2732B94218DFC0F20068E18B /* lootList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootList.json; path = Fixtures/lootList.json; sourceTree = "<group>"; };
+		2732B94418DFC1140068E18B /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lootSingle.json; sourceTree = "<group>"; };
 		27491F4418D74B86005E3F38 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		27491F4618D74C0C005E3F38 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		27C7BF3818D7498100761C84 /* lootr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lootr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,10 +117,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2725968918D838DE003BF04E /* Fixtures */ = {
+		2732B94118DFBA100068E18B /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				2725968718D838D5003BF04E /* loots.json */,
+				27C7BF7718D749B600761C84 /* Loot.h */,
+				27C7BF7818D749B600761C84 /* Loot.m */,
+				27C7BF7918D749B600761C84 /* User.h */,
+				27C7BF7A18D749B600761C84 /* User.m */,
+				2732B93E18DFB8130068E18B /* Coordinate.h */,
+				2732B93F18DFB8130068E18B /* Coordinate.m */,
+			);
+			name = Domain;
+			sourceTree = "<group>";
+		};
+		2732B94618DFC1230068E18B /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				2732B94218DFC0F20068E18B /* lootList.json */,
+				2732B94418DFC1140068E18B /* lootSingle.json */,
 			);
 			name = Fixtures;
 			sourceTree = "<group>";
@@ -166,10 +185,7 @@
 				27C7BF7318D749A800761C84 /* RESTKitInitializer.h */,
 				27C7BF7418D749A800761C84 /* RESTKitInitializer_Internal.h */,
 				27C7BF7518D749A800761C84 /* RESTKitInitializer.m */,
-				27C7BF7718D749B600761C84 /* Loot.h */,
-				27C7BF7818D749B600761C84 /* Loot.m */,
-				27C7BF7918D749B600761C84 /* User.h */,
-				27C7BF7A18D749B600761C84 /* User.m */,
+				2732B94118DFBA100068E18B /* Domain */,
 				27C7BF5218D7498100761C84 /* Images.xcassets */,
 				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
@@ -192,10 +208,10 @@
 			isa = PBXGroup;
 			children = (
 				27C7BF6618D7498200761C84 /* lootrTests.m */,
-				2725968018D837E3003BF04E /* MappingTests.m */,
+				2732B94618DFC1230068E18B /* Fixtures */,
+				2725968018D837E3003BF04E /* RestKitInitializerTests.m */,
 				2725968118D837E3003BF04E /* RKResponseDescriptorWrapper.h */,
 				2725968218D837E3003BF04E /* RKResponseDescriptorWrapper.m */,
-				2725968918D838DE003BF04E /* Fixtures */,
 				27C7BF6118D7498100761C84 /* Supporting Files */,
 			);
 			path = lootrTests;
@@ -307,7 +323,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				27C7BF6518D7498200761C84 /* InfoPlist.strings in Resources */,
-				2725968818D838D5003BF04E /* loots.json in Resources */,
+				2732B94318DFC0F20068E18B /* lootList.json in Resources */,
+				2732B94518DFC1140068E18B /* lootSingle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +375,7 @@
 				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
 				27C7BF7218D7499F00761C84 /* LootViewViewController.m in Sources */,
 				27C7BF7B18D749B600761C84 /* Loot.m in Sources */,
+				2732B94018DFB8130068E18B /* Coordinate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2725968418D837E3003BF04E /* RKResponseDescriptorWrapper.m in Sources */,
-				2725968318D837E3003BF04E /* MappingTests.m in Sources */,
+				2725968318D837E3003BF04E /* RestKitInitializerTests.m in Sources */,
 				27C7BF6718D7498200761C84 /* lootrTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

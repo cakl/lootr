@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface RESTKitInitializer : NSObject
--(void) setupRESTKit:(NSError **) error;
+-(id)initWithApiUrl:(NSString*)apiUrl;
 @end

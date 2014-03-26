@@ -10,24 +10,28 @@
 #import "Loot.h"
 #import "User.h"
 
-#define API_URL @"http://152.96.56.70:8080/lootrserver/"
-#define LOOTS_PATH_PATTERN @"webapi/loots/X/:xCoordinate/Y/:yCoordinate"
+#define LOOTS_PATH_PATTERN @"/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist"
 
 
 @interface RESTKitInitializer()
 @property (nonatomic, strong) RKObjectManager *manager;
 @property (nonatomic, strong) RKObjectMapping *lootsMapping;
 @property (nonatomic, strong) RKObjectMapping *userMapping;
+@property (nonatomic, strong) RKObjectMapping *coordinateMapping;
 @property (nonatomic, strong) RKResponseDescriptor *lootsRD;
-@property (nonatomic, strong) RKResponseDescriptor *userRD;
 - (void)addGETMapping;
 @end
 
 @implementation RESTKitInitializer
 
--(void) setupRESTKit:(NSError **) error{
-    self.manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:API_URL]];
-    self.manager.requestSerializationMIMEType = RKMIMETypeJSON;
+-(id)initWithApiUrl:(NSString*)apiUrl{
+    self = [super init];
+    if(self){
+        self.manager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:apiUrl]];
+        self.manager.requestSerializationMIMEType = RKMIMETypeJSON;
+        [self addGETMapping];
+    }
+    return self;
 }
 
 - (RKObjectMapping *)lootsMapping {
@@ -38,14 +42,14 @@
     [_lootsMapping addAttributeMappingsFromDictionary:@{
                                                          @"id": @"identifier",
                                                          @"dateCreated": @"created",
-                                                         @"description": @"description",
-                                                         @"latitude": @"latitude",
-                                                         @"longitude" : @"longitude",
+                                                         @"dateUpdated": @"updated",
+                                                         @"summary": @"summary",
                                                          @"title" : @"title",
-                                                         @"accuracy" : @"accuracy"
+                                                         @"radius" : @"radius"
                                                          }];
     
     [_lootsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:self.userMapping]];
+    [_lootsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"coordinate" toKeyPath:@"coordinate" withMapping:self.coordinateMapping]];
     
     return _lootsMapping;
 }
@@ -55,28 +59,35 @@
         return _userMapping;
     }
     _userMapping = [RKObjectMapping mappingForClass:[User class]];
-    [_lootsMapping addAttributeMappingsFromDictionary:@{
+    [_userMapping addAttributeMappingsFromDictionary:@{
                                                         @"username": @"userName"
                                                         }];
     
     return _userMapping;
 }
 
--(RKResponseDescriptor*)lootsRD{
-    if(_lootsRD) return _lootsRD;
-    _lootsRD = [RKResponseDescriptor responseDescriptorWithMapping:self.lootsMapping method:RKRequestMethodGET pathPattern:LOOTS_PATH_PATTERN keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    return _lootsRD;
+- (RKObjectMapping *)coordinateMapping {
+    if(_coordinateMapping) {
+        return _coordinateMapping;
+    }
+    _coordinateMapping = [RKObjectMapping mappingForClass:[Coordinate class]];
+    [_coordinateMapping addAttributeMappingsFromDictionary:@{
+                                                        @"latitude": @"latitude",
+                                                        @"longitude": @"longitude",
+                                                        @"location": @"location"
+                                                        }];
+    
+    return _coordinateMapping;
 }
 
--(RKResponseDescriptor*)userRD{
-    if(_userRD) return _userRD;
-    _userRD = [RKResponseDescriptor responseDescriptorWithMapping:self.userMapping method:RKRequestMethodGET pathPattern:LOOTS_PATH_PATTERN keyPath:@"creator" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    return _userRD;
+-(RKResponseDescriptor*)lootsRD{
+    if(_lootsRD) return _lootsRD;
+    _lootsRD = [RKResponseDescriptor responseDescriptorWithMapping:self.lootsMapping method:RKRequestMethodGET pathPattern:LOOTS_PATH_PATTERN keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    return _lootsRD;
 }
 
 - (void)addGETMapping {
     [self.manager addResponseDescriptor:self.lootsRD];
-    [self.manager addResponseDescriptor:self.userRD];
 }
 
 @end

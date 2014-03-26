@@ -11,6 +11,7 @@
 @interface RESTKitInitializer : NSObject
 @property (nonatomic, strong, readonly) RKObjectMapping *lootsMapping;
 @property (nonatomic, strong, readonly) RKObjectMapping *userMapping;
+@property (nonatomic, strong) RKObjectMapping *coordinateMapping;
 @property (nonatomic, strong, readonly) RKResponseDescriptor *lootsRD;
-@property (nonatomic, strong, readonly) RKResponseDescriptor *userRD;
+-(id)initWithApiUrl:(NSString*)apiUrl;
 @end

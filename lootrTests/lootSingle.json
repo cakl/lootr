@@ -1,0 +1,20 @@
+{
+    "loots": [
+        {
+            "radius": 25,
+            "creator": {
+                "username": "HSR"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "All what's important for students",
+            "id": 3,
+            "title": "Life@HSR",
+            "coordinate": {
+                "latitude": 47.22732,
+                "longitude": 8.81609,
+                "location": "Rapperswil"
+            }
+        }
+    ]
+}
