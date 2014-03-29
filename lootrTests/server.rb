@@ -6,35 +6,101 @@ require 'rubygems'
 require 'sinatra'
 require 'json'
 
+apiBase = '/lootrserver/api/v1/'
+
+
 configure do
   set :port, 8081
   set :logging, true
   set :dump_errors, true
   set :public_folder, Proc.new { File.expand_path(File.join(root, 'Fixtures')) }
+  
 end
 
 def render_fixture(filename)
   send_file File.join(settings.public_folder, filename)
 end
 
-# Creates a route that will match /api/loots/lat/47.226/long/8.818/distance/100
+
+
+#LOOTS
+
+
+
+# Creates a route that will match /loots/lat/47.226/long/8.818/distance/100
 # PUNKT nicht KOMMA
-get '/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist' do
+get apiBase + 'loots/latitude/:lat/longitude/:long/distance/:dist' do
   render_fixture('lootList.json')
 end
 
 
-# Creates a route that will match /api/loots/lat/47.226/long/8.818/count/4
+
+
+# Creates a route that will match /oots/lat/47.226/long/8.818/count/4
 # PUNKT nicht KOMMA
-get '/lootrserver/api/loots/lat/:lat/long/:long/count/:count' do
+get apiBase + 'loots/latitude/:lat/longitude/:long/count/:count' do
   render_fixture('lootList.json')
 end
 
 
-# Creates a route that will match /api/loots/id/3
-# PUNKT nicht KOMMA
-get '/lootrserver/api/loots/id/:id' do
-  render_fixture('lootSingle.json')
+
+# BENÖTIGT TOKEN:
+# https://username:token@www.lootrapp.com/api/v1/loots/3
+# Creates a route that will match /loots/3
+get apiBase + 'loots/:id' do
+  if params[:id] == '666'
+    status 404
+  else
+    render_fixture('lootSingle.json')
+  end
+end
+
+
+#CONTENTS
+# BENÖTIGT TOKEN:
+# https://username:token@www.lootrapp.com/api/v1/contents
+# Creates a route that will match /contents
+post apiBase + 'contents' do
+  if params[:id] == '666'
+    status 404
+  else
+    status 201
+  end
+end
+
+
+
+
+
+#REPORTS
+
+
+# BENÖTIGT TOKEN:
+# https://username:token@www.lootrapp.com/api/v1/reports
+# Creates a route that will match /reports
+get apiBase + 'reports' do
+  render_fixture('reportsList.json')
+end
+
+
+# BENÖTIGT TOKEN:
+# https://username:token@www.lootrapp.com/api/v1/reports/3
+# Creates a route that will match /reports/3
+get apiBase + 'reports/:id' do
+  if params[:id] == '666'
+    status 404
+  else
+    render_fixture('reportsSingle.json')
+  end
+end
+
+
+# BENÖTIGT TOKEN:
+# https://username:token@www.lootrapp.com/api/v1/reports
+# Creates a route that will match /reports
+post apiBase + 'reports' do
+  headers 'Location' => apiBase + "reports/12"
+  status 201
 end
 
 
@@ -42,56 +108,19 @@ end
 
 
 
+#USERS
 
-
-
-# Creates a route that will match /api/activity/<article ID>
-get '/api/activity/:id' do
-  render_fixture('activity.json')
+# Creates a route that will match /users
+post apiBase + 'users' do
+  status 201
 end
 
-get '/api/activities' do
-  render_fixture('activities.json')
-end
 
-get '/api/checkin' do
-  render_fixture('checkin.json')
-  status 200
-end
-
-get '/api/Login' do
-  render_fixture('token.json')
-  status 200
-end
-
-get '/api/hash' do
-  render_fixture('hash.json')
-  status 200
-end
-
-get '/api/peoplecount' do
-  render_fixture('peoplecount.json')
-  status 200
-end
-
-get '/api/setting' do
-  render_fixture('settings.json')
-  status 200
-end
-
-get '/api/locationvisibilities' do
-  render_fixture('locationvisibilities.json')
-  status 200
-end
-
-# Return a 503 response to test error conditions
-get '/offline' do
-  status 503
-end
-
-# Simulate a JSON error
-get '/error' do
-  status 400
-  content_type 'application/json'
-  "{\"error\": \"An error occurred!!\"}"
+# Creates a route that will match /users
+post apiBase + 'users/login' do
+  if params[:username] == '666'
+    status 401
+  else
+    render_fixture('usersToken.json')
+  end
 end

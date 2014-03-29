@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758BD18E732B8003939AA /* ServerCallerTests.m */; };
+		272758C018E73886003939AA /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 272758BF18E73886003939AA /* lootSingle.json */; };
+		272758C318E74018003939AA /* ServerCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758C218E74018003939AA /* ServerCaller.m */; };
 		2732B94018DFB8130068E18B /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B93F18DFB8130068E18B /* Coordinate.m */; };
 		2732B94318DFC0F20068E18B /* lootList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2732B94218DFC0F20068E18B /* lootList.json */; };
-		2732B94518DFC1140068E18B /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 2732B94418DFC1140068E18B /* lootSingle.json */; };
 		2739454318E37ABB00677E60 /* RKObjectMapperInitializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */; };
 		27491F4518D74B86005E3F38 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27491F4418D74B86005E3F38 /* Storyboard.storyboard */; };
 		27491F4718D74C0C005E3F38 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
@@ -50,10 +51,12 @@
 /* Begin PBXFileReference section */
 		13391FF8791D4B9BB6C83794 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		272758BD18E732B8003939AA /* ServerCallerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerTests.m; sourceTree = "<group>"; };
+		272758BF18E73886003939AA /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootSingle.json; path = Fixtures/lootSingle.json; sourceTree = "<group>"; };
+		272758C118E74018003939AA /* ServerCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCaller.h; sourceTree = "<group>"; };
+		272758C218E74018003939AA /* ServerCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCaller.m; sourceTree = "<group>"; };
 		2732B93E18DFB8130068E18B /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
 		2732B93F18DFB8130068E18B /* Coordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinate.m; sourceTree = "<group>"; };
 		2732B94218DFC0F20068E18B /* lootList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootList.json; path = Fixtures/lootList.json; sourceTree = "<group>"; };
-		2732B94418DFC1140068E18B /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lootSingle.json; sourceTree = "<group>"; };
 		2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectMapperInitializerTests.m; sourceTree = "<group>"; };
 		27491F4418D74B86005E3F38 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		27491F4618D74C0C005E3F38 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -132,7 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				2732B94218DFC0F20068E18B /* lootList.json */,
-				2732B94418DFC1140068E18B /* lootSingle.json */,
+				272758BF18E73886003939AA /* lootSingle.json */,
 			);
 			name = Fixtures;
 			sourceTree = "<group>";
@@ -182,6 +185,8 @@
 				27491F4418D74B86005E3F38 /* Storyboard.storyboard */,
 				27AEF43D18E45ADD004C18A9 /* RKObjectManagerHelper.h */,
 				27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */,
+				272758C118E74018003939AA /* ServerCaller.h */,
+				272758C218E74018003939AA /* ServerCaller.m */,
 				2732B94118DFBA100068E18B /* Domain */,
 				27C7BF5218D7498100761C84 /* Images.xcassets */,
 				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
@@ -320,7 +325,7 @@
 			files = (
 				27C7BF6518D7498200761C84 /* InfoPlist.strings in Resources */,
 				2732B94318DFC0F20068E18B /* lootList.json in Resources */,
-				2732B94518DFC1140068E18B /* lootSingle.json in Resources */,
+				272758C018E73886003939AA /* lootSingle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,6 +372,7 @@
 				27AEF43F18E45ADD004C18A9 /* RKObjectManagerHelper.m in Sources */,
 				27C7BF4E18D7498100761C84 /* AppDelegate.m in Sources */,
 				27C7BF7C18D749B600761C84 /* User.m in Sources */,
+				272758C318E74018003939AA /* ServerCaller.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
 				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
 				27C7BF7218D7499F00761C84 /* LootViewViewController.m in Sources */,

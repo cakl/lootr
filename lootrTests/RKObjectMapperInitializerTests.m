@@ -20,7 +20,7 @@
 static NSString* const apiUrlTest = @"http://localhost:8081";
 static NSString* const bundleIdentifier = @"ch.hsr.lootrTests";
 static NSString* const lootsKeyPath = @"loots";
-static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
+static NSString* const lootsSingleJsonFileName = @"lootList.json";
 
 - (void)setUp
 {
@@ -56,8 +56,8 @@ static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
 -(void)testResponseDescriptorsWithLootsInDistanceCall
 {
     //given
-    NSString* pathUnderTest = @"/lootrserver/api/loots/lat/47.123/long/9.8684/distance/123";
-    NSString* pathPatternUnderTest = @"/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist";
+    NSString* pathUnderTest = @"/lootrserver/api/v1/loots/latitude/47.123/longitude/9.8684/distance/123";
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
@@ -80,12 +80,11 @@ static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
 -(void)testLootsMapping
 {
     //given
-    
     Loot* loot = [Loot new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
     id loots = [parsedJSON objectForKey:lootsKeyPath];
 
-    NSString* pathPatternUnderTest = @"/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist";
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
@@ -116,7 +115,7 @@ static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
     id loots = [parsedJSON objectForKey:lootsKeyPath];
     
-    NSString* pathPatternUnderTest = @"/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist";
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
     RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;
@@ -137,7 +136,7 @@ static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
     id loots = [parsedJSON objectForKey:lootsKeyPath];
     
-    NSString* pathPatternUnderTest = @"/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist";
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
     RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;

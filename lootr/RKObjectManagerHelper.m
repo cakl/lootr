@@ -10,7 +10,7 @@
 #import "Loot.h"
 
 @implementation RKObjectManagerHelper
-static NSString* const lootsByDistancePathPattern = @"/lootrserver/api/loots/lat/:lat/long/:long/distance/:dist";
+static NSString* const lootsByDistancePathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
 
 +(void) configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager{
     RKObjectMapping* lootsMapping = [RKObjectMapping mappingForClass:[Loot class]];
