@@ -1,18 +1,18 @@
 //
-//  lootrTests.m
-//  lootrTests
+//  ServerCallerTests.m
+//  lootr
 //
-//  Created by Sebastian Bock on 17.03.14.
+//  Created by Sebastian Bock on 29.03.14.
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface lootrTests : XCTestCase
+@interface ServerCallerTests : XCTestCase
 
 @end
 
-@implementation lootrTests
+@implementation ServerCallerTests
 
 - (void)setUp
 {
@@ -28,9 +28,7 @@
 
 - (void)testExample
 {
-    [NSThread sleepForTimeInterval:3.0];
-    NSLog(@"done");
-    XCTAssertTrue(true, @"test always true");
-    
+    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
+
 @end
