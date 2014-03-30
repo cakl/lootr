@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Loot View View Controller - Loot Map-->
+        <!--Loot Map View Controller - Loot Map-->
         <scene sceneID="Yzh-Vj-hGD">
             <objects>
-                <viewController id="PDh-Fz-UnH" customClass="LootViewViewController" sceneMemberID="viewController">
+                <viewController id="PDh-Fz-UnH" customClass="LootMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j7O-Yv-fGG"/>
                         <viewControllerLayoutGuide type="bottom" id="ddi-XD-bLk"/>
@@ -52,10 +52,10 @@
             </objects>
             <point key="canvasLocation" x="-91" y="-47"/>
         </scene>
-        <!--View Controller - Settings-->
+        <!--Settings View Controller - Settings-->
         <scene sceneID="SXj-fc-TIS">
             <objects>
-                <viewController id="NId-H3-z0k" sceneMemberID="viewController">
+                <viewController id="NId-H3-z0k" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Pa4-tC-d9O"/>
                         <viewControllerLayoutGuide type="bottom" id="RrM-ZA-PlY"/>
@@ -65,16 +65,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" id="rGI-rL-2hs"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsTabIconInactive" id="rGI-rL-2hs"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhn-wr-qNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="443" y="939"/>
         </scene>
-        <!--View Controller - Loot List-->
+        <!--Loot List View Controller - Loot List-->
         <scene sceneID="O9v-3i-UUI">
             <objects>
-                <viewController id="9nX-ep-pAU" sceneMemberID="viewController">
+                <viewController id="9nX-ep-pAU" customClass="LootListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HJc-DZ-Pxz"/>
                         <viewControllerLayoutGuide type="bottom" id="RJX-1I-6VD"/>
@@ -84,7 +84,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Loot List" id="odB-HR-sdw"/>
+                    <tabBarItem key="tabBarItem" title="Loot List" image="ListTabIcon" id="odB-HR-sdw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FM-fj-TfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -92,7 +92,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ListTabIcon" width="25" height="25"/>
         <image name="MapTabIconInactive" width="25" height="25"/>
+        <image name="SettingsTabIconInactive" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

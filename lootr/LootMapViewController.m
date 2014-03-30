@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
 
-#import "LootViewViewController.h"
+#import "LootMapViewController.h"
 
-@interface LootViewViewController ()
+@interface LootMapViewController ()
 
 @end
 
-@implementation LootViewViewController
+@implementation LootMapViewController
 
 - (void)viewDidLoad
 {
