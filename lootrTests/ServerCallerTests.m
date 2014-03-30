@@ -10,7 +10,9 @@
 #import <RestKit/RestKit.h>
 #import <RestKit/Testing.h>
 #import "RKObjectManagerHelper.h"
+#import "RestKitServerCaller.h"
 #import "ServerCaller.h"
+#import "Loot.h"
 
 @interface ServerCallerTests : XCTestCase
 
@@ -32,17 +34,19 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
     [super tearDown];
 }
 
-- (void)testServerCallLootsByDistance
+- (void)testServerCallLootsByDistanceOnSuccess
 {
     //given
     [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
     RKObjectManager* objectManager = [RKTestFactory objectManager];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
-    ServerCaller* serverCaller = [[ServerCaller alloc] initWithObjectManager:objectManager];
+    id <ServerCaller> serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
+    
     //when
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [serverCaller getLootsAtLatitude:[NSNumber numberWithFloat:3.14] andLongitude:[NSNumber numberWithFloat:3.14] inDistance:[NSNumber numberWithInt:100] onSuccess:^(NSArray *loots) {
+    //then
         XCTAssertEqual([loots count], 4, @"4 Loots were excpeted to load");
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError *error) {
@@ -51,8 +55,11 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
     }];
     
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
-    //then
 }
+
+
+
+
 
 
 

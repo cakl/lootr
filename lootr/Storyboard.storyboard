@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Loot View View Controller - Loot View-->
+        <!--Loot View View Controller - Loot Map-->
         <scene sceneID="Yzh-Vj-hGD">
             <objects>
                 <viewController id="PDh-Fz-UnH" customClass="LootViewViewController" sceneMemberID="viewController">
@@ -23,7 +23,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Loot View" id="5uk-2o-rew"/>
+                    <tabBarItem key="tabBarItem" title="Loot Map" image="MapTabIconInactive" id="5uk-2o-rew"/>
                     <connections>
                         <outlet property="mapView" destination="08a-Js-DbU" id="UwZ-1y-qkY"/>
                     </connections>
@@ -91,6 +91,9 @@
             <point key="canvasLocation" x="443" y="279"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MapTabIconInactive" width="25" height="25"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

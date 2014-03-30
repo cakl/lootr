@@ -6,13 +6,14 @@
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
 
-#import "ServerCaller.h"
+#import "RestKitServerCaller.h"
 
-@interface ServerCaller ()
+@interface RestKitServerCaller ()
 @property (nonatomic, strong) RKObjectManager* objectManager;
 @end
 
-@implementation ServerCaller
+@implementation RestKitServerCaller
+static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(instancetype) initWithObjectManager:(RKObjectManager*)objectManager
 {
@@ -25,11 +26,10 @@
 
 -(void) getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude inDistance:(NSNumber*)distance onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure
 {
-    
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"/lootrserver/api/v1/loots/latitude/%@/longitude/%@/distance/%@", latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/latitude/%@/longitude/%@/distance/%@", apiPath, latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([mappingResult array]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        
+        failure(error);
     }];
 }
 
