@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "Loot.h"
+#import "RKObjectManagerHelper.h"
 
 @implementation AppDelegate
 
@@ -17,6 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://localhost:8081"]];
+    [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    
     return YES;
 }
 

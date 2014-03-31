@@ -140,7 +140,7 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
     RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;
-    RKRelationshipMapping* coordinateRelationshipMapping = [[lootsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"coordinate"];
+    RKRelationshipMapping* coordinateRelationshipMapping = [[lootsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"coord"];
     //when
     RKMappingTest *test = [RKMappingTest testForMapping:[coordinateRelationshipMapping mapping] sourceObject:[loots firstObject] destinationObject:coordinate];
     test.rootKeyPath = @"coordinate";

@@ -17,6 +17,6 @@
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* summary;
 @property (nonatomic, strong) User* creator;
-@property (nonatomic, strong) Coordinate* coordinate;
+@property (nonatomic, strong) Coordinate* coord;
 @property (nonatomic, strong) NSNumber* radius;
 @end
