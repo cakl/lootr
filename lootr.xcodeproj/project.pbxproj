@@ -38,7 +38,7 @@
 		27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF7118D7499F00761C84 /* LootMapViewController.m */; };
 		27C7BF7B18D749B600761C84 /* Loot.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF7818D749B600761C84 /* Loot.m */; };
 		27C7BF7C18D749B600761C84 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF7A18D749B600761C84 /* User.m */; };
-		27C7BF7E18D749F800761C84 /* MeiliZuhause.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 27C7BF7D18D749F800761C84 /* MeiliZuhause.gpx */; };
+		27C7BF7E18D749F800761C84 /* HSR.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 27C7BF7D18D749F800761C84 /* HSR.gpx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -96,7 +96,7 @@
 		27C7BF7818D749B600761C84 /* Loot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loot.m; sourceTree = "<group>"; };
 		27C7BF7918D749B600761C84 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		27C7BF7A18D749B600761C84 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		27C7BF7D18D749F800761C84 /* MeiliZuhause.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = MeiliZuhause.gpx; sourceTree = "<group>"; };
+		27C7BF7D18D749F800761C84 /* HSR.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HSR.gpx; sourceTree = "<group>"; };
 		694B1DA0DB63438A954FE498 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -247,7 +247,7 @@
 		27C7BF7F18D749FA00761C84 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27C7BF7D18D749F800761C84 /* MeiliZuhause.gpx */,
+				27C7BF7D18D749F800761C84 /* HSR.gpx */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27C7BF7E18D749F800761C84 /* MeiliZuhause.gpx in Resources */,
+				27C7BF7E18D749F800761C84 /* HSR.gpx in Resources */,
 				27491F4518D74B86005E3F38 /* Storyboard.storyboard in Resources */,
 				27C7BF4818D7498100761C84 /* InfoPlist.strings in Resources */,
 				27C7BF5318D7498100761C84 /* Images.xcassets in Resources */,

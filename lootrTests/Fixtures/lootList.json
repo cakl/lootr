@@ -63,6 +63,38 @@
                 "longitude": 8.81725,
                 "location": "Rapperswil"
             }
+        },
+        {
+            "radius": 25,
+            "creator": {
+                "username": "ZuriCity"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "Zurich Is Geil",
+            "id": 5,
+            "title": "Cars and stuff",
+            "coordinate": {
+                "latitude": 47.36864,
+                "longitude": 8.53918,
+                "location": "Zürich"
+            }
+        },
+        {
+            "radius": 25,
+            "creator": {
+                "username": "buuurebueb"
+            },
+            "dateCreated": "2014-03-23T21:30:10.178",
+            "dateUpdated": "2014-03-23T21:30:10.178",
+            "summary": "sang galle isch lääääs",
+            "id": 6,
+            "title": "Cars and stuff",
+            "coordinate": {
+                "latitude": 47.4178667,
+                "longitude": 9.37013626,
+                "location": "St. Gallen"
+            }
         }
     ]
-} 
+}

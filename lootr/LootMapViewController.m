@@ -14,6 +14,7 @@
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
+@property (nonatomic, strong) id <ServerCaller> serverCaller;
 @end
 
 @implementation LootMapViewController
@@ -24,12 +25,11 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    self.serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:[RKObjectManager sharedManager]];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
-    
-    
 }
 
--(void)viewWillAppear:(BOOL)animated
+- (void)zoomIntoUserLocation
 {
     MKUserLocation* aUserLocation = self.mapView.userLocation;
     MKCoordinateRegion region;
@@ -43,6 +43,11 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self zoomIntoUserLocation];
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,41 +79,25 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     
     if( distance > scrollUpdateDistance )
     {
-        // do something awesome
         NSLog(@"Center Latitude: %f Longitude: %f", [self.mapView centerCoordinate].latitude, [self.mapView centerCoordinate].longitude);
-         //LootAnnotation* exampleAnnotation = [[LootAnnotation alloc] initWithTitle:@"testLoot" andCoordinate:[self.mapView centerCoordinate]];
-        //[self.mapView addAnnotation:exampleAnnotation];
-        
-        id <ServerCaller> serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:[RKObjectManager sharedManager]];
-        
-        [serverCaller getLootsAtLatitude:[NSNumber numberWithFloat:3.14] andLongitude:[NSNumber numberWithFloat:3.14] inDistance:[NSNumber numberWithInt:100] onSuccess:^(NSArray *loots) {
-            NSLog(@"%@", loots);
-            [self.mapView addAnnotations:loots];
-            NSLog(@"%i", [[self.mapView annotations] count]);
-        } onFailure:^(NSError *error) {
-            NSLog(@"%@", error);
-        }];
-        
+        [self loadLoots];
     }
-    
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
-    
 }
 
-/*
- - (void)mapView:(MKMapView *)aMapView didUpdateUserLocation:(MKUserLocation *)aUserLocation {
- MKCoordinateRegion region;
- MKCoordinateSpan span;
- span.latitudeDelta = 0.100;
- span.longitudeDelta = 0.100;
- CLLocationCoordinate2D location;
- location.latitude = aUserLocation.coordinate.latitude;
- location.longitude = aUserLocation.coordinate.longitude;
- region.span = span;
- region.center = location;
- [aMapView setRegion:region animated:YES];
- }
- */
+- (void)loadLoots {
+    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].latitude] andLongitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].longitude] inDistance:[NSNumber numberWithInt:100] onSuccess:^(NSArray *loots) {
+        NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
+        [newLoots removeObjectsInArray:[self.mapView annotations]];
+        [self.mapView addAnnotations:newLoots];
+        NSLog(@"%d", [[self.mapView annotations] count]);
+    } onFailure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
+}
+
+
+
 /*
  #pragma mark - Navigation
  
