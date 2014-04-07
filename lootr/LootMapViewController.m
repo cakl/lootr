@@ -7,8 +7,7 @@
 //
 
 #import "LootMapViewController.h"
-#import "ServerCaller.h"
-#import "RestKitServerCaller.h"
+
 #import "Loot+Annotation.h"
 
 
@@ -20,12 +19,28 @@
 @implementation LootMapViewController
 static const CLLocationDistance scrollUpdateDistance = 200.0;
 
+-(id <ServerCaller>)serverCaller{
+    if (_serverCaller == nil)
+    {
+        _serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:[RKObjectManager sharedManager]];
+    }
+    return _serverCaller;
+}
+
+- (instancetype)initWithServerCaller:(id <ServerCaller>)serverCaller
+{
+    self = [super init];
+    if (self) {
+        _serverCaller = serverCaller;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
-    self.serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:[RKObjectManager sharedManager]];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
 }
 
