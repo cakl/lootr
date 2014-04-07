@@ -45,7 +45,7 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
     
     [serverCaller getLootsAtLatitude:[NSNumber numberWithFloat:3.14] andLongitude:[NSNumber numberWithFloat:3.14] inDistance:[NSNumber numberWithInt:100] onSuccess:^(NSArray *loots) {
     //then
-        XCTAssertEqual([loots count], 4, @"4 Loots were excpeted to load");
+        XCTAssertEqual([loots count], 6, @"6 Loots were excpeted to load");
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError *error) {
         XCTFail(@"Failure returned");

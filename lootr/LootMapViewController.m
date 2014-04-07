@@ -111,8 +111,6 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     }];
 }
 
-
-
 /*
  #pragma mark - Navigation
  

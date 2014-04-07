@@ -73,7 +73,7 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
         [requestOperation waitUntilFinished];
         //then
         XCTAssertTrue(requestOperation.HTTPRequestOperation.response.statusCode == 200, @"Expected 200 response");
-        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)4, @"Expected to load four loots");
+        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)6, @"Expected to load 6 loots");
     }
 }
 
