@@ -9,8 +9,8 @@
             <objects>
                 <viewController id="PDh-Fz-UnH" customClass="LootMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="j7O-Yv-fGG"/>
-                        <viewControllerLayoutGuide type="bottom" id="ddi-XD-bLk"/>
+                        <viewControllerLayoutGuide type="top" id="imR-fh-ZmK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zev-6L-Mhx"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6Hj-jQ-5Y3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-NA-dsY">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-NA-dsY">
                                 <rect key="frame" x="261" y="415" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="LocateMeButton">
@@ -32,10 +32,6 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="b6D-NA-dsY" firstAttribute="bottom" secondItem="ddi-XD-bLk" secondAttribute="bottom" constant="-60" id="H6w-LF-h3N"/>
-                            <constraint firstAttribute="trailing" secondItem="b6D-NA-dsY" secondAttribute="trailing" constant="15" id="mFn-ut-GNB"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Loots" id="vrF-gZ-GHk">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="Psl-pR-ztq"/>
@@ -43,7 +39,7 @@
                     <connections>
                         <outlet property="locateUserButton" destination="b6D-NA-dsY" id="NN5-Me-pre"/>
                         <outlet property="mapView" destination="08a-Js-DbU" id="UwZ-1y-qkY"/>
-                        <segue destination="gK3-KG-a3w" kind="push" identifier="showLoot" id="iYl-wP-Vm3"/>
+                        <segue destination="gK3-KG-a3w" kind="push" identifier="showLoot" id="yvE-en-f5a"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uyx-Sd-kbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -55,7 +51,7 @@
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="gK3-KG-a3w" customClass="LootContentViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="byd-Oc-oag">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="vpx-Dt-fTE">
                             <size key="itemSize" width="50" height="50"/>
@@ -65,7 +61,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ekD-pN-USd">
-                                <rect key="frame" x="0.0" y="64" width="50" height="50"/>
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -79,11 +75,13 @@
                             <outlet property="delegate" destination="gK3-KG-a3w" id="WLM-jh-VjB"/>
                         </connections>
                     </collectionView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="JLg-Gi-lyI"/>
+                    <size key="freeformSize" width="320" height="400"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bvl-JV-Gb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1805" y="-515"/>
+            <point key="canvasLocation" x="1780" y="-515"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aJ1-eT-Jq0">
@@ -110,8 +108,8 @@
             <objects>
                 <viewController id="NId-H3-z0k" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Pa4-tC-d9O"/>
-                        <viewControllerLayoutGuide type="bottom" id="RrM-ZA-PlY"/>
+                        <viewControllerLayoutGuide type="top" id="6f8-Qe-TU7"/>
+                        <viewControllerLayoutGuide type="bottom" id="0NX-Yi-Agl"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kGL-Wz-HZa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -129,8 +127,8 @@
             <objects>
                 <viewController id="9nX-ep-pAU" customClass="LootListViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HJc-DZ-Pxz"/>
-                        <viewControllerLayoutGuide type="bottom" id="RJX-1I-6VD"/>
+                        <viewControllerLayoutGuide type="top" id="rno-kX-gry"/>
+                        <viewControllerLayoutGuide type="bottom" id="sWY-cp-8rZ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HVP-tO-ujQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
