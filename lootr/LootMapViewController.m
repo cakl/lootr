@@ -110,7 +110,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 }
 
 - (void)loadLoots {
-    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].latitude] andLongitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].longitude] inDistance:[NSNumber numberWithInt:100] onSuccess:^(NSArray *loots) {
+    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].latitude] andLongitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].longitude] inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
         [newLoots removeObjectsInArray:[self.mapView annotations]];
         [self.mapView addAnnotations:newLoots];

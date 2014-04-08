@@ -56,7 +56,7 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
 -(void)testResponseDescriptorsWithLootsInDistanceCall
 {
     //given
-    NSString* pathUnderTest = @"/lootrserver/api/v1/loots/latitude/47.123/longitude/9.8684/distance/123";
+    NSString* pathUnderTest = @"/lootrserver/api/v1/loots/latitude/47.22693/longitude/8.8189/distance/200";
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
