@@ -1,2 +1,2 @@
-lootr
-=====
+lootr iPhone Client
+===================
