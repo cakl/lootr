@@ -20,11 +20,22 @@
                                 <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-NA-dsY">
+                                <rect key="frame" x="269" y="467" width="44" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="LocateMeButton">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonPressed:" destination="PDh-Fz-UnH" eventType="touchUpInside" id="JDW-d3-Ksd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Loot Map" image="MapTabIconInactive" id="5uk-2o-rew"/>
                     <connections>
+                        <outlet property="locateUserButton" destination="b6D-NA-dsY" id="NN5-Me-pre"/>
                         <outlet property="mapView" destination="08a-Js-DbU" id="UwZ-1y-qkY"/>
                     </connections>
                 </viewController>
@@ -93,6 +104,7 @@
     </scenes>
     <resources>
         <image name="ListTabIcon" width="25" height="25"/>
+        <image name="LocateMeButton" width="44" height="44"/>
         <image name="MapTabIconInactive" width="25" height="25"/>
         <image name="SettingsTabIconInactive" width="25" height="25"/>
     </resources>

@@ -14,6 +14,7 @@
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
 @property (nonatomic, strong) id <ServerCaller> serverCaller;
+@property (weak, nonatomic) IBOutlet UIButton *locateUserButton;
 @end
 
 @implementation LootMapViewController
@@ -36,24 +37,33 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     return self;
 }
 
+- (IBAction)buttonPressed:(id)sender {
+    [self zoomIntoUserLocation];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
+    self.locateUserButton.backgroundColor = [UIColor clearColor];
 }
 
 - (void)zoomIntoUserLocation
 {
-    MKUserLocation* aUserLocation = self.mapView.userLocation;
+    [self zoomIntoLocation:self.mapView.userLocation.location];
+}
+
+-(void)zoomIntoLocation:(CLLocation*)aLocation
+{
     MKCoordinateRegion region;
     MKCoordinateSpan span;
     span.latitudeDelta = 0.05;
     span.longitudeDelta = 0.05;
     CLLocationCoordinate2D location;
-    location.latitude = aUserLocation.coordinate.latitude;
-    location.longitude = aUserLocation.coordinate.longitude;
+    location.latitude = aLocation.coordinate.latitude;
+    location.longitude = aLocation.coordinate.longitude;
     region.span = span;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
