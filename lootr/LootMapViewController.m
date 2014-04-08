@@ -52,18 +52,18 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 - (void)zoomIntoUserLocation
 {
-    [self zoomIntoLocation:self.mapView.userLocation.location];
+    [self zoomIntoLocation:self.mapView.userLocation.coordinate];
 }
 
--(void)zoomIntoLocation:(CLLocation*)aLocation
+-(void)zoomIntoLocation:(CLLocationCoordinate2D)coordinate
 {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
     span.latitudeDelta = 0.05;
     span.longitudeDelta = 0.05;
     CLLocationCoordinate2D location;
-    location.latitude = aLocation.coordinate.latitude;
-    location.longitude = aLocation.coordinate.longitude;
+    location.latitude = coordinate.latitude;
+    location.longitude = coordinate.longitude;
     region.span = span;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
@@ -72,7 +72,11 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self zoomIntoUserLocation];
+    if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
+        [self zoomIntoLocation:CLLocationCoordinate2DMake(47.22693, 8.8189)];
+    } else {
+        [self zoomIntoUserLocation];
+    }
 }
 
 - (void)didReceiveMemoryWarning
