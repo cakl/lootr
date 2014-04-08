@@ -17,6 +17,7 @@
 		27491F4718D74C0C005E3F38 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
 		274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C941718E8EF15006A50F7 /* Loot+Annotation.m */; };
 		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
+		2776D33E18F4ADF60012934A /* LootContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2776D33D18F4ADF60012934A /* LootContentViewController.m */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
 		279284EE18E8652B002CB07A /* LootListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284ED18E8652B002CB07A /* LootListViewController.m */; };
 		279284F118E8668A002CB07A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284F018E8668A002CB07A /* SettingsViewController.m */; };
@@ -72,6 +73,8 @@
 		274C941618E8EF15006A50F7 /* Loot+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Loot+Annotation.h"; sourceTree = "<group>"; };
 		274C941718E8EF15006A50F7 /* Loot+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Loot+Annotation.m"; sourceTree = "<group>"; };
 		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
+		2776D33C18F4ADF60012934A /* LootContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LootContentViewController.h; sourceTree = "<group>"; };
+		2776D33D18F4ADF60012934A /* LootContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootContentViewController.m; sourceTree = "<group>"; };
 		279284EB18E85E87002CB07A /* ServerCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCaller.h; sourceTree = "<group>"; };
 		279284EC18E8652B002CB07A /* LootListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LootListViewController.h; sourceTree = "<group>"; };
 		279284ED18E8652B002CB07A /* LootListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootListViewController.m; sourceTree = "<group>"; };
@@ -151,6 +154,8 @@
 		2732B94118DFBA100068E18B /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				274C941618E8EF15006A50F7 /* Loot+Annotation.h */,
+				274C941718E8EF15006A50F7 /* Loot+Annotation.m */,
 				27C7BF7718D749B600761C84 /* Loot.h */,
 				27C7BF7818D749B600761C84 /* Loot.m */,
 				27C7BF7918D749B600761C84 /* User.h */,
@@ -168,6 +173,22 @@
 				272758BF18E73886003939AA /* lootSingle.json */,
 			);
 			name = Fixtures;
+			sourceTree = "<group>";
+		};
+		2776D33B18F4AD940012934A /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				27C7BF7018D7499F00761C84 /* LootMapViewController.h */,
+				27C7BF7118D7499F00761C84 /* LootMapViewController.m */,
+				279284EC18E8652B002CB07A /* LootListViewController.h */,
+				279284ED18E8652B002CB07A /* LootListViewController.m */,
+				279284EF18E8668A002CB07A /* SettingsViewController.h */,
+				279284F018E8668A002CB07A /* SettingsViewController.m */,
+				27491F4418D74B86005E3F38 /* Storyboard.storyboard */,
+				2776D33C18F4ADF60012934A /* LootContentViewController.h */,
+				2776D33D18F4ADF60012934A /* LootContentViewController.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 		27C7BF2F18D7498100761C84 = {
@@ -217,20 +238,12 @@
 			children = (
 				27C7BF4C18D7498100761C84 /* AppDelegate.h */,
 				27C7BF4D18D7498100761C84 /* AppDelegate.m */,
-				27C7BF7018D7499F00761C84 /* LootMapViewController.h */,
-				27C7BF7118D7499F00761C84 /* LootMapViewController.m */,
-				279284EC18E8652B002CB07A /* LootListViewController.h */,
-				279284ED18E8652B002CB07A /* LootListViewController.m */,
-				279284EF18E8668A002CB07A /* SettingsViewController.h */,
-				279284F018E8668A002CB07A /* SettingsViewController.m */,
-				27491F4418D74B86005E3F38 /* Storyboard.storyboard */,
+				2776D33B18F4AD940012934A /* UI */,
 				27AEF43D18E45ADD004C18A9 /* RKObjectManagerHelper.h */,
 				27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */,
 				279284EB18E85E87002CB07A /* ServerCaller.h */,
 				272758C118E74018003939AA /* RestKitServerCaller.h */,
 				272758C218E74018003939AA /* RestKitServerCaller.m */,
-				274C941618E8EF15006A50F7 /* Loot+Annotation.h */,
-				274C941718E8EF15006A50F7 /* Loot+Annotation.m */,
 				2732B94118DFBA100068E18B /* Domain */,
 				27C7BF5218D7498100761C84 /* Images.xcassets */,
 				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
@@ -423,6 +436,7 @@
 				272758C318E74018003939AA /* RestKitServerCaller.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
 				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
+				2776D33E18F4ADF60012934A /* LootContentViewController.m in Sources */,
 				279284EE18E8652B002CB07A /* LootListViewController.m in Sources */,
 				27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */,
 				279284F118E8668A002CB07A /* SettingsViewController.m in Sources */,

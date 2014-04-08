@@ -71,7 +71,8 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 -(void)viewWillAppear:(BOOL)animated
 {
     if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
-        [self zoomIntoLocation:CLLocationCoordinate2DMake(47.22693, 8.8189)];
+        CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
+        [self zoomIntoLocation:defaultZoomInCoordinate];
     } else {
         [self zoomIntoUserLocation];
     }
@@ -80,7 +81,6 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
@@ -102,13 +102,9 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     if( distance > scrollUpdateDistance )
     {
         NSLog(@"Center Latitude: %f Longitude: %f", [self.mapView centerCoordinate].latitude, [self.mapView centerCoordinate].longitude);
-        [self loadLoots];
+        [self loadLootsAtCoordinate:[self.mapView centerCoordinate]];
     }
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
-}
-
--(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
-    NSLog(@"%@", [view.annotation title]);
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
@@ -120,7 +116,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             annotationView.enabled = YES;
             annotationView.canShowCallout = YES;
-            annotationView.image = [UIImage imageNamed:@"MapsMarker"];//here we use a nice image instead of the default pins
+            annotationView.image = [UIImage imageNamed:@"MapsMarker"];
             
             UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             [rightButton setTitle:annotation.title forState:UIControlStateNormal];
@@ -136,14 +132,12 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
-        //UIViewController *mapDetailViewController = [[UIViewController alloc] init];
-        //[[self navigationController] pushViewController:mapDetailViewController animated:YES];
         [self performSegueWithIdentifier:@"showLoot" sender:self];
     }
 }
 
-- (void)loadLoots {
-    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].latitude] andLongitude:[NSNumber numberWithDouble:[self.mapView centerCoordinate].longitude] inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
+- (void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
+    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:coordinate.latitude] andLongitude:[NSNumber numberWithDouble:coordinate.longitude] inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
         [newLoots removeObjectsInArray:[self.mapView annotations]];
         [self.mapView addAnnotations:newLoots];
