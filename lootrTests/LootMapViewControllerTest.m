@@ -20,7 +20,8 @@
 #import "Loot.h"
 
 @interface LootMapViewControllerTest : XCTestCase
-
+@property (nonatomic, strong) Loot *exampleLootOne, *exampleLootTwo, *exampleLootThree;
+@property (nonatomic, strong) MKTArgumentCaptor *latitudeArgument, *longitudeArgument, *distanceArgument, *successBlockArgument, *failureBlockArgument;
 @end
 
 typedef void (^success)(NSArray* a);
@@ -33,11 +34,39 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
     [super setUp];
     [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
     [RKTestFactory objectManager];
+    self.exampleLootOne = [Loot new];
+    self.exampleLootOne.identifier = [NSNumber numberWithInt:42];
+    self.exampleLootOne.coord = [Coordinate new];
+    self.exampleLootOne.coord.latitude = [NSNumber numberWithDouble:47.22732];
+    self.exampleLootOne.coord.longitude = [NSNumber numberWithDouble:8.8189];
+    self.exampleLootTwo = [Loot new];
+    self.exampleLootTwo.identifier = [NSNumber numberWithInt:43];
+    self.exampleLootTwo.coord = [Coordinate new];
+    self.exampleLootTwo.coord.latitude = [NSNumber numberWithDouble:42.22732];
+    self.exampleLootTwo.coord.longitude = [NSNumber numberWithDouble:7.8189];
+    self.exampleLootThree = [Loot new];
+    self.exampleLootThree.identifier = [NSNumber numberWithInt:44];
+    self.exampleLootThree.coord = [Coordinate new];
+    self.exampleLootThree.coord.latitude = [NSNumber numberWithDouble:41.22732];
+    self.exampleLootThree.coord.longitude = [NSNumber numberWithDouble:4.8189];
+    self.latitudeArgument = [MKTArgumentCaptor new];
+    self.longitudeArgument = [MKTArgumentCaptor new];
+    self.distanceArgument = [MKTArgumentCaptor new];
+    self.successBlockArgument = [MKTArgumentCaptor new];
+    self.failureBlockArgument = [MKTArgumentCaptor new];
 }
 
 - (void)tearDown
 {
     [RKTestFactory tearDown];
+    self.exampleLootOne = nil;
+    self.exampleLootTwo = nil;
+    self.exampleLootThree = nil;
+    self.latitudeArgument = nil;
+    self.longitudeArgument = nil;
+    self.distanceArgument = nil;
+    self.successBlockArgument = nil;
+    self.failureBlockArgument = nil;
     [super tearDown];
 }
 
@@ -50,32 +79,18 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
     id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
     LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
     lootMapViewController.mapView = mapView;
-    Loot* lootOne = [Loot new];
-    lootOne.identifier = [NSNumber numberWithInt:42];
-    lootOne.coord = [Coordinate new];
-    lootOne.coord.latitude = [NSNumber numberWithDouble:47.22732];
-    lootOne.coord.longitude = [NSNumber numberWithDouble:8.8189];
-    Loot* lootTwo = [Loot new];
-    lootTwo.identifier = [NSNumber numberWithInt:43];
-    lootTwo.coord = [Coordinate new];
-    lootTwo.coord.latitude = [NSNumber numberWithDouble:42.22732];
-    lootTwo.coord.longitude = [NSNumber numberWithDouble:7.8189];
     //when
     [lootMapViewController viewDidLoad];
     [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
     //then
-    MKTArgumentCaptor *latitudeArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *longitudeArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *distanceArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *successBlockArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *failureBlockArgument = [[MKTArgumentCaptor alloc] init];
-    [verify(serverCaller) getLootsAtLatitude:[latitudeArgument capture]  andLongitude:[longitudeArgument capture] inDistance:[distanceArgument capture] onSuccess:[successBlockArgument capture] onFailure:[failureBlockArgument capture]];
-    NSNumber* latitude = [latitudeArgument value];
-    NSNumber* longitude = [longitudeArgument value];
-    success successBlock = [successBlockArgument value];
+    
+    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+    NSNumber* latitude = [self.latitudeArgument value];
+    NSNumber* longitude = [self.longitudeArgument value];
+    success successBlock = [self.successBlockArgument value];
     assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
     assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
-    successBlock(@[lootOne, lootTwo]);
+    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
     assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
 }
 
@@ -83,58 +98,72 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
 {
     //given
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
+    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
     MKMapViewMock* mapView = [MKMapViewMock new];
     mapView.mockCenterCoordinate = centerCoordinate;
     id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
     LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
     lootMapViewController.mapView = mapView;
-    Loot* lootOne = [Loot new];
-    lootOne.identifier = [NSNumber numberWithInt:42];
-    lootOne.coord = [Coordinate new];
-    lootOne.coord.latitude = [NSNumber numberWithDouble:47.22732];
-    lootOne.coord.longitude = [NSNumber numberWithDouble:8.8189];
-    Loot* lootTwo = [Loot new];
-    lootTwo.identifier = [NSNumber numberWithInt:43];
-    lootTwo.coord = [Coordinate new];
-    lootTwo.coord.latitude = [NSNumber numberWithDouble:42.22732];
-    lootTwo.coord.longitude = [NSNumber numberWithDouble:7.8189];
     //when
     [lootMapViewController viewDidLoad];
     [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
     //then
-    MKTArgumentCaptor *latitudeArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *longitudeArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *distanceArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *successBlockArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *failureBlockArgument = [[MKTArgumentCaptor alloc] init];
-    [verify(serverCaller) getLootsAtLatitude:[latitudeArgument capture]  andLongitude:[longitudeArgument capture] inDistance:[distanceArgument capture] onSuccess:[successBlockArgument capture] onFailure:[failureBlockArgument capture]];
-    NSNumber* latitude = [latitudeArgument value];
-    NSNumber* longitude = [longitudeArgument value];
-    success successBlock = [successBlockArgument value];
+    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+    NSNumber* latitude = [self.latitudeArgument value];
+    NSNumber* longitude = [self.longitudeArgument value];
+    success successBlock = [self.successBlockArgument value];
     assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
     assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
-    successBlock(@[lootOne, lootTwo]);
+    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
     assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
     
-    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
+    //when
     mapView.mockCenterCoordinate = secondCenterCoordinate;
-    Loot* lootThree = [Loot new];
-    lootOne.identifier = [NSNumber numberWithInt:44];
-    lootOne.coord = [Coordinate new];
-    lootOne.coord.latitude = [NSNumber numberWithDouble:41.22732];
-    lootOne.coord.longitude = [NSNumber numberWithDouble:4.8189];
     [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    latitudeArgument = [[MKTArgumentCaptor alloc] init];
-    longitudeArgument = [[MKTArgumentCaptor alloc] init];
-    distanceArgument = [[MKTArgumentCaptor alloc] init];
-    successBlockArgument = [[MKTArgumentCaptor alloc] init];
-    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[latitudeArgument capture]  andLongitude:[longitudeArgument capture] inDistance:[distanceArgument capture] onSuccess:[successBlockArgument capture] onFailure:[failureBlockArgument capture]];
-    latitude = [latitudeArgument value];
-    longitude = [longitudeArgument value];
+    //then
+    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+    latitude = [self.latitudeArgument value];
+    longitude = [self.longitudeArgument value];
     assertThat(latitude, closeTo(secondCenterCoordinate.latitude, 0.1));
     assertThat(longitude, closeTo(secondCenterCoordinate.longitude, 0.1));
-    successBlock(@[lootThree]);
+    successBlock(@[self.exampleLootThree]);
     assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(3));
+}
+
+- (void)testRegionWillChangeAnimatedTwoTimesWithAddingSameLoots
+{
+    //given
+    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
+    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
+    MKMapViewMock* mapView = [MKMapViewMock new];
+    mapView.mockCenterCoordinate = centerCoordinate;
+    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
+    lootMapViewController.mapView = mapView;
+    //when
+    [lootMapViewController viewDidLoad];
+    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+    //then
+    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+    NSNumber* latitude = [self.latitudeArgument value];
+    NSNumber* longitude = [self.longitudeArgument value];
+    success successBlock = [self.successBlockArgument value];
+    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
+    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
+    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
+    
+    //when
+    mapView.mockCenterCoordinate = secondCenterCoordinate;
+    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+    //then
+    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+    latitude = [self.latitudeArgument value];
+    longitude = [self.longitudeArgument value];
+    assertThat(latitude, closeTo(secondCenterCoordinate.latitude, 0.1));
+    assertThat(longitude, closeTo(secondCenterCoordinate.longitude, 0.1));
+    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
 }
 
 - (void)testRegionWillChangeAnimatedWithToSmallScrollUpdateDistance
@@ -150,12 +179,7 @@ static NSString* const apiUrlTest = @"http://localhost:8081";
     [lootMapViewController viewDidLoad];
     [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
     //then
-    MKTArgumentCaptor *latitudeArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *longitudeArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *distanceArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *successBlockArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *failureBlockArgument = [[MKTArgumentCaptor alloc] init];
-    [verifyCount(serverCaller, never()) getLootsAtLatitude:[latitudeArgument capture]  andLongitude:[longitudeArgument capture] inDistance:[distanceArgument capture] onSuccess:[successBlockArgument capture] onFailure:[failureBlockArgument capture]];
+    [verifyCount(serverCaller, never()) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
 }
 
 @end

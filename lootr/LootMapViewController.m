@@ -74,22 +74,17 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
     
     NSLog(@"regionDidChangeAnimated");
+    NSLog(@"Span latDelta:%f, longDelta:%f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
     MKCoordinateRegion mapRegion;
-    // set the center of the map region to the now updated map view center
     mapRegion.center = mapView.centerCoordinate;
-    
-    mapRegion.span.latitudeDelta = 0.3; // you likely don't need these... just kinda hacked this out
+    mapRegion.span.latitudeDelta = 0.3;
     mapRegion.span.longitudeDelta = 0.3;
-    
-    // get the lat & lng of the map region
     double lat = mapRegion.center.latitude;
     double lng = mapRegion.center.longitude;
-    
     CLLocation *before = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
     CLLocation *now = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-    
+
     CLLocationDistance distance = ([before distanceFromLocation:now]);
-    
     NSLog(@"Scrolled distance: %@", [NSString stringWithFormat:@"%.02f", distance]);
     
     if( distance > scrollUpdateDistance )
