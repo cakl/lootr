@@ -17,11 +17,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="08a-Js-DbU">
-                                <rect key="frame" x="0.0" y="20" width="320" height="499"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-NA-dsY">
-                                <rect key="frame" x="256" y="464" width="44" height="44"/>
+                                <rect key="frame" x="261" y="415" width="44" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="LocateMeButton">
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,8 +33,8 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ddi-XD-bLk" firstAttribute="top" secondItem="b6D-NA-dsY" secondAttribute="bottom" constant="11" id="H6w-LF-h3N"/>
-                            <constraint firstAttribute="trailing" secondItem="b6D-NA-dsY" secondAttribute="trailing" constant="20" id="mFn-ut-GNB"/>
+                            <constraint firstItem="b6D-NA-dsY" firstAttribute="bottom" secondItem="ddi-XD-bLk" secondAttribute="bottom" constant="-60" id="H6w-LF-h3N"/>
+                            <constraint firstAttribute="trailing" secondItem="b6D-NA-dsY" secondAttribute="trailing" constant="15" id="mFn-ut-GNB"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Loot Map" image="MapTabIconInactive" id="5uk-2o-rew"/>
