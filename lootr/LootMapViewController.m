@@ -7,9 +7,7 @@
 //
 
 #import "LootMapViewController.h"
-
 #import "Loot+Annotation.h"
-
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
@@ -107,6 +105,41 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
         [self loadLoots];
     }
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
+}
+
+-(void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view{
+    NSLog(@"%@", [view.annotation title]);
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    static NSString *identifier = @"loot";
+    
+    if ([annotation isKindOfClass:[Loot class]]) {
+        MKAnnotationView *annotationView = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        if (annotationView == nil) {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView.enabled = YES;
+            annotationView.canShowCallout = YES;
+            annotationView.image = [UIImage imageNamed:@"MapsMarker"];//here we use a nice image instead of the default pins
+            
+            UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [rightButton setTitle:annotation.title forState:UIControlStateNormal];
+            [annotationView setRightCalloutAccessoryView:rightButton];
+            
+        } else {
+            annotationView.annotation = annotation;
+        }
+        return annotationView;
+    }
+    return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
+        //UIViewController *mapDetailViewController = [[UIViewController alloc] init];
+        //[[self navigationController] pushViewController:mapDetailViewController animated:YES];
+        [self performSegueWithIdentifier:@"showLoot" sender:self];
+    }
 }
 
 - (void)loadLoots {

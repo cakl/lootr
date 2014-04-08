@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Loot Map View Controller - Loot Map-->
+        <!--Loot Map View Controller - Loots-->
         <scene sceneID="Yzh-Vj-hGD">
             <objects>
                 <viewController id="PDh-Fz-UnH" customClass="LootMapViewController" sceneMemberID="viewController">
@@ -37,15 +37,37 @@
                             <constraint firstAttribute="trailing" secondItem="b6D-NA-dsY" secondAttribute="trailing" constant="15" id="mFn-ut-GNB"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Loot Map" image="MapTabIconInactive" id="5uk-2o-rew"/>
+                    <navigationItem key="navigationItem" title="Loots" id="vrF-gZ-GHk">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="Psl-pR-ztq"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="locateUserButton" destination="b6D-NA-dsY" id="NN5-Me-pre"/>
                         <outlet property="mapView" destination="08a-Js-DbU" id="UwZ-1y-qkY"/>
+                        <segue destination="ICE-tl-dFd" kind="push" identifier="showLoot" id="SdG-hz-GxK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uyx-Sd-kbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="477" y="-335"/>
+            <point key="canvasLocation" x="1107" y="-515"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QU4-WE-WN9">
+            <objects>
+                <viewController id="ICE-tl-dFd" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oUd-Ng-0HL"/>
+                        <viewControllerLayoutGuide type="bottom" id="rnX-xA-kTU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="wUd-Jy-RG2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="DdO-EM-ObG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1Wb-7s-Z4p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1603" y="-510"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aJ1-eT-Jq0">
@@ -58,7 +80,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="PDh-Fz-UnH" kind="relationship" relationship="viewControllers" id="xAX-lC-QRP"/>
+                        <segue destination="R2U-Rb-MYe" kind="relationship" relationship="viewControllers" id="xAX-lC-QRP"/>
                         <segue destination="9nX-ep-pAU" kind="relationship" relationship="viewControllers" id="pB7-lS-IGW"/>
                         <segue destination="NId-H3-z0k" kind="relationship" relationship="viewControllers" id="4Fm-cq-wr0"/>
                     </connections>
@@ -104,6 +126,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FM-fj-TfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="443" y="279"/>
+        </scene>
+        <!--Navigation Controller - Loot Map-->
+        <scene sceneID="BaO-49-txJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="R2U-Rb-MYe" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Loot Map" image="MapTabIconInactive" id="5uk-2o-rew"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XRi-ug-4dd">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="PDh-Fz-UnH" kind="relationship" relationship="rootViewController" id="XpQ-5O-Kng"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7aj-v7-O9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="581" y="-515"/>
         </scene>
     </scenes>
     <resources>
