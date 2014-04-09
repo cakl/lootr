@@ -7,6 +7,7 @@
 //
 
 #import "LootContentViewController.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface LootContentViewController ()
 
@@ -33,7 +34,7 @@
 - (void)customizeCell:(RPSlidingMenuCell *)slidingMenuCell forRow:(NSInteger)row {
     slidingMenuCell.textLabel.text = @"Some Title";
     slidingMenuCell.detailTextLabel.text = @"Some longer description that is like a subtitle!";
-    slidingMenuCell.backgroundImageView.image = [UIImage imageNamed:@"ExampleImage"];
+    [slidingMenuCell.backgroundImageView setImageWithURL:[NSURL URLWithString:@"http://lorempixel.com/output/food-q-c-640-420-4.jpg"] placeholderImage:[UIImage imageNamed:@"ExampleImage"]];
     
 }
 
