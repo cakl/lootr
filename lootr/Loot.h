@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "User.h"
 #import "Coordinate.h"
+#import "Content.h"
 
 @interface Loot : NSObject
 @property (nonatomic, strong) NSNumber* identifier;
@@ -19,4 +20,5 @@
 @property (nonatomic, strong) User* creator;
 @property (nonatomic, strong) Coordinate* coord;
 @property (nonatomic, strong) NSNumber* radius;
+@property (nonatomic, strong) NSSet* contents;
 @end

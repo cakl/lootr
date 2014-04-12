@@ -21,6 +21,7 @@
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
 		279284EE18E8652B002CB07A /* LootListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284ED18E8652B002CB07A /* LootListViewController.m */; };
 		279284F118E8668A002CB07A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284F018E8668A002CB07A /* SettingsViewController.m */; };
+		27A7731D18F4CF790041EE05 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A7731C18F4CF790041EE05 /* Content.m */; };
 		27AEF43F18E45ADD004C18A9 /* RKObjectManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */; };
 		27C7BF3C18D7498100761C84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3B18D7498100761C84 /* Foundation.framework */; };
 		27C7BF3E18D7498100761C84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3D18D7498100761C84 /* CoreGraphics.framework */; };
@@ -80,6 +81,8 @@
 		279284ED18E8652B002CB07A /* LootListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootListViewController.m; sourceTree = "<group>"; };
 		279284EF18E8668A002CB07A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		279284F018E8668A002CB07A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		27A7731B18F4CF790041EE05 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
+		27A7731C18F4CF790041EE05 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
 		27AEF43D18E45ADD004C18A9 /* RKObjectManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKObjectManagerHelper.h; sourceTree = "<group>"; };
 		27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectManagerHelper.m; sourceTree = "<group>"; };
 		27C7BF3818D7498100761C84 /* lootr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lootr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +154,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2732A36118F59E7D00C2A544 /* Technical Services */ = {
+			isa = PBXGroup;
+			children = (
+				27AEF43D18E45ADD004C18A9 /* RKObjectManagerHelper.h */,
+				27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */,
+				279284EB18E85E87002CB07A /* ServerCaller.h */,
+				272758C118E74018003939AA /* RestKitServerCaller.h */,
+				272758C218E74018003939AA /* RestKitServerCaller.m */,
+			);
+			name = "Technical Services";
+			sourceTree = "<group>";
+		};
 		2732B94118DFBA100068E18B /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +177,8 @@
 				27C7BF7A18D749B600761C84 /* User.m */,
 				2732B93E18DFB8130068E18B /* Coordinate.h */,
 				2732B93F18DFB8130068E18B /* Coordinate.m */,
+				27A7731B18F4CF790041EE05 /* Content.h */,
+				27A7731C18F4CF790041EE05 /* Content.m */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -239,12 +256,8 @@
 				27C7BF4C18D7498100761C84 /* AppDelegate.h */,
 				27C7BF4D18D7498100761C84 /* AppDelegate.m */,
 				2776D33B18F4AD940012934A /* UI */,
-				27AEF43D18E45ADD004C18A9 /* RKObjectManagerHelper.h */,
-				27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */,
-				279284EB18E85E87002CB07A /* ServerCaller.h */,
-				272758C118E74018003939AA /* RestKitServerCaller.h */,
-				272758C218E74018003939AA /* RestKitServerCaller.m */,
 				2732B94118DFBA100068E18B /* Domain */,
+				2732A36118F59E7D00C2A544 /* Technical Services */,
 				27C7BF5218D7498100761C84 /* Images.xcassets */,
 				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
@@ -434,6 +447,7 @@
 				27C7BF4E18D7498100761C84 /* AppDelegate.m in Sources */,
 				27C7BF7C18D749B600761C84 /* User.m in Sources */,
 				272758C318E74018003939AA /* RestKitServerCaller.m in Sources */,
+				27A7731D18F4CF790041EE05 /* Content.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
 				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
 				2776D33E18F4ADF60012934A /* LootContentViewController.m in Sources */,

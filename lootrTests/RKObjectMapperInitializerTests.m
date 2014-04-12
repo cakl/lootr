@@ -20,7 +20,9 @@
 static NSString* const apiUrlTest = @"http://localhost:8081";
 static NSString* const bundleIdentifier = @"ch.hsr.lootrTests";
 static NSString* const lootsKeyPath = @"loots";
-static NSString* const lootsSingleJsonFileName = @"lootList.json";
+static NSString* const contentsKeyPath = @"contents";
+static NSString* const lootsListJsonFileName = @"lootList.json";
+static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
 
 - (void)setUp
 {
@@ -53,6 +55,32 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
     return [[objectManager responseDescriptors] objectAtIndex:idx];
 }
 
+-(void)testResponseDescriptorsWithLootById
+{
+    //given
+    NSString* pathUnderTest = @"/lootrserver/api/v1/loots/3";
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/:id";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    
+    if(responseDescriptor == nil) {
+        XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
+    } else {
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",apiUrlTest,pathUnderTest]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[URL absoluteURL]];
+        RKObjectRequestOperation *requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+        //when
+        [requestOperation start];
+        [requestOperation waitUntilFinished];
+        //then
+        XCTAssertTrue(requestOperation.HTTPRequestOperation.response.statusCode == 200, @"Expected 200 response");
+        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)1, @"Expected to load exactly one loot");
+        Loot* aLoot = [[requestOperation.mappingResult array] firstObject];
+        XCTAssertEqual([[aLoot contents] count], 6, @"Expected to load 6 contents on the loot");
+    }
+}
+
 -(void)testResponseDescriptorsWithLootsInDistanceCall
 {
     //given
@@ -81,7 +109,7 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
 {
     //given
     Loot* loot = [Loot new];
-    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsListJsonFileName];
     id loots = [parsedJSON objectForKey:lootsKeyPath];
 
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
@@ -112,7 +140,7 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
 {
     //given
     User* user = [User new];
-    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsListJsonFileName];
     id loots = [parsedJSON objectForKey:lootsKeyPath];
     
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
@@ -133,7 +161,7 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
 {
     //given
     Coordinate* coordinate = [Coordinate new];
-    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsListJsonFileName];
     id loots = [parsedJSON objectForKey:lootsKeyPath];
     
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
@@ -151,6 +179,36 @@ static NSString* const lootsSingleJsonFileName = @"lootList.json";
     XCTAssertTrue([test evaluate], @"longitude Mapping failed");
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"location" destinationKeyPath:@"location"]];
     XCTAssertTrue([test evaluate], @"location Mapping failed");
+}
+
+-(void)testNestedContentsInLootsMapping
+{
+    //given
+    Content* aContent = [Content new];
+    NSSet* contents = [NSSet setWithObject:aContent];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsSingleJsonFileName];
+    id parsedLoots = [parsedJSON objectForKey:lootsKeyPath];
+    id parsedContents = [[parsedLoots firstObject] objectForKey:contentsKeyPath];
+    id parsedContent = [parsedContents firstObject];
+    
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/:id";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;
+    RKRelationshipMapping* contentsRelationshipMapping = [[lootsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"contents"];
+    //when
+    RKMappingTest *test = [RKMappingTest testForMapping:[contentsRelationshipMapping mapping] sourceObject:parsedContent destinationObject:contents];
+    //then
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"id" destinationKeyPath:@"identifier"]];
+    XCTAssertTrue([test evaluate], @"identifier Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"type" destinationKeyPath:@"type"]];
+    XCTAssertTrue([test evaluate], @"type Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"url" destinationKeyPath:@"url"]];
+    XCTAssertTrue([test evaluate], @"url Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"thumb" destinationKeyPath:@"thumb"]];
+    XCTAssertTrue([test evaluate], @"thumb Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"dateCreated" destinationKeyPath:@"created"]];
+    XCTAssertTrue([test evaluate], @"dateCreated Mapping failed");
 }
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "RestKitServerCaller.h"
+#import "Loot.h"
 
 @interface RestKitServerCaller ()
 @property (nonatomic, strong) RKObjectManager* objectManager;
@@ -28,6 +29,15 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 {
     [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/latitude/%@/longitude/%@/distance/%@", apiPath, latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([mappingResult array]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void) getLootByIdentifier:(NSNumber*)identifier onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
+{
+    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/%@", apiPath, identifier] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success([[mappingResult array] firstObject]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];

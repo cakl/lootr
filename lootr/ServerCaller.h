@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Loot.h"
 
 @protocol ServerCaller <NSObject>
 -(void) getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude inDistance:(NSNumber*)distance onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure;
+-(void) getLootByIdentifier:(NSNumber*)identifier onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure;
 @end
