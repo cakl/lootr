@@ -8,11 +8,14 @@
 
 #import "LootMapViewController.h"
 #import "Loot+Annotation.h"
+#import "LootContentViewController.h"
+#import "ServerCallerFactory.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
 @property (nonatomic, strong) id <ServerCaller> serverCaller;
 @property (weak, nonatomic) IBOutlet UIButton *locateUserButton;
+@property (nonatomic, strong) Loot* lastSelectedLoot;
 @end
 
 @implementation LootMapViewController
@@ -21,7 +24,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 -(id <ServerCaller>)serverCaller{
     if (_serverCaller == nil)
     {
-        _serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:[RKObjectManager sharedManager]];
+        _serverCaller = [ServerCallerFactory createServerCaller];
     }
     return _serverCaller;
 }
@@ -46,6 +49,21 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     self.mapView.showsUserLocation = YES;
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
     self.locateUserButton.backgroundColor = [UIColor clearColor];
+    [self zoomIntoUserLocationWithCoordinateCheck];
+}
+
+-(NSUInteger)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskLandscape;
+}
+
+-(void)zoomIntoUserLocationWithCoordinateCheck
+{
+    if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
+        CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
+        [self zoomIntoLocation:defaultZoomInCoordinate];
+    } else {
+        [self zoomIntoUserLocation];
+    }
 }
 
 - (void)zoomIntoUserLocation
@@ -66,16 +84,6 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
-}
-
--(void)viewWillAppear:(BOOL)animated
-{
-    if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
-        CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
-        [self zoomIntoLocation:defaultZoomInCoordinate];
-    } else {
-        [self zoomIntoUserLocation];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -132,6 +140,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
+        self.lastSelectedLoot = [view annotation];
         [self performSegueWithIdentifier:@"showLoot" sender:self];
     }
 }
@@ -147,15 +156,12 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     }];
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
- {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showLoot"]){
+        LootContentViewController* contentViewController = segue.destinationViewController;
+        contentViewController.loot = self.lastSelectedLoot;
+    }
+}
 
 @end

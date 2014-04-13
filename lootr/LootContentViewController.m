@@ -8,18 +8,33 @@
 
 #import "LootContentViewController.h"
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "ServerCaller.h"
+#import "ServerCallerFactory.h"
+#import "ContentViewController.h"
 
 @interface LootContentViewController ()
-
+@property (nonatomic, strong) id <ServerCaller> serverCaller;
+@property (nonatomic, strong) Content* lastSelectedContent;
+@property (nonatomic, strong) UIImage* placeholderImage;
 @end
 
 @implementation LootContentViewController
+static NSString* const dateFormat = @"dd.MMMM yyyy";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = NO;
+    [self reloadLootWithContents];
+    self.placeholderImage = [UIImage imageNamed:@"ExampleImage"];
+}
 
+-(id <ServerCaller>)serverCaller{
+    if (_serverCaller == nil)
+    {
+        _serverCaller = [ServerCallerFactory createServerCaller];
+    }
+    return _serverCaller;
 }
 
 - (void)didReceiveMemoryWarning
@@ -28,35 +43,45 @@
 }
 
 - (NSInteger)numberOfItemsInSlidingMenu {
-    return 10; // 10 menu items
+    return [self.loot.contents count];
 }
 
 - (void)customizeCell:(RPSlidingMenuCell *)slidingMenuCell forRow:(NSInteger)row {
-    slidingMenuCell.textLabel.text = @"Some Title";
-    slidingMenuCell.detailTextLabel.text = @"Some longer description that is like a subtitle!";
-    [slidingMenuCell.backgroundImageView setImageWithURL:[NSURL URLWithString:@"http://lorempixel.com/output/food-q-c-640-420-4.jpg"] placeholderImage:[UIImage imageNamed:@"ExampleImage"]];
-    
+    Content* content = [self.lootsContents objectAtIndex:row];
+    slidingMenuCell.textLabel.text = content.creator.userName;
+    slidingMenuCell.detailTextLabel.text = [self getFormattedStringFromDate:content.created];
+    [slidingMenuCell.backgroundImageView setImageWithURL:content.url placeholderImage:self.placeholderImage];
 }
+
 
 - (void)slidingMenu:(RPSlidingMenuViewController *)slidingMenu didSelectItemAtRow:(NSInteger)row {
     // when a row is tapped do some action like go to another view controller
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Row Tapped"
-                                                    message:[NSString stringWithFormat:@"Row %d tapped.", row]
-                                                   delegate:nil
-                                          cancelButtonTitle:@"OK"
-                                          otherButtonTitles:nil];
-    [alert show];
+    self.lastSelectedContent = [self.lootsContents objectAtIndex:row];
+    [self performSegueWithIdentifier:@"showContent" sender:self];
 }
 
-/*
-#pragma mark - Navigation
+-(void)reloadLootWithContents{
+    [self.serverCaller getLootByIdentifier:[self.loot identifier] onSuccess:^(Loot *loot) {
+        self.loot = loot;
+        self.lootsContents = [loot.contents allObjects];
+        [self.collectionView reloadData];
+    } onFailure:^(NSError *error) {
+        NSLog(@"error:%@", error);
+    }];
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(NSString*)getFormattedStringFromDate:(NSDate*)date{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateFormat];
+    return [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:date]];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"showContent"]){
+        ContentViewController* contentViewController = segue.destinationViewController;
+        contentViewController.content = self.lastSelectedContent;
+    }
 }
-*/
 
 @end

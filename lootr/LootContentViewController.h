@@ -7,7 +7,9 @@
 //
 
 #import "RPSlidingMenuViewController.h"
+#import "Loot.h"
 
 @interface LootContentViewController : RPSlidingMenuViewController
-
+@property (nonatomic, strong) Loot* loot;
+@property (nonatomic, strong) NSArray* lootsContents;
 @end

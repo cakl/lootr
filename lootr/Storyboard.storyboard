@@ -9,14 +9,14 @@
             <objects>
                 <viewController id="PDh-Fz-UnH" customClass="LootMapViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="imR-fh-ZmK"/>
-                        <viewControllerLayoutGuide type="bottom" id="Zev-6L-Mhx"/>
+                        <viewControllerLayoutGuide type="top" id="l0J-3j-ehj"/>
+                        <viewControllerLayoutGuide type="bottom" id="4Up-6W-ueq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6Hj-jQ-5Y3">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="08a-Js-DbU">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="08a-Js-DbU">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
@@ -33,8 +33,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="b6D-NA-dsY" secondAttribute="trailing" constant="15" id="OCd-e4-wOu"/>
-                            <constraint firstItem="Zev-6L-Mhx" firstAttribute="top" secondItem="b6D-NA-dsY" secondAttribute="bottom" constant="15" id="d2C-Yy-0fP"/>
+                            <constraint firstItem="4Up-6W-ueq" firstAttribute="top" secondItem="b6D-NA-dsY" secondAttribute="bottom" constant="15" id="3UC-Q7-nVq"/>
+                            <constraint firstAttribute="trailing" secondItem="08a-Js-DbU" secondAttribute="trailing" id="JTV-aT-q3o"/>
+                            <constraint firstAttribute="bottom" secondItem="08a-Js-DbU" secondAttribute="bottom" id="V78-7M-f4W"/>
+                            <constraint firstAttribute="trailing" secondItem="b6D-NA-dsY" secondAttribute="trailing" constant="15" id="bBh-aQ-NuJ"/>
+                            <constraint firstItem="08a-Js-DbU" firstAttribute="leading" secondItem="6Hj-jQ-5Y3" secondAttribute="leading" id="uu3-YQ-Ylf"/>
+                            <constraint firstItem="08a-Js-DbU" firstAttribute="top" secondItem="6Hj-jQ-5Y3" secondAttribute="top" constant="20" symbolic="YES" id="yeS-Kv-9Si"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Loots" id="vrF-gZ-GHk">
@@ -49,6 +53,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uyx-Sd-kbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1107" y="-515"/>
+        </scene>
+        <!--Content View Controller-->
+        <scene sceneID="VV8-Ud-NpB">
+            <objects>
+                <viewController id="jQ5-SJ-oNq" customClass="ContentViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8KG-RK-w44"/>
+                        <viewControllerLayoutGuide type="bottom" id="mID-nk-Ar4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="R7H-t3-zKf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBC-kq-AeH">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCH-NJ-8bN">
+                                        <rect key="frame" x="0.0" y="0.0" width="340" height="588"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="5ca-MS-rYf"/>
+                    <connections>
+                        <outlet property="contentImageView" destination="rCH-NJ-8bN" id="8SM-zu-hbP"/>
+                        <outlet property="scrollView" destination="KBC-kq-AeH" id="hTj-Sb-hQw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mge-2f-tRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2306" y="-515"/>
         </scene>
         <!--Loot Content View Controller-->
         <scene sceneID="EnZ-QG-vnY">
@@ -82,6 +121,9 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="JLg-Gi-lyI"/>
                     <size key="freeformSize" width="320" height="400"/>
+                    <connections>
+                        <segue destination="jQ5-SJ-oNq" kind="push" identifier="showContent" id="Ju3-ha-PVe"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bvl-JV-Gb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -112,8 +154,8 @@
             <objects>
                 <viewController id="NId-H3-z0k" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6f8-Qe-TU7"/>
-                        <viewControllerLayoutGuide type="bottom" id="0NX-Yi-Agl"/>
+                        <viewControllerLayoutGuide type="top" id="TzD-4n-ddz"/>
+                        <viewControllerLayoutGuide type="bottom" id="toQ-MP-Rhp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kGL-Wz-HZa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -131,8 +173,8 @@
             <objects>
                 <viewController id="9nX-ep-pAU" customClass="LootListViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rno-kX-gry"/>
-                        <viewControllerLayoutGuide type="bottom" id="sWY-cp-8rZ"/>
+                        <viewControllerLayoutGuide type="top" id="Y2A-sq-Isn"/>
+                        <viewControllerLayoutGuide type="bottom" id="0Vr-iK-yuq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="HVP-tO-ujQ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
