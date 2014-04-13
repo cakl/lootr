@@ -9,7 +9,7 @@
 #import "RPSlidingMenuViewController.h"
 #import "Loot.h"
 
-@interface LootContentViewController : RPSlidingMenuViewController <UIActionSheetDelegate>
+@interface LootContentViewController : RPSlidingMenuViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) Loot* loot;
 @property (nonatomic, strong) NSArray* lootsContents;
 @end

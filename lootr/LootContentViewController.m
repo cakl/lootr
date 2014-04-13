@@ -90,7 +90,52 @@ static NSString* const dateFormat = @"dd.MMMM yyyy";
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"You have pressed the %@ button", [actionSheet buttonTitleAtIndex:buttonIndex]);
+    switch (buttonIndex) {
+        case 0:
+            [self takeNewPhotoFromCamera];
+            break;
+        case 1:
+            [self choosePhotoFromExistingImages];
+        default:
+            break;
+    }
+}
+- (void)takeNewPhotoFromCamera
+{
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
+    {
+        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+        controller.sourceType = UIImagePickerControllerSourceTypeCamera;
+        controller.allowsEditing = NO;
+        controller.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
+        controller.delegate = self;
+        [self.navigationController presentViewController: controller animated: YES completion: nil];
+    }
+}
+-(void)choosePhotoFromExistingImages
+{
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
+        controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        controller.allowsEditing = NO;
+        controller.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypePhotoLibrary];
+        controller.delegate = self;
+        [self.navigationController presentViewController: controller animated: YES completion: nil];
+    }
+}
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+
+{
+    UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
+    [self.navigationController dismissViewControllerAnimated: YES completion: nil];
+    //TODO: work with selected image
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
+
+{
+    [self.navigationController dismissViewControllerAnimated: YES completion: nil];
+    
 }
 
 @end
