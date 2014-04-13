@@ -61,6 +61,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
         CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
         [self zoomIntoLocation:defaultZoomInCoordinate];
+        [self loadLootsAtCoordinate:defaultZoomInCoordinate];
     } else {
         [self zoomIntoUserLocation];
     }
