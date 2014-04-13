@@ -21,6 +21,8 @@
 @implementation LootMapViewController
 static const CLLocationDistance scrollUpdateDistance = 200.0;
 
+#pragma mark - Initialization
+
 -(id <ServerCaller>)serverCaller{
     if (_serverCaller == nil)
     {
@@ -38,9 +40,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     return self;
 }
 
-- (IBAction)buttonPressed:(id)sender {
-    [self zoomIntoUserLocation];
-}
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
@@ -55,6 +55,22 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 -(NSUInteger)supportedInterfaceOrientations{
     return UIInterfaceOrientationMaskLandscape;
 }
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showLoot"]){
+        LootContentViewController* contentViewController = segue.destinationViewController;
+        contentViewController.loot = self.lastSelectedLoot;
+    }
+}
+
+#pragma mark - User Interaction
+
+- (IBAction)buttonPressed:(id)sender {
+    [self zoomIntoUserLocation];
+}
+
+#pragma mark - MapView Setup
 
 -(void)zoomIntoUserLocationWithCoordinateCheck
 {
@@ -87,10 +103,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
+#pragma mark - MKMapViewDelegate
 
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
     
@@ -146,6 +159,8 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     }
 }
 
+#pragma mark - Loading Data from Server
+
 - (void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
     [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:coordinate.latitude] andLongitude:[NSNumber numberWithDouble:coordinate.longitude] inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
@@ -157,12 +172,6 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     }];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"showLoot"]){
-        LootContentViewController* contentViewController = segue.destinationViewController;
-        contentViewController.loot = self.lastSelectedLoot;
-    }
-}
+
 
 @end

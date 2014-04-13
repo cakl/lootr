@@ -37,11 +37,6 @@ static NSString* const dateFormat = @"dd.MMMM yyyy";
     return _serverCaller;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 - (NSInteger)numberOfItemsInSlidingMenu {
     return [self.loot.contents count];
 }
@@ -52,6 +47,8 @@ static NSString* const dateFormat = @"dd.MMMM yyyy";
     slidingMenuCell.detailTextLabel.text = [self getFormattedStringFromDate:content.created];
     [slidingMenuCell.backgroundImageView setImageWithURL:content.url placeholderImage:self.placeholderImage];
 }
+
+
 
 
 - (void)slidingMenu:(RPSlidingMenuViewController *)slidingMenu didSelectItemAtRow:(NSInteger)row {
@@ -83,6 +80,7 @@ static NSString* const dateFormat = @"dd.MMMM yyyy";
         contentViewController.content = self.lastSelectedContent;
     }
 }
+
 - (IBAction)addButtonTouchUpInside:(id)sender {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Photo", @"Write Text", nil];
     [actionSheet showInView:self.view];
