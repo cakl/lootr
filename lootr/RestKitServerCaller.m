@@ -43,4 +43,13 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
     }];
 }
 
+-(void)postLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
+{
+    [self.objectManager postObject:loot path:[NSString stringWithFormat:@"%@/loots", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success([[mappingResult array] firstObject]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+}
+
 @end

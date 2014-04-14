@@ -32,7 +32,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     [super tearDown];
 }
 
-- (void)testServerCallLootsByDistanceOnSuccess
+- (void)testServerCallGetLootsByDistanceOnSuccess
 {
     //given
     [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
@@ -55,7 +55,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
-- (void)testServerCallLootByIdentifier
+- (void)testServerCallGetLootByIdentifier
 {
     //given
     [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
@@ -73,6 +73,32 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError *error) {
         XCTFail(@"Failure returned");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+}
+
+- (void)testServerCallPostLoot
+{
+    //given
+    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    RKObjectManager* objectManager = [RKTestFactory objectManager];
+    [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    id <ServerCaller> serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
+    Loot* aLoot = [Loot new];
+    aLoot.identifier = [NSNumber numberWithInt:42];
+    
+    //when
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [serverCaller postLoot:aLoot onSuccess:^(Loot *loot) {
+        XCTAssertNotNil(loot, @"loaded loot is nil");
+        NSLog(@"%@", loot);
+        dispatch_semaphore_signal(semaphore);
+    } onFailure:^(NSError *error) {
+        XCTFail(@"Failure returned");
+        NSLog(@"%@", error);
         dispatch_semaphore_signal(semaphore);
     }];
     

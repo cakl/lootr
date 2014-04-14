@@ -12,6 +12,7 @@
 @implementation RKObjectManagerHelper
 static NSString* const lootsByDistancePathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
 static NSString* const lootsByIdPathPattern = @"/lootrserver/api/v1/loots/:id";
+static NSString* const lootsPostPathPattern = @"/lootrserver/api/v1/loots";
 
 +(void) configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager{
     RKObjectMapping* lootsMapping = [RKObjectMapping mappingForClass:[Loot class]];
@@ -54,9 +55,15 @@ static NSString* const lootsByIdPathPattern = @"/lootrserver/api/v1/loots/:id";
     
     RKResponseDescriptor* lootsByDistanceResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByDistancePathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsByIdResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByIdPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor* lootsPostResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodPOST pathPattern:lootsPostPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:lootsByDistanceResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByIdResponseDescriptor];
+    [objectManager addResponseDescriptor:lootsPostResponseDescriptor];
+    
+    RKRequestDescriptor* lootPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[lootsMapping inverseMapping] objectClass:[Loot class] rootKeyPath:@"loots" method:RKRequestMethodPOST];
+    
+    [objectManager addRequestDescriptor:lootPostRequestDescriptor];
 }
 
 @end
