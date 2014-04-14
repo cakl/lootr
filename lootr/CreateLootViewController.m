@@ -10,6 +10,7 @@
 #import "CreateLootForm.h"
 
 @interface CreateLootViewController ()
+@property (strong) UINavigationBar* navigationBar;
 @end
 
 @implementation CreateLootViewController
@@ -39,7 +40,7 @@
 }
 
 -(void)cancelButtonPressed{
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)createButtonPressed{

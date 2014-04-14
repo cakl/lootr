@@ -9,39 +9,20 @@
 #import <Foundation/Foundation.h>
 #import <FXForms.h>
 
-typedef NS_ENUM(NSInteger, Gender)
+typedef NS_ENUM(NSInteger, Accuracy)
 {
-    GenderMale = 0,
-    GenderFemale,
-    GenderOther
-};
-
-
-typedef NS_OPTIONS(NSInteger, Interests)
-{
-    InterestComputers = 1 << 0,
-    InterestSocializing = 1 << 1,
-    InterestSports = 1 << 2
+    GenderMale = 5,
+    GenderFemale = 25,
+    GenderOther = 50
 };
 
 @interface CreateLootForm : NSObject <FXForm>
 
-@property (nonatomic, copy) NSString *email;
-@property (nonatomic, copy) NSString *password;
-@property (nonatomic, copy) NSString *repeatPassword;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *summary;
 
-@property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) Gender gender;
-@property (nonatomic, assign) NSUInteger age;
-@property (nonatomic, strong) NSDate *dateOfBirth;
-@property (nonatomic, strong) UIImage *profilePhoto;
-@property (nonatomic, copy) NSString *language;
-@property (nonatomic, copy) NSArray *interests;
-@property (nonatomic, assign) Interests otherInterests;
-@property (nonatomic, copy) NSString *about;
+@property (nonatomic, assign) BOOL anonymously;
 
-@property (nonatomic, copy) NSString *notifications;
-
-@property (nonatomic, assign) BOOL agreedToTerms;
+@property (nonatomic, assign) Accuracy accuracy;
  
 @end
