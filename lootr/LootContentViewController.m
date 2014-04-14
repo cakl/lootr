@@ -27,6 +27,7 @@ static NSString* const dateFormat = @"dd.MMMM yyyy";
     self.navigationController.navigationBarHidden = NO;
     [self reloadLootWithContents];
     self.placeholderImage = [UIImage imageNamed:@"ExampleImage"];
+    
 }
 
 -(id <ServerCaller>)serverCaller{
@@ -47,9 +48,6 @@ static NSString* const dateFormat = @"dd.MMMM yyyy";
     slidingMenuCell.detailTextLabel.text = [self getFormattedStringFromDate:content.created];
     [slidingMenuCell.backgroundImageView setImageWithURL:content.url placeholderImage:self.placeholderImage];
 }
-
-
-
 
 - (void)slidingMenu:(RPSlidingMenuViewController *)slidingMenu didSelectItemAtRow:(NSInteger)row {
     // when a row is tapped do some action like go to another view controller

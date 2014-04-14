@@ -101,6 +101,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
     self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+    [self loadLootsAtCoordinate:coordinate];
 }
 
 #pragma mark - MKMapViewDelegate
