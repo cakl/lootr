@@ -11,9 +11,9 @@
 
 typedef NS_ENUM(NSInteger, Accuracy)
 {
-    GenderMale = 5,
-    GenderFemale = 25,
-    GenderOther = 50
+    AccuracyNear = 5,
+    AccuracyDefault = 25,
+    AccuracyWide = 50
 };
 
 @interface CreateLootForm : NSObject <FXForm>

@@ -15,7 +15,7 @@
     return @[
              
              @"title",
-             @{FXFormFieldKey: @"summary", FXFormFieldType: FXFormFieldTypeLongText, FXFormFieldFooter: @"The description and title are public and not dependent on location. Those informations will be displayed on the web. Choose your test carefully", FXFormFieldTitle: @"Description"},
+             @{FXFormFieldKey: @"summary", FXFormFieldType: FXFormFieldTypeLongText, FXFormFieldFooter: @"The description and title are public and not dependent on location. Those informations will be displayed on the web. Choose your text carefully", FXFormFieldTitle: @"Description"},
              
              //we want to add another group header here, and modify the auto-capitalization
              

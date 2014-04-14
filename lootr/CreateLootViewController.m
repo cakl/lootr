@@ -44,7 +44,9 @@
 }
 
 -(void)createButtonPressed{
-    
+    [self.view endEditing:YES];
+    CreateLootForm* createLootForm = self.formController.form;
+    NSLog(@"%@", createLootForm.title);
 }
 
 /*
