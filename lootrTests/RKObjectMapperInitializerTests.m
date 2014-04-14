@@ -17,7 +17,7 @@
 @end
 
 @implementation RKObjectMapperInitializerTests
-static NSString* const apiUrlTest = @"http://localhost:8081";
+static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
 static NSString* const bundleIdentifier = @"ch.hsr.lootrTests";
 static NSString* const lootsKeyPath = @"loots";
 static NSString* const contentsKeyPath = @"contents";

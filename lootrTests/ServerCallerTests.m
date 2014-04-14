@@ -19,7 +19,7 @@
 @end
 
 @implementation ServerCallerTests
-static NSString* const apiUrlTest = @"http://localhost:8081";
+static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
 
 - (void)setUp
 {

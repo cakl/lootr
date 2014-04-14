@@ -85,9 +85,10 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 {
     if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
         CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
+        self.lastLocationCoordinate = defaultZoomInCoordinate;
         [self zoomIntoLocation:defaultZoomInCoordinate];
-        [self loadLootsAtCoordinate:defaultZoomInCoordinate];
     } else {
+        self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
         [self zoomIntoUserLocation];
     }
 }
@@ -109,14 +110,14 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     region.span = span;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
-    self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
+    
     [self loadLootsAtCoordinate:coordinate];
 }
 
 #pragma mark - MKMapViewDelegate
 
--(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    
+-(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
+{
     NSLog(@"regionDidChangeAnimated");
     NSLog(@"Span latDelta:%f, longDelta:%f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
     MKCoordinateRegion mapRegion;
