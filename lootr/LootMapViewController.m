@@ -10,6 +10,7 @@
 #import "Loot+Annotation.h"
 #import "LootContentViewController.h"
 #import "ServerCallerFactory.h"
+#import "CreateLootViewController.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
@@ -68,6 +69,14 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 - (IBAction)buttonPressed:(id)sender {
     [self zoomIntoUserLocation];
+}
+
+- (IBAction)addLootButtonPressed:(id)sender {
+    //[self performSegueWithIdentifier:@"createLoot" sender:self];
+    CreateLootViewController *viewController = [[CreateLootViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    //[self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - MapView Setup

@@ -15,6 +15,8 @@
 		2739454318E37ABB00677E60 /* RKObjectMapperInitializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */; };
 		27491F4518D74B86005E3F38 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27491F4418D74B86005E3F38 /* Storyboard.storyboard */; };
 		27491F4718D74C0C005E3F38 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
+		274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C06D018FB625200B0429A /* CreateLootViewController.m */; };
+		274C06D418FB631200B0429A /* CreateLootForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C06D318FB631200B0429A /* CreateLootForm.m */; };
 		274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C941718E8EF15006A50F7 /* Loot+Annotation.m */; };
 		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
 		27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27707C5E18F994240018DC10 /* ServerCallerFactory.m */; };
@@ -73,6 +75,10 @@
 		2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectMapperInitializerTests.m; sourceTree = "<group>"; };
 		27491F4418D74B86005E3F38 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		27491F4618D74C0C005E3F38 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		274C06CF18FB625200B0429A /* CreateLootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateLootViewController.h; sourceTree = "<group>"; };
+		274C06D018FB625200B0429A /* CreateLootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateLootViewController.m; sourceTree = "<group>"; };
+		274C06D218FB631200B0429A /* CreateLootForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateLootForm.h; sourceTree = "<group>"; };
+		274C06D318FB631200B0429A /* CreateLootForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateLootForm.m; sourceTree = "<group>"; };
 		274C941618E8EF15006A50F7 /* Loot+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Loot+Annotation.h"; sourceTree = "<group>"; };
 		274C941718E8EF15006A50F7 /* Loot+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Loot+Annotation.m"; sourceTree = "<group>"; };
 		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
@@ -200,6 +206,15 @@
 			name = Fixtures;
 			sourceTree = "<group>";
 		};
+		274C06D518FB631700B0429A /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				274C06D218FB631200B0429A /* CreateLootForm.h */,
+				274C06D318FB631200B0429A /* CreateLootForm.m */,
+			);
+			name = Forms;
+			sourceTree = "<group>";
+		};
 		2776D33B18F4AD940012934A /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,6 +229,9 @@
 				2776D33D18F4ADF60012934A /* LootContentViewController.m */,
 				27707C6018F9F5930018DC10 /* ContentViewController.h */,
 				27707C6118F9F5930018DC10 /* ContentViewController.m */,
+				274C06CF18FB625200B0429A /* CreateLootViewController.h */,
+				274C06D018FB625200B0429A /* CreateLootViewController.m */,
+				274C06D518FB631700B0429A /* Forms */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -465,8 +483,10 @@
 				279284EE18E8652B002CB07A /* LootListViewController.m in Sources */,
 				27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */,
 				27707C6218F9F5930018DC10 /* ContentViewController.m in Sources */,
+				274C06D418FB631200B0429A /* CreateLootForm.m in Sources */,
 				279284F118E8668A002CB07A /* SettingsViewController.m in Sources */,
 				27C7BF7B18D749B600761C84 /* Loot.m in Sources */,
+				274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */,
 				2732B94018DFB8130068E18B /* Coordinate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

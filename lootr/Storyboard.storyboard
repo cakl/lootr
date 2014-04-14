@@ -42,7 +42,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Loots" id="vrF-gZ-GHk">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="Psl-pR-ztq"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="Psl-pR-ztq">
+                            <connections>
+                                <action selector="addLootButtonPressed:" destination="PDh-Fz-UnH" id="602-Ob-SVS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="locateUserButton" destination="b6D-NA-dsY" id="NN5-Me-pre"/>
@@ -87,7 +91,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mge-2f-tRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2306" y="-515"/>
+            <point key="canvasLocation" x="2290" y="-839"/>
         </scene>
         <!--Loot Content View Controller-->
         <scene sceneID="EnZ-QG-vnY">
@@ -133,7 +137,25 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bvl-JV-Gb3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1780" y="-515"/>
+            <point key="canvasLocation" x="1752" y="-839"/>
+        </scene>
+        <!--Create Loot View Controller-->
+        <scene sceneID="mnn-YZ-M5W">
+            <objects>
+                <viewController id="wZI-2C-FKs" customClass="CreateLootViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zY3-Im-ZMj"/>
+                        <viewControllerLayoutGuide type="bottom" id="6nI-Om-YXS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M0f-Mt-5Fg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J6L-ew-sY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1752" y="-97"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aJ1-eT-Jq0">
