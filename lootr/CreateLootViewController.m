@@ -26,13 +26,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //self.formController = [[FXFormViewController alloc] init];
-    
+    self.navigationItem.title = @"New Loot";
+    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelButtonPressed)];
+    UIBarButtonItem* createButton = [[UIBarButtonItem alloc] initWithTitle:@"Create" style:UIBarButtonItemStylePlain target:self action:@selector(createButtonPressed)];
+    self.navigationItem.leftBarButtonItem = cancelButton;
+    self.navigationItem.rightBarButtonItem = createButton;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(void)cancelButtonPressed{
+
+}
+
+-(void)createButtonPressed{
+    
 }
 
 /*
