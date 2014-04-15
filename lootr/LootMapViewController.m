@@ -83,6 +83,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 - (IBAction)addLootButtonPressed:(id)sender {
     //[self performSegueWithIdentifier:@"createLoot" sender:self];
     CreateLootViewController *viewController = [[CreateLootViewController alloc] init];
+    viewController.userLocation = self.mapView.userLocation;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     //[self.navigationController pushViewController:viewController animated:YES];
     [self.navigationController presentViewController:navigationController animated:YES completion:nil];

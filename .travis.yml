@@ -1,0 +1,4 @@
+language: objective-c
+before_install: gem install cocoapods
+script:
+  - xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator

@@ -7,9 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface Coordinate : NSObject
 @property (nonatomic, strong) NSNumber* latitude;
 @property (nonatomic, strong) NSNumber* longitude;
 @property (nonatomic, strong) NSString* location;
+- (instancetype)initWithCoordinate2D:(CLLocationCoordinate2D)coordinate;
 @end

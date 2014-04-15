@@ -11,6 +11,13 @@
 #import "Coordinate.h"
 #import "Content.h"
 
+typedef NS_ENUM(int, Accuracy)
+{
+    AccuracyNear = 5,
+    AccuracyDefault = 25,
+    AccuracyWide = 50
+};
+
 @interface Loot : NSObject
 @property (nonatomic, strong) NSNumber* identifier;
 @property (nonatomic, strong) NSDate* created;
@@ -21,4 +28,5 @@
 @property (nonatomic, strong) Coordinate* coord;
 @property (nonatomic, strong) NSNumber* radius;
 @property (nonatomic, strong) NSSet* contents;
+-(void)setRadiusWithAccuracy:(Accuracy)accuracy;
 @end

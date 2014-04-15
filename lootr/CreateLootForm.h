@@ -8,13 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <FXForms.h>
+#import "Loot.h"
 
-typedef NS_ENUM(NSInteger, Accuracy)
-{
-    AccuracyNear = 5,
-    AccuracyDefault = 25,
-    AccuracyWide = 50
-};
 
 @interface CreateLootForm : NSObject <FXForm>
 

@@ -29,6 +29,11 @@
     return YES;
 }
 
+-(void)setRadiusWithAccuracy:(Accuracy)accuracy
+{
+    self.radius = [NSNumber numberWithInt:accuracy];
+}
+
 -(NSUInteger)hash{
     NSUInteger prime = 31;
     NSUInteger result = 1;

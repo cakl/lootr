@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <FXForms.h>
+#import <MapKit/MapKit.h>
 
 @interface CreateLootViewController : FXFormViewController
-
+@property (nonatomic, strong) MKUserLocation* userLocation;
 @end

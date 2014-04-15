@@ -25,8 +25,13 @@
              //this is a multiple choice field, so we'll need to provide some options
              //because this is an enum property, the indexes of the options should match enum values
              
-             @{FXFormFieldKey: @"accuracy", FXFormFieldHeader: @"Accurary", FXFormFieldOptions: @[@"5 Meters", @"25 Meters", @"50 Meters"], FXFormFieldInline :@YES , FXFormFieldFooter: @"The minimum distance to the Loot for someone to see the entire contents"}
+             @{FXFormFieldKey: @"accuracy", FXFormFieldHeader: @"Accurary", FXFormFieldOptions: @[@(AccuracyNear), @(AccuracyDefault), @(AccuracyWide)], FXFormFieldInline :@YES , FXFormFieldFooter: @"The minimum distance to the Loot for someone to see the entire contents",
+               FXFormFieldValueTransformer: ^(id input) {
+                   return @{@(AccuracyNear): @"5 Meters", @(AccuracyDefault): @"25 Meters", @(AccuracyWide): @"50 Meters"}[input];
+             }
+               }
              ];
+    
 }
 
 @end
