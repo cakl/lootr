@@ -77,7 +77,7 @@
         Coordinate *userLocation = [[Coordinate alloc] initWithCoordinate2D:self.userLocation.coordinate];
         postLoot.coord = userLocation;
         User *user = [User new];
-        user.userName = @"MIGGERDIGGERFIGGER";
+        user.userName = @"Mario";
         postLoot.creator = user;
         [self postLoot:postLoot];
     }
