@@ -4,4 +4,4 @@ before_install:
   - brew update
   - brew upgrade xctool
 script:
-  - xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator
+  - xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
