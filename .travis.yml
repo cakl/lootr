@@ -1,8 +1,7 @@
 language: objective-c
 before_install:
 - gem install cocoapods
-- brew update
-- brew upgrade xctool
+- sudo easy_install cpp-coveralls
 script:
 - xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator
   ONLY_ACTIVE_ARCH=NO
