@@ -1,7 +1,13 @@
 language: objective-c
 before_install:
-  - gem install cocoapods
-  - brew update
-  - brew upgrade xctool
+- gem install cocoapods
+- brew update
+- brew upgrade xctool
 script:
-  - xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+- xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator
+  ONLY_ACTIVE_ARCH=NO
+after_success:
+- ruby coveralls.rb -h -e Pods -e lootrTests -t $COV_TOKEN
+env:
+  global:
+    secure: eg5YfnHwJ+V+7O/QfjLVIQbNCc25CXMw8n1yeOWNcrW5OewLI9ocpNdCTLz7hbUlSnWPwCeCx/KEPqWlyfUkst6fYw8GupNQ6ngyA755c/JuxYgqMzltkQEGXaRvUOANZRvaf+490sQSqbfJ+2ul9s3ctrKy4TUN3b9JPgwXghQ=
