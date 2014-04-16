@@ -57,7 +57,7 @@
 }
 
 - (void)cancelButtonPressed {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self dismissSelfViewController];
 }
 
 - (void)createButtonPressed {
@@ -86,8 +86,14 @@
 - (void)postLoot:(Loot *)loot {
     [self.serverCaller postLoot:loot onSuccess:^(Loot *loot) {
         NSLog(@"%@", loot);
+        [self dismissSelfViewController];
     }
-                      onFailure:^(NSError *error) { NSLog(@"%@", error); }];
+    onFailure:^(NSError *error) { NSLog(@"%@", error); }];
+}
+
+-(void)dismissSelfViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
