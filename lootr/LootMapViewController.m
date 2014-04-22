@@ -11,6 +11,7 @@
 #import "LootContentViewController.h"
 #import "ServerCallerFactory.h"
 #import "CreateLootViewController.h"
+#import "LootContentViewController.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;

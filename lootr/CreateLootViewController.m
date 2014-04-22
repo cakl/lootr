@@ -64,7 +64,7 @@
     [self.view endEditing:YES];
     CreateLootForm *createLootForm = self.formController.form;
     if ([createLootForm.title length] == 0 || [createLootForm.summary length] == 0 || createLootForm.accuracy == 0 ) {
-        [[[UIAlertView alloc] initWithTitle:@"please check data u idiot"
+        [[[UIAlertView alloc] initWithTitle:@"please check data"
                                     message:nil
                                    delegate:self
                           cancelButtonTitle:nil
