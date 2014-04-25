@@ -16,6 +16,8 @@ script:
 - xctool -workspace lootr.xcworkspace -scheme lootr -sdk iphoneos -configuration Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO
 after_script:
 - ./scripts/remove-key.sh
+after_failure:
+- ./scripts/remove-key.sh
 after_success:
 - ruby coveralls.rb -h -e Pods -e lootrTests -t $COV_TOKEN
 env:
