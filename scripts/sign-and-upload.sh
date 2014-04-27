@@ -29,7 +29,7 @@ if [ ! -z "$TESTFLIGHT_TEAM_TOKEN" ] && [ ! -z "$TESTFLIGHT_API_TOKEN" ]; then
   echo "***************************"
   echo "* Uploading to Testflight *"
   echo "***************************"
-  curl http://testflightapp.com/api/builds.format \
+  curl http://testflightapp.com/api/builds.json \
     -F file="@$OUTPUTDIR/$APP_NAME.ipa" \
     -F dsym="@$OUTPUTDIR/$APP_NAME.app.dSYM.zip" \
     -F api_token="$TESTFLIGHT_API_TOKEN" \
