@@ -5,15 +5,19 @@ before_install:
 - brew update
 - brew upgrade xctool
 before_script:
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/Lootr_Development.mobileprovision.enc -d -a -out scripts/profile/Lootr_Development.mobileprovision
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a -out scripts/certs/dist.cer
-- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a -out scripts/certs/dist.p12
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/profile/Lootr_Development.mobileprovision.enc
+  -d -a -out scripts/profile/Lootr_Development.mobileprovision
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.cer.enc -d -a
+  -out scripts/certs/dist.cer
+- openssl aes-256-cbc -k "$ENCRYPTION_SECRET" -in scripts/certs/dist.p12.enc -d -a
+  -out scripts/certs/dist.p12
 - ./scripts/add-key.sh
 - ./scripts/update-bundle.sh
 script:
 - xctool test -workspace lootr.xcworkspace -scheme lootrTests -sdk iphonesimulator
   ONLY_ACTIVE_ARCH=NO
-- xctool -workspace lootr.xcworkspace -scheme lootr -sdk iphoneos -configuration Release OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO
+- xctool -workspace lootr.xcworkspace -scheme lootr -sdk iphoneos -configuration Release
+  OBJROOT=$PWD/build SYMROOT=$PWD/build ONLY_ACTIVE_ARCH=NO
 after_script:
 - ./scripts/remove-key.sh
 after_failure:
@@ -29,3 +33,5 @@ env:
   - 'DEVELOPER_NAME="iPhone Developer: Fabio Pigagnelli (JK5237J63G)"'
   - PROFILE_NAME="Lootr_Development"
   - secure: W2oycmFHEEKNKiImMTJpCDn2r9M8mXF7v8YkkxfTwm1XSFyLFoNuxLDhUafCjkO1nMe0pnDLaeiTmqQFi+BgF4aeSRzqYMVm+Rwt8z8iBWZ+cAjqTbqNIz/gl1ETljvIxZQbCHCJyfPq2kD8tB83oEXfEdrvnyKPlZiv/A4KT4U=
+  - secure: cnhbczSTTC9jwGF4616Okv87hFRxxCN9ZmhNFRdpWD0yj9Mn5blyt3GauZ12RqtjUmTEW+F0Mw9jSQvd+fkd0VK2zwRBP981XfBCmewM9h8k9Q7BTAxFAF7isMewDCV5i+r8zYh9kY+H/1bbtw7I/VOYPpdxrzOd0oEdap2YRZY=
+  - secure: Vx4pla2T1/MLNiGMu0ENKDNRTGflNfkkMXQXyMFudyIQ0+lP0ouTpJWEmTb+XeTdJesbfz3Zbm7GCmSn3FqF+Qb++YBjjmynK2hMdG9bVSAl6BxOjwBdNI+185vUu35ZksEj4rz/Db1rozAS6EQbXlcEhaOrhs55TykNGIioRlI=
