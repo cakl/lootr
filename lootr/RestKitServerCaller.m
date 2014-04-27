@@ -44,6 +44,15 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
     }];
 }
 
+-(void) getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude withLimitedCount:(NSNumber*)count onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure
+{
+    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/latitude/%@/longitude/%@/count/%@", apiPath, latitude, longitude, count] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success([mappingResult array]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+}
+
 -(void)postLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
 {
     [self.objectManager postObject:loot path:[NSString stringWithFormat:@"%@/loots", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {

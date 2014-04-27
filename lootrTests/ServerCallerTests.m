@@ -79,6 +79,28 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
+- (void)testServerCallGetLootByCount
+{
+    //given
+    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    RKObjectManager* objectManager = [RKTestFactory objectManager];
+    [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    id <ServerCaller> serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
+    
+    //when
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [serverCaller getLootsAtLatitude:[NSNumber numberWithInt:6] andLongitude:[NSNumber numberWithFloat:3.14] withLimitedCount:[NSNumber numberWithInt:100] onSuccess:^(NSArray *loots) {
+        XCTAssertEqual([loots count], 6, @"6 Loots were excpeted to load");
+        dispatch_semaphore_signal(semaphore);
+    } onFailure:^(NSError *error) {
+        XCTFail(@"Failure returned");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+}
+
 - (void)testServerCallPostLoot
 {
     //given

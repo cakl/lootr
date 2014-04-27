@@ -105,6 +105,30 @@ static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
     }
 }
 
+-(void)testResponseDescriptorsWithLootsByCountCall
+{
+    //given
+    NSString* pathUnderTest = @"/lootrserver/api/v1/loots/latitude/47.22693/longitude/8.8189/count/6";
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/count/:count";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    
+    if(responseDescriptor == nil) {
+        XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
+    } else {
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",apiUrlTest,pathUnderTest]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:[URL absoluteURL]];
+        RKObjectRequestOperation *requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+        //when
+        [requestOperation start];
+        [requestOperation waitUntilFinished];
+        //then
+        XCTAssertTrue(requestOperation.HTTPRequestOperation.response.statusCode == 200, @"Expected 200 response");
+        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)6, @"Expected to load 6 loots");
+    }
+}
+
 -(void)testLootsMapping
 {
     //given

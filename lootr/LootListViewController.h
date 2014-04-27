@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "ServerCaller.h"
 
-@interface LootListViewController : UIViewController
-
+@interface LootListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) MKUserLocation* userLocation;
 @end

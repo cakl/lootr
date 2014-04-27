@@ -11,7 +11,7 @@
 #import "ServerCaller.h"
 #import "RestKitServerCaller.h"
 
-@interface LootMapViewController : UIViewController <MKMapViewDelegate>
+@interface LootMapViewController : UIViewController <MKMapViewDelegate, UITabBarControllerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 - (instancetype)initWithServerCaller:(id <ServerCaller>)serverCaller;
 @end

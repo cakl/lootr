@@ -12,6 +12,7 @@
 #import "ServerCallerFactory.h"
 #import "CreateLootViewController.h"
 #import "LootContentViewController.h"
+#import "LootListViewController.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
@@ -22,6 +23,7 @@
 
 @implementation LootMapViewController
 static const CLLocationDistance scrollUpdateDistance = 200.0;
+static const NSUInteger indexOfLootListViewController = 1;
 
 #pragma mark - Initialization
 
@@ -47,6 +49,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tabBarController.delegate = self;
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
@@ -82,11 +85,9 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 }
 
 - (IBAction)addLootButtonPressed:(id)sender {
-    //[self performSegueWithIdentifier:@"createLoot" sender:self];
     CreateLootViewController *viewController = [[CreateLootViewController alloc] init];
     viewController.userLocation = self.mapView.userLocation;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
-    //[self.navigationController pushViewController:viewController animated:YES];
     [self.navigationController presentViewController:navigationController animated:YES completion:nil];
 }
 
@@ -178,6 +179,23 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
         self.lastSelectedLoot = [view annotation];
         [self performSegueWithIdentifier:@"showLoot" sender:self];
+    }
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    NSUInteger indexOfTab = [self.tabBarController.viewControllers indexOfObject:viewController];
+    switch (indexOfTab) {
+        case indexOfLootListViewController:
+        {
+            UINavigationController* navController = (UINavigationController*) viewController;
+            LootListViewController* destinationViewController = (LootListViewController*) navController.topViewController;
+            destinationViewController.userLocation = self.mapView.userLocation;
+        }
+        default:
+            break;
     }
 }
 

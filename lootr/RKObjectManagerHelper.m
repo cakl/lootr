@@ -11,6 +11,7 @@
 
 @implementation RKObjectManagerHelper
 static NSString* const lootsByDistancePathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
+static NSString* const lootsByCountPathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/count/:count";
 static NSString* const lootsByIdPathPattern = @"/lootrserver/api/v1/loots/:id";
 static NSString* const lootsPostPathPattern = @"/lootrserver/api/v1/loots";
 
@@ -66,10 +67,12 @@ static NSString* const lootsPostPathPattern = @"/lootrserver/api/v1/loots";
     RKResponseDescriptor* lootsByDistanceResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByDistancePathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsByIdResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByIdPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsPostResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodPOST pathPattern:lootsPostPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor* lootsByCountResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByCountPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:lootsByDistanceResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByIdResponseDescriptor];
     [objectManager addResponseDescriptor:lootsPostResponseDescriptor];
+    [objectManager addResponseDescriptor:lootsByCountResponseDescriptor];
     
     RKRequestDescriptor* lootPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[lootsPostMapping inverseMapping] objectClass:[Loot class] rootKeyPath:@"loots" method:RKRequestMethodPOST];
     

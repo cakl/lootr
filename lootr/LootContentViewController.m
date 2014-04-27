@@ -61,6 +61,11 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     self.lastDownloadedImage.contentMode = UIViewContentModeScaleAspectFill;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self reloadLootWithContents];
+}
+
 #pragma mark - GUI io messages
 
 - (void)refresh:(UIRefreshControl *)refreshControl
