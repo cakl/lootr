@@ -244,10 +244,10 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     c.creator = u;
     [self.serverCaller postContent:c onLoot:self.loot withImage:image onSuccess:^(Loot *loot) {
         NSLog(@"%s", __PRETTY_FUNCTION__);
-        [self.navigationController dismissViewControllerAnimated: YES completion: nil];
     } onFailure:^(NSError *error) {
         NSLog(@"%s", __PRETTY_FUNCTION__);
     }];
+    [self.navigationController dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;

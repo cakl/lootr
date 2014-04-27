@@ -35,5 +35,6 @@ if [ ! -z "$TESTFLIGHT_TEAM_TOKEN" ] && [ ! -z "$TESTFLIGHT_API_TOKEN" ]; then
     -F api_token="$TESTFLIGHT_API_TOKEN" \
     -F team_token="$TESTFLIGHT_TEAM_TOKEN" \
     -F distribution_lists='LootrDistribution' \
-    -F notes="$RELEASE_NOTES"
+    -F notes="$RELEASE_NOTES" \
+    -F notify=True
 fi
