@@ -13,3 +13,7 @@ build/
 
 # AppCode
 .idea/
+
+# OCLint
+xcodebuild.log
+compile_commands.json
