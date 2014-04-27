@@ -238,7 +238,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
     //TODO: work with selected image
     User* u = [User new];
-    u.userName = @"MIGGERDIGGER";
+    u.userName = @"Mario";
     Content* c = [Content new];
     c.created = [NSDate date];
     c.creator = u;
