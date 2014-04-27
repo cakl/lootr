@@ -24,6 +24,7 @@ after_failure:
 - ./scripts/remove-key.sh
 after_success:
 - ruby coveralls.rb -h -e Pods -e lootrTests -t $COV_TOKEN
+- ./scripts/sign-and-upload.sh
 env:
   global:
   - INFO_PLIST="lootr/lootr-Info.plist"
