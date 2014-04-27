@@ -8,6 +8,7 @@
 
 #import "RestKitServerCaller.h"
 #import "Loot.h"
+#import "Content.h"
 
 @interface RestKitServerCaller ()
 @property (nonatomic, strong) RKObjectManager* objectManager;
@@ -50,6 +51,23 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
+}
+
+-(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
+{
+    NSMutableURLRequest *request = [self.objectManager multipartFormRequestWithObject:content method:RKRequestMethodPOST path:[NSString stringWithFormat:@"%@/contents", apiPath] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.8) name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+        NSString* nsdataIdentifierString = [NSString stringWithFormat:@"%@", loot.identifier];
+        [formData appendPartWithFormData:[nsdataIdentifierString dataUsingEncoding:NSUTF8StringEncoding] name:@"id"];
+        NSString* nsdataCreatorString = [NSString stringWithFormat:@"%@", content.creator.userName];
+        [formData appendPartWithFormData:[nsdataCreatorString dataUsingEncoding:NSUTF8StringEncoding] name:@"username"];
+    }];
+    RKObjectRequestOperation *operation = [self.objectManager objectRequestOperationWithRequest:request success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success([[mappingResult array] firstObject]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+    [self.objectManager enqueueObjectRequestOperation:operation];
 }
 
 @end

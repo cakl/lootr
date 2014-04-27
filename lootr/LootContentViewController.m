@@ -15,7 +15,6 @@
 #import "ServerCaller.h"
 #import "ServerCallerFactory.h"
 #import <UIImageView+WebCache.h>
-
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
 
@@ -95,7 +94,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%i", indexPath.row);
+    NSLog(@"%li", indexPath.row);
     Content* content = [self.lootContents objectAtIndex:indexPath.row];
     
     ImageViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifierDetailed];
@@ -169,7 +168,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         SDWebImageManager *manager = [SDWebImageManager sharedManager];
         [manager downloadWithURL:content.url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)
          {
-             // progression tracking code
+             // TODO: progression tracking code
          }
          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
          {
@@ -232,8 +231,18 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
-    [self.navigationController dismissViewControllerAnimated: YES completion: nil];
     //TODO: work with selected image
+    User* u = [User new];
+    u.userName = @"MIGGERDIGGER";
+    Content* c = [Content new];
+    c.created = [NSDate date];
+    c.creator = u;
+    [self.serverCaller postContent:c onLoot:self.loot withImage:image onSuccess:^(Loot *loot) {
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+        [self.navigationController dismissViewControllerAnimated: YES completion: nil];
+    } onFailure:^(NSError *error) {
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
