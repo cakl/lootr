@@ -35,33 +35,26 @@ static const double updateDistance = 20.0;
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         self.locationManager.distanceFilter = updateDistance;
-        _location = nil;
     }
     return self;
 }
 
--(BOOL)startUpdatingLocationWithError:(NSError**)error{
-    if(CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorized){
-        *error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:nil];
-        return false;
-    }
+-(void)startUpdatingLocation{
     [self.locationManager startUpdatingLocation];
-    return true;
 }
 
--(BOOL)stopUpdatingLocationWithError:(NSError**)error{
-    if(CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorized){
-        *error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:nil];
-        return false;
-    }
+-(void)stopUpdatingLocation{
     [self.locationManager stopUpdatingLocation];
-    return true;
 }
 
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error{
-    if(CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorized){
+    if(!self.locationManager.location){
         *error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:nil];
         return nil;
+    }
+    if(!self.location){
+        [self.locationManager startUpdatingLocation];
+        return self.locationManager.location;
     }
     return self.location;
 }

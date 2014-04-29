@@ -51,4 +51,29 @@
     }];
 }
 
+-(void) getLootsAtCoordinate:(CLLocationCoordinate2D)coordinate withLimitedCount:(NSUInteger)count onSuccess:(void (^)(NSArray *loots))success onFailure:(void (^)(NSError *error))failure{
+    NSNumber* latitude = [NSNumber numberWithDouble:coordinate.latitude];
+    NSNumber* longitude = [NSNumber numberWithDouble:coordinate.longitude];
+    NSNumber* limitedCount = [NSNumber numberWithUnsignedInteger:count];
+    [self.serverCaller getLootsAtLatitude:latitude andLongitude:longitude withLimitedCount:limitedCount onSuccess:^(NSArray *loots) {
+        success(loots);
+    } onFailure:^(NSError *error) {
+        failure(error);
+    }];
+}
+
+-(void) getLootsAtCurrentPositionWithLimitedCount:(NSUInteger)count onSuccess:(void (^)(NSArray *))success onFailure:(void (^)(NSError *))failure{
+    NSError* positionError = nil;
+    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
+    if(currentLocation){
+        [self getLootsAtCoordinate:currentLocation.coordinate withLimitedCount:count onSuccess:^(NSArray *loots) {
+            success(loots);
+        } onFailure:^(NSError *error) {
+            failure(error);
+        }];
+    } else {
+        failure(positionError);
+    }
+}
+
 @end

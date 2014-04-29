@@ -11,8 +11,8 @@
 
 @interface CoreLocationDelegate : NSObject <CLLocationManagerDelegate>
 +(CoreLocationDelegate*)sharedInstance;
--(BOOL)startUpdatingLocationWithError:(NSError**)error;
--(BOOL)stopUpdatingLocationWithError:(NSError**)error;
+-(void)startUpdatingLocation;
+-(void)stopUpdatingLocation;
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error;
 -(BOOL)isAuthorized;
 @end

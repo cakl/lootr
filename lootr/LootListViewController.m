@@ -9,10 +9,13 @@
 #import "LootListViewController.h"
 #import "ServerCallerFactory.h"
 #import "Loot.h"
+#import "Facade.h"
+#import "ServerCallerFacade.h"
 
 @interface LootListViewController ()
-@property (nonatomic, strong) id <ServerCaller> serverCaller;
+//@property (nonatomic, strong) id <ServerCaller> serverCaller;
 @property (nonatomic, strong) NSArray* loots;
+@property (nonatomic, strong) id<Facade> facade;
 @end
 
 @implementation LootListViewController
@@ -23,24 +26,27 @@ static NSString *cellIdentifier = @"DetailCell";
 {
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"ListTabIcon"];
-    [self loadLootsAtCoordinate:self.userLocation.coordinate];
+    [self loadLootsAtCurrentPosition];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.title = @"Loots";
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(id <Facade>)facade{
+    if(_facade == nil)
+    {
+        _facade = [[ServerCallerFacade alloc] init];
+    }
+    return _facade;
 }
 
--(id <ServerCaller>)serverCaller{
-    if (_serverCaller == nil)
-    {
-        _serverCaller = [ServerCallerFactory createServerCaller];
+- (instancetype)initWithFacade:(id <Facade>)facade
+{
+    self = [super init];
+    if (self) {
+        self.facade = facade;
     }
-    return _serverCaller;
+    return self;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -64,12 +70,13 @@ static NSString *cellIdentifier = @"DetailCell";
 }
 
 #pragma mark - Loading Data from Server
--(void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate{
-    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:coordinate.latitude] andLongitude:[NSNumber numberWithDouble:coordinate.longitude] withLimitedCount:[NSNumber numberWithUnsignedInt:limitedCount] onSuccess:^(NSArray *loots) {
+
+-(void)loadLootsAtCurrentPosition{
+    [self.facade getLootsAtCurrentPositionWithLimitedCount:limitedCount onSuccess:^(NSArray *loots) {
         self.loots = loots;
         [self.tableView reloadData];
     } onFailure:^(NSError *error) {
-        NSLog(@"ERROR");
+        NSLog(@"%@", error);
     }];
 }
 

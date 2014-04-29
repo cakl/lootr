@@ -18,7 +18,6 @@
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
-//@property (nonatomic, strong) id <ServerCaller> serverCaller;
 @property (nonatomic, strong) id<Facade> facade;
 @property (weak, nonatomic) IBOutlet UIButton *locateUserButton;
 @property (nonatomic, strong) Loot* lastSelectedLoot;
@@ -26,7 +25,6 @@
 
 @implementation LootMapViewController
 static const CLLocationDistance scrollUpdateDistance = 200.0;
-static const NSUInteger indexOfLootListViewController = 1;
 
 #pragma mark - Initialization
 
@@ -185,22 +183,22 @@ static const NSUInteger indexOfLootListViewController = 1;
     }
 }
 
-#pragma mark - UITabBarControllerDelegate
-
--(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
-    NSUInteger indexOfTab = [self.tabBarController.viewControllers indexOfObject:viewController];
-    switch (indexOfTab) {
-        case indexOfLootListViewController:
-        {
-            UINavigationController* navController = (UINavigationController*) viewController;
-            LootListViewController* destinationViewController = (LootListViewController*) navController.topViewController;
-            destinationViewController.userLocation = self.mapView.userLocation;
-        }
-        default:
-            break;
-    }
-}
+//#pragma mark - UITabBarControllerDelegate
+//
+//-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+//{
+//    NSUInteger indexOfTab = [self.tabBarController.viewControllers indexOfObject:viewController];
+//    switch (indexOfTab) {
+//        case indexOfLootListViewController:
+//        {
+//            UINavigationController* navController = (UINavigationController*) viewController;
+//            LootListViewController* destinationViewController = (LootListViewController*) navController.topViewController;
+//            destinationViewController.userLocation = self.mapView.userLocation;
+//        }
+//        default:
+//            break;
+//    }
+//}
 
 #pragma mark - Loading Data from Server
 

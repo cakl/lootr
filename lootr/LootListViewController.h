@@ -12,5 +12,5 @@
 
 @interface LootListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) MKUserLocation* userLocation;
+//@property (nonatomic, strong) MKUserLocation* userLocation;
 @end
