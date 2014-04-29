@@ -12,10 +12,12 @@
 #import "ServerCallerFactory.h"
 #import "Loot.h"
 #import "User.h"
+#import "Facade.h"
+#import "ServerCallerFacade.h"
 
 @interface CreateLootViewController ()
 @property(strong) UINavigationBar *navigationBar;
-@property(nonatomic, strong) id<ServerCaller> serverCaller;
+@property (nonatomic, strong) id<Facade> facade;
 @end
 
 @implementation CreateLootViewController
@@ -28,11 +30,21 @@
     return self;
 }
 
-- (id<ServerCaller>)serverCaller {
-    if (_serverCaller == nil) {
-        _serverCaller = [ServerCallerFactory createServerCaller];
+-(id <Facade>)facade{
+    if(_facade == nil)
+    {
+        _facade = [[ServerCallerFacade alloc] init];
     }
-    return _serverCaller;
+    return _facade;
+}
+
+- (instancetype)initWithFacade:(id <Facade>)facade
+{
+    self = [super init];
+    if (self) {
+        self.facade = facade;
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -70,25 +82,28 @@
                           cancelButtonTitle:nil
                           otherButtonTitles:@"OK", nil] show];
     } else {
-        Loot *postLoot = [Loot new];
-        postLoot.title = createLootForm.title;
-        postLoot.summary = createLootForm.summary;
-        [postLoot setRadiusWithAccuracy:createLootForm.accuracy];
-        Coordinate *userLocation = [[Coordinate alloc] initWithCoordinate2D:self.userLocation.coordinate];
-        postLoot.coord = userLocation;
-        User *user = [User new];
-        user.userName = @"Mario";
-        postLoot.creator = user;
+        Loot *postLoot = [self createLootFromInputForm:self.formController.form];
         [self postLoot:postLoot];
     }
 }
 
-- (void)postLoot:(Loot *)loot {
-    [self.serverCaller postLoot:loot onSuccess:^(Loot *loot) {
-        NSLog(@"%@", loot);
+-(Loot*)createLootFromInputForm:(CreateLootForm*)form{
+    Loot *postLoot = [Loot new];
+    postLoot.title = form.title;
+    postLoot.summary = form.summary;
+    [postLoot setRadiusWithAccuracy:form.accuracy];
+    User *user = [User new];
+    user.userName = @"Mario";
+    postLoot.creator = user;
+    return postLoot;
+}
+
+- (void)postLoot:(Loot *)loot{
+    [self.facade postLoot:loot atCurrentLocationOnSuccess:^(Loot *loot) {
         [self dismissSelfViewController];
-    }
-    onFailure:^(NSError *error) { NSLog(@"%@", error); }];
+    } onFailure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 -(void)dismissSelfViewController

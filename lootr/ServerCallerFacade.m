@@ -62,12 +62,30 @@
     }];
 }
 
--(void) getLootsAtCurrentPositionWithLimitedCount:(NSUInteger)count onSuccess:(void (^)(NSArray *))success onFailure:(void (^)(NSError *))failure{
+-(void) getLootsAtCurrentPositionWithLimitedCount:(NSUInteger)count onSuccess:(void (^)(NSArray *loots))success onFailure:(void (^)(NSError *error))failure{
     NSError* positionError = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
     if(currentLocation){
         [self getLootsAtCoordinate:currentLocation.coordinate withLimitedCount:count onSuccess:^(NSArray *loots) {
             success(loots);
+        } onFailure:^(NSError *error) {
+            failure(error);
+        }];
+    } else {
+        failure(positionError);
+    }
+}
+
+-(void)postLoot:(Loot*)loot atCurrentLocationOnSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
+    NSError* positionError = nil;
+    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
+    if(currentLocation){
+        Coordinate* currentCoordinate = [[Coordinate alloc] init];
+        currentCoordinate.latitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
+        currentCoordinate.longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+        loot.coord = currentCoordinate;
+        [self.serverCaller postLoot:loot onSuccess:^(Loot *loot) {
+            success(loot);
         } onFailure:^(NSError *error) {
             failure(error);
         }];
