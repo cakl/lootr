@@ -62,7 +62,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
     }];
 }
 
--(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
+-(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* content))success onFailure:(void(^)(NSError* error))failure
 {
     NSMutableURLRequest *request = [self.objectManager multipartFormRequestWithObject:content method:RKRequestMethodPOST path:[NSString stringWithFormat:@"%@/contents", apiPath] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.8) name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];

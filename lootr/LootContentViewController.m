@@ -12,8 +12,6 @@
 #import <UIImageView+WebCache.h>
 #import <FXBlurView.h>
 #import <QuartzCore/QuartzCore.h>
-#import "ServerCaller.h"
-#import "ServerCallerFactory.h"
 #import <UIImageView+WebCache.h>
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
@@ -22,7 +20,6 @@
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
-@property (nonatomic, strong) id <ServerCaller> serverCaller;
 @property (nonatomic, strong) UIImageView* lastDownloadedImage;
 @property (nonatomic, strong) id<Facade> facade;
 @end
@@ -31,14 +28,6 @@
 static NSString *CellIdentifierDetailed = @"ImageCell";
 
 #pragma mark - Initialization
-
--(id <ServerCaller>)serverCaller{
-    if (_serverCaller == nil)
-    {
-        _serverCaller = [ServerCallerFactory createServerCaller];
-    }
-    return _serverCaller;
-}
 
 -(id <Facade>)facade{
     if(_facade == nil)
@@ -62,13 +51,11 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.lootContents = [[self.loot contents] allObjects];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0); //TODO should be dynamic on 4, 3.5 screens
     self.title = self.loot.title;
-    [self reloadLootWithContents];
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
@@ -261,18 +248,13 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     Content* c = [Content new];
     c.created = [NSDate date];
     c.creator = u;
-    [self.serverCaller postContent:c onLoot:self.loot withImage:image onSuccess:^(Loot *loot) {
-        NSLog(@"%s", __PRETTY_FUNCTION__);
-    } onFailure:^(NSError *error) {
-        NSLog(@"%s", __PRETTY_FUNCTION__);
-    }];
+    [self postContent:c onLoot:self.loot withImage:image];
     [self.navigationController dismissViewControllerAnimated: YES completion: nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker;
 {
     [self.navigationController dismissViewControllerAnimated: YES completion: nil];
-    
 }
 
 #pragma mark - Loading Data from Server
@@ -280,10 +262,18 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 -(void)reloadLootWithContents{
     [self.facade getLoot:self.loot onSuccess:^(Loot *loot) {
         self.loot = loot;
-        self.lootContents = [loot.contents allObjects];
+        self.lootContents = [self.loot.contents allObjects];
         [self.tableView reloadData];
     } onFailure:^(NSError *error) {
         NSLog(@"%@",error);
+    }];
+}
+
+-(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image{
+    [self.facade postContent:content onLoot:self.loot withImage:image onSuccess:^(Content *loot) {
+        //TODO
+    } onFailure:^(NSError *error) {
+        NSLog(@"%@", error);
     }];
 }
 

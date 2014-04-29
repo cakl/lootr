@@ -9,7 +9,6 @@
 #import "LootMapViewController.h"
 #import "Loot+Annotation.h"
 #import "LootContentViewController.h"
-#import "ServerCallerFactory.h"
 #import "CreateLootViewController.h"
 #import "LootContentViewController.h"
 #import "LootListViewController.h"

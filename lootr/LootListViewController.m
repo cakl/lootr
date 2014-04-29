@@ -7,13 +7,11 @@
 //
 
 #import "LootListViewController.h"
-#import "ServerCallerFactory.h"
 #import "Loot.h"
 #import "Facade.h"
 #import "ServerCallerFacade.h"
 
 @interface LootListViewController ()
-//@property (nonatomic, strong) id <ServerCaller> serverCaller;
 @property (nonatomic, strong) NSArray* loots;
 @property (nonatomic, strong) id<Facade> facade;
 @end

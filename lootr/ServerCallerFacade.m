@@ -76,6 +76,22 @@
     }
 }
 
+-(void)getLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
+    NSError* positionError = nil;
+    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
+    if(currentLocation){
+        if([self checkIfCurrentLocation:currentLocation isInRadiusOfLoot:loot]){
+            [self.serverCaller getLootByIdentifier:loot.identifier onSuccess:^(Loot *loot) {
+                success(loot);
+            } onFailure:^(NSError *error) {
+                failure(error);
+            }];
+        }
+    } else {
+        failure(positionError);
+    }
+}
+
 -(void)postLoot:(Loot*)loot atCurrentLocationOnSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
     NSError* positionError = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
@@ -94,13 +110,13 @@
     }
 }
 
--(void)getLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
+-(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* loot))success onFailure:(void (^)(NSError *error))failure{
     NSError* positionError = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
     if(currentLocation){
         if([self checkIfCurrentLocation:currentLocation isInRadiusOfLoot:loot]){
-            [self.serverCaller getLootByIdentifier:loot.identifier onSuccess:^(Loot *loot) {
-                success(loot);
+            [self.serverCaller postContent:content onLoot:loot withImage:image onSuccess:^(Content *content) {
+                success(content);
             } onFailure:^(NSError *error) {
                 failure(error);
             }];

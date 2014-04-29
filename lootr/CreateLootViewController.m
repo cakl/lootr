@@ -8,8 +8,6 @@
 
 #import "CreateLootViewController.h"
 #import "CreateLootForm.h"
-#import "ServerCaller.h"
-#import "ServerCallerFactory.h"
 #import "Loot.h"
 #import "User.h"
 #import "Facade.h"
