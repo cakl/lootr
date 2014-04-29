@@ -13,10 +13,13 @@
 #import "CreateLootViewController.h"
 #import "LootContentViewController.h"
 #import "LootListViewController.h"
+#import "Facade.h"
+#import "ServerCallerFacade.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
-@property (nonatomic, strong) id <ServerCaller> serverCaller;
+//@property (nonatomic, strong) id <ServerCaller> serverCaller;
+@property (nonatomic, strong) id<Facade> facade;
 @property (weak, nonatomic) IBOutlet UIButton *locateUserButton;
 @property (nonatomic, strong) Loot* lastSelectedLoot;
 @end
@@ -27,19 +30,19 @@ static const NSUInteger indexOfLootListViewController = 1;
 
 #pragma mark - Initialization
 
--(id <ServerCaller>)serverCaller{
-    if (_serverCaller == nil)
+-(id <Facade>)facade{
+    if(_facade == nil)
     {
-        _serverCaller = [ServerCallerFactory createServerCaller];
+        _facade = [[ServerCallerFacade alloc] init];
     }
-    return _serverCaller;
+    return _facade;
 }
 
-- (instancetype)initWithServerCaller:(id <ServerCaller>)serverCaller
+- (instancetype)initWithFacade:(id <Facade>)facade
 {
     self = [super init];
     if (self) {
-        _serverCaller = serverCaller;
+        self.facade = facade;
     }
     return self;
 }
@@ -201,8 +204,8 @@ static const NSUInteger indexOfLootListViewController = 1;
 
 #pragma mark - Loading Data from Server
 
-- (void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    [self.serverCaller getLootsAtLatitude:[NSNumber numberWithDouble:coordinate.latitude] andLongitude:[NSNumber numberWithDouble:coordinate.longitude] inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
+-(void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
+    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
         [newLoots removeObjectsInArray:[self.mapView annotations]];
         [self.mapView addAnnotations:newLoots];

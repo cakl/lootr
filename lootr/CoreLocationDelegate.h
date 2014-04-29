@@ -14,4 +14,5 @@
 -(BOOL)startUpdatingLocationWithError:(NSError**)error;
 -(BOOL)stopUpdatingLocationWithError:(NSError**)error;
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error;
+-(BOOL)isAuthorized;
 @end

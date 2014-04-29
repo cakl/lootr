@@ -66,6 +66,10 @@ static const double updateDistance = 20.0;
     return self.location;
 }
 
+-(BOOL)isAuthorized{
+    return (CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorized);
+}
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
