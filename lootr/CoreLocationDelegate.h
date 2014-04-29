@@ -11,7 +11,7 @@
 
 @interface CoreLocationDelegate : NSObject <CLLocationManagerDelegate>
 +(CoreLocationDelegate*)sharedInstance;
-@property (atomic, strong, readonly) CLLocation* location;
 -(BOOL)startUpdatingLocationWithError:(NSError**)error;
 -(BOOL)stopUpdatingLocationWithError:(NSError**)error;
+-(CLLocation*)getCurrentLocationWithError:(NSError**)error;
 @end

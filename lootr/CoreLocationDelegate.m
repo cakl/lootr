@@ -10,6 +10,7 @@
 
 @interface CoreLocationDelegate ()
 @property (strong, nonatomic) CLLocationManager* locationManager;
+@property (atomic, strong, readonly) CLLocation* location;
 @end
 
 @implementation CoreLocationDelegate
@@ -55,6 +56,14 @@ static const double updateDistance = 20.0;
     }
     [self.locationManager stopUpdatingLocation];
     return true;
+}
+
+-(CLLocation*)getCurrentLocationWithError:(NSError**)error{
+    if(CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorized){
+        *error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:nil];
+        return nil;
+    }
+    return self.location;
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations

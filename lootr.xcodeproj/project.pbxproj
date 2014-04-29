@@ -140,6 +140,7 @@
 		27CF77C018F22EDA0000C91C /* MKMapViewMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapViewMock.m; sourceTree = "<group>"; };
 		27CF77C218F2309F0000C91C /* libPods-OCHamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCHamcrest.a"; path = "Pods/build/Debug-iphoneos/libPods-OCHamcrest.a"; sourceTree = "<group>"; };
 		27CF77C318F2309F0000C91C /* libPods-OCMockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMockito.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMockito.a"; sourceTree = "<group>"; };
+		27F316101910062A0066D304 /* Facade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facade.h; sourceTree = "<group>"; };
 		27FBCFA1190FE38200677436 /* CoreLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationDelegate.h; sourceTree = "<group>"; };
 		27FBCFA2190FE38200677436 /* CoreLocationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationDelegate.m; sourceTree = "<group>"; };
 		694B1DA0DB63438A954FE498 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,6 +225,7 @@
 		27346CED190DDD530085B556 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				27F316101910062A0066D304 /* Facade.h */,
 				27346CEA190DDD4E0085B556 /* ServerCallerFacade.h */,
 				27346CEB190DDD4E0085B556 /* ServerCallerFacade.m */,
 				27FBCFA1190FE38200677436 /* CoreLocationDelegate.h */,
