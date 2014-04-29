@@ -17,11 +17,14 @@
 #import <UIImageView+WebCache.h>
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
+#import "Facade.h"
+#import "ServerCallerFacade.h"
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
 @property (nonatomic, strong) id <ServerCaller> serverCaller;
 @property (nonatomic, strong) UIImageView* lastDownloadedImage;
+@property (nonatomic, strong) id<Facade> facade;
 @end
 
 @implementation LootContentViewController
@@ -35,6 +38,23 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         _serverCaller = [ServerCallerFactory createServerCaller];
     }
     return _serverCaller;
+}
+
+-(id <Facade>)facade{
+    if(_facade == nil)
+    {
+        _facade = [[ServerCallerFacade alloc] init];
+    }
+    return _facade;
+}
+
+- (instancetype)initWithFacade:(id <Facade>)facade
+{
+    self = [super init];
+    if (self) {
+        self.facade = facade;
+    }
+    return self;
 }
 
 #pragma mark - UIViewController
@@ -99,7 +119,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%li", indexPath.row);
     Content* content = [self.lootContents objectAtIndex:indexPath.row];
     
     ImageViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifierDetailed];
@@ -259,12 +278,12 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 #pragma mark - Loading Data from Server
 
 -(void)reloadLootWithContents{
-    [self.serverCaller getLootByIdentifier:[self.loot identifier] onSuccess:^(Loot *loot) {
+    [self.facade getLoot:self.loot onSuccess:^(Loot *loot) {
         self.loot = loot;
         self.lootContents = [loot.contents allObjects];
         [self.tableView reloadData];
     } onFailure:^(NSError *error) {
-        NSLog(@"error:%@", error);
+        NSLog(@"%@",error);
     }];
 }
 
