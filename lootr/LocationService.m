@@ -8,7 +8,6 @@
 
 #import "LocationService.h"
 #import "CoreLocationDelegate.h"
-#import "Loot.h"
 
 @interface LocationService ()
 @property (nonatomic, strong) CoreLocationDelegate* locationDelegate;

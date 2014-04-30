@@ -7,8 +7,6 @@
 //
 
 #import "RestKitServerCaller.h"
-#import "Loot.h"
-#import "Content.h"
 
 @interface RestKitServerCaller ()
 @property (nonatomic, strong) RKObjectManager* objectManager;

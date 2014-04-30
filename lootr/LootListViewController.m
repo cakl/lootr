@@ -9,7 +9,7 @@
 #import "LootListViewController.h"
 #import "Loot.h"
 #import "Facade.h"
-#import "ServerCallerFacade.h"
+#import "ServerCallerFacadeFactory.h"
 
 @interface LootListViewController ()
 @property (nonatomic, strong) NSArray* loots;
@@ -33,7 +33,7 @@ static NSString *cellIdentifier = @"DetailCell";
 -(id <Facade>)facade{
     if(_facade == nil)
     {
-        _facade = [[ServerCallerFacade alloc] init];
+        _facade = [ServerCallerFacadeFactory createFacade];
     }
     return _facade;
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2707D8F719116375009C8669 /* ServerCallerFacadeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */; };
 		272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758BD18E732B8003939AA /* ServerCallerTests.m */; };
 		272758C018E73886003939AA /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 272758BF18E73886003939AA /* lootSingle.json */; };
 		272758C318E74018003939AA /* RestKitServerCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758C218E74018003939AA /* RestKitServerCaller.m */; };
@@ -71,6 +72,8 @@
 
 /* Begin PBXFileReference section */
 		13391FF8791D4B9BB6C83794 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		2707D8F519116375009C8669 /* ServerCallerFacadeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFacadeFactory.h; sourceTree = "<group>"; };
+		2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFacadeFactory.m; sourceTree = "<group>"; };
 		272758BD18E732B8003939AA /* ServerCallerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerTests.m; sourceTree = "<group>"; };
 		272758BF18E73886003939AA /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootSingle.json; path = Fixtures/lootSingle.json; sourceTree = "<group>"; };
 		272758C118E74018003939AA /* RestKitServerCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestKitServerCaller.h; sourceTree = "<group>"; };
@@ -235,6 +238,8 @@
 				27FBCFA2190FE38200677436 /* CoreLocationDelegate.m */,
 				27F316111910319B0066D304 /* LocationService.h */,
 				27F316121910319B0066D304 /* LocationService.m */,
+				2707D8F519116375009C8669 /* ServerCallerFacadeFactory.h */,
+				2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -537,6 +542,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2707D8F719116375009C8669 /* ServerCallerFacadeFactory.m in Sources */,
 				27AEF43F18E45ADD004C18A9 /* RKObjectManagerHelper.m in Sources */,
 				27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */,
 				274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */,

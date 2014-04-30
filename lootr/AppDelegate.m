@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "Loot.h"
 #import "RKObjectManagerHelper.h"
 
 @implementation AppDelegate

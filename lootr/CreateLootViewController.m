@@ -8,10 +8,8 @@
 
 #import "CreateLootViewController.h"
 #import "CreateLootForm.h"
-#import "Loot.h"
-#import "User.h"
 #import "Facade.h"
-#import "ServerCallerFacade.h"
+#import "ServerCallerFacadeFactory.h"
 
 @interface CreateLootViewController ()
 @property(strong) UINavigationBar *navigationBar;
@@ -31,7 +29,7 @@
 -(id <Facade>)facade{
     if(_facade == nil)
     {
-        _facade = [[ServerCallerFacade alloc] init];
+        _facade = [ServerCallerFacadeFactory createFacade];
     }
     return _facade;
 }

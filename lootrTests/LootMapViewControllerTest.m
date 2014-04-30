@@ -70,139 +70,139 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
     [super tearDown];
 }
 
-- (void)testViewDidLoad
-{
-    //given
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
-    MKMapViewMock* mapView = [MKMapViewMock new];
-    mapView.mockCenterCoordinate = centerCoordinate;
-    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
-    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
-    lootMapViewController.mapView = mapView;
-    //when
-    [lootMapViewController viewDidLoad];
-    //then
-    
-    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-    NSNumber* latitude = [self.latitudeArgument value];
-    NSNumber* longitude = [self.longitudeArgument value];
-    success successBlock = [self.successBlockArgument value];
-    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
-    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
-    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
-    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
-}
-
-- (void)testRegionWillChangeAnimatedWithAddingTwoLoots
-{
-    //given
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(41.22732, 3.8189);
-    MKMapViewMock* mapView = [MKMapViewMock new];
-    mapView.mockCenterCoordinate = centerCoordinate;
-    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
-    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
-    lootMapViewController.mapView = mapView;
-    //when
-    [lootMapViewController viewDidLoad];
-    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    //then
-    
-    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-    NSNumber* latitude = [self.latitudeArgument value];
-    NSNumber* longitude = [self.longitudeArgument value];
-    success successBlock = [self.successBlockArgument value];
-    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
-    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
-    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
-    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
-}
-
-- (void)testRegionWillChangeAnimatedTwoTimesWithAddingDifferentLoots
-{
-    //given
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
-    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
-    MKMapViewMock* mapView = [MKMapViewMock new];
-    mapView.mockCenterCoordinate = centerCoordinate;
-    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
-    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
-    lootMapViewController.mapView = mapView;
-    //when
-    [lootMapViewController viewDidLoad];
-    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    //then
-    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-    NSNumber* latitude = [self.latitudeArgument value];
-    NSNumber* longitude = [self.longitudeArgument value];
-    success successBlock = [self.successBlockArgument value];
-    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
-    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
-    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
-    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
-    
-    //when
-    mapView.mockCenterCoordinate = secondCenterCoordinate;
-    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    //then
-    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-    latitude = [self.latitudeArgument value];
-    longitude = [self.longitudeArgument value];
-    assertThat(latitude, closeTo(secondCenterCoordinate.latitude, 0.1));
-    assertThat(longitude, closeTo(secondCenterCoordinate.longitude, 0.1));
-    successBlock(@[self.exampleLootThree]);
-    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(3));
-}
-
-- (void)testRegionWillChangeAnimatedTwoTimesWithAddingSameLoots
-{
-    //given
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
-    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
-    MKMapViewMock* mapView = [MKMapViewMock new];
-    mapView.mockCenterCoordinate = centerCoordinate;
-    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
-    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
-    lootMapViewController.mapView = mapView;
-    //when
-    [lootMapViewController viewDidLoad];
-    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    //then
-    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-    NSNumber* latitude = [self.latitudeArgument value];
-    NSNumber* longitude = [self.longitudeArgument value];
-    success successBlock = [self.successBlockArgument value];
-    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
-    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
-    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
-    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
-    
-    //when
-    mapView.mockCenterCoordinate = secondCenterCoordinate;
-    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    //then
-    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-    latitude = [self.latitudeArgument value];
-    longitude = [self.longitudeArgument value];
-    assertThat(latitude, closeTo(secondCenterCoordinate.latitude, 0.1));
-    assertThat(longitude, closeTo(secondCenterCoordinate.longitude, 0.1));
-    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
-    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
-}
-
-- (void)testRegionWillChangeAnimatedWithToSmallScrollUpdateDistance
-{
-    //given
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
-    MKMapViewMock* mapView = [MKMapViewMock new];
-    mapView.mockCenterCoordinate = centerCoordinate;
-    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
-    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
-    lootMapViewController.mapView = mapView;
-    //when
-    [lootMapViewController viewDidLoad];
-    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
-    //then
-    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
-}
+//- (void)testViewDidLoad
+//{
+//    //given
+//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
+//    MKMapViewMock* mapView = [MKMapViewMock new];
+//    mapView.mockCenterCoordinate = centerCoordinate;
+//    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+//    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
+//    lootMapViewController.mapView = mapView;
+//    //when
+//    [lootMapViewController viewDidLoad];
+//    //then
+//    
+//    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//    NSNumber* latitude = [self.latitudeArgument value];
+//    NSNumber* longitude = [self.longitudeArgument value];
+//    success successBlock = [self.successBlockArgument value];
+//    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
+//    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
+//    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+//    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
+//}
+//
+//- (void)testRegionWillChangeAnimatedWithAddingTwoLoots
+//{
+//    //given
+//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(41.22732, 3.8189);
+//    MKMapViewMock* mapView = [MKMapViewMock new];
+//    mapView.mockCenterCoordinate = centerCoordinate;
+//    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+//    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
+//    lootMapViewController.mapView = mapView;
+//    //when
+//    [lootMapViewController viewDidLoad];
+//    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+//    //then
+//    
+//    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//    NSNumber* latitude = [self.latitudeArgument value];
+//    NSNumber* longitude = [self.longitudeArgument value];
+//    success successBlock = [self.successBlockArgument value];
+//    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
+//    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
+//    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+//    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
+//}
+//
+//- (void)testRegionWillChangeAnimatedTwoTimesWithAddingDifferentLoots
+//{
+//    //given
+//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
+//    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
+//    MKMapViewMock* mapView = [MKMapViewMock new];
+//    mapView.mockCenterCoordinate = centerCoordinate;
+//    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+//    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
+//    lootMapViewController.mapView = mapView;
+//    //when
+//    [lootMapViewController viewDidLoad];
+//    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+//    //then
+//    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//    NSNumber* latitude = [self.latitudeArgument value];
+//    NSNumber* longitude = [self.longitudeArgument value];
+//    success successBlock = [self.successBlockArgument value];
+//    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
+//    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
+//    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+//    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
+//    
+//    //when
+//    mapView.mockCenterCoordinate = secondCenterCoordinate;
+//    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+//    //then
+//    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//    latitude = [self.latitudeArgument value];
+//    longitude = [self.longitudeArgument value];
+//    assertThat(latitude, closeTo(secondCenterCoordinate.latitude, 0.1));
+//    assertThat(longitude, closeTo(secondCenterCoordinate.longitude, 0.1));
+//    successBlock(@[self.exampleLootThree]);
+//    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(3));
+//}
+//
+//- (void)testRegionWillChangeAnimatedTwoTimesWithAddingSameLoots
+//{
+//    //given
+//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
+//    CLLocationCoordinate2D secondCenterCoordinate = CLLocationCoordinate2DMake(48.22732, 9.8189);
+//    MKMapViewMock* mapView = [MKMapViewMock new];
+//    mapView.mockCenterCoordinate = centerCoordinate;
+//    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+//    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
+//    lootMapViewController.mapView = mapView;
+//    //when
+//    [lootMapViewController viewDidLoad];
+//    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+//    //then
+//    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//    NSNumber* latitude = [self.latitudeArgument value];
+//    NSNumber* longitude = [self.longitudeArgument value];
+//    success successBlock = [self.successBlockArgument value];
+//    assertThat(latitude, closeTo(centerCoordinate.latitude, 0.1));
+//    assertThat(longitude, closeTo(centerCoordinate.longitude, 0.1));
+//    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+//    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
+//    
+//    //when
+//    mapView.mockCenterCoordinate = secondCenterCoordinate;
+//    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+//    //then
+//    [verifyCount(serverCaller, times(2)) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//    latitude = [self.latitudeArgument value];
+//    longitude = [self.longitudeArgument value];
+//    assertThat(latitude, closeTo(secondCenterCoordinate.latitude, 0.1));
+//    assertThat(longitude, closeTo(secondCenterCoordinate.longitude, 0.1));
+//    successBlock(@[self.exampleLootOne, self.exampleLootTwo]);
+//    assertThatUnsignedInt([[mapView annotations] count], equalToUnsignedInt(2));
+//}
+//
+//- (void)testRegionWillChangeAnimatedWithToSmallScrollUpdateDistance
+//{
+//    //given
+//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(47.22732, 8.8189);
+//    MKMapViewMock* mapView = [MKMapViewMock new];
+//    mapView.mockCenterCoordinate = centerCoordinate;
+//    id <ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+//    LootMapViewController* lootMapViewController = [[LootMapViewController alloc] initWithServerCaller:serverCaller];
+//    lootMapViewController.mapView = mapView;
+//    //when
+//    [lootMapViewController viewDidLoad];
+//    [lootMapViewController mapView:mapView regionWillChangeAnimated:(NO)];
+//    //then
+//    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
+//}
 
 @end

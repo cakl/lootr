@@ -11,13 +11,11 @@
 #import <JCRBlurView.h>
 #import <UIImageView+WebCache.h>
 #import <FXBlurView.h>
-#import <QuartzCore/QuartzCore.h>
-#import <UIImageView+WebCache.h>
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
 #import "Facade.h"
-#import "ServerCallerFacade.h"
 #import "LocationService.h"
+#import "ServerCallerFacadeFactory.h"
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
@@ -35,7 +33,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 -(id <Facade>)facade{
     if(_facade == nil)
     {
-        _facade = [[ServerCallerFacade alloc] init];
+        _facade = [ServerCallerFacadeFactory createFacade];
     }
     return _facade;
 }
@@ -178,9 +176,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     switch (section) {
         case 0:
             return 30;
-            break;
         default:
-            break;
             return 0;
     }
     return 0;
@@ -245,6 +241,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)blurContentOverlay:(FXBlurView*)blurOverlay{
     DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
+    //radius = [self.loot.radius integerValue];
     switch (distanceThreshold) {
         case DistanceTresholdFiveMeters:
         {

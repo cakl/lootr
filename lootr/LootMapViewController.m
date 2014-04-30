@@ -10,10 +10,8 @@
 #import "Loot+Annotation.h"
 #import "LootContentViewController.h"
 #import "CreateLootViewController.h"
-#import "LootContentViewController.h"
-#import "LootListViewController.h"
 #import "Facade.h"
-#import "ServerCallerFacade.h"
+#import "ServerCallerFacadeFactory.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
@@ -30,7 +28,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 -(id <Facade>)facade{
     if(_facade == nil)
     {
-        _facade = [[ServerCallerFacade alloc] init];
+        _facade = [ServerCallerFacadeFactory createFacade];
     }
     return _facade;
 }
