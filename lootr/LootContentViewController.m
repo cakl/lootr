@@ -17,11 +17,14 @@
 #import <TGRImageZoomAnimationController.h>
 #import "Facade.h"
 #import "ServerCallerFacade.h"
+#import "LocationService.h"
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
 @property (nonatomic, strong) UIImageView* lastDownloadedImage;
 @property (nonatomic, strong) id<Facade> facade;
+@property (nonatomic, strong) LocationService* locationService;
+@property (nonatomic, strong) UILabel* distanceToLootLabel;
 @end
 
 @implementation LootContentViewController
@@ -35,6 +38,14 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         _facade = [[ServerCallerFacade alloc] init];
     }
     return _facade;
+}
+
+-(LocationService*)locationService{
+    if(_locationService == nil)
+    {
+        _locationService = [[LocationService alloc] init];
+    }
+    return _locationService;
 }
 
 - (instancetype)initWithFacade:(id <Facade>)facade
@@ -78,6 +89,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 - (void)refresh:(UIRefreshControl *)refreshControl
 {
     [self reloadLootWithContents];
+    [self setDistanceToLootLabelText];
     [refreshControl endRefreshing];
 }
 
@@ -134,10 +146,10 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     JCRBlurView* blurView = [[JCRBlurView alloc] init];
     blurView.frame = CGRectMake(0, 0, width, height);
     
-    UILabel *label =  [[UILabel alloc] initWithFrame: CGRectMake(10, 8, width, 15)];
-    label.text = @"Distance to Loot: 50 Meters";
-    [label setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12]];
-    [blurView addSubview:label];
+    self.distanceToLootLabel =  [[UILabel alloc] initWithFrame: CGRectMake(10, 8, width, 15)];
+    [self setDistanceToLootLabelText];
+    [self.distanceToLootLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12]];
+    [blurView addSubview:self.distanceToLootLabel];
     
     UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 29.5, width, 0.5)];
     separator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
@@ -196,6 +208,18 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
     }
     
+}
+
+-(void)setDistanceToLootLabelText{
+    NSError* error = nil;
+    NSInteger distance = [self.locationService getDistanceToLoot:self.loot withError:&error];
+    NSString* distanceText = @"Distance to Loot: ";
+    NSString* distanceUnknownText = @"undetermined";
+    if(distance >= 0){
+        self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@%i m",distanceText, distance];
+    } else {
+        self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@%@",distanceText, distanceUnknownText];
+    }
 }
 
 #pragma mark - ImagePicker
