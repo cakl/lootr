@@ -41,5 +41,32 @@
     }
 }
 
+-(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLocation:(CLLocation*)location
+{
+    NSError* error = nil;
+    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&error];
+    if(currentLocation){
+        int distance = (int) [location distanceFromLocation:currentLocation];
+        if(distance < DistanceTresholdFiveMeters){
+            return DistanceTresholdFiveMeters;
+        } else if (distance < DistanceTresholdTenMeters){
+            NSLog(@"%i", DistanceTresholdTenMeters);
+            return DistanceTresholdTenMeters;
+        } else if (distance < DistanceTresholdFiftyMeters){
+            return DistanceTresholdFiftyMeters;
+        } else if (distance < DistanceTresholdHundredMeters){
+            return DistanceTresholdHundredMeters;
+        } else if (distance < DistanceTresholdFiveHundredMeters){
+            return DistanceTresholdFiveHundredMeters;
+        } else if (distance > DistanceTresholdFiveHundredMeters){
+            return DistanceTresholdMoreThanFiveHundredMeters;
+        } else {
+            return DistanceTresholdUndetermined;
+        }
+    } else {
+        return DistanceTresholdUndetermined;
+    }
+}
+
 
 @end

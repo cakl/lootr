@@ -14,4 +14,5 @@
 @property (nonatomic, strong) NSNumber* longitude;
 @property (nonatomic, strong) NSString* location;
 - (instancetype)initWithCoordinate2D:(CLLocationCoordinate2D)coordinate;
+-(CLLocation*)asCLLocation;
 @end

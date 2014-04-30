@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6rX-bH-e1F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6rX-bH-e1F">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -163,6 +163,11 @@
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
+                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bpy-l4-da3" customClass="FXBlurView">
+                                                            <rect key="frame" x="0.0" y="0.0" width="301" height="175"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                 </view>
@@ -171,6 +176,7 @@
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <connections>
                                             <outlet property="blurFooterView" destination="rw2-Nv-otP" id="63J-Df-hiF"/>
+                                            <outlet property="blurOverlayView" destination="bpy-l4-da3" id="1WD-Ho-faR"/>
                                             <outlet property="footerLabel" destination="Af6-Au-jyr" id="IV4-MY-bPG"/>
                                             <outlet property="fullImageView" destination="BM0-C6-X67" id="A7j-xs-MpZ"/>
                                         </connections>
@@ -306,7 +312,6 @@
         <!--Navigation Controller - Loot List-->
         <scene sceneID="xZ4-An-7PX">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cha-ts-9eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1zA-SO-p6i" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Loot List" image="ListTabIcon" id="odB-HR-sdw"/>
                     <toolbarItems/>
@@ -319,8 +324,26 @@
                         <segue destination="9nX-ep-pAU" kind="relationship" relationship="rootViewController" id="UxE-WN-YT4"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cha-ts-9eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="548" y="278"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="JOp-My-9hO">
+            <objects>
+                <viewController id="GDQ-Li-wYm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5JL-wb-g4V"/>
+                        <viewControllerLayoutGuide type="bottom" id="gXF-3G-lj4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YtX-bc-nZD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F1k-1r-kOa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

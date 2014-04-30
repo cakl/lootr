@@ -123,9 +123,12 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     ImageViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifierDetailed];
     cell = [cell initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     
+    [self blurContentOverlay:cell.blurOverlayView];
     [cell.fullImageView setImageWithURL:content.thumb completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         [cell.blurFooterView setNeedsDisplay];
+        [cell.blurOverlayView setNeedsDisplay];
     }];
+    
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"dd MMMM yyyy"];
     
@@ -134,6 +137,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     cell.footerLabel.text = [NSString stringWithFormat:@"by %@ on %@", content.creator.userName, dateString];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.blurFooterView.dynamic = NO;
+    cell.blurOverlayView.dynamic = NO;
     
     return cell;
 }
@@ -184,41 +188,89 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-    Content* content = [self.lootContents objectAtIndex:self.tableView.indexPathForSelectedRow.row];
-    if([cell isKindOfClass:[ImageViewTableViewCell class]]){
-        
-        SDWebImageManager *manager = [SDWebImageManager sharedManager];
-        [manager downloadWithURL:content.url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)
-         {
-             // TODO: progression tracking code
-         }
-         completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
-         {
-             if (image)
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
+    if(distanceThreshold == DistanceTresholdFiveMeters)
+    {
+        UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+        Content* content = [self.lootContents objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        if([cell isKindOfClass:[ImageViewTableViewCell class]]){
+            
+            SDWebImageManager *manager = [SDWebImageManager sharedManager];
+            [manager downloadWithURL:content.url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)
              {
-                 self.lastDownloadedImage.image = image;
-                 [self.lastDownloadedImage sizeToFit];
-                 TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:image];
-                 // Don't forget to set ourselves as the transition delegate
-                 viewController.transitioningDelegate = self;
-                 [self presentViewController:viewController animated:YES completion:nil];
+                 // TODO: progression tracking code
              }
-         }];
-
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
+             {
+                 if (image)
+                 {
+                     self.lastDownloadedImage.image = image;
+                     [self.lastDownloadedImage sizeToFit];
+                     TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:image];
+                     // Don't forget to set ourselves as the transition delegate
+                     viewController.transitioningDelegate = self;
+                     [self presentViewController:viewController animated:YES completion:nil];
+                 }
+             }];
+            
+        }
     }
     
 }
 
+#pragma mark - GUI Helper LocationService based
+
 -(void)setDistanceToLootLabelText{
-    NSError* error = nil;
-    NSInteger distance = [self.locationService getDistanceToLoot:self.loot withError:&error];
-    NSString* distanceText = @"Distance to Loot: ";
+    NSString* distanceText = @"distance";
     NSString* distanceUnknownText = @"undetermined";
-    if(distance >= 0){
-        self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@%i m",distanceText, distance];
-    } else {
-        self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@%@",distanceText, distanceUnknownText];
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
+    switch (distanceThreshold) {
+        case DistanceTresholdUndetermined:
+        {
+            self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@%@ m",distanceText, distanceUnknownText];
+        }
+            break;
+        case DistanceTresholdMoreThanFiveHundredMeters:
+        {
+            self.distanceToLootLabel.text = [NSString stringWithFormat:@">%im %@",DistanceTresholdFiveHundredMeters, distanceText];
+        }
+            break;
+        default:
+        {
+            self.distanceToLootLabel.text = [NSString stringWithFormat:@"<%im %@", distanceThreshold, distanceText];
+        }
+            break;
+    }
+}
+
+-(void)blurContentOverlay:(FXBlurView*)blurOverlay{
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
+    switch (distanceThreshold) {
+        case DistanceTresholdFiveMeters:
+        {
+            blurOverlay.blurEnabled = NO;
+        }
+            break;
+        case DistanceTresholdTenMeters:
+        {
+            blurOverlay.blurRadius = 5.0;
+        }
+            break;
+        case DistanceTresholdFiftyMeters:
+        {
+            blurOverlay.blurRadius = 10.0;
+        }
+            break;
+        case DistanceTresholdHundredMeters:
+        {
+            blurOverlay.blurRadius = 20.0;
+        }
+            break;
+        default:
+        {
+            blurOverlay.blurRadius = 40.0;
+        }
+            break;
     }
 }
 
