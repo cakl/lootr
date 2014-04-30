@@ -48,7 +48,7 @@
 		27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF7118D7499F00761C84 /* LootMapViewController.m */; };
 		27C7BF7B18D749B600761C84 /* Loot.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF7818D749B600761C84 /* Loot.m */; };
 		27C7BF7C18D749B600761C84 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF7A18D749B600761C84 /* User.m */; };
-		27C7BF7E18D749F800761C84 /* UNIA.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 27C7BF7D18D749F800761C84 /* UNIA.gpx */; };
+		27C7BF7E18D749F800761C84 /* HSR.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 27C7BF7D18D749F800761C84 /* HSR.gpx */; };
 		27CF77B118F215A10000C91C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
 		27CF77B318F217750000C91C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77B218F217750000C91C /* CoreLocation.framework */; };
 		27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CF77C018F22EDA0000C91C /* MKMapViewMock.m */; };
@@ -131,7 +131,7 @@
 		27C7BF7818D749B600761C84 /* Loot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Loot.m; sourceTree = "<group>"; };
 		27C7BF7918D749B600761C84 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		27C7BF7A18D749B600761C84 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		27C7BF7D18D749F800761C84 /* UNIA.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = UNIA.gpx; sourceTree = "<group>"; };
+		27C7BF7D18D749F800761C84 /* HSR.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = HSR.gpx; sourceTree = "<group>"; };
 		27CF77B218F217750000C91C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		27CF77B418F217EC0000C91C /* libPods-OCHamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCHamcrest.a"; path = "Pods/build/Release-iphoneos/libPods-OCHamcrest.a"; sourceTree = "<group>"; };
 		27CF77B618F217F70000C91C /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
@@ -398,7 +398,7 @@
 		27C7BF7F18D749FA00761C84 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				27C7BF7D18D749F800761C84 /* UNIA.gpx */,
+				27C7BF7D18D749F800761C84 /* HSR.gpx */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -480,7 +480,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27C7BF7E18D749F800761C84 /* UNIA.gpx in Resources */,
+				27C7BF7E18D749F800761C84 /* HSR.gpx in Resources */,
 				27346CE9190DA3100085B556 /* Storyboard.storyboard in Resources */,
 				27C7BF4818D7498100761C84 /* InfoPlist.strings in Resources */,
 				27C7BF5318D7498100761C84 /* Images.xcassets in Resources */,
