@@ -29,4 +29,5 @@ typedef NS_ENUM(int, Accuracy)
 @property (nonatomic, strong) NSNumber* radius;
 @property (nonatomic, strong) NSSet* contents;
 -(void)setRadiusWithAccuracy:(Accuracy)accuracy;
+-(Accuracy)getRadiusAsAccuracy;
 @end

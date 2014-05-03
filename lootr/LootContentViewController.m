@@ -241,33 +241,33 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)blurContentOverlay:(FXBlurView*)blurOverlay{
     DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
-    //radius = [self.loot.radius integerValue];
-    switch (distanceThreshold) {
-        case DistanceTresholdFiveMeters:
-        {
-            blurOverlay.blurEnabled = NO;
+    Accuracy accuracy = [self.loot getRadiusAsAccuracy];
+    if(distanceThreshold < accuracy){
+        blurOverlay.blurEnabled = NO;
+    } else {
+        switch (distanceThreshold) {
+            case DistanceTresholdTenMeters:
+            {
+                blurOverlay.blurRadius = 5.0;
+            }
+                break;
+            case DistanceTresholdFiftyMeters:
+            {
+                blurOverlay.blurRadius = 10.0;
+            }
+                break;
+            case DistanceTresholdHundredMeters:
+            {
+                blurOverlay.blurRadius = 20.0;
+            }
+                break;
+            default:
+            {
+                blurOverlay.blurRadius = 40.0;
+            }
+                break;
         }
-            break;
-        case DistanceTresholdTenMeters:
-        {
-            blurOverlay.blurRadius = 5.0;
-        }
-            break;
-        case DistanceTresholdFiftyMeters:
-        {
-            blurOverlay.blurRadius = 10.0;
-        }
-            break;
-        case DistanceTresholdHundredMeters:
-        {
-            blurOverlay.blurRadius = 20.0;
-        }
-            break;
-        default:
-        {
-            blurOverlay.blurRadius = 40.0;
-        }
-            break;
+        
     }
 }
 

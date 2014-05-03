@@ -34,6 +34,13 @@
     self.radius = [NSNumber numberWithInt:accuracy];
 }
 
+-(Accuracy)getRadiusAsAccuracy
+{
+    if([self.radius integerValue] == AccuracyNear) return AccuracyNear;
+    if([self.radius integerValue] == AccuracyWide) return AccuracyWide;
+    return AccuracyDefault;
+}
+
 -(NSUInteger)hash{
     NSUInteger prime = 31;
     NSUInteger result = 1;

@@ -49,7 +49,6 @@
         if(distance < DistanceTresholdFiveMeters){
             return DistanceTresholdFiveMeters;
         } else if (distance < DistanceTresholdTenMeters){
-            NSLog(@"%i", DistanceTresholdTenMeters);
             return DistanceTresholdTenMeters;
         } else if (distance < DistanceTresholdFiftyMeters){
             return DistanceTresholdFiftyMeters;
