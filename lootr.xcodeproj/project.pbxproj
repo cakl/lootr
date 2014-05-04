@@ -88,6 +88,7 @@
 		27346CE8190DA3100085B556 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		27346CEA190DDD4E0085B556 /* ServerCallerFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFacade.h; sourceTree = "<group>"; };
 		27346CEB190DDD4E0085B556 /* ServerCallerFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFacade.m; sourceTree = "<group>"; };
+		2734E74219168A7B00DD7F18 /* Fischermarktplatz.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Fischermarktplatz.gpx; sourceTree = "<group>"; };
 		2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectMapperInitializerTests.m; sourceTree = "<group>"; };
 		27491F4618D74C0C005E3F38 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		274C06CF18FB625200B0429A /* CreateLootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateLootViewController.h; sourceTree = "<group>"; };
@@ -404,6 +405,7 @@
 			isa = PBXGroup;
 			children = (
 				27C7BF7D18D749F800761C84 /* UNIA.gpx */,
+				2734E74219168A7B00DD7F18 /* Fischermarktplatz.gpx */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

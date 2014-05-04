@@ -345,6 +345,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image{
     [self.facade postContent:content onLoot:self.loot withImage:image onSuccess:^(Content *loot) {
         //TODO
+        [self reloadLootWithContents];
     } onFailure:^(NSError *error) {
         NSLog(@"%@", error);
     }];

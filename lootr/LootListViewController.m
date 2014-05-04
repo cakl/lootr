@@ -10,10 +10,12 @@
 #import "Loot.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
+#import "LocationService.h"
 
 @interface LootListViewController ()
 @property (nonatomic, strong) NSArray* loots;
 @property (nonatomic, strong) id<Facade> facade;
+@property (nonatomic, strong) LocationService* locationService;
 @end
 
 @implementation LootListViewController
@@ -24,10 +26,13 @@ static NSString *cellIdentifier = @"DetailCell";
 {
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"ListTabIcon"];
-    [self loadLootsAtCurrentPosition];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.title = @"Loots";
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self loadLootsAtCurrentPosition];
 }
 
 -(id <Facade>)facade{
@@ -36,6 +41,14 @@ static NSString *cellIdentifier = @"DetailCell";
         _facade = [ServerCallerFacadeFactory createFacade];
     }
     return _facade;
+}
+
+-(LocationService*)locationService{
+    if(_locationService == nil)
+    {
+        _locationService = [[LocationService alloc] init];
+    }
+    return _locationService;
 }
 
 - (instancetype)initWithFacade:(id <Facade>)facade
@@ -55,6 +68,7 @@ static NSString *cellIdentifier = @"DetailCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Loot* loot = [self.loots objectAtIndex:indexPath.row];
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[loot.coord asCLLocation]];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
@@ -62,7 +76,7 @@ static NSString *cellIdentifier = @"DetailCell";
     }
     
     cell.textLabel.text = loot.title;
-    cell.detailTextLabel.text = @"< XXm ";
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"< %im", distanceThreshold];
     
     return cell;
 }
