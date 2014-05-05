@@ -196,6 +196,63 @@
             </objects>
             <point key="canvasLocation" x="1794" y="-839"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="79U-zK-VHu">
+            <objects>
+                <viewController id="pjX-ha-KRj" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z5Y-34-sNb"/>
+                        <viewControllerLayoutGuide type="bottom" id="wiH-GP-C8U"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="McC-DG-h6H">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="fu5-B6-5Vl">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" minimumFontSize="17" background="loginTextfieldBackground" translatesAutoresizingMaskIntoConstraints="NO" id="mpp-iX-pms" customClass="LoginTextField">
+                                <rect key="frame" x="30" y="38" width="260" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" background="loginTextfieldBackground" translatesAutoresizingMaskIntoConstraints="NO" id="yn8-06-3nQ" customClass="LoginTextField">
+                                <rect key="frame" x="30" y="94" width="260" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kPR-WN-DGV">
+                                <rect key="frame" x="30" y="262" width="260" height="163"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginTextfieldBackground" translatesAutoresizingMaskIntoConstraints="NO" id="RZf-QJ-nYA">
+                                <rect key="frame" x="30" y="150" width="260" height="48"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tu5-yC-sCs">
+                                <rect key="frame" x="30" y="159" width="260" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
+                                <state key="normal" title="Login">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="passWordTextField" destination="yn8-06-3nQ" id="Dta-nh-aSd"/>
+                        <outlet property="userNameTextField" destination="mpp-iX-pms" id="TL4-3X-vjM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lhS-Ur-ZRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-557" y="-47"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="aJ1-eT-Jq0">
             <objects>
@@ -328,29 +385,15 @@
             </objects>
             <point key="canvasLocation" x="548" y="278"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="JOp-My-9hO">
-            <objects>
-                <viewController id="GDQ-Li-wYm" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="5JL-wb-g4V"/>
-                        <viewControllerLayoutGuide type="bottom" id="gXF-3G-lj4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="YtX-bc-nZD">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="F1k-1r-kOa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
     </scenes>
     <resources>
         <image name="ListTabIcon" width="25" height="25"/>
         <image name="LocateMeButton" width="44" height="44"/>
         <image name="MapTabIconInactive" width="25" height="25"/>
         <image name="SettingsTabIconInactive" width="25" height="25"/>
+        <image name="loginBackgroundImage" width="320" height="568"/>
+        <image name="loginLogo" width="260" height="163"/>
+        <image name="loginTextfieldBackground" width="260" height="48"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
