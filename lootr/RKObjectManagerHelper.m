@@ -15,6 +15,7 @@ static NSString* const lootsByCountPathPattern = @"/lootrserver/api/v1/loots/lat
 static NSString* const lootsByIdPathPattern = @"/lootrserver/api/v1/loots/:id";
 static NSString* const lootsPostPathPattern = @"/lootrserver/api/v1/loots";
 static NSString* const contentsPathPattern = @"/lootrserver/api/v1/contents";
+static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login";
 
 +(void) configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager{
     RKObjectMapping* lootsMapping = [RKObjectMapping mappingForClass:[Loot class]];
@@ -22,6 +23,7 @@ static NSString* const contentsPathPattern = @"/lootrserver/api/v1/contents";
     RKObjectMapping* coordinateMapping = [RKObjectMapping mappingForClass:[Coordinate class]];
     RKObjectMapping* contentMapping = [RKObjectMapping mappingForClass:[Content class]];
     RKObjectMapping* lootsPostMapping = [RKObjectMapping mappingForClass:[Loot class]];
+    RKObjectMapping* userPostMapping = [RKObjectMapping mappingForClass:[User class]];
     
     [lootsMapping addAttributeMappingsFromDictionary:@{
                                                       @"id": @"identifier",
@@ -39,8 +41,16 @@ static NSString* const contentsPathPattern = @"/lootrserver/api/v1/contents";
                                                        }];
     
     [userMapping addAttributeMappingsFromDictionary:@{
-                                                    @"username": @"userName"
+                                                    @"username": @"userName",
+                                                    @"email": @"email",
+                                                    @"password": @"passWord",
+                                                    @"token": @"token"
                                                     }];
+    
+    [userPostMapping addAttributeMappingsFromDictionary:@{
+                                                     @"email": @"email",
+                                                     @"password": @"passWord"
+                                                     }];
     
     [coordinateMapping addAttributeMappingsFromDictionary:@{
                                                              @"latitude": @"latitude",
@@ -70,16 +80,20 @@ static NSString* const contentsPathPattern = @"/lootrserver/api/v1/contents";
     RKResponseDescriptor* lootsPostResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodPOST pathPattern:lootsPostPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsByCountResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByCountPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* contentResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:contentMapping method:RKRequestMethodPOST pathPattern:contentsPathPattern keyPath:@"contents" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor* userResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping method:RKRequestMethodPOST pathPattern:usersLoginPathPattern keyPath:@"users" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:lootsByDistanceResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByIdResponseDescriptor];
     [objectManager addResponseDescriptor:lootsPostResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByCountResponseDescriptor];
     [objectManager addResponseDescriptor:contentResponseDescriptor];
+    [objectManager addResponseDescriptor:userResponseDescriptor];
     
     RKRequestDescriptor* lootPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[lootsPostMapping inverseMapping] objectClass:[Loot class] rootKeyPath:@"loots" method:RKRequestMethodPOST];
+    RKRequestDescriptor* userPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[userPostMapping inverseMapping] objectClass:[User class] rootKeyPath:@"users" method:RKRequestMethodPOST];
     
     [objectManager addRequestDescriptor:lootPostRequestDescriptor];
+    [objectManager addRequestDescriptor:userPostRequestDescriptor];
     
     objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
 }

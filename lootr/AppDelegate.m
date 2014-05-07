@@ -8,6 +8,11 @@
 
 #import "AppDelegate.h"
 #import "RKObjectManagerHelper.h"
+#import "UserService.h"
+#import "RootViewController.h"
+
+@interface AppDelegate ()
+@end
 
 @implementation AppDelegate
 
@@ -15,10 +20,17 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+static NSString* keyChainServiceName = @"ch.hsr.lootr";
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://152.96.56.70:8080"]];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    
+    RootViewController* rootViewController = (RootViewController*) self.window.rootViewController;
+    [self.window makeKeyAndVisible];
+    
+    [rootViewController presentLogin];
     
     return YES;
 }

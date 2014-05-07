@@ -127,7 +127,32 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
-
+- (void)testServerCallPostUser
+{
+    //given
+    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    RKObjectManager* objectManager = [RKTestFactory objectManager];
+    [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    id <ServerCaller> serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
+    User* user = [User new];
+    user.userName = @"Mario";
+    user.passWord = @"42";
+    
+    //when
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [serverCaller postUser:user onSuccess:^(User *user) {
+        XCTAssertNotNil(user, @"loaded loot is nil");
+        NSLog(@"%@", user);
+        dispatch_semaphore_signal(semaphore);
+    } onFailure:^(NSError *error) {
+        XCTFail(@"Failure returned");
+        NSLog(@"%@", error);
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+}
 
 
 

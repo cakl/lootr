@@ -77,11 +77,11 @@
 }
 
 -(void)getLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
-            [self.serverCaller getLootByIdentifier:loot.identifier onSuccess:^(Loot *loot) {
-                success(loot);
-            } onFailure:^(NSError *error) {
-                failure(error);
-            }];
+    [self.serverCaller getLootByIdentifier:loot.identifier onSuccess:^(Loot *loot) {
+        success(loot);
+    } onFailure:^(NSError *error) {
+        failure(error);
+    }];
 }
 
 -(void)postLoot:(Loot*)loot atCurrentLocationOnSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{

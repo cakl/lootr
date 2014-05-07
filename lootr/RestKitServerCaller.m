@@ -60,6 +60,15 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
     }];
 }
 
+-(void)postUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure
+{
+    [self.objectManager postObject:user path:[NSString stringWithFormat:@"%@/users/login", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success([[mappingResult array] firstObject]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+}
+
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* content))success onFailure:(void(^)(NSError* error))failure
 {
     NSMutableURLRequest *request = [self.objectManager multipartFormRequestWithObject:content method:RKRequestMethodPOST path:[NSString stringWithFormat:@"%@/contents", apiPath] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -75,6 +84,16 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
         failure(error);
     }];
     [self.objectManager enqueueObjectRequestOperation:operation];
+}
+
+-(void)setAuthorizationToken:(NSString*)token
+{
+    [self.objectManager.HTTPClient setAuthorizationHeaderWithToken:token];
+}
+
+-(void)clearAuthorizationToken
+{
+    [self.objectManager.HTTPClient clearAuthorizationHeader];
 }
 
 @end

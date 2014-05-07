@@ -23,6 +23,8 @@
 		274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C06D018FB625200B0429A /* CreateLootViewController.m */; };
 		274C06D418FB631200B0429A /* CreateLootForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C06D318FB631200B0429A /* CreateLootForm.m */; };
 		274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C941718E8EF15006A50F7 /* Loot+Annotation.m */; };
+		27514508191AAF6100846E36 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27514507191AAF6100846E36 /* RootViewController.m */; };
+		2751450C191AB56C00846E36 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2751450B191AB56C00846E36 /* TabBarViewController.m */; };
 		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
 		27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27707C5E18F994240018DC10 /* ServerCallerFactory.m */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
@@ -57,6 +59,9 @@
 		27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CF77C018F22EDA0000C91C /* MKMapViewMock.m */; };
 		27CF77C418F2309F0000C91C /* libPods-OCHamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77C218F2309F0000C91C /* libPods-OCHamcrest.a */; };
 		27CF77C518F2309F0000C91C /* libPods-OCMockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77C318F2309F0000C91C /* libPods-OCMockito.a */; };
+		27DAA9EE1918148B006B329D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAA9ED1918148B006B329D /* Security.framework */; };
+		27DAA9F119181605006B329D /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DAA9F019181605006B329D /* UserService.m */; };
+		27DAA9F719182773006B329D /* UserServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DAA9F619182773006B329D /* UserServiceTest.m */; };
 		27F3160F190FEF9B0066D304 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77B218F217750000C91C /* CoreLocation.framework */; };
 		27F316131910319B0066D304 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F316121910319B0066D304 /* LocationService.m */; };
 		27FBCFA3190FE38200677436 /* CoreLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBCFA2190FE38200677436 /* CoreLocationDelegate.m */; };
@@ -101,6 +106,10 @@
 		274C06D318FB631200B0429A /* CreateLootForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateLootForm.m; sourceTree = "<group>"; };
 		274C941618E8EF15006A50F7 /* Loot+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Loot+Annotation.h"; sourceTree = "<group>"; };
 		274C941718E8EF15006A50F7 /* Loot+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Loot+Annotation.m"; sourceTree = "<group>"; };
+		27514506191AAF6100846E36 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		27514507191AAF6100846E36 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		2751450A191AB56C00846E36 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
+		2751450B191AB56C00846E36 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
 		27707C5D18F994240018DC10 /* ServerCallerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFactory.h; sourceTree = "<group>"; };
 		27707C5E18F994240018DC10 /* ServerCallerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFactory.m; sourceTree = "<group>"; };
@@ -151,6 +160,10 @@
 		27CF77C018F22EDA0000C91C /* MKMapViewMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapViewMock.m; sourceTree = "<group>"; };
 		27CF77C218F2309F0000C91C /* libPods-OCHamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCHamcrest.a"; path = "Pods/build/Debug-iphoneos/libPods-OCHamcrest.a"; sourceTree = "<group>"; };
 		27CF77C318F2309F0000C91C /* libPods-OCMockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMockito.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMockito.a"; sourceTree = "<group>"; };
+		27DAA9ED1918148B006B329D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		27DAA9EF19181605006B329D /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
+		27DAA9F019181605006B329D /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
+		27DAA9F619182773006B329D /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
 		27F316101910062A0066D304 /* Facade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facade.h; sourceTree = "<group>"; };
 		27F316111910319B0066D304 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		27F316121910319B0066D304 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
@@ -164,6 +177,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27DAA9EE1918148B006B329D /* Security.framework in Frameworks */,
 				27F3160F190FEF9B0066D304 /* CoreLocation.framework in Frameworks */,
 				27A971D619056C0E00F26A87 /* QuartzCore.framework in Frameworks */,
 				27A971D419056A4D00F26A87 /* Accelerate.framework in Frameworks */,
@@ -247,6 +261,8 @@
 				27F316121910319B0066D304 /* LocationService.m */,
 				2707D8F519116375009C8669 /* ServerCallerFacadeFactory.h */,
 				2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */,
+				27DAA9EF19181605006B329D /* UserService.h */,
+				27DAA9F019181605006B329D /* UserService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -269,6 +285,17 @@
 				274C06D318FB631200B0429A /* CreateLootForm.m */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		27514509191AAF6600846E36 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				27514506191AAF6100846E36 /* RootViewController.h */,
+				27514507191AAF6100846E36 /* RootViewController.m */,
+				2751450A191AB56C00846E36 /* TabBarViewController.h */,
+				2751450B191AB56C00846E36 /* TabBarViewController.m */,
+			);
+			name = Root;
 			sourceTree = "<group>";
 		};
 		27740E381906DCC7004C85D9 /* LootMap */ = {
@@ -321,6 +348,7 @@
 				27740E391906DCD0004C85D9 /* LootList */,
 				27740E3A1906DCD9004C85D9 /* Settings */,
 				2734E746191694F200DD7F18 /* Login */,
+				27514509191AAF6600846E36 /* Root */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -349,6 +377,7 @@
 		27C7BF3A18D7498100761C84 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27DAA9ED1918148B006B329D /* Security.framework */,
 				27A971D519056C0E00F26A87 /* QuartzCore.framework */,
 				27A971D319056A4D00F26A87 /* Accelerate.framework */,
 				27CF77C218F2309F0000C91C /* libPods-OCHamcrest.a */,
@@ -406,6 +435,7 @@
 				2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */,
 				27CF77BF18F22EDA0000C91C /* MKMapViewMock.h */,
 				27CF77C018F22EDA0000C91C /* MKMapViewMock.m */,
+				27DAA9F619182773006B329D /* UserServiceTest.m */,
 			);
 			path = lootrTests;
 			sourceTree = "<group>";
@@ -572,6 +602,7 @@
 				272758C318E74018003939AA /* RestKitServerCaller.m in Sources */,
 				27A7731D18F4CF790041EE05 /* Content.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
+				27514508191AAF6100846E36 /* RootViewController.m in Sources */,
 				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
 				279284EE18E8652B002CB07A /* LootListViewController.m in Sources */,
 				27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */,
@@ -585,6 +616,8 @@
 				274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */,
 				27FBCFA3190FE38200677436 /* CoreLocationDelegate.m in Sources */,
 				27F316131910319B0066D304 /* LocationService.m in Sources */,
+				2751450C191AB56C00846E36 /* TabBarViewController.m in Sources */,
+				27DAA9F119181605006B329D /* UserService.m in Sources */,
 				2732B94018DFB8130068E18B /* Coordinate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -595,6 +628,7 @@
 			files = (
 				2739454318E37ABB00677E60 /* RKObjectMapperInitializerTests.m in Sources */,
 				2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */,
+				27DAA9F719182773006B329D /* UserServiceTest.m in Sources */,
 				27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */,
 				272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */,
 				27C7BF6718D7498200761C84 /* lootrTests.m in Sources */,
