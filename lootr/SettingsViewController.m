@@ -7,18 +7,42 @@
 //
 
 #import "SettingsViewController.h"
+#import "SettingsForm.h"
+#import "UserService.h"
 
 @interface SettingsViewController ()
-
+@property (nonatomic, strong) UserService* userService;
+@property (nonatomic, strong) SettingsForm* settingsForm;
 @end
 
 @implementation SettingsViewController
+static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
+
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        self.settingsForm = [[SettingsForm alloc] init];
+        self.formController.form = self.settingsForm;
+    }
+    return self;
+}
+
+-(void)setFormData:(SettingsForm*)settingsForm
+{
+    NSError* error = nil;
+    User* user = [self.userService getLoggedInUserWithError:&error];
+    if(!error){
+        self.settingsForm.userName = user.userName;
+        self.settingsForm.email = user.email;
+    }
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"SettingsTabIconActive"];
-    // Do any additional setup after loading the view.
+    [self setFormData:self.settingsForm];
 }
 
 - (void)didReceiveMemoryWarning
@@ -27,15 +51,28 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)logout{
+    NSLog(@"logout");
 }
-*/
+
+#pragma mark - Initialization
+
+
+-(UserService*)userService{
+    if(_userService == nil)
+    {
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+    }
+    return _userService;
+}
+
+- (instancetype)initWithUserService:(UserService*)userService
+{
+    self = [super init];
+    if (self) {
+        self.userService = userService;
+    }
+    return self;
+}
 
 @end

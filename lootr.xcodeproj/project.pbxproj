@@ -19,6 +19,7 @@
 		27346CEC190DDD4E0085B556 /* ServerCallerFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 27346CEB190DDD4E0085B556 /* ServerCallerFacade.m */; };
 		2734E745191694ED00DD7F18 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2734E744191694ED00DD7F18 /* LoginViewController.m */; };
 		2739454318E37ABB00677E60 /* RKObjectMapperInitializerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */; };
+		2747BE77191C15F800135648 /* SettingsForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 2747BE76191C15F800135648 /* SettingsForm.m */; };
 		27491F4718D74C0C005E3F38 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
 		274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C06D018FB625200B0429A /* CreateLootViewController.m */; };
 		274C06D418FB631200B0429A /* CreateLootForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C06D318FB631200B0429A /* CreateLootForm.m */; };
@@ -99,6 +100,8 @@
 		2734E743191694ED00DD7F18 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		2734E744191694ED00DD7F18 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectMapperInitializerTests.m; sourceTree = "<group>"; };
+		2747BE75191C15F800135648 /* SettingsForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsForm.h; sourceTree = "<group>"; };
+		2747BE76191C15F800135648 /* SettingsForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsForm.m; sourceTree = "<group>"; };
 		27491F4618D74C0C005E3F38 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		274C06CF18FB625200B0429A /* CreateLootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateLootViewController.h; sourceTree = "<group>"; };
 		274C06D018FB625200B0429A /* CreateLootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateLootViewController.m; sourceTree = "<group>"; };
@@ -327,6 +330,8 @@
 			children = (
 				279284EF18E8668A002CB07A /* SettingsViewController.h */,
 				279284F018E8668A002CB07A /* SettingsViewController.m */,
+				2747BE75191C15F800135648 /* SettingsForm.h */,
+				2747BE76191C15F800135648 /* SettingsForm.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 			files = (
 				2707D8F719116375009C8669 /* ServerCallerFacadeFactory.m in Sources */,
 				2734E745191694ED00DD7F18 /* LoginViewController.m in Sources */,
+				2747BE77191C15F800135648 /* SettingsForm.m in Sources */,
 				27AEF43F18E45ADD004C18A9 /* RKObjectManagerHelper.m in Sources */,
 				27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */,
 				274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */,

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FXForms.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : FXFormViewController
 
 @end

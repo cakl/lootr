@@ -16,7 +16,8 @@
 @end
 
 @implementation UserService
-static NSString* userDefaultsKey = @"username";
+static NSString* userDefaultsUserNameKey = @"username";
+static NSString* userDefaultsEmailKey = @"email";
 
 -(id <ServerCaller>)serverCaller{
     if (_serverCaller == nil)
@@ -48,11 +49,12 @@ static NSString* userDefaultsKey = @"username";
 }
 
 -(BOOL)setLoggedInUser:(User*)user error:(NSError**)error{
-    if(user.token || user.userName){
+    if(user.token && user.userName){
         [SSKeychain setPassword:user.token forService:self.keyChainServiceName account:user.userName error:error];
         if(!(*error)){
             user.passWord = nil;
-            [self.userDefaults setObject:user.userName forKey:userDefaultsKey];
+            [self.userDefaults setObject:user.userName forKey:userDefaultsUserNameKey];
+            [self.userDefaults setObject:user.email forKey:userDefaultsEmailKey];
             return YES;
         }
     }
@@ -61,10 +63,12 @@ static NSString* userDefaultsKey = @"username";
 }
 
 -(User*)getLoggedInUserWithError:(NSError**)error{
-    NSString* userName = [self.userDefaults objectForKey:userDefaultsKey];
+    NSString* userName = [self.userDefaults objectForKey:userDefaultsUserNameKey];
+    NSString* email = [self.userDefaults objectForKey:userDefaultsEmailKey];
     if(userName){
         User* loggedInUser = [User new];
         loggedInUser.userName = userName;
+        loggedInUser.email = email;
         loggedInUser.token = [self getPasswordForUsername:loggedInUser.userName error:error];
         if(!*error){
             return loggedInUser;
@@ -87,7 +91,8 @@ static NSString* userDefaultsKey = @"username";
 }
 
 -(void)deleteLoggedInUser{
-    [self.userDefaults removeObjectForKey:userDefaultsKey];
+    [self.userDefaults removeObjectForKey:userDefaultsUserNameKey];
+    [self.userDefaults removeObjectForKey:userDefaultsEmailKey];
     [self clearKeyChain];
 }
 
