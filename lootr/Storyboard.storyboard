@@ -287,14 +287,14 @@
                     <connections>
                         <segue destination="R2U-Rb-MYe" kind="relationship" relationship="viewControllers" id="xAX-lC-QRP"/>
                         <segue destination="1zA-SO-p6i" kind="relationship" relationship="viewControllers" id="pB7-lS-IGW"/>
-                        <segue destination="NId-H3-z0k" kind="relationship" relationship="viewControllers" id="4Fm-cq-wr0"/>
+                        <segue destination="IFG-z5-wWF" kind="relationship" relationship="viewControllers" id="4Fm-cq-wr0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lmq-N5-f87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-91" y="-47"/>
         </scene>
-        <!--Settings View Controller - Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="SXj-fc-TIS">
             <objects>
                 <viewController id="NId-H3-z0k" customClass="SettingsViewController" sceneMemberID="viewController">
@@ -307,11 +307,11 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsTabIconInactive" id="rGI-rL-2hs"/>
+                    <navigationItem key="navigationItem" id="d5g-SX-jpH"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhn-wr-qNW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="443" y="939"/>
+            <point key="canvasLocation" x="969" y="939"/>
         </scene>
         <!--Loot List View Controller-->
         <scene sceneID="O9v-3i-UUI">
@@ -405,6 +405,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cha-ts-9eC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="548" y="278"/>
+        </scene>
+        <!--Navigation Controller - Settings-->
+        <scene sceneID="cV8-OX-qzz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="IFG-z5-wWF" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsTabIconInactive" id="rGI-rL-2hs"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="3wF-OD-LE5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="NId-H3-z0k" kind="relationship" relationship="rootViewController" id="3Yz-mr-pyC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dKf-lY-VYG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="443" y="939"/>
         </scene>
     </scenes>
     <resources>

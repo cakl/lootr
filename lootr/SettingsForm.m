@@ -22,7 +22,7 @@
 - (NSArray *)extraFields
 {
     return @[
-             @{FXFormFieldTitle: @"Logout", FXFormFieldHeader: @"", FXFormFieldAction: @"logout", @"textLabel.color": [UIColor redColor]},
+             @{FXFormFieldTitle: @"Logout", FXFormFieldHeader: @"", FXFormFieldAction: @"performLogout", @"textLabel.color": [UIColor redColor]},
              ];
 }
 

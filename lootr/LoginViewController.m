@@ -48,8 +48,15 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     RootViewController* rootViewController = (RootViewController*) delegate.window.rootViewController;
     [self dismissViewControllerAnimated:NO completion:^{
+        [self clearTextFields];
         [rootViewController presentViewController:rootViewController.tabBarViewController animated:NO completion:nil];
     }];
+}
+
+-(void)clearTextFields
+{
+    self.emailTextField.text = nil;
+    self.passWordTextField.text = nil;
 }
 
 #pragma mark - Initialization

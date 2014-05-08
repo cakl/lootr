@@ -9,6 +9,8 @@
 #import "SettingsViewController.h"
 #import "SettingsForm.h"
 #import "UserService.h"
+#import "AppDelegate.h"
+#import "RootViewController.h"
 
 @interface SettingsViewController ()
 @property (nonatomic, strong) UserService* userService;
@@ -42,6 +44,7 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 {
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"SettingsTabIconActive"];
+    self.title = @"Settings";
     [self setFormData:self.settingsForm];
 }
 
@@ -51,8 +54,14 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     // Dispose of any resources that can be recreated.
 }
 
--(void)logout{
+-(void)performLogout{
     NSLog(@"logout");
+    AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
+    RootViewController* rootViewController = (RootViewController*) delegate.window.rootViewController;
+    [self dismissViewControllerAnimated:NO completion:^{
+        [rootViewController presentViewController:rootViewController.loginViewController animated:NO completion:nil];
+        [self.userService deleteLoggedInUser];
+    }];
 }
 
 #pragma mark - Initialization
