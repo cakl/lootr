@@ -8,6 +8,8 @@
 
 #import "UserService.h"
 #import "ServerCallerFactory.h"
+#import <SDWebImageDownloader.h>
+#import <SDWebImageManager.h>
 
 @interface UserService ()
 @property (nonatomic, strong) id<ServerCaller> serverCaller;
@@ -92,11 +94,13 @@ static NSString* userDefaultsKey = @"username";
 -(void)setAuthorizationToken:(NSString*)token
 {
     [self.serverCaller setAuthorizationToken:token];
+    [[SDWebImageManager.sharedManager imageDownloader] setValue:[NSString stringWithFormat:@"Token token=\"%@\"", token] forHTTPHeaderField:@"Authorization"];
 }
 
 -(void)clearAuthorizationToken
 {
     [self.serverCaller clearAuthorizationToken];
+    [[SDWebImageManager.sharedManager imageDownloader] setValue:@"" forHTTPHeaderField:@"Authorization"];
 }
 
 -(void)loginUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure{
