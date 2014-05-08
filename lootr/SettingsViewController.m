@@ -37,6 +37,7 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     if(!error){
         self.settingsForm.userName = user.userName;
         self.settingsForm.email = user.email;
+        [self.tableView reloadData];
     }
 }
 
@@ -45,6 +46,9 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"SettingsTabIconActive"];
     self.title = @"Settings";
+}
+
+-(void)viewWillAppear:(BOOL)animated{
     [self setFormData:self.settingsForm];
 }
 
