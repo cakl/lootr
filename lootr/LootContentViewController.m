@@ -23,6 +23,7 @@
 @property (nonatomic, strong) id<Facade> facade;
 @property (nonatomic, strong) LocationService* locationService;
 @property (nonatomic, strong) UILabel* distanceToLootLabel;
+@property (nonatomic, strong) UITextField* reportTextField;
 @end
 
 @implementation LootContentViewController
@@ -94,17 +95,37 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 -(void)infoButtonPressed
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.loot.title
+                                                    message:self.loot.summary
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
 }
 
 -(void)reportButtonPressed
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"Report This Loot"
+                                                    message:@"Enter a reason or concern for reporting this loot."
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Report",nil];
+    dialog.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [dialog show];
+    self.reportTextField = [dialog textFieldAtIndex:0];
+    
 }
 
 -(void)addBarButtonPressed
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Photo", @"Write Text", nil];
     [actionSheet showInView:self.view];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == 1) {
+        NSLog(@"%@", self.reportTextField.text);
+    }
 }
 
 #pragma mark - UITableViewDelegate
