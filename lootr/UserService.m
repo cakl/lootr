@@ -29,12 +29,7 @@ static NSString* userDefaultsEmailKey = @"email";
 
 - (instancetype)initWithKeyChainServiceName:(NSString*)serviceName userDefaults:(NSUserDefaults*)userDefaults
 {
-    self = [super init];
-    if (self) {
-        _keyChainServiceName = serviceName;
-        _userDefaults = userDefaults;
-    }
-    return self;
+    return [self initWithKeyChainServiceName:serviceName userDefaults:userDefaults serverCaller:nil];
 }
 
 - (instancetype)initWithKeyChainServiceName:(NSString*)serviceName userDefaults:(NSUserDefaults*)userDefaults serverCaller:(id<ServerCaller>)serverCaller
@@ -71,6 +66,7 @@ static NSString* userDefaultsEmailKey = @"email";
         loggedInUser.email = email;
         loggedInUser.token = [self getPasswordForUsername:loggedInUser.userName error:error];
         if(!*error){
+            [self setAuthorizationToken:loggedInUser.token];
             return loggedInUser;
         }
     }
