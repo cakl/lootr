@@ -14,10 +14,8 @@
 
 @implementation TabBarViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
+-(void)viewWillAppear:(BOOL)animated{
+    self.selectedIndex = 0;
 }
 
 - (void)didReceiveMemoryWarning
