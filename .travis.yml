@@ -29,11 +29,11 @@ after_success:
 env:
   global:
   - INFO_PLIST="lootr/lootr-Info.plist"
-  - secure: eg5YfnHwJ+V+7O/QfjLVIQbNCc25CXMw8n1yeOWNcrW5OewLI9ocpNdCTLz7hbUlSnWPwCeCx/KEPqWlyfUkst6fYw8GupNQ6ngyA755c/JuxYgqMzltkQEGXaRvUOANZRvaf+490sQSqbfJ+2ul9s3ctrKy4TUN3b9JPgwXghQ=
-  - secure: Onv9xltKpobDIsJKGaS4bfKZLummLsH40T+QpyjW/J0IMyxhSuVO0qI7hLAIwGVshiZeEbKrTJICvPj/IKn84cFth540hefjWkxyLnisNvrSnzijlGkP9Ki/rfdyxUlVzEgaSOOV3w+l9Bhanlf8w4Y+J81+x7zcF37mF8fYDy4=
   - APP_NAME="lootr"
   - 'DEVELOPER_NAME="iPhone Developer: Fabio Pigagnelli (JK5237J63G)"'
   - PROFILE_NAME="Lootr_Development"
-  - secure: W2oycmFHEEKNKiImMTJpCDn2r9M8mXF7v8YkkxfTwm1XSFyLFoNuxLDhUafCjkO1nMe0pnDLaeiTmqQFi+BgF4aeSRzqYMVm+Rwt8z8iBWZ+cAjqTbqNIz/gl1ETljvIxZQbCHCJyfPq2kD8tB83oEXfEdrvnyKPlZiv/A4KT4U=
-  - secure: cnhbczSTTC9jwGF4616Okv87hFRxxCN9ZmhNFRdpWD0yj9Mn5blyt3GauZ12RqtjUmTEW+F0Mw9jSQvd+fkd0VK2zwRBP981XfBCmewM9h8k9Q7BTAxFAF7isMewDCV5i+r8zYh9kY+H/1bbtw7I/VOYPpdxrzOd0oEdap2YRZY=
-  - secure: Vx4pla2T1/MLNiGMu0ENKDNRTGflNfkkMXQXyMFudyIQ0+lP0ouTpJWEmTb+XeTdJesbfz3Zbm7GCmSn3FqF+Qb++YBjjmynK2hMdG9bVSAl6BxOjwBdNI+185vUu35ZksEj4rz/Db1rozAS6EQbXlcEhaOrhs55TykNGIioRlI=
+  - secure: PQDEglosITl8INxjDiHi1Gq+oVDf4QJ+X+b41D8phGhJzGuPucsHuuZ56v6ApOA9x3Ee4Qc9L75JhD3P+JpD1qNaMxT4sMdlQ7h0D7mMVrepSXrugFfx2HR3cW62FqxoUnr9wgOMmnRrxGx1rvVdgbdqJkHrXFMB75W8rhRkHUM=
+  - secure: vJ7LQvnzk0cafUiJu8iIGqGFfZkNZtqluCTu8X0+nLULCFepO+ST18L86bop2TdImFOZ9o1BV+ITdfnNgzyvOiCLBRzMvHilCvgvbWgtaasUpTDa4tO5/DT/vh5DqUrJnJPfhhj517GV6pPTUdiEb7YzsDe0mDg55lbvkHrGedE=
+  - secure: FS+sgmd/10FJzZCJRzwrbqBpXtvgut9WuOmqdraiB19/9RvCY3ayEqblN7cOMx4ZQ3jOtgn5j0LKQG9Y7yUKhgounqVRvej59jNr+rlrOoGvZibBqIPA6bKsnDeemXbrxI0puSm1bdsPuz1Ef8vhkT/Hps7Ne2jxtbbwZSLySbE=
+  - secure: U/YXcY+7Qc/SwIQw1yLRy4Q1P7CTeKfVtvX2BdPDBJ5P+kJ0OQ41WDYM6ol27nAfMZmYfYxoMm2nXNC1pTYgNh3itd2GGMdY5J95eLotOg8d9mH6imXWosVlwDOLeP7qx61bwgGv8ve4v1+Ssadn58Bvs1f7C9bWyfYVms1U930=
+  - secure: FTrbIab6P8m9EKSxAxO+wAqiGBaEGB/3Ve7k7SwdIUZ9FbNhz/WvB2GHLlrFewbSp+QiqLVDQ4wzprEX56ZaMykOeuPXd15s4zhXPf02wOW+vSflIPNrjfegfKjEMbhQu8UkowlZ1VXETLmfSaUc+KhwVMU9PtFcAuFocQh+By4=
