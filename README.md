@@ -6,4 +6,6 @@ Lootr iPhone Client
 ===================
 developed as SE2 project
 
+more information on http://lootrapp.com
+
 Icons used from http://icons8.com/
