@@ -68,7 +68,7 @@ static NSString *cellIdentifier = @"DetailCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Loot* loot = [self.loots objectAtIndex:indexPath.row];
-    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[loot.coord asCLLocation]];
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLoot:loot];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {

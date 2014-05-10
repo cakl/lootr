@@ -18,12 +18,12 @@ typedef NS_ENUM(int, DistanceTreshold)
     DistanceTresholdHundredMeters = 100,
     DistanceTresholdFiveHundredMeters = 500,
     DistanceTresholdMoreThanFiveHundredMeters = 1000,
-    DistanceTresholdUndetermined = 0
+    DistanceTresholdUndetermined = 10000
 };
 
 @interface LocationService : NSObject
 
--(NSInteger)getDistanceToLoot:(Loot*)loot withError:(NSError**)error;
--(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLocation:(CLLocation*)location;
+-(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLoot:(Loot*)loot;
+-(BOOL)isCurrentLocationInRadiusOfLoot:(Loot*)loot;
 
 @end

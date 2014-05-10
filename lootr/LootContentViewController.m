@@ -118,8 +118,17 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)addBarButtonPressed
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Photo", @"Write Text", nil];
-    [actionSheet showInView:self.view];
+    if([self.locationService isCurrentLocationInRadiusOfLoot:self.loot]){
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Photo", @"Write Text", nil];
+        [actionSheet showInView:self.view];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
+                                                        message:@"You're not close enough to the loot to add content"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    }
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
@@ -205,8 +214,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
-    if(distanceThreshold == DistanceTresholdFiveMeters)
+    if([self.locationService isCurrentLocationInRadiusOfLoot:self.loot])
     {
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         Content* content = [self.lootContents objectAtIndex:self.tableView.indexPathForSelectedRow.row];
@@ -240,11 +248,11 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 -(void)setDistanceToLootLabelText{
     NSString* distanceText = @"distance";
     NSString* distanceUnknownText = @"undetermined";
-    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLoot:self.loot];
     switch (distanceThreshold) {
         case DistanceTresholdUndetermined:
         {
-            self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@%@ m",distanceText, distanceUnknownText];
+            self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@ %@",distanceText, distanceUnknownText];
         }
             break;
         case DistanceTresholdMoreThanFiveHundredMeters:
@@ -261,35 +269,18 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 }
 
 -(void)blurContentOverlay:(FXBlurView*)blurOverlay{
-    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLocation:[self.loot.coord asCLLocation]];
-    Accuracy accuracy = [self.loot getRadiusAsAccuracy];
-    if(distanceThreshold < accuracy){
+    DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLoot:self.loot];
+    if([self.locationService isCurrentLocationInRadiusOfLoot:self.loot]){
         blurOverlay.blurEnabled = NO;
     } else {
-        switch (distanceThreshold) {
-            case DistanceTresholdTenMeters:
-            {
-                blurOverlay.blurRadius = 5.0;
-            }
-                break;
-            case DistanceTresholdFiftyMeters:
-            {
-                blurOverlay.blurRadius = 10.0;
-            }
-                break;
-            case DistanceTresholdHundredMeters:
-            {
-                blurOverlay.blurRadius = 20.0;
-            }
-                break;
-            default:
-            {
-                blurOverlay.blurRadius = 40.0;
-            }
-                break;
-        }
-        
+        blurOverlay.blurRadius = [self blurRadiusOfDistanceThreshold:distanceThreshold];
     }
+}
+
+-(float)blurRadiusOfDistanceThreshold:(DistanceTreshold)threshold
+{
+    int x = threshold;
+    return (1/1200)*sqrt(x)+(3/40)*x+(25/6); //TODO: describe and re-calculate optimal quadratic equitation
 }
 
 #pragma mark - ImagePicker

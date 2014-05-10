@@ -29,23 +29,14 @@
     return self;
 }
 
--(NSInteger)getDistanceToLoot:(Loot*)loot withError:(NSError**)error{
-    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:error];
-    if(currentLocation){
-        CLLocation* lootLocation = [[CLLocation alloc] initWithLatitude:[loot.coord.latitude doubleValue] longitude:[loot.coord.longitude doubleValue]];
-        CLLocationDistance distance = [lootLocation distanceFromLocation:currentLocation];
-        return (NSInteger) distance;
-    } else {
-        return -1;
-    }
-}
-
--(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLocation:(CLLocation*)location
+//TODO: erklaeren warum kupplung an pure data object loot sinn macht: zuviel distance checks in GUI
+-(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLoot:(Loot*)loot
 {
     NSError* error = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&error];
+    CLLocation* lootLocation = [loot.coord asCLLocation];
     if(currentLocation){
-        int distance = (int) [location distanceFromLocation:currentLocation];
+        int distance = (int) [lootLocation distanceFromLocation:currentLocation];
         if(distance < DistanceTresholdFiveMeters){
             return DistanceTresholdFiveMeters;
         } else if (distance < DistanceTresholdTenMeters){
@@ -64,6 +55,19 @@
     } else {
         return DistanceTresholdUndetermined;
     }
+}
+
+-(BOOL)isCurrentLocationInRadiusOfLoot:(Loot*)loot
+{
+    NSError* error = nil;
+    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&error];
+    if(currentLocation){
+        DistanceTreshold threshold = [self getDistanceThresholdfromCurrentLocationToLoot:loot];
+        if((int)threshold <= (int)[loot getRadiusAsAccuracy]){
+            return YES;
+        }
+    }
+    return NO;
 }
 
 

@@ -66,7 +66,7 @@ static NSString* userDefaultsEmailKey = @"email";
         loggedInUser.email = email;
         loggedInUser.token = [self getPasswordForUsername:loggedInUser.userName error:error];
         if(!*error){
-            [self setAuthorizationToken:loggedInUser.token];
+            [self setAuthorizationToken:loggedInUser.token]; //TODO: write unit test for this case! kill simu. restart already loggedin token set?
             return loggedInUser;
         }
     }
