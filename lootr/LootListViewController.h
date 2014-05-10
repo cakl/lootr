@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface LootListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface LootListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end

@@ -362,11 +362,12 @@
                     <navigationItem key="navigationItem" id="ydw-QK-JET"/>
                     <connections>
                         <outlet property="tableView" destination="ncr-f0-Sdf" id="bQo-Ik-Jj4"/>
+                        <segue destination="gRe-fW-iOZ" kind="push" identifier="showLoot" id="i6E-BU-eft"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0FM-fj-TfG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1040" y="278"/>
+            <point key="canvasLocation" x="1107" y="278"/>
         </scene>
         <!--Navigation Controller - Loot Map-->
         <scene sceneID="BaO-49-txJ">
@@ -440,4 +441,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="i6E-BU-eft"/>
+    </inferredMetricsTieBreakers>
 </document>

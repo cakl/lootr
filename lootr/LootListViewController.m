@@ -11,11 +11,13 @@
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
 #import "LocationService.h"
+#import "LootContentViewController.h"
 
 @interface LootListViewController ()
 @property (nonatomic, strong) NSArray* loots;
 @property (nonatomic, strong) id<Facade> facade;
 @property (nonatomic, strong) LocationService* locationService;
+@property (nonatomic, strong) Loot* lastSelectedLoot;
 @end
 
 @implementation LootListViewController
@@ -32,6 +34,8 @@ static NSString *cellIdentifier = @"DetailCell";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.delegate = self;
+    [self.tableView reloadData];
     [self loadLootsAtCurrentPosition];
 }
 
@@ -79,6 +83,30 @@ static NSString *cellIdentifier = @"DetailCell";
     cell.detailTextLabel.text = [NSString stringWithFormat:@"< %im", distanceThreshold];
     
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.lastSelectedLoot = [self.loots objectAtIndex:indexPath.row];
+    [self performSegueWithIdentifier:@"showLoot" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showLoot"]){
+        LootContentViewController* contentViewController = segue.destinationViewController;
+        contentViewController.loot = self.lastSelectedLoot;
+    }
+}
+
+#pragma mark - UITabBarControllerDelegate
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    if(viewController != self.navigationController){
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+    return YES;
 }
 
 #pragma mark - Loading Data from Server

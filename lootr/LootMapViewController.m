@@ -47,7 +47,6 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tabBarController.delegate = self;
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
@@ -57,11 +56,13 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    // iOS 7.1 BUGFIX TABBAR: http://stackoverflow.com/questions/22327646/tab-bar-background-is-missing-on-ios-7-1-after-presenting-and-dismissing-a-view
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        self.tabBarController.tabBar.translucent = NO;
-        self.tabBarController.tabBar.translucent = YES;
-    });
+    self.tabBarController.delegate = self;
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [[self.mapView selectedAnnotations] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [self.mapView deselectAnnotation:obj animated:NO];
+    }];
 }
 
 -(NSUInteger)supportedInterfaceOrientations{
@@ -179,22 +180,15 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     }
 }
 
-//#pragma mark - UITabBarControllerDelegate
-//
-//-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-//{
-//    NSUInteger indexOfTab = [self.tabBarController.viewControllers indexOfObject:viewController];
-//    switch (indexOfTab) {
-//        case indexOfLootListViewController:
-//        {
-//            UINavigationController* navController = (UINavigationController*) viewController;
-//            LootListViewController* destinationViewController = (LootListViewController*) navController.topViewController;
-//            destinationViewController.userLocation = self.mapView.userLocation;
-//        }
-//        default:
-//            break;
-//    }
-//}
+#pragma mark - UITabBarControllerDelegate
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
+{
+    if(viewController != self.navigationController){
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
+    return YES;
+}
 
 #pragma mark - Loading Data from Server
 
