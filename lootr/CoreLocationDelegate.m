@@ -11,6 +11,9 @@
 @interface CoreLocationDelegate ()
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (atomic, strong, readonly) CLLocation* location;
+@property (atomic, strong) CLLocation* lastLocation;
+@property (atomic, strong) NSString* city;
+@property (nonatomic, strong) CLGeocoder* geocoder;
 @end
 
 @implementation CoreLocationDelegate
@@ -35,6 +38,7 @@ static const double updateDistance = 20.0;
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         self.locationManager.distanceFilter = updateDistance;
+        self.geocoder = [[CLGeocoder alloc] init];
     }
     return self;
 }
@@ -60,13 +64,31 @@ static const double updateDistance = 20.0;
 }
 
 -(BOOL)isAuthorized{
-    return (CLLocationManager.authorizationStatus != kCLAuthorizationStatusAuthorized);
+    return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized);
 }
 
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    self.lastLocation = self.location;
     _location = [locations lastObject];
+    double distance = [self.lastLocation distanceFromLocation:self.location];
+    if(distance > 1000 || distance == 0 ){
+        [self geocodeCityByLocation:self.location];
+    }
+}
+
+-(void)geocodeCityByLocation:(CLLocation*)location
+{
+    if(!self.geocoder.geocoding){
+        [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+            if(error){
+                self.city = nil;
+            } else {
+                self.city = [[placemarks firstObject] locality];
+            }
+        }];
+    }
 }
 
 @end

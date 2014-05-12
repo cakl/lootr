@@ -49,7 +49,7 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     RootViewController* rootViewController = (RootViewController*) delegate.window.rootViewController;
     [self dismissViewControllerAnimated:NO completion:^{
         [self clearTextFields];
-        [rootViewController presentViewController:rootViewController.tabBarViewController animated:NO completion:nil];
+        [rootViewController checkLocationServiceAuthorization];
     }];
 }
 

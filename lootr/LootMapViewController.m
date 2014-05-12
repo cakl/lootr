@@ -12,6 +12,9 @@
 #import "CreateLootViewController.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
+#import "ServerCaller.h"
+#import "ServerCallerFactory.h"
+
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
@@ -21,7 +24,7 @@
 @end
 
 @implementation LootMapViewController
-static const CLLocationDistance scrollUpdateDistance = 200.0;
+//static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 #pragma mark - Initialization
 
@@ -41,6 +44,7 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
     }
     return self;
 }
+
 
 #pragma mark - UIViewController
 
@@ -128,27 +132,58 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
-    NSLog(@"regionDidChangeAnimated");
-    NSLog(@"Span latDelta:%f, longDelta:%f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
+    
+    //[self DEBUGlootCreatorAtCoordinate:self.mapView.centerCoordinate];
+//    NSLog(@"regionDidChangeAnimated");
+//    NSLog(@"Span latDelta:%f, longDelta:%f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
     MKCoordinateRegion mapRegion;
     mapRegion.center = mapView.centerCoordinate;
-    mapRegion.span.latitudeDelta = 0.3;
-    mapRegion.span.longitudeDelta = 0.3;
-    double lat = mapRegion.center.latitude;
-    double lng = mapRegion.center.longitude;
-    CLLocation *before = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
-    CLLocation *now = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-
-    CLLocationDistance distance = ([before distanceFromLocation:now]);
-    NSLog(@"Scrolled distance: %@", [NSString stringWithFormat:@"%.02f", distance]);
+//    mapRegion.span.latitudeDelta = 0.3;
+//    mapRegion.span.longitudeDelta = 0.3;
+//    double lat = mapRegion.center.latitude;
+//    double lng = mapRegion.center.longitude;
+//    CLLocation *before = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
+//    CLLocation *now = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+//
+//    CLLocationDistance distance = ([before distanceFromLocation:now]);
+//    NSLog(@"Scrolled distance: %@", [NSString stringWithFormat:@"%.02f", distance]);
     
-    if( distance > scrollUpdateDistance )
+    //if( distance > scrollUpdateDistance )
+    double widthOfViewPort = self.mapView.region.span.longitudeDelta/4*111*1000;
+    CLLocation* centerLocation = [[CLLocation alloc] initWithLatitude:self.mapView.centerCoordinate.latitude longitude:self.mapView.centerCoordinate.longitude];
+    CLLocation* lastLocation = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
+    double distanceBetween = [lastLocation distanceFromLocation:centerLocation];
+    NSLog(@"widhofviewport = %f --- distancebetween = %f", widthOfViewPort, distanceBetween);
+    if(widthOfViewPort < distanceBetween)
     {
         NSLog(@"Center Latitude: %f Longitude: %f", [self.mapView centerCoordinate].latitude, [self.mapView centerCoordinate].longitude);
         [self loadLootsAtCoordinate:[self.mapView centerCoordinate]];
+        
+        self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
     }
-    self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
+    
 }
+
+//-(void)DEBUGlootCreatorAtCoordinate:(CLLocationCoordinate2D)coordinate
+//{
+//    id<ServerCaller> serverCaller = [ServerCallerFactory createServerCaller];
+//    Loot* tempLoot = [Loot new];
+//    tempLoot.title = @"AUTOMATIC";
+//    tempLoot.summary = @"blaablalblba";
+//    tempLoot.created = [NSDate date];
+//    tempLoot.radius = [NSNumber numberWithInt:50];
+//    User* user = [User new];
+//    user.userName = @"Mario";
+//    user.email = @"mario@test.ch";
+//    tempLoot.creator = user;
+//    Coordinate* coord = [[Coordinate alloc] initWithCoordinate2D:coordinate];
+//    tempLoot.coord = coord;
+//    [serverCaller postLoot:tempLoot onSuccess:^(Loot *loot) {
+//        NSLog(@"ROBOT SUCCESSFULL");
+//    } onFailure:^(NSError *error) {
+//        
+//    }];
+//}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     static NSString *identifier = @"loot";
@@ -193,11 +228,15 @@ static const CLLocationDistance scrollUpdateDistance = 200.0;
 #pragma mark - Loading Data from Server
 
 -(void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:1000] onSuccess:^(NSArray *loots) {
+    MKCoordinateSpan visibleSpanRegion = self.mapView.region.span;
+    int distance = (visibleSpanRegion.latitudeDelta*111 / 2)*1000;
+    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:distance] onSuccess:^(NSArray *loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
-        [newLoots removeObjectsInArray:[self.mapView annotations]];
+        [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:newLoots];
-        NSLog(@"%d", [[self.mapView annotations] count]);
+//        [newLoots removeObjectsInArray:[self.mapView annotations]];
+//        [self.mapView addAnnotations:newLoots];
+//        NSLog(@"%d", [[self.mapView annotations] count]);
     } onFailure:^(NSError *error) {
         NSLog(@"%@", error);
     }];

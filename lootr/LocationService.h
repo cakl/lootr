@@ -25,5 +25,8 @@ typedef NS_ENUM(int, DistanceTreshold)
 
 -(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLoot:(Loot*)loot;
 -(BOOL)isCurrentLocationInRadiusOfLoot:(Loot*)loot;
+-(void)startLocationService;
+-(void)stopLocationService;
+-(BOOL)isLocationServiceAuthorized;
 
 @end

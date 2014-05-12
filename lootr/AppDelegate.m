@@ -10,6 +10,7 @@
 #import "RKObjectManagerHelper.h"
 #import "UserService.h"
 #import "RootViewController.h"
+#import "ServiceCheckViewController.h"
 
 @interface AppDelegate ()
 @end
@@ -30,7 +31,7 @@ static NSString* keyChainServiceName = @"ch.hsr.lootr";
     RootViewController* rootViewController = (RootViewController*) self.window.rootViewController;
     [self.window makeKeyAndVisible];
     
-    [rootViewController presentLogin];
+    //[rootViewController presentLogin];
     
     return YES;
 }
@@ -55,6 +56,9 @@ static NSString* keyChainServiceName = @"ch.hsr.lootr";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    RootViewController* rootViewController = (RootViewController*) self.window.rootViewController;
+    [rootViewController presentLogin];
+    //[rootViewController checkLocationServiceAuthorization];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

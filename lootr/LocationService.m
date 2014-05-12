@@ -29,6 +29,21 @@
     return self;
 }
 
+-(void)startLocationService
+{
+    [self.locationDelegate startUpdatingLocation];
+}
+
+-(void)stopLocationService
+{
+    [self.locationDelegate stopUpdatingLocation];
+}
+
+-(BOOL)isLocationServiceAuthorized
+{
+    return [self.locationDelegate isAuthorized];
+}
+
 //TODO: erklaeren warum kupplung an pure data object loot sinn macht: zuviel distance checks in GUI
 -(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLoot:(Loot*)loot
 {

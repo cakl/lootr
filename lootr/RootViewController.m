@@ -9,9 +9,12 @@
 #import "RootViewController.h"
 #import "AppDelegate.h"
 #import "UserService.h"
+#import "ServiceCheckViewController.h"
+#import "LocationService.h"
 
 @interface RootViewController ()
 @property (nonatomic, strong) UserService* userService;
+@property (nonatomic, strong) LocationService* locationService;
 @end
 
 @implementation RootViewController
@@ -29,14 +32,59 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     return _tabBarViewController;
 }
 
+-(ServiceCheckViewController*)serviceCheckViewController{
+    if(_serviceCheckViewController) return _serviceCheckViewController;
+    _serviceCheckViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"serviceCheckViewController"];
+    return _serviceCheckViewController;
+}
+
+-(LocationService*)locationService{
+    if(_locationService == nil)
+    {
+        _locationService = [[LocationService alloc] init];
+    }
+    return _locationService;
+}
+
 -(void)presentLogin{
     NSError* error = nil;
     User* loggedInUser = [self.userService getLoggedInUserWithError:&error];
     if(!error){
-        [self presentViewController:self.tabBarViewController animated:NO completion:nil];
+        [self checkLocationServiceAuthorization];
     } else {
-        [self presentViewController:self.loginViewController animated:NO completion:nil];
+        if(self.presentedViewController != self.loginViewController){
+            [self presentViewController:self.loginViewController animated:NO completion:nil];
+        }
     }
+}
+
+-(void)checkLocationServiceAuthorization
+{
+    if((![self.locationService isLocationServiceAuthorized]) && (self.presentedViewController != nil) ){
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self presentViewController:self.serviceCheckViewController animated:NO completion:^{
+                [self.locationService startLocationService];
+            }];
+        }];
+    }
+    if([self.locationService isLocationServiceAuthorized] && (self.presentedViewController != nil) ){
+        [self dismissViewControllerAnimated:NO completion:^{
+            [self presentViewController:self.tabBarViewController animated:NO completion:nil];
+        }];
+    }
+    if((![self.locationService isLocationServiceAuthorized]) && (self.presentedViewController == nil) ){
+        [self presentViewController:self.serviceCheckViewController animated:NO completion:^{
+            [self.locationService startLocationService];
+        }];
+    }
+    if([self.locationService isLocationServiceAuthorized] && (self.presentedViewController == nil) ){
+        [self presentViewController:self.tabBarViewController animated:NO completion:nil];
+    }
+}
+
+-(BOOL)loggedIn
+{
+    return [self presentedViewController] != self.loginViewController;
 }
 
 #pragma mark - Initialization
