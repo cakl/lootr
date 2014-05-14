@@ -88,9 +88,6 @@
     postLoot.title = form.title;
     postLoot.summary = form.summary;
     [postLoot setRadiusWithAccuracy:form.accuracy];
-    User *user = [User new];
-    user.userName = @"Mario";
-    postLoot.creator = user;
     return postLoot;
 }
 

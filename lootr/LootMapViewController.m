@@ -89,7 +89,7 @@
         CLLocationCoordinate2D newCenterCoordinate = [self zoomIntoLocation:self.mapView.userLocation.coordinate];
         [self loadLootsAtCoordinate:newCenterCoordinate];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"User Location is undefined" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"GPS is not yet initiating" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alertView show];
     }
 }

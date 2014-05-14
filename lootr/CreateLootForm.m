@@ -20,7 +20,7 @@
              //we want to add another group header here, and modify the auto-capitalization
              
              
-             @{FXFormFieldKey: @"anonymously", FXFormFieldHeader: @"", FXFormFieldFooter: @"A Loot created anonymously will not show you as creator and will not count toward your stats and credits"},
+             //@{FXFormFieldKey: @"anonymously", FXFormFieldHeader: @"", FXFormFieldFooter: @"A Loot created anonymously will not show you as creator and will not count toward your stats and credits"},
              
              //this is a multiple choice field, so we'll need to provide some options
              //because this is an enum property, the indexes of the options should match enum values

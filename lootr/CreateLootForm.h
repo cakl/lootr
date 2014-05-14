@@ -16,8 +16,6 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *summary;
 
-@property (nonatomic, assign) BOOL anonymously;
-
 @property (nonatomic, assign) Accuracy accuracy;
  
 @end

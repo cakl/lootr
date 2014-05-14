@@ -327,12 +327,8 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *image = [info valueForKey: UIImagePickerControllerOriginalImage];
-    //TODO: work with selected image
-    User* u = [User new];
-    u.userName = @"Mario";
     Content* c = [Content new];
     c.created = [NSDate date];
-    c.creator = u;
     [self postContent:c onLoot:self.loot withImage:image];
     [self.navigationController dismissViewControllerAnimated: YES completion: nil];
 }

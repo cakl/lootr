@@ -82,11 +82,6 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     }
 }
 
--(BOOL)loggedIn
-{
-    return [self presentedViewController] != self.loginViewController;
-}
-
 #pragma mark - Initialization
 
 -(UserService*)userService{

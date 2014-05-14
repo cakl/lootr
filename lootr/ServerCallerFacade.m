@@ -10,13 +10,16 @@
 #import "CoreLocationDelegate.h"
 #import "ServerCaller.h"
 #import "ServerCallerFactory.h"
+#import "UserService.h"
 
 @interface ServerCallerFacade ()
 @property (nonatomic, strong) CoreLocationDelegate* locationDelegate;
 @property (nonatomic, strong) id<ServerCaller> serverCaller;
+@property (nonatomic, strong) UserService* userService;
 @end
 
 @implementation ServerCallerFacade
+static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 
 -(CoreLocationDelegate*)locationDelegate{
     if(_locationDelegate) return _locationDelegate;
@@ -30,6 +33,14 @@
         _serverCaller = [ServerCallerFactory createServerCaller];
     }
     return _serverCaller;
+}
+
+-(UserService*)userService{
+    if(_userService == nil)
+    {
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+    }
+    return _userService;
 }
 
 -(instancetype)initWithLocationDelegate:(CoreLocationDelegate*)locationDelegate andServerCaller:(id<ServerCaller>)serverCaller{
@@ -86,35 +97,44 @@
 
 -(void)postLoot:(Loot*)loot atCurrentLocationOnSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
     NSError* positionError = nil;
+    NSError* userError = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
-    if(currentLocation){
+    User* currentUser = [self.userService getLoggedInUserWithError:&userError];
+    if(!positionError && !userError){
         Coordinate* currentCoordinate = [[Coordinate alloc] init];
         currentCoordinate.latitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
         currentCoordinate.longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
         loot.coord = currentCoordinate;
+        loot.creator = currentUser;
         [self.serverCaller postLoot:loot onSuccess:^(Loot *loot) {
             success(loot);
         } onFailure:^(NSError *error) {
             failure(error);
         }];
     } else {
-        failure(positionError);
+        (positionError)?failure(positionError):failure(userError);
     }
 }
 
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* loot))success onFailure:(void (^)(NSError *error))failure{
     NSError* positionError = nil;
+    NSError* userError = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
-    if(currentLocation){
+    User* currentUser = [self.userService getLoggedInUserWithError:&userError];
+    if(!userError && !positionError){
         if([self checkIfCurrentLocation:currentLocation isInRadiusOfLoot:loot]){
+            content.creator = currentUser;
             [self.serverCaller postContent:content onLoot:loot withImage:image onSuccess:^(Content *content) {
                 success(content);
             } onFailure:^(NSError *error) {
                 failure(error);
             }];
+        } else {
+            NSError* distanceError = [NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
+            failure(distanceError);
         }
     } else {
-        failure(positionError);
+        (positionError)?failure(positionError):failure(userError);
     }
 }
 
