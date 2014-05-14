@@ -55,7 +55,7 @@
     self.mapView.showsUserLocation = YES;
     self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
     self.locateUserButton.backgroundColor = [UIColor clearColor];
-    [self zoomIntoUserLocationWithCoordinateCheck];
+    [self zoomIntoUserLocationOnInit];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -84,7 +84,14 @@
 #pragma mark - User Interaction
 
 - (IBAction)buttonPressed:(id)sender {
-    [self zoomIntoUserLocation];
+    CLLocationCoordinate2D userCoordinate = self.mapView.userLocation.coordinate;
+    if([self isValidCenterCoordinate:userCoordinate]) {
+        CLLocationCoordinate2D newCenterCoordinate = [self zoomIntoLocation:self.mapView.userLocation.coordinate];
+        [self loadLootsAtCoordinate:newCenterCoordinate];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"User Location is undefined" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        [alertView show];
+    }
 }
 
 - (IBAction)addLootButtonPressed:(id)sender {
@@ -95,24 +102,25 @@
 
 #pragma mark - MapView Setup
 
--(void)zoomIntoUserLocationWithCoordinateCheck
+-(void)zoomIntoUserLocationOnInit
 {
-    if(self.mapView.userLocation.coordinate.latitude < 0.01 && self.mapView.userLocation.coordinate.longitude < 0.01){
-        CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
-        self.lastLocationCoordinate = defaultZoomInCoordinate;
-        [self zoomIntoLocation:defaultZoomInCoordinate];
+    CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
+    CLLocationCoordinate2D userCoordinate = self.mapView.userLocation.coordinate;
+    CLLocationCoordinate2D newCenterCoordinate;
+    if([self isValidCenterCoordinate:userCoordinate]) {
+        newCenterCoordinate = [self zoomIntoLocation:self.mapView.userLocation.coordinate];
     } else {
-        self.lastLocationCoordinate = CLLocationCoordinate2DMake(self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude);
-        [self zoomIntoUserLocation];
+         newCenterCoordinate = [self zoomIntoLocation:defaultZoomInCoordinate];
     }
+    [self loadLootsAtCoordinate:newCenterCoordinate];
 }
 
-- (void)zoomIntoUserLocation
+-(BOOL)isValidCenterCoordinate:(CLLocationCoordinate2D)coordinate
 {
-    [self zoomIntoLocation:self.mapView.userLocation.coordinate];
+    return (coordinate.latitude <= 0.1 && coordinate.longitude <= 0.1)?false:CLLocationCoordinate2DIsValid(coordinate);
 }
 
--(void)zoomIntoLocation:(CLLocationCoordinate2D)coordinate
+-(CLLocationCoordinate2D)zoomIntoLocation:(CLLocationCoordinate2D)coordinate
 {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
@@ -124,8 +132,8 @@
     region.span = span;
     region.center = location;
     [self.mapView setRegion:region animated:YES];
-    
-    [self loadLootsAtCoordinate:coordinate];
+    return region.center;
+    //[self loadLootsAtCoordinate:coordinate];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -241,7 +249,5 @@
         NSLog(@"%@", error);
     }];
 }
-
-
 
 @end
