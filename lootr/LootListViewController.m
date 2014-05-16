@@ -24,24 +24,7 @@
 static const NSUInteger limitedCount = 10;
 static NSString *cellIdentifier = @"DetailCell";
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.tabBarItem.selectedImage = [UIImage imageNamed:@"ListTabIcon"];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.title = @"Loots";
-    
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:refreshControl];
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.delegate = self;
-    [self.tableView reloadData];
-    [self loadLootsAtCurrentPosition];
-}
+#pragma mark - Initialization
 
 -(id <Facade>)facade{
     if(_facade == nil)
@@ -66,6 +49,27 @@ static NSString *cellIdentifier = @"DetailCell";
         self.facade = facade;
     }
     return self;
+}
+
+
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.tabBarItem.selectedImage = [UIImage imageNamed:@"ListTabIcon"];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.title = @"Loots";
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.delegate = self;
+    [self.tableView reloadData];
+    [self loadLootsAtCurrentPosition];
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl

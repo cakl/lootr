@@ -11,6 +11,7 @@
 		272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758BD18E732B8003939AA /* ServerCallerTests.m */; };
 		272758C018E73886003939AA /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 272758BF18E73886003939AA /* lootSingle.json */; };
 		272758C318E74018003939AA /* RestKitServerCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758C218E74018003939AA /* RestKitServerCaller.m */; };
+		272BD95919263EDF00BF8D30 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 272BD95819263EDF00BF8D30 /* Images.xcassets */; };
 		272F805A1900577E00D1A0AB /* LootContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F80591900577E00D1A0AB /* LootContentViewController.m */; };
 		2730DE261902E61900436E15 /* ImageViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2730DE251902E61900436E15 /* ImageViewTableViewCell.m */; };
 		2732B94018DFB8130068E18B /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B93F18DFB8130068E18B /* Coordinate.m */; };
@@ -30,7 +31,6 @@
 		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
 		27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27707C5E18F994240018DC10 /* ServerCallerFactory.m */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
-		278153211917C01100D9B1A1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 278153201917C01100D9B1A1 /* Images.xcassets */; };
 		278153241917C62E00D9B1A1 /* loginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 278153231917C62E00D9B1A1 /* loginTextField.m */; };
 		279105521920418B00B1B44E /* ServiceCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279105511920418B00B1B44E /* ServiceCheckViewController.m */; };
 		279284EE18E8652B002CB07A /* LootListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284ED18E8652B002CB07A /* LootListViewController.m */; };
@@ -88,6 +88,7 @@
 		272758BF18E73886003939AA /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootSingle.json; path = Fixtures/lootSingle.json; sourceTree = "<group>"; };
 		272758C118E74018003939AA /* RestKitServerCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestKitServerCaller.h; sourceTree = "<group>"; };
 		272758C218E74018003939AA /* RestKitServerCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestKitServerCaller.m; sourceTree = "<group>"; };
+		272BD95819263EDF00BF8D30 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		272F80581900577E00D1A0AB /* LootContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LootContentViewController.h; sourceTree = "<group>"; };
 		272F80591900577E00D1A0AB /* LootContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootContentViewController.m; sourceTree = "<group>"; };
 		2730DE241902E61900436E15 /* ImageViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewTableViewCell.h; sourceTree = "<group>"; };
@@ -120,7 +121,6 @@
 		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
 		27707C5D18F994240018DC10 /* ServerCallerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFactory.h; sourceTree = "<group>"; };
 		27707C5E18F994240018DC10 /* ServerCallerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFactory.m; sourceTree = "<group>"; };
-		278153201917C01100D9B1A1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		278153221917C62E00D9B1A1 /* loginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginTextField.h; sourceTree = "<group>"; };
 		278153231917C62E00D9B1A1 /* loginTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = loginTextField.m; sourceTree = "<group>"; };
 		279105501920418B00B1B44E /* ServiceCheckViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceCheckViewController.h; sourceTree = "<group>"; };
@@ -422,7 +422,7 @@
 				2732B94118DFBA100068E18B /* Domain */,
 				2732A36118F59E7D00C2A544 /* Technical Services */,
 				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
-				278153201917C01100D9B1A1 /* Images.xcassets */,
+				272BD95819263EDF00BF8D30 /* Images.xcassets */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
 			);
 			path = lootr;
@@ -551,7 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27C7BF7E18D749F800761C84 /* UNIA.gpx in Resources */,
-				278153211917C01100D9B1A1 /* Images.xcassets in Resources */,
+				272BD95919263EDF00BF8D30 /* Images.xcassets in Resources */,
 				27346CE9190DA3100085B556 /* Storyboard.storyboard in Resources */,
 				27C7BF4818D7498100761C84 /* InfoPlist.strings in Resources */,
 			);

@@ -74,7 +74,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addBarButtonPressed)];
     self.navigationItem.rightBarButtonItem = addBarButton;
     
-    self.lastDownloadedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"ExampleImage"]];
+    self.lastDownloadedImage = [[UIImageView alloc] init];
     self.lastDownloadedImage.contentMode = UIViewContentModeScaleAspectFill;
 }
 
