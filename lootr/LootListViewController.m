@@ -31,6 +31,10 @@ static NSString *cellIdentifier = @"DetailCell";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.title = @"Loots";
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -62,6 +66,12 @@ static NSString *cellIdentifier = @"DetailCell";
         self.facade = facade;
     }
     return self;
+}
+
+- (void)refresh:(UIRefreshControl *)refreshControl
+{
+    [self loadLootsAtCurrentPosition];
+    [refreshControl endRefreshing];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
