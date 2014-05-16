@@ -86,6 +86,15 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
     [self.objectManager enqueueObjectRequestOperation:operation];
 }
 
+-(void)postReport:(Report*)report onSuccess:(void(^)(Report* report))success onFailure:(void(^)(NSError* error))failure
+{
+    [self.objectManager postObject:report path:[NSString stringWithFormat:@"%@/reports", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success([[mappingResult array] firstObject]);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+}
+
 -(void)setAuthorizationToken:(NSString*)token
 {
     [self.objectManager.HTTPClient setAuthorizationHeaderWithToken:token];

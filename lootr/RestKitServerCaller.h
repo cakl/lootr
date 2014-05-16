@@ -16,6 +16,7 @@
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* content))success onFailure:(void(^)(NSError* error))failure;
 -(void) getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude withLimitedCount:(NSNumber*)count onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure;
 -(void)postUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure;
+-(void)postReport:(Report*)report onSuccess:(void(^)(Report* report))success onFailure:(void(^)(NSError* error))failure;
 -(void)setAuthorizationToken:(NSString*)token;
 -(void)clearAuthorizationToken;
 @end

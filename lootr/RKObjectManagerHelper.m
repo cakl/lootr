@@ -8,6 +8,7 @@
 
 #import "RKObjectManagerHelper.h"
 #import "Loot.h"
+#import "Report.h"
 
 @implementation RKObjectManagerHelper
 static NSString* const lootsByDistancePathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
@@ -24,6 +25,8 @@ static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login
     RKObjectMapping* contentMapping = [RKObjectMapping mappingForClass:[Content class]];
     RKObjectMapping* lootsPostMapping = [RKObjectMapping mappingForClass:[Loot class]];
     RKObjectMapping* userPostMapping = [RKObjectMapping mappingForClass:[User class]];
+    RKObjectMapping* reportPostMapping = [RKObjectMapping mappingForClass:[Report class]];
+    RKObjectMapping* lootReportsPostMapping = [RKObjectMapping mappingForClass:[Report class]];
     
     [lootsMapping addAttributeMappingsFromDictionary:@{
                                                       @"id": @"identifier",
@@ -66,6 +69,14 @@ static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login
                                                             @"dateCreated": @"created"
                                                             }];
     
+    [reportPostMapping addAttributeMappingsFromDictionary:@{
+                                                          @"purpose": @"purpose"
+                                                          }];
+    [lootReportsPostMapping addAttributeMappingsFromDictionary:@{
+                                                           @"id": @"identifier"
+                                                           }];
+    
+    
     
     [lootsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:userMapping]];
     [lootsMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"coordinate" toKeyPath:@"coord" withMapping:coordinateMapping]];
@@ -74,6 +85,9 @@ static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login
     
     [lootsPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"coordinate" toKeyPath:@"coord" withMapping:coordinateMapping]];
     [lootsPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:userMapping]];
+    
+    [reportPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:userMapping]];
+    [reportPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"loot" toKeyPath:@"loot" withMapping:lootReportsPostMapping]];
     
     RKResponseDescriptor* lootsByDistanceResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByDistancePathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsByIdResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByIdPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
@@ -91,9 +105,11 @@ static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login
     
     RKRequestDescriptor* lootPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[lootsPostMapping inverseMapping] objectClass:[Loot class] rootKeyPath:@"loots" method:RKRequestMethodPOST];
     RKRequestDescriptor* userPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[userPostMapping inverseMapping] objectClass:[User class] rootKeyPath:@"users" method:RKRequestMethodPOST];
+    RKRequestDescriptor* reportPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[reportPostMapping inverseMapping] objectClass:[Report class] rootKeyPath:@"reports" method:RKRequestMethodPOST];
     
     [objectManager addRequestDescriptor:lootPostRequestDescriptor];
     [objectManager addRequestDescriptor:userPostRequestDescriptor];
+    [objectManager addRequestDescriptor:reportPostRequestDescriptor];
     
     objectManager.requestSerializationMIMEType = RKMIMETypeJSON;
 }

@@ -17,4 +17,5 @@
 -(void)postLoot:(Loot*)loot atCurrentLocationOnSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure;
 -(void) getLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure;
 -(void) postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* loot))success onFailure:(void (^)(NSError *error))failure;
+-(void)postReport:(Report*)report onSuccess:(void(^)(Report* loot))success onFailure:(void (^)(NSError *error))failure;
 @end

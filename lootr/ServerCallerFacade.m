@@ -138,6 +138,22 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     }
 }
 
+
+-(void)postReport:(Report*)report onSuccess:(void(^)(Report* loot))success onFailure:(void (^)(NSError *error))failure{
+    NSError* userError = nil;
+    User* currentUser = [self.userService getLoggedInUserWithError:&userError];
+    if(!userError){
+        report.creator = currentUser;
+        [self.serverCaller postReport:report onSuccess:^(Report *report) {
+            success(report);
+        } onFailure:^(NSError *error) {
+            failure(error);
+        }];
+    } else {
+        failure(userError);
+    }
+}
+
 -(BOOL)checkIfCurrentLocation:(CLLocation*)currentLocation isInRadiusOfLoot:(Loot*)loot{
     CLLocation* lootLocation = [[CLLocation alloc] initWithLatitude:[loot.coord.latitude doubleValue] longitude:[loot.coord.longitude doubleValue]];
     return ([lootLocation distanceFromLocation:currentLocation] <= [loot.radius doubleValue]);

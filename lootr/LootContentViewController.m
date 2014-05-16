@@ -113,7 +113,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     dialog.alertViewStyle = UIAlertViewStylePlainTextInput;
     [dialog show];
     self.reportTextField = [dialog textFieldAtIndex:0];
-    
 }
 
 -(void)addBarButtonPressed
@@ -134,6 +133,10 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
         NSLog(@"%@", self.reportTextField.text);
+        Report* report = [Report new];
+        report.purpose = self.reportTextField.text;
+        report.loot = self.loot;
+        [self postReport:report];
     }
 }
 
@@ -355,6 +358,14 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         [self reloadLootWithContents];
     } onFailure:^(NSError *error) {
         NSLog(@"%@", error);
+    }];
+}
+
+-(void)postReport:(Report*)report{
+    [self.facade postReport:report onSuccess:^(Report *loot) {
+        NSLog(@"success");
+    } onFailure:^(NSError *error) {
+        NSLog(@"failure");
     }];
 }
 
