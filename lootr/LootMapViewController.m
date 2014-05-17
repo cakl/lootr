@@ -69,10 +69,6 @@
     }];
 }
 
--(NSUInteger)supportedInterfaceOrientations{
-    return UIInterfaceOrientationMaskLandscape;
-}
-
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"showLoot"]){
@@ -133,7 +129,6 @@
     region.center = location;
     [self.mapView setRegion:region animated:YES];
     return region.center;
-    //[self loadLootsAtCoordinate:coordinate];
 }
 
 #pragma mark - MKMapViewDelegate
@@ -141,7 +136,7 @@
 -(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
 {
     
-    //[self DEBUGlootCreatorAtCoordinate:self.mapView.centerCoordinate];
+//    [self DEBUGlootCreatorAtCoordinate:self.mapView.centerCoordinate];
 //    NSLog(@"regionDidChangeAnimated");
 //    NSLog(@"Span latDelta:%f, longDelta:%f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
     MKCoordinateRegion mapRegion;

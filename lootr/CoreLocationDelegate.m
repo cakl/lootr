@@ -39,12 +39,16 @@ static const double updateDistance = 20.0;
         self.locationManager.delegate = self;
         self.locationManager.distanceFilter = updateDistance;
         self.geocoder = [[CLGeocoder alloc] init];
+        self.lastLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     }
     return self;
 }
 
 -(void)startUpdatingLocation{
-    [self.locationManager startUpdatingLocation];
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self.locationManager startUpdatingLocation]; // TODO: describe this hack.
+    });
 }
 
 -(void)stopUpdatingLocation{
@@ -63,6 +67,14 @@ static const double updateDistance = 20.0;
     return self.location;
 }
 
+-(NSString*)getCurrentCityWithError:(NSError**)error{
+    if(!self.city){
+        *error = [NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
+        return nil;
+    }
+    return self.city;
+}
+
 -(BOOL)isAuthorized{
     return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized);
 }
@@ -70,11 +82,11 @@ static const double updateDistance = 20.0;
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    self.lastLocation = self.location;
     _location = [locations lastObject];
     double distance = [self.lastLocation distanceFromLocation:self.location];
     if(distance > 1000 || distance == 0 ){
         [self geocodeCityByLocation:self.location];
+        self.lastLocation = self.location;
     }
 }
 

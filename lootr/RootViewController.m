@@ -69,7 +69,9 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     }
     if([self.locationService isLocationServiceAuthorized] && (self.presentedViewController != nil) ){
         [self dismissViewControllerAnimated:NO completion:^{
-            [self presentViewController:self.tabBarViewController animated:NO completion:nil];
+            [self presentViewController:self.tabBarViewController animated:NO completion:^{
+                [self.locationService startLocationService];
+            }];
         }];
     }
     if((![self.locationService isLocationServiceAuthorized]) && (self.presentedViewController == nil) ){
@@ -78,7 +80,9 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
         }];
     }
     if([self.locationService isLocationServiceAuthorized] && (self.presentedViewController == nil) ){
-        [self presentViewController:self.tabBarViewController animated:NO completion:nil];
+        [self presentViewController:self.tabBarViewController animated:NO completion:^{
+            [self.locationService startLocationService];
+        }];
     }
 }
 

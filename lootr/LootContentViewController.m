@@ -195,7 +195,9 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     [infoButton addTarget:self action:@selector(infoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [blurView addSubview:infoButton];
     
-    UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [reportButton setBackgroundImage:[UIImage imageNamed:@"ReportButton"] forState:UIControlStateNormal];
+    reportButton.frame = CGRectMake(0, 0, 24, 24);
     reportButton.center = CGPointMake(width-50, 15);
     [reportButton addTarget:self action:@selector(reportButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [blurView addSubview:reportButton];

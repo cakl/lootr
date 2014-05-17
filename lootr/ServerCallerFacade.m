@@ -98,13 +98,16 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 -(void)postLoot:(Loot*)loot atCurrentLocationOnSuccess:(void(^)(Loot* loot))success onFailure:(void (^)(NSError *error))failure{
     NSError* positionError = nil;
     NSError* userError = nil;
+    NSError* cityError = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
     User* currentUser = [self.userService getLoggedInUserWithError:&userError];
     if(!positionError && !userError){
         Coordinate* currentCoordinate = [[Coordinate alloc] init];
         currentCoordinate.latitude = [NSNumber numberWithDouble:currentLocation.coordinate.latitude];
         currentCoordinate.longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
+        NSString* currentCity = [self.locationDelegate getCurrentCityWithError:&cityError];
         loot.coord = currentCoordinate;
+        loot.coord.location = (cityError)?@"unknown":currentCity;
         loot.creator = currentUser;
         [self.serverCaller postLoot:loot onSuccess:^(Loot *loot) {
             success(loot);

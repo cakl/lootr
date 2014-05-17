@@ -14,5 +14,6 @@
 -(void)startUpdatingLocation;
 -(void)stopUpdatingLocation;
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error;
+-(NSString*)getCurrentCityWithError:(NSError**)error;
 -(BOOL)isAuthorized;
 @end

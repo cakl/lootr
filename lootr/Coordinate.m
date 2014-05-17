@@ -10,17 +10,6 @@
 
 @implementation Coordinate
 
-- (instancetype)initWithCoordinate2D:(CLLocationCoordinate2D)coordinate
-{
-    self = [super init];
-    if (self) {
-        self.latitude = [NSNumber numberWithDouble:coordinate.latitude];
-        self.longitude = [NSNumber numberWithDouble:coordinate.longitude];
-        self.location = @"TODO";
-    }
-    return self;
-}
-
 -(CLLocation*)asCLLocation{
     return [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
 }
