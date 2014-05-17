@@ -181,24 +181,26 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     JCRBlurView* blurView = [[JCRBlurView alloc] init];
     blurView.frame = CGRectMake(0, 0, width, height);
     
-    self.distanceToLootLabel =  [[UILabel alloc] initWithFrame: CGRectMake(10, 8, width, 15)];
+    self.distanceToLootLabel =  [[UILabel alloc] initWithFrame: CGRectMake(10, 8, width, 20)];
     [self setDistanceToLootLabelText];
-    [self.distanceToLootLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:12]];
+    [self.distanceToLootLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:14]];
     [blurView addSubview:self.distanceToLootLabel];
     
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 29.5, width, 0.5)];
+    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 39.5, width, 0.5)];
     separator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
     [blurView addSubview:separator];
     
     UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    infoButton.center = CGPointMake(width-20, 15);
+    infoButton.frame = CGRectMake(0, 0, 40, 40);
+    infoButton.center = CGPointMake(width-20, 20);
     [infoButton addTarget:self action:@selector(infoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [blurView addSubview:infoButton];
     
     UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [reportButton setBackgroundImage:[UIImage imageNamed:@"ReportButton"] forState:UIControlStateNormal];
-    reportButton.frame = CGRectMake(0, 0, 24, 24);
-    reportButton.center = CGPointMake(width-50, 15);
+    [reportButton setImage:[UIImage imageNamed:@"ReportButton"] forState:UIControlStateNormal];
+    reportButton.frame = CGRectMake(0, 0, 40, 40);
+    reportButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
+    reportButton.center = CGPointMake(width-55, 20);
     [reportButton addTarget:self action:@selector(reportButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [blurView addSubview:reportButton];
     
@@ -210,7 +212,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 {
     switch (section) {
         case 0:
-            return 30;
+            return 40;
         default:
             return 0;
     }

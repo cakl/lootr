@@ -18,6 +18,8 @@
 
 @implementation CreateLootViewController
 
+#pragma mark - Initialization
+
 - (instancetype)init {
     self = [super init];
     if (self) {
@@ -43,6 +45,8 @@
     return self;
 }
 
+#pragma mark - UIViewController
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"New Loot";
@@ -60,9 +64,12 @@
     self.navigationItem.rightBarButtonItem = createButton;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+-(void)dismissSelfViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - User Interaction
 
 - (void)cancelButtonPressed {
     [self dismissSelfViewController];
@@ -91,6 +98,8 @@
     return postLoot;
 }
 
+#pragma mark - Loading Data from Server
+
 - (void)postLoot:(Loot *)loot{
     [self.facade postLoot:loot atCurrentLocationOnSuccess:^(Loot *loot) {
         [self dismissSelfViewController];
@@ -99,9 +108,6 @@
     }];
 }
 
--(void)dismissSelfViewController
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 @end
