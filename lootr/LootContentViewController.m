@@ -10,6 +10,7 @@
 #import <UIImageView+WebCache.h>
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
+#import <SVProgressHUD.h>
 #import "LootContentViewController.h"
 #import "ImageViewTableViewCell.h"
 #import "Facade.h"
@@ -352,17 +353,23 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 }
 
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.facade postContent:content onLoot:self.loot withImage:image onSuccess:^(Content *loot) {
+        [SVProgressHUD dismiss];
         [self reloadLootWithContents];
     } onFailure:^(NSError *error) {
+        [SVProgressHUD dismiss];
         NSLog(@"%@", error);
     }];
 }
 
 -(void)postReport:(Report*)report{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.facade postReport:report onSuccess:^(Report *loot) {
+        [SVProgressHUD dismiss];
         NSLog(@"success");
     } onFailure:^(NSError *error) {
+        [SVProgressHUD dismiss];
         NSLog(@"failure");
     }];
 }

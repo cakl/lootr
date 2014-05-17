@@ -10,10 +10,12 @@
 #import "CreateLootForm.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
+#import <SVProgressHUD.h>
 
 @interface CreateLootViewController ()
 @property(strong) UINavigationBar *navigationBar;
 @property (nonatomic, strong) id<Facade> facade;
+@property (nonatomic, strong) UIActivityIndicatorView *aSpinner;
 @end
 
 @implementation CreateLootViewController
@@ -101,10 +103,13 @@
 #pragma mark - Loading Data from Server
 
 - (void)postLoot:(Loot *)loot{
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [self.facade postLoot:loot atCurrentLocationOnSuccess:^(Loot *loot) {
         [self dismissSelfViewController];
+        [SVProgressHUD dismiss];
     } onFailure:^(NSError *error) {
         NSLog(@"%@", error);
+        [SVProgressHUD dismiss];
     }];
 }
 
