@@ -35,6 +35,7 @@
 		279105521920418B00B1B44E /* ServiceCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279105511920418B00B1B44E /* ServiceCheckViewController.m */; };
 		279284EE18E8652B002CB07A /* LootListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284ED18E8652B002CB07A /* LootListViewController.m */; };
 		279284F118E8668A002CB07A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284F018E8668A002CB07A /* SettingsViewController.m */; };
+		279CD99C192824B1008DAA4B /* SVProgressHUD+Lootr.m in Sources */ = {isa = PBXBuildFile; fileRef = 279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */; };
 		27A7731D18F4CF790041EE05 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A7731C18F4CF790041EE05 /* Content.m */; };
 		27A971D419056A4D00F26A87 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A971D319056A4D00F26A87 /* Accelerate.framework */; };
 		27A971D619056C0E00F26A87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A971D519056C0E00F26A87 /* QuartzCore.framework */; };
@@ -130,6 +131,8 @@
 		279284ED18E8652B002CB07A /* LootListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootListViewController.m; sourceTree = "<group>"; };
 		279284EF18E8668A002CB07A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		279284F018E8668A002CB07A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Lootr.h"; sourceTree = "<group>"; };
+		279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Lootr.m"; sourceTree = "<group>"; };
 		27A7731B18F4CF790041EE05 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
 		27A7731C18F4CF790041EE05 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
 		27A971D319056A4D00F26A87 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -318,6 +321,8 @@
 				274C06D018FB625200B0429A /* CreateLootViewController.m */,
 				272F80581900577E00D1A0AB /* LootContentViewController.h */,
 				272F80591900577E00D1A0AB /* LootContentViewController.m */,
+				279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */,
+				279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */,
 				27740E3B1906DCE7004C85D9 /* Cells */,
 				274C06D518FB631700B0429A /* Forms */,
 			);
@@ -607,6 +612,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				279CD99C192824B1008DAA4B /* SVProgressHUD+Lootr.m in Sources */,
 				2707D8F719116375009C8669 /* ServerCallerFacadeFactory.m in Sources */,
 				2734E745191694ED00DD7F18 /* LoginViewController.m in Sources */,
 				2747BE77191C15F800135648 /* SettingsForm.m in Sources */,

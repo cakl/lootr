@@ -6,24 +6,23 @@
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
 
-#import <JCRBlurView.h>
-#import <UIImageView+WebCache.h>
-#import <TGRImageViewController.h>
-#import <TGRImageZoomAnimationController.h>
-#import <SVProgressHUD.h>
 #import "LootContentViewController.h"
 #import "ImageViewTableViewCell.h"
 #import "Facade.h"
 #import "LocationService.h"
 #import "ServerCallerFacadeFactory.h"
+#import <JCRBlurView.h>
+#import <UIImageView+WebCache.h>
+#import "SVProgressHUD+Lootr.h"
+#import <URBMediaFocusViewController.h>
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
-@property (nonatomic, strong) UIImageView* lastDownloadedImage;
 @property (nonatomic, strong) id<Facade> facade;
 @property (nonatomic, strong) LocationService* locationService;
 @property (nonatomic, strong) UILabel* distanceToLootLabel;
 @property (nonatomic, strong) UITextField* reportTextField;
+@property (nonatomic, strong) URBMediaFocusViewController* mediaFocusController;
 @end
 
 @implementation LootContentViewController
@@ -74,8 +73,8 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addBarButtonPressed)];
     self.navigationItem.rightBarButtonItem = addBarButton;
     
-    self.lastDownloadedImage = [[UIImageView alloc] init];
-    self.lastDownloadedImage.contentMode = UIViewContentModeScaleAspectFill;
+    self.mediaFocusController = [[URBMediaFocusViewController alloc] init];
+    self.mediaFocusController.parallaxEnabled = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -225,22 +224,18 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
         Content* content = [self.lootContents objectAtIndex:self.tableView.indexPathForSelectedRow.row];
         if([cell isKindOfClass:[ImageViewTableViewCell class]]){
-            
+            [SVProgressHUD showApropriateHUD];
             SDWebImageManager *manager = [SDWebImageManager sharedManager];
-            [manager downloadWithURL:content.url options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize)
-             {
-                 // TODO: progression tracking code
-             }
+            [manager downloadWithURL:content.url options:SDWebImageProgressiveDownload progress:nil
              completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
              {
-                 if (image)
+                 if (image && finished)
                  {
-                     self.lastDownloadedImage.image = image;
-                     [self.lastDownloadedImage sizeToFit];
-                     TGRImageViewController *viewController = [[TGRImageViewController alloc] initWithImage:image];
-                     // Don't forget to set ourselves as the transition delegate
-                     viewController.transitioningDelegate = self;
-                     [self presentViewController:viewController animated:YES completion:nil];
+                     ImageViewTableViewCell* imageCell = (ImageViewTableViewCell*)[self.tableView cellForRowAtIndexPath:indexPath];
+                     [SVProgressHUD dismiss];
+                     [self.mediaFocusController showImage:image fromView:imageCell.fullImageView];
+                 } else {
+                     [SVProgressHUD showErrorWithStatus:@"Failed to load image"];
                  }
              }];
             
@@ -353,7 +348,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 }
 
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showApropriateHUD];
     [self.facade postContent:content onLoot:self.loot withImage:image onSuccess:^(Content *loot) {
         [SVProgressHUD dismiss];
         [self reloadLootWithContents];
@@ -364,7 +359,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 }
 
 -(void)postReport:(Report*)report{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showApropriateHUD];
     [self.facade postReport:report onSuccess:^(Report *loot) {
         [SVProgressHUD dismiss];
         NSLog(@"success");
@@ -372,29 +367,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         [SVProgressHUD dismiss];
         NSLog(@"failure");
     }];
-}
-
-
-#pragma mark - Vertigo
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
-    if ([presented isKindOfClass:TGRImageViewController.class]) {
-        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:self.tableView.indexPathForSelectedRow];
-        if([cell isKindOfClass:[ImageViewTableViewCell class]]){
-            return [[TGRImageZoomAnimationController alloc] initWithReferenceImageView:self.lastDownloadedImage];
-        }
-    }
-    return nil;
-}
-
-- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    if ([dismissed isKindOfClass:TGRImageViewController.class]) {
-        UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:self.tableView.indexPathForSelectedRow];
-        if([cell isKindOfClass:[ImageViewTableViewCell class]]){
-            return [[TGRImageZoomAnimationController alloc] initWithReferenceImageView:self.lastDownloadedImage];
-        }
-    }
-    return nil;
 }
 
 @end

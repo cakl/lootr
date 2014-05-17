@@ -11,7 +11,7 @@
 #import "UserService.h"
 #import "AppDelegate.h"
 #import "RootViewController.h"
-#import <SVProgressHUD.h>
+#import "SVProgressHUD+Lootr.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong) UserService* userService;
@@ -79,7 +79,7 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 #pragma mark - interact with User Service
 
 -(void)loginUser:(User*)user{
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
+    [SVProgressHUD showApropriateHUD];
     [self.userService loginUser:user onSuccess:^(User *user) {
         NSLog(@"success");
         [SVProgressHUD dismiss];
