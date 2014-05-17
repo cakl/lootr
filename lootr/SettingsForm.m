@@ -13,8 +13,14 @@
 - (NSArray *)fields
 {
     return @[
-             @{FXFormFieldKey: @"userName", FXFormFieldType: FXFormFieldTypeLabel, FXFormFieldTitle: @"Username"},
-             @{FXFormFieldKey: @"email", FXFormFieldType: FXFormFieldTypeLabel, FXFormFieldTitle: @"Email"}
+             @{FXFormFieldKey: @"userName",
+               FXFormFieldType: FXFormFieldTypeLabel,
+               FXFormFieldTitle: @"Username"
+               },
+             @{FXFormFieldKey: @"email",
+               FXFormFieldType: FXFormFieldTypeLabel,
+               FXFormFieldTitle: @"Email"
+               }
              ];
     
 }
@@ -22,7 +28,10 @@
 - (NSArray *)extraFields
 {
     return @[
-             @{FXFormFieldTitle: @"Logout", FXFormFieldHeader: @"", FXFormFieldAction: @"performLogout", @"textLabel.color": [UIColor redColor]},
+             @{FXFormFieldTitle: @"Logout",
+               FXFormFieldHeader: @"",
+               FXFormFieldAction: @"performLogout", @"textLabel.color": [UIColor redColor]
+               },
              ];
 }
 

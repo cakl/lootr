@@ -28,7 +28,6 @@ static NSString* keyChainServiceName = @"ch.hsr.lootr";
     RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://152.96.56.70:8080"]];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
     
-    RootViewController* rootViewController = (RootViewController*) self.window.rootViewController;
     [self.window makeKeyAndVisible];
     
     //[rootViewController presentLogin];

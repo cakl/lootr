@@ -51,7 +51,7 @@ static NSString *cellIdentifier = @"DetailCell";
     return self;
 }
 
-
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
@@ -78,6 +78,16 @@ static NSString *cellIdentifier = @"DetailCell";
     [refreshControl endRefreshing];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"showLoot"]){
+        LootContentViewController* contentViewController = segue.destinationViewController;
+        contentViewController.loot = self.lastSelectedLoot;
+    }
+}
+
+#pragma mark - UITableViewDelegate
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.loots count];
@@ -103,14 +113,6 @@ static NSString *cellIdentifier = @"DetailCell";
 {
     self.lastSelectedLoot = [self.loots objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"showLoot" sender:self];
-}
-
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:@"showLoot"]){
-        LootContentViewController* contentViewController = segue.destinationViewController;
-        contentViewController.loot = self.lastSelectedLoot;
-    }
 }
 
 #pragma mark - UITabBarControllerDelegate

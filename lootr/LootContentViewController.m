@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
 
-#import "LootContentViewController.h"
-#import "ImageViewTableViewCell.h"
 #import <JCRBlurView.h>
 #import <UIImageView+WebCache.h>
 #import <FXBlurView.h>
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
+#import "LootContentViewController.h"
+#import "ImageViewTableViewCell.h"
 #import "Facade.h"
 #import "LocationService.h"
 #import "ServerCallerFacadeFactory.h"
@@ -391,16 +391,5 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     }
     return nil;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

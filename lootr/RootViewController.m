@@ -8,9 +8,8 @@
 
 #import "RootViewController.h"
 #import "AppDelegate.h"
-#import "UserService.h"
 #import "ServiceCheckViewController.h"
-#import "LocationService.h"
+
 
 @interface RootViewController ()
 @property (nonatomic, strong) UserService* userService;
@@ -19,6 +18,8 @@
 
 @implementation RootViewController
 static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
+
+#pragma mark - Initialization
 
 -(LoginViewController*)loginViewController{
     if(_loginViewController) return _loginViewController;
@@ -45,6 +46,26 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     }
     return _locationService;
 }
+
+-(UserService*)userService{
+    if(_userService == nil)
+    {
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+    }
+    return _userService;
+}
+
+- (instancetype)initWithUserService:(UserService*)userService locationService:(LocationService*)locationService
+{
+    self = [super init];
+    if (self) {
+        self.userService = userService;
+        self.locationService = locationService;
+    }
+    return self;
+}
+
+#pragma mark - Login startup handling
 
 -(void)presentLogin{
     NSError* error = nil;
@@ -84,25 +105,6 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
             [self.locationService startLocationService];
         }];
     }
-}
-
-#pragma mark - Initialization
-
--(UserService*)userService{
-    if(_userService == nil)
-    {
-        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
-    }
-    return _userService;
-}
-
-- (instancetype)initWithUserService:(UserService*)userService
-{
-    self = [super init];
-    if (self) {
-        self.userService = userService;
-    }
-    return self;
 }
 
 @end
