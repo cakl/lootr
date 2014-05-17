@@ -8,7 +8,6 @@
 
 #import <JCRBlurView.h>
 #import <UIImageView+WebCache.h>
-#import <FXBlurView.h>
 #import <TGRImageViewController.h>
 #import <TGRImageZoomAnimationController.h>
 #import "LootContentViewController.h"
@@ -216,7 +215,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
         default:
             return 0;
     }
-    return 0;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

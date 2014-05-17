@@ -5,7 +5,6 @@
 //  Created by Sebastian Bock on 05.05.14.
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
-#import <QuartzCore/QuartzCore.h>
 #import "LoginTextField.h"
 
 @implementation LoginTextField

@@ -12,8 +12,6 @@
 #import "CreateLootViewController.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
-#import "ServerCaller.h"
-#import "ServerCallerFactory.h"
 
 
 @interface LootMapViewController ()
@@ -191,7 +189,7 @@
     static NSString *identifier = @"loot";
     
     if ([annotation isKindOfClass:[Loot class]]) {
-        MKAnnotationView *annotationView = (MKAnnotationView *) [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        MKAnnotationView *annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
         if (annotationView == nil) {
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
             annotationView.enabled = YES;

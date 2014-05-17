@@ -8,9 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RKObjectManagerHelper.h"
-#import "UserService.h"
 #import "RootViewController.h"
-#import "ServiceCheckViewController.h"
 
 @interface AppDelegate ()
 @end
@@ -21,7 +19,6 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
-static NSString* keyChainServiceName = @"ch.hsr.lootr";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

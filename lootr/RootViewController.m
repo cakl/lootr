@@ -7,8 +7,6 @@
 //
 
 #import "RootViewController.h"
-#import "AppDelegate.h"
-#import "ServiceCheckViewController.h"
 
 
 @interface RootViewController ()
