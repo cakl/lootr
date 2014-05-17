@@ -232,7 +232,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
              {
                  // TODO: progression tracking code
              }
-                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
+             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished)
              {
                  if (image)
                  {
@@ -307,25 +307,21 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 - (void)takeNewPhotoFromCamera
 {
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-    {
-        UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-        controller.sourceType = UIImagePickerControllerSourceTypeCamera;
-        controller.allowsEditing = NO;
-        controller.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypeCamera];
-        controller.delegate = self;
-        [self.navigationController presentViewController: controller animated: YES completion: nil];
-    }
+    [self presentImagePickerControllerBySourceType:UIImagePickerControllerSourceTypeCamera];
 }
 
 -(void)choosePhotoFromExistingImages
 {
-    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypePhotoLibrary])
+    [self presentImagePickerControllerBySourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+-(void)presentImagePickerControllerBySourceType:(UIImagePickerControllerSourceType)sourceType{
+    if ([UIImagePickerController isSourceTypeAvailable: sourceType])
     {
         UIImagePickerController *controller = [[UIImagePickerController alloc] init];
-        controller.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        controller.sourceType = sourceType;
         controller.allowsEditing = NO;
-        controller.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: UIImagePickerControllerSourceTypePhotoLibrary];
+        controller.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType: sourceType];
         controller.delegate = self;
         [self.navigationController presentViewController: controller animated: YES completion: nil];
     }
