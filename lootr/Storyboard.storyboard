@@ -158,7 +158,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="204" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="g1X-ti-mRY">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="204" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="g1X-ti-mRY">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="573"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -221,6 +221,13 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="g1X-ti-mRY" secondAttribute="bottom" constant="-5" id="6l3-Sl-2Gx"/>
+                            <constraint firstAttribute="trailing" secondItem="g1X-ti-mRY" secondAttribute="trailing" id="7k8-F1-xN9"/>
+                            <constraint firstItem="g1X-ti-mRY" firstAttribute="top" secondItem="ijV-zJ-p71" secondAttribute="top" id="gdx-pu-Zxh"/>
+                            <constraint firstAttribute="bottom" secondItem="g1X-ti-mRY" secondAttribute="bottom" constant="-5" id="ksT-it-McN"/>
+                            <constraint firstItem="g1X-ti-mRY" firstAttribute="leading" secondItem="ijV-zJ-p71" secondAttribute="leading" id="yf9-6C-tdK"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IJj-Nu-nip"/>
                     <connections>

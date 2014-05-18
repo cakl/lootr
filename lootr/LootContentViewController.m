@@ -63,7 +63,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0); //TODO should be dynamic on 4, 3.5 screens
+    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0); //TODO should be dynamic on 4, 3.5 screens
     self.title = self.loot.title;
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
