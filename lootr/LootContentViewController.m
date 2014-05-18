@@ -15,18 +15,20 @@
 #import <UIImageView+WebCache.h>
 #import "SVProgressHUD+Lootr.h"
 #import <URBMediaFocusViewController.h>
+#import "LootContentHeader.h"
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
 @property (nonatomic, strong) id<Facade> facade;
 @property (nonatomic, strong) LocationService* locationService;
-@property (nonatomic, strong) UILabel* distanceToLootLabel;
+@property (nonatomic, strong) LootContentHeader* contentHeader;
 @property (nonatomic, strong) UITextField* reportTextField;
 @property (nonatomic, strong) URBMediaFocusViewController* mediaFocusController;
 @end
 
 @implementation LootContentViewController
-static NSString *CellIdentifierDetailed = @"ImageCell";
+static NSString *const CellIdentifierDetailed = @"ImageCell";
+static int const sectionHeaderHeight = 40;
 
 #pragma mark - Initialization
 
@@ -93,7 +95,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)infoButtonPressed
 {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.loot.title
                                                     message:self.loot.summary
                                                    delegate:nil
@@ -173,44 +174,22 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 - (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    
-    CGFloat width=tableView.bounds.size.width;
-    CGFloat height=tableView.bounds.size.height;
-    JCRBlurView* blurView = [[JCRBlurView alloc] init];
-    blurView.frame = CGRectMake(0, 0, width, height);
-    
-    self.distanceToLootLabel =  [[UILabel alloc] initWithFrame: CGRectMake(10, 8, width, 20)];
-    [self setDistanceToLootLabelText];
-    [self.distanceToLootLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:14]];
-    [blurView addSubview:self.distanceToLootLabel];
-    
-    UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(0, 39.5, width, 0.5)];
-    separator.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
-    [blurView addSubview:separator];
-    
-    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-    infoButton.frame = CGRectMake(0, 0, 40, 40);
-    infoButton.center = CGPointMake(width-20, 20);
-    [infoButton addTarget:self action:@selector(infoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [blurView addSubview:infoButton];
-    
-    UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [reportButton setImage:[UIImage imageNamed:@"ReportButtonIcon"] forState:UIControlStateNormal];
-    reportButton.frame = CGRectMake(0, 0, 40, 40);
-    reportButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
-    reportButton.center = CGPointMake(width-55, 20);
-    [reportButton addTarget:self action:@selector(reportButtonPressed) forControlEvents:UIControlEventTouchUpInside];
-    [blurView addSubview:reportButton];
-    
-    return blurView;
-    
+    if(section==0){
+        CGFloat width=tableView.bounds.size.width;
+        self.contentHeader = [[LootContentHeader alloc] initWithFrame:CGRectMake(0, 0, width, sectionHeaderHeight)];
+        [self setDistanceToLootLabelText];
+        [self.contentHeader.infoButton addTarget:self action:@selector(infoButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        [self.contentHeader.reportButton addTarget:self action:@selector(reportButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        return self.contentHeader;
+    }
+    return nil;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     switch (section) {
         case 0:
-            return 40;
+            return sectionHeaderHeight;
         default:
             return 0;
     }
@@ -250,17 +229,17 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     switch (distanceThreshold) {
         case DistanceTresholdUndetermined:
         {
-            self.distanceToLootLabel.text = [NSString stringWithFormat:@"%@ %@",distanceText, distanceUnknownText];
+            self.contentHeader.distanceToLootLabel.text = [NSString stringWithFormat:@"%@ %@",distanceText, distanceUnknownText];
         }
             break;
         case DistanceTresholdMoreThanFiveHundredMeters:
         {
-            self.distanceToLootLabel.text = [NSString stringWithFormat:@">%im %@",DistanceTresholdFiveHundredMeters, distanceText];
+            self.contentHeader.distanceToLootLabel.text = [NSString stringWithFormat:@">%im %@",DistanceTresholdFiveHundredMeters, distanceText];
         }
             break;
         default:
         {
-            self.distanceToLootLabel.text = [NSString stringWithFormat:@"<%im %@", distanceThreshold, distanceText];
+            self.contentHeader.distanceToLootLabel.text = [NSString stringWithFormat:@"<%im %@", distanceThreshold, distanceText];
         }
             break;
     }

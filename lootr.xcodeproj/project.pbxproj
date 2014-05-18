@@ -69,6 +69,7 @@
 		27F316131910319B0066D304 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F316121910319B0066D304 /* LocationService.m */; };
 		27FBCFA3190FE38200677436 /* CoreLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBCFA2190FE38200677436 /* CoreLocationDelegate.m */; };
 		27FD6FDB19291C5300734F11 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27FD6FDA19291C5300734F11 /* Images.xcassets */; };
+		27FD6FDE1929676E00734F11 /* LootContentHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FD6FDD1929676E00734F11 /* LootContentHeader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,8 @@
 		27FBCFA1190FE38200677436 /* CoreLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationDelegate.h; sourceTree = "<group>"; };
 		27FBCFA2190FE38200677436 /* CoreLocationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationDelegate.m; sourceTree = "<group>"; };
 		27FD6FDA19291C5300734F11 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		27FD6FDC1929676E00734F11 /* LootContentHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LootContentHeader.h; sourceTree = "<group>"; };
+		27FD6FDD1929676E00734F11 /* LootContentHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootContentHeader.m; sourceTree = "<group>"; };
 		694B1DA0DB63438A954FE498 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -323,8 +326,7 @@
 				274C06D018FB625200B0429A /* CreateLootViewController.m */,
 				272F80581900577E00D1A0AB /* LootContentViewController.h */,
 				272F80591900577E00D1A0AB /* LootContentViewController.m */,
-				279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */,
-				279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */,
+				27FD6FDF1929747300734F11 /* Elements */,
 				27740E3B1906DCE7004C85D9 /* Cells */,
 				274C06D518FB631700B0429A /* Forms */,
 			);
@@ -482,6 +484,17 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		27FD6FDF1929747300734F11 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				27FD6FDC1929676E00734F11 /* LootContentHeader.h */,
+				27FD6FDD1929676E00734F11 /* LootContentHeader.m */,
+				279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */,
+				279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -632,6 +645,7 @@
 				27514508191AAF6100846E36 /* RootViewController.m in Sources */,
 				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
 				279284EE18E8652B002CB07A /* LootListViewController.m in Sources */,
+				27FD6FDE1929676E00734F11 /* LootContentHeader.m in Sources */,
 				27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */,
 				278153241917C62E00D9B1A1 /* loginTextField.m in Sources */,
 				2730DE261902E61900436E15 /* ImageViewTableViewCell.m in Sources */,
