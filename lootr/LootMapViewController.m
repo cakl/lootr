@@ -22,11 +22,13 @@
 @end
 
 @implementation LootMapViewController
+static NSString *const mapMarkerIcon = @"MapsMarker";
 static NSString *const tabBarImageIcon = @"MapTabIconActive";
 static NSString *const showLootSegueIdentifier = @"showLoot";
 static NSString *const annotationViewIdentifier = @"loot";
 static double const defaultZoomInLatitude = 47.22693;
 static double const defaultZoomInLongitude = 8.8189;
+static double const degreeToMetersFactor = 111;
 
 #pragma mark - Initialization
 
@@ -196,7 +198,7 @@ static double const defaultZoomInLongitude = 8.8189;
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier];
             annotationView.enabled = YES;
             annotationView.canShowCallout = YES;
-            annotationView.image = [UIImage imageNamed:@"MapsMarker"];
+            annotationView.image = [UIImage imageNamed:mapMarkerIcon];
             
             UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             [rightButton setTitle:annotation.title forState:UIControlStateNormal];
@@ -230,18 +232,19 @@ static double const defaultZoomInLongitude = 8.8189;
 #pragma mark - Loading Data from Server
 
 -(void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
-    MKCoordinateSpan visibleSpanRegion = self.mapView.region.span;
-    int distance = (visibleSpanRegion.latitudeDelta*111 / 2)*1000;
-    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:distance] onSuccess:^(NSArray *loots) {
+    int updateDistance = [self radiusOfVisibleRegion:self.mapView.region.span];
+    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:updateDistance] onSuccess:^(NSArray *loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:newLoots];
-//        [newLoots removeObjectsInArray:[self.mapView annotations]];
-//        [self.mapView addAnnotations:newLoots];
-//        NSLog(@"%d", [[self.mapView annotations] count]);
     } onFailure:^(NSError *error) {
         NSLog(@"%@", error);
     }];
+}
+
+-(int)radiusOfVisibleRegion:(MKCoordinateSpan)visibleRegion
+{
+    return (visibleRegion.latitudeDelta*degreeToMetersFactor / 2)*1000;
 }
 
 @end
