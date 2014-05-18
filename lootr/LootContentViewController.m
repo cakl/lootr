@@ -195,7 +195,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     [blurView addSubview:infoButton];
     
     UIButton *reportButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [reportButton setImage:[UIImage imageNamed:@"ReportButton"] forState:UIControlStateNormal];
+    [reportButton setImage:[UIImage imageNamed:@"ReportButtonIcon"] forState:UIControlStateNormal];
     reportButton.frame = CGRectMake(0, 0, 40, 40);
     reportButton.imageEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8);
     reportButton.center = CGPointMake(width-55, 20);

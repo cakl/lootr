@@ -44,10 +44,10 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.emailTextField.leftViewImage = [UIImage imageNamed:@"loginUserFieldIcon"];
+    self.emailTextField.leftViewImage = [UIImage imageNamed:@"LoginUserFieldIcon"];
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailTextField.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.passWordTextField.leftViewImage = [UIImage imageNamed:@"passwordUserFieldIcon"];
+    self.passWordTextField.leftViewImage = [UIImage imageNamed:@"PasswordUserFieldIcon"];
 }
 
 #pragma mark - GUI io messages
