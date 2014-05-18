@@ -22,6 +22,11 @@
 @end
 
 @implementation LootMapViewController
+static NSString *const tabBarImageIcon = @"MapTabIconActive";
+static NSString *const showLootSegueIdentifier = @"showLoot";
+static NSString *const annotationViewIdentifier = @"loot";
+static double const defaultZoomInLatitude = 47.22693;
+static double const defaultZoomInLongitude = 8.8189;
 
 #pragma mark - Initialization
 
@@ -49,7 +54,7 @@
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
-    self.tabBarItem.selectedImage = [UIImage imageNamed:@"MapTabIconActive"];
+    self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIcon];
     self.locateUserButton.backgroundColor = [UIColor clearColor];
     [self zoomIntoUserLocationOnInit];
 }
@@ -67,7 +72,7 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"showLoot"]){
+    if([segue.identifier isEqualToString:showLootSegueIdentifier]){
         LootContentViewController* contentViewController = segue.destinationViewController;
         contentViewController.loot = self.lastSelectedLoot;
     }
@@ -96,7 +101,7 @@
 
 -(void)zoomIntoUserLocationOnInit
 {
-    CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(47.22693, 8.8189);
+    CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(defaultZoomInLatitude, defaultZoomInLongitude);
     CLLocationCoordinate2D userCoordinate = self.mapView.userLocation.coordinate;
     CLLocationCoordinate2D newCenterCoordinate;
     if([self isValidCenterCoordinate:userCoordinate]) {
@@ -185,12 +190,10 @@
 //}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    static NSString *identifier = @"loot";
-    
     if ([annotation isKindOfClass:[Loot class]]) {
-        MKAnnotationView *annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+        MKAnnotationView *annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
         if (annotationView == nil) {
-            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:identifier];
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier];
             annotationView.enabled = YES;
             annotationView.canShowCallout = YES;
             annotationView.image = [UIImage imageNamed:@"MapsMarker"];
@@ -210,7 +213,7 @@
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
     if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
         self.lastSelectedLoot = [view annotation];
-        [self performSegueWithIdentifier:@"showLoot" sender:self];
+        [self performSegueWithIdentifier:showLootSegueIdentifier sender:self];
     }
 }
 

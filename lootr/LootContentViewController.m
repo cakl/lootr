@@ -63,7 +63,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    //self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 90, 0); //TODO should be dynamic on 4, 3.5 screens
     self.title = self.loot.title;
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
@@ -132,7 +131,6 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == 1) {
-        NSLog(@"%@", self.reportTextField.text);
         Report* report = [Report new];
         report.purpose = self.reportTextField.text;
         report.loot = self.loot;
@@ -239,10 +237,8 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
                      [SVProgressHUD showErrorWithStatus:@"Failed to load image"];
                  }
              }];
-            
         }
     }
-    
 }
 
 #pragma mark - GUI Helper LocationService based

@@ -105,11 +105,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="Aa5-DS-1rc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoginBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="Aa5-DS-1rc">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LocationServiceImage" translatesAutoresizingMaskIntoConstraints="NO" id="OWX-Y8-WFx">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LocationServiceIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OWX-Y8-WFx">
                                 <rect key="frame" x="109" y="121" width="102" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -268,27 +268,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="fu5-B6-5Vl">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoginBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="fu5-B6-5Vl">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" background="loginTextfieldBackground" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mpp-iX-pms" customClass="LoginTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" background="LoginTextFieldBackGround" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mpp-iX-pms" customClass="LoginTextField">
                                 <rect key="frame" x="30" y="38" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" background="loginTextfieldBackground" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yn8-06-3nQ" customClass="LoginTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" background="LoginTextFieldBackGround" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yn8-06-3nQ" customClass="LoginTextField">
                                 <rect key="frame" x="30" y="94" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kPR-WN-DGV">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoginLogo" translatesAutoresizingMaskIntoConstraints="NO" id="kPR-WN-DGV">
                                 <rect key="frame" x="30" y="262" width="260" height="163"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="loginTextfieldBackground" translatesAutoresizingMaskIntoConstraints="NO" id="RZf-QJ-nYA">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LoginTextFieldBackGround" translatesAutoresizingMaskIntoConstraints="NO" id="RZf-QJ-nYA">
                                 <rect key="frame" x="30" y="150" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -472,12 +472,12 @@
     <resources>
         <image name="ListTabIcon" width="25" height="25"/>
         <image name="LocateMeButton" width="44" height="44"/>
-        <image name="LocationServiceImage" width="102" height="104"/>
+        <image name="LocationServiceIcon" width="102" height="104"/>
+        <image name="LoginBackgroundImage" width="320" height="568"/>
+        <image name="LoginLogo" width="260" height="163"/>
+        <image name="LoginTextFieldBackGround" width="260" height="48"/>
         <image name="MapTabIconInactive" width="25" height="25"/>
         <image name="SettingsTabIconInactive" width="25" height="25"/>
-        <image name="loginBackgroundImage" width="320" height="568"/>
-        <image name="loginLogo" width="260" height="163"/>
-        <image name="loginTextfieldBackground" width="260" height="48"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
