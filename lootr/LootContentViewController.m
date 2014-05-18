@@ -75,6 +75,7 @@ static NSString *CellIdentifierDetailed = @"ImageCell";
     
     self.mediaFocusController = [[URBMediaFocusViewController alloc] init];
     self.mediaFocusController.parallaxEnabled = NO;
+    self.mediaFocusController.shouldRotateToDeviceOrientation = NO;
 }
 
 -(void)viewWillAppear:(BOOL)animated
