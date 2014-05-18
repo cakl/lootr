@@ -133,6 +133,8 @@
 		279284F018E8668A002CB07A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Lootr.h"; sourceTree = "<group>"; };
 		279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Lootr.m"; sourceTree = "<group>"; };
+		279CD99D192834E4008DAA4B /* Linsebuehl.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Linsebuehl.gpx; sourceTree = "<group>"; };
+		279CD9A1192838FD008DAA4B /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		27A7731B18F4CF790041EE05 /* Content.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Content.h; sourceTree = "<group>"; };
 		27A7731C18F4CF790041EE05 /* Content.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Content.m; sourceTree = "<group>"; };
 		27A971D319056A4D00F26A87 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
@@ -397,6 +399,7 @@
 		27C7BF3A18D7498100761C84 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				279CD9A1192838FD008DAA4B /* ImageIO.framework */,
 				27DAA9ED1918148B006B329D /* Security.framework */,
 				27A971D519056C0E00F26A87 /* QuartzCore.framework */,
 				27A971D319056A4D00F26A87 /* Accelerate.framework */,
@@ -474,6 +477,7 @@
 			children = (
 				27C7BF7D18D749F800761C84 /* UNIA.gpx */,
 				2734E74219168A7B00DD7F18 /* Fischermarktplatz.gpx */,
+				279CD99D192834E4008DAA4B /* Linsebuehl.gpx */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
