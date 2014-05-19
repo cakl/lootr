@@ -21,6 +21,8 @@
 @implementation ServerCallerFacade
 static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 
+#pragma mark - Initialization
+
 -(CoreLocationDelegate*)locationDelegate{
     if(_locationDelegate) return _locationDelegate;
     _locationDelegate = [CoreLocationDelegate sharedInstance];
@@ -51,6 +53,8 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
     }
     return self;
 }
+
+#pragma mark - Server IO
 
 -(void) getLootsAtCoordinate:(CLLocationCoordinate2D)coordinate inDistance:(NSNumber*)distance onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure{
     NSNumber* latitude = [NSNumber numberWithDouble:coordinate.latitude];
@@ -156,6 +160,8 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
         failure(userError);
     }
 }
+
+#pragma mark - Location Helper
 
 -(BOOL)checkIfCurrentLocation:(CLLocation*)currentLocation isInRadiusOfLoot:(Loot*)loot{
     CLLocation* lootLocation = [[CLLocation alloc] initWithLatitude:[loot.coord.latitude doubleValue] longitude:[loot.coord.longitude doubleValue]];

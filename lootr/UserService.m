@@ -16,8 +16,9 @@
 @end
 
 @implementation UserService
-static NSString* userDefaultsUserNameKey = @"username";
-static NSString* userDefaultsEmailKey = @"email";
+static NSString *const userDefaultsUserNameKey = @"username";
+static NSString *const userDefaultsEmailKey = @"email";
+static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
 
 -(id <ServerCaller>)serverCaller{
     if (_serverCaller == nil)
@@ -95,13 +96,13 @@ static NSString* userDefaultsEmailKey = @"email";
 -(void)setAuthorizationToken:(NSString*)token
 {
     [self.serverCaller setAuthorizationToken:token];
-    [[SDWebImageManager.sharedManager imageDownloader] setValue:[NSString stringWithFormat:@"Token token=\"%@\"", token] forHTTPHeaderField:@"Authorization"];
+    [[SDWebImageManager.sharedManager imageDownloader] setValue:[NSString stringWithFormat:@"Token token=\"%@\"", token] forHTTPHeaderField:AFNetworkingAuthorizationHeaderKey];
 }
 
 -(void)clearAuthorizationToken
 {
     [self.serverCaller clearAuthorizationToken];
-    [[SDWebImageManager.sharedManager imageDownloader] setValue:@"" forHTTPHeaderField:@"Authorization"];
+    [[SDWebImageManager.sharedManager imageDownloader] setValue:@"" forHTTPHeaderField:AFNetworkingAuthorizationHeaderKey];
 }
 
 -(void)loginUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure{

@@ -20,6 +20,7 @@
 static NSString* errorDomain = @"ch.hsr.lootr";
 static const NSInteger errorCode = 1000;
 static const double updateDistance = 20.0;
+static const double geocodeUpdateDistance = 1000;
 
 +(CoreLocationDelegate*)sharedInstance
 {
@@ -84,7 +85,7 @@ static const double updateDistance = 20.0;
     NSLog(@"%s", __PRETTY_FUNCTION__);
     _location = [locations lastObject];
     double distance = [self.lastLocation distanceFromLocation:self.location];
-    if(distance > 1000 || distance == 0 ){
+    if(distance > geocodeUpdateDistance || distance == 0 ){
         [self geocodeCityByLocation:self.location];
         self.lastLocation = self.location;
     }
