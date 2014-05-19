@@ -6,6 +6,12 @@ Lootr iPhone Client
 ===================
 developed as SE2 project
 
+install with:
+```
+pod install
+open lootr.xcworkspace
+```
+***
 more information on http://lootrapp.com
 
 Icons used from http://icons8.com/
