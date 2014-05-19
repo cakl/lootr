@@ -160,7 +160,7 @@ static int const sectionHeaderHeight = 40;
     }];
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"dd MMMM yyyy"];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     
     NSString* dateString = [dateFormatter stringFromDate:content.created];
     
