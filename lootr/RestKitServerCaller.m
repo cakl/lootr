@@ -14,6 +14,19 @@
 
 @implementation RestKitServerCaller
 static NSString* const apiPath = @"/lootrserver/api/v1";
+static NSString* const lootsByDistanceFormat = @"%@/loots/latitude/%@/longitude/%@/distance/%@";
+static NSString* const lootByIdentifierFormat = @"%@/loots/%@";
+static NSString* const lootByCountFormat = @"%@/loots/latitude/%@/longitude/%@/count/%@";
+static NSString* const postLootFormat = @"%@/loots";
+static NSString* const postUserFormat = @"%@/users/login";
+static NSString* const postContentFormat = @"%@/contents";
+static NSString* const postReportFormat = @"%@/reports";
+static NSString* const contentName = @"file";
+static NSString* const contentFileName = @"photo.jpg";
+static NSString* const contentMimeType = @"image/jpeg";
+static NSString* const contentIdentifierBoundaryName = @"id";
+static NSString* const contentUserBoundaryName = @"username";
+static CGFloat const compressionQuality = 0.8;
 
 -(instancetype) initWithObjectManager:(RKObjectManager*)objectManager
 {
@@ -26,7 +39,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void) getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude inDistance:(NSNumber*)distance onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure
 {
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/latitude/%@/longitude/%@/distance/%@", apiPath, latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:lootsByDistanceFormat, apiPath, latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([mappingResult array]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
@@ -35,7 +48,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void) getLootByIdentifier:(NSNumber*)identifier onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
 {
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/%@", apiPath, identifier] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:lootByIdentifierFormat, apiPath, identifier] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
@@ -44,7 +57,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void) getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude withLimitedCount:(NSNumber*)count onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure
 {
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:@"%@/loots/latitude/%@/longitude/%@/count/%@", apiPath, latitude, longitude, count] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:lootByCountFormat, apiPath, latitude, longitude, count] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([mappingResult array]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
@@ -53,7 +66,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void)postLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure
 {
-    [self.objectManager postObject:loot path:[NSString stringWithFormat:@"%@/loots", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager postObject:loot path:[NSString stringWithFormat:postLootFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
@@ -62,7 +75,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void)postUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure
 {
-    [self.objectManager postObject:user path:[NSString stringWithFormat:@"%@/users/login", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager postObject:user path:[NSString stringWithFormat:postUserFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
@@ -71,12 +84,12 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* content))success onFailure:(void(^)(NSError* error))failure
 {
-    NSMutableURLRequest *request = [self.objectManager multipartFormRequestWithObject:content method:RKRequestMethodPOST path:[NSString stringWithFormat:@"%@/contents", apiPath] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.8) name:@"file" fileName:@"photo.jpg" mimeType:@"image/jpeg"];
+    NSMutableURLRequest *request = [self.objectManager multipartFormRequestWithObject:content method:RKRequestMethodPOST path:[NSString stringWithFormat:postContentFormat, apiPath] parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, compressionQuality) name:contentName fileName:contentFileName mimeType:contentMimeType];
         NSString* nsdataIdentifierString = [NSString stringWithFormat:@"%@", loot.identifier];
-        [formData appendPartWithFormData:[nsdataIdentifierString dataUsingEncoding:NSUTF8StringEncoding] name:@"id"];
+        [formData appendPartWithFormData:[nsdataIdentifierString dataUsingEncoding:NSUTF8StringEncoding] name:contentIdentifierBoundaryName];
         NSString* nsdataCreatorString = [NSString stringWithFormat:@"%@", content.creator.userName];
-        [formData appendPartWithFormData:[nsdataCreatorString dataUsingEncoding:NSUTF8StringEncoding] name:@"username"];
+        [formData appendPartWithFormData:[nsdataCreatorString dataUsingEncoding:NSUTF8StringEncoding] name:contentUserBoundaryName];
     }];
     RKObjectRequestOperation *operation = [self.objectManager objectRequestOperationWithRequest:request success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
@@ -88,7 +101,7 @@ static NSString* const apiPath = @"/lootrserver/api/v1";
 
 -(void)postReport:(Report*)report onSuccess:(void(^)(Report* report))success onFailure:(void(^)(NSError* error))failure
 {
-    [self.objectManager postObject:report path:[NSString stringWithFormat:@"%@/reports", apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [self.objectManager postObject:report path:[NSString stringWithFormat:postReportFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
