@@ -56,6 +56,8 @@ static double const degreeToMetersFactor = 111;
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    self.title = @"Loots";
+    self.addBarButton.title = @"Add";
     self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.locateUserButton.backgroundColor = [UIColor clearColor];
     [self zoomIntoUserLocationOnInit];

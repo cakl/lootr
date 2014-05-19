@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.serviceCheckLabel.text = @"You must activate the iOS Location Services before you can use the app";
 }
 
 @end

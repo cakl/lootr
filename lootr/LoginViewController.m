@@ -49,7 +49,10 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
     self.emailTextField.leftViewImage = [UIImage imageNamed:loginTextFieldIconName];
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailTextField.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.passWordTextField.leftViewImage = [UIImage imageNamed:passwortTextFieldIconName];
+    self.passwordTextField.leftViewImage = [UIImage imageNamed:passwortTextFieldIconName];
+    [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
+    self.emailTextField.placeholder = @"email";
+    self.passwordTextField.placeholder = @"password";
 }
 
 #pragma mark - GUI io messages
@@ -57,7 +60,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 - (IBAction)loginButtonTouchUpInside:(id)sender {
     User* loginUser = [User new];
     loginUser.email = self.emailTextField.text;
-    loginUser.passWord = self.passWordTextField.text;
+    loginUser.passWord = self.passwordTextField.text;
     [self loginUser:loginUser];
 }
 
@@ -66,7 +69,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 -(void)clearTextFields
 {
     self.emailTextField.text = nil;
-    self.passWordTextField.text = nil;
+    self.passwordTextField.text = nil;
 }
 
 -(void)performLogin{

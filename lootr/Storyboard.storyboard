@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Loot Map View Controller - Loots-->
+        <!--Loot Map View Controller-->
         <scene sceneID="Yzh-Vj-hGD">
             <objects>
                 <viewController id="PDh-Fz-UnH" customClass="LootMapViewController" sceneMemberID="viewController">
@@ -41,14 +41,15 @@
                             <constraint firstItem="08a-Js-DbU" firstAttribute="top" secondItem="6Hj-jQ-5Y3" secondAttribute="top" constant="20" symbolic="YES" id="yeS-Kv-9Si"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Loots" id="vrF-gZ-GHk">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="Psl-pR-ztq">
+                    <navigationItem key="navigationItem" id="vrF-gZ-GHk">
+                        <barButtonItem key="rightBarButtonItem" id="Psl-pR-ztq">
                             <connections>
                                 <action selector="addLootButtonPressed:" destination="PDh-Fz-UnH" id="602-Ob-SVS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addBarButton" destination="Psl-pR-ztq" id="euK-s4-ZVU"/>
                         <outlet property="locateUserButton" destination="b6D-NA-dsY" id="NN5-Me-pre"/>
                         <outlet property="mapView" destination="08a-Js-DbU" id="UwZ-1y-qkY"/>
                         <segue destination="gRe-fW-iOZ" kind="push" identifier="showLoot" id="zIT-TG-3G8"/>
@@ -57,41 +58,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uyx-Sd-kbz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1107" y="-515"/>
-        </scene>
-        <!--Content View Controller-->
-        <scene sceneID="VV8-Ud-NpB">
-            <objects>
-                <viewController id="jQ5-SJ-oNq" customClass="ContentViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8KG-RK-w44"/>
-                        <viewControllerLayoutGuide type="bottom" id="mID-nk-Ar4"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="R7H-t3-zKf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBC-kq-AeH">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rCH-NJ-8bN">
-                                        <rect key="frame" x="0.0" y="0.0" width="340" height="588"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="5ca-MS-rYf"/>
-                    <connections>
-                        <outlet property="contentImageView" destination="rCH-NJ-8bN" id="8SM-zu-hbP"/>
-                        <outlet property="scrollView" destination="KBC-kq-AeH" id="hTj-Sb-hQw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mge-2f-tRF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2290" y="-839"/>
         </scene>
         <!--Service Check View Controller-->
         <scene sceneID="3If-IU-LOS">
@@ -113,7 +79,7 @@
                                 <rect key="frame" x="109" y="121" width="102" height="103"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You must activate the iOS Location Services before you can use the app" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="251" translatesAutoresizingMaskIntoConstraints="NO" id="eBy-ad-0tq">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="251" translatesAutoresizingMaskIntoConstraints="NO" id="eBy-ad-0tq">
                                 <rect key="frame" x="35" y="232" width="251" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
@@ -123,6 +89,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="serviceCheckLabel" destination="eBy-ad-0tq" id="Imx-yD-jhE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jVn-6H-06F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -272,13 +241,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" minimumFontSize="17" background="LoginTextFieldBackground" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mpp-iX-pms" customClass="LoginTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="LoginTextFieldBackground" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mpp-iX-pms" customClass="LoginTextField">
                                 <rect key="frame" x="30" y="38" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="password" minimumFontSize="17" background="LoginTextFieldBackground" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yn8-06-3nQ" customClass="LoginTextField">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" background="LoginTextFieldBackground" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="yn8-06-3nQ" customClass="LoginTextField">
                                 <rect key="frame" x="30" y="94" width="260" height="48"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
@@ -296,7 +265,7 @@
                                 <rect key="frame" x="30" y="159" width="260" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
-                                <state key="normal" title="Login">
+                                <state key="normal">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -309,7 +278,8 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="mpp-iX-pms" id="6ce-uP-VbT"/>
-                        <outlet property="passWordTextField" destination="yn8-06-3nQ" id="Dta-nh-aSd"/>
+                        <outlet property="loginButton" destination="Tu5-yC-sCs" id="lmc-CS-4IC"/>
+                        <outlet property="passwordTextField" destination="yn8-06-3nQ" id="WeE-nD-al1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhS-Ur-ZRD" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ServiceCheckViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *serviceCheckLabel;
 
 @end
