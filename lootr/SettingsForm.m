@@ -15,11 +15,11 @@
     return @[
              @{FXFormFieldKey: @"userName",
                FXFormFieldType: FXFormFieldTypeLabel,
-               FXFormFieldTitle: @"Username"
+               FXFormFieldTitle: NSLocalizedString(@"settingsform.username", nil)
                },
              @{FXFormFieldKey: @"email",
                FXFormFieldType: FXFormFieldTypeLabel,
-               FXFormFieldTitle: @"Email"
+               FXFormFieldTitle: NSLocalizedString(@"settingsform.email", nil)
                }
              ];
     
@@ -28,7 +28,7 @@
 - (NSArray *)extraFields
 {
     return @[
-             @{FXFormFieldTitle: @"Logout",
+             @{FXFormFieldTitle: NSLocalizedString(@"settingsform.logout", nil),
                FXFormFieldHeader: @"",
                FXFormFieldAction: @"performLogout", @"textLabel.color": [UIColor redColor]
                },

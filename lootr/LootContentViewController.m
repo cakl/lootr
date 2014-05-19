@@ -71,7 +71,7 @@ static int const sectionHeaderHeight = 40;
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
     
-    UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStylePlain target:self action:@selector(addBarButtonPressed)];
+    UIBarButtonItem *addBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"lootcontentviewcontroller.addbutton.title", nil) style:UIBarButtonItemStylePlain target:self action:@selector(addBarButtonPressed)];
     self.navigationItem.rightBarButtonItem = addBarButton;
     
     self.mediaFocusController = [[URBMediaFocusViewController alloc] init];
@@ -98,18 +98,18 @@ static int const sectionHeaderHeight = 40;
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:self.loot.title
                                                     message:self.loot.summary
                                                    delegate:nil
-                                          cancelButtonTitle:@"OK"
+                                          cancelButtonTitle:NSLocalizedString(@"ok", nil)
                                           otherButtonTitles:nil];
     [alert show];
 }
 
 -(void)reportButtonPressed
 {
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:@"Report This Loot"
-                                                    message:@"Enter a reason or concern for reporting this loot."
+    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lootcontentviewcontroller.report.alert.title", nil)
+                                                    message:NSLocalizedString(@"lootcontentviewcontroller.report.alert.message", nil)
                                                    delegate:self
-                                          cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Report",nil];
+                                           cancelButtonTitle:NSLocalizedString(@"cancel", nil)
+                                          otherButtonTitles:NSLocalizedString(@"lootcontentviewcontroller.report.alert.reportbutton", nil),nil];
     dialog.alertViewStyle = UIAlertViewStylePlainTextInput;
     [dialog show];
     self.reportTextField = [dialog textFieldAtIndex:0];
@@ -118,13 +118,13 @@ static int const sectionHeaderHeight = 40;
 -(void)addBarButtonPressed
 {
     if([self.locationService isCurrentLocationInRadiusOfLoot:self.loot]){
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose Photo", @"Write Text", nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"lootcontentviewcontroller.actionsheet.takephoto", nil), NSLocalizedString(@"lootcontentviewcontroller.actionsheet.choosephoto", nil), nil];
         [actionSheet showInView:self.view];
     } else {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Sorry"
-                                                        message:@"You're not close enough to the loot to add content"
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lootcontentviewcontroller.add.alert.title", nil)
+                                                        message:NSLocalizedString(@"lootcontentviewcontroller.add.alert.message", nil)
                                                        delegate:nil
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"ok", nil)
                                               otherButtonTitles:nil];
         [alert show];
     }
@@ -164,7 +164,7 @@ static int const sectionHeaderHeight = 40;
     
     NSString* dateString = [dateFormatter stringFromDate:content.created];
     
-    cell.footerLabel.text = [NSString stringWithFormat:@"by %@ on %@", content.creator.userName, dateString];
+    cell.footerLabel.text = [NSString stringWithFormat:NSLocalizedString(@"lootcontentviewcontroller.content.postedby%@on%@", nil), content.creator.userName, dateString];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.blurFooterView.dynamic = NO;
     cell.blurOverlayView.dynamic = NO;
@@ -208,7 +208,7 @@ static int const sectionHeaderHeight = 40;
                      [SVProgressHUD dismiss];
                      [self.mediaFocusController showImage:image fromView:imageCell.fullImageView];
                  } else {
-                     [SVProgressHUD showErrorWithStatus:@"Failed to load image"];
+                     [SVProgressHUD dismiss];
                  }
              }];
         }
@@ -218,8 +218,8 @@ static int const sectionHeaderHeight = 40;
 #pragma mark - GUI Helper LocationService based
 
 -(void)setDistanceToLootLabelText{
-    NSString* distanceText = @"distance";
-    NSString* distanceUnknownText = @"undetermined";
+    NSString* distanceText = NSLocalizedString(@"lootcontentviewcontroller.content.distancelabel", nil);
+    NSString* distanceUnknownText = NSLocalizedString(@"lootcontentviewcontroller.content.distanceundeterminedlabel", nil);
     DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLoot:self.loot];
     switch (distanceThreshold) {
         case DistanceTresholdUndetermined:
@@ -245,14 +245,17 @@ static int const sectionHeaderHeight = 40;
     if([self.locationService isCurrentLocationInRadiusOfLoot:self.loot]){
         blurOverlay.blurEnabled = NO;
     } else {
-        blurOverlay.blurRadius = [self blurRadiusOfDistanceThreshold:distanceThreshold];
+        blurOverlay.blurRadius = [self blurRadiusOfDistanceThreshold:distanceThreshold accuracy:[self.loot getRadiusAsAccuracy]];
     }
 }
 
--(float)blurRadiusOfDistanceThreshold:(DistanceTreshold)threshold
+-(float)blurRadiusOfDistanceThreshold:(DistanceTreshold)threshold accuracy:(Accuracy)accuracy
 {
     int x = threshold;
-    return (1/1200)*sqrt(x)+(3/40)*x+(25/6); //TODO: describe and re-calculate optimal quadratic equitation
+    if(x<=accuracy) return 0;
+    if(accuracy < x < 500 + accuracy) return sqrt(16/5*(x-accuracy));
+    if(500+accuracy < x) return 40;
+    return 40;
 }
 
 #pragma mark - ImagePicker

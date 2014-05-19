@@ -50,9 +50,9 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailTextField.spellCheckingType = UITextSpellCheckingTypeNo;
     self.passwordTextField.leftViewImage = [UIImage imageNamed:passwortTextFieldIconName];
-    [self.loginButton setTitle:@"Login" forState:UIControlStateNormal];
-    self.emailTextField.placeholder = @"email";
-    self.passwordTextField.placeholder = @"password";
+    [self.loginButton setTitle:NSLocalizedString(@"loginviewcontroller.loginbutton.title", nil) forState:UIControlStateNormal];
+    self.emailTextField.placeholder = NSLocalizedString(@"loginviewcontroller.emailfield.placeholder", nil);
+    self.passwordTextField.placeholder = NSLocalizedString(@"loginviewcontroller.passwordfield.placeholder", nil);;
 }
 
 #pragma mark - GUI io messages

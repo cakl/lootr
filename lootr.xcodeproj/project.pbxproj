@@ -27,6 +27,7 @@
 		274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C941718E8EF15006A50F7 /* Loot+Annotation.m */; };
 		27514508191AAF6100846E36 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27514507191AAF6100846E36 /* RootViewController.m */; };
 		2751450C191AB56C00846E36 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2751450B191AB56C00846E36 /* TabBarViewController.m */; };
+		2761D843192A90F100386D8D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2761D845192A90F100386D8D /* Localizable.strings */; };
 		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
 		27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27707C5E18F994240018DC10 /* ServerCallerFactory.m */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
@@ -119,6 +120,7 @@
 		27514507191AAF6100846E36 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		2751450A191AB56C00846E36 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		2751450B191AB56C00846E36 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		2761D844192A90F100386D8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
 		27707C5D18F994240018DC10 /* ServerCallerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFactory.h; sourceTree = "<group>"; };
 		27707C5E18F994240018DC10 /* ServerCallerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFactory.m; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
 				27FD6FDA19291C5300734F11 /* Images.xcassets */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
+				2761D845192A90F100386D8D /* Localizable.strings */,
 			);
 			path = lootr;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2761D843192A90F100386D8D /* Localizable.strings in Resources */,
 				27C7BF7E18D749F800761C84 /* UNIA.gpx in Resources */,
 				27FD6FDB19291C5300734F11 /* Images.xcassets in Resources */,
 				27346CE9190DA3100085B556 /* Storyboard.storyboard in Resources */,
@@ -688,6 +692,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		2761D845192A90F100386D8D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2761D844192A90F100386D8D /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		27C7BF4618D7498100761C84 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

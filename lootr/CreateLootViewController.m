@@ -51,14 +51,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"New Loot";
+    self.navigationItem.title = NSLocalizedString(@"createlootviewcontroller.title", nil);
     UIBarButtonItem *cancelButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"Cancel"
+    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"cancel", nil)
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(cancelButtonPressed)];
     UIBarButtonItem *createButton =
-    [[UIBarButtonItem alloc] initWithTitle:@"Create"
+    [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"createlootviewcontroller.createbutton.title", nil)
                                      style:UIBarButtonItemStylePlain
                                     target:self
                                     action:@selector(createButtonPressed)];
@@ -81,11 +81,11 @@
     [self.view endEditing:YES];
     CreateLootForm *createLootForm = self.formController.form;
     if ([createLootForm.title length] == 0 || [createLootForm.summary length] == 0 || createLootForm.accuracy == 0 ) {
-        [[[UIAlertView alloc] initWithTitle:@"please check data"
-                                    message:nil
+        [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
+                                    message:NSLocalizedString(@"createlootviewcontroller.alert.create.message", nil)
                                    delegate:self
                           cancelButtonTitle:nil
-                          otherButtonTitles:@"OK", nil] show];
+                          otherButtonTitles:NSLocalizedString(@"ok", nil), nil] show];
     } else {
         Loot *postLoot = [self createLootFromInputForm:self.formController.form];
         [self postLoot:postLoot];

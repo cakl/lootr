@@ -61,7 +61,7 @@ static NSString *const showLootSegueIdentifier = @"showLoot";
     self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.title = @"Loots";
+    self.title = NSLocalizedString(@"lootlistviewcontroller.title", nil);
     
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];

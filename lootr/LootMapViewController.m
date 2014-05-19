@@ -56,8 +56,8 @@ static double const degreeToMetersFactor = 111;
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
-    self.title = @"Loots";
-    self.addBarButton.title = @"Add";
+    self.title = NSLocalizedString(@"lootmapviewcontroller.title", nil);
+    self.addBarButton.title = NSLocalizedString(@"lootmapviewcontroller.addbutton.title", nil);
     self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.locateUserButton.backgroundColor = [UIColor clearColor];
     [self zoomIntoUserLocationOnInit];
@@ -90,7 +90,7 @@ static double const degreeToMetersFactor = 111;
         CLLocationCoordinate2D newCenterCoordinate = [self zoomIntoLocation:self.mapView.userLocation.coordinate];
         [self loadLootsAtCoordinate:newCenterCoordinate];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"GPS is not yet initiating" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil) message:NSLocalizedString(@"lootmapviewcontroller.alert.gpsnotready.message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
         [alertView show];
     }
 }

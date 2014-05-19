@@ -56,7 +56,7 @@ static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
 {
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"settingsviewcontroller.title", nil);
 }
 
 -(void)viewWillAppear:(BOOL)animated{
