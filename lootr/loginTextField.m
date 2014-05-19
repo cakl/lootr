@@ -8,13 +8,15 @@
 #import "LoginTextField.h"
 
 @implementation LoginTextField
+static CGFloat const margin = 10;
+static UIKeyboardAppearance const keyboardAppearance = UIKeyboardAppearanceDark;
 
 - (instancetype)initWithCoder:(NSCoder *)coder
 {
     self = [super initWithCoder:coder];
     if (self) {
         self.textColor = [UIColor lightGrayColor];
-        self.keyboardAppearance = UIKeyboardAppearanceDark;
+        self.keyboardAppearance = keyboardAppearance;
     }
     return self;
 }
@@ -32,19 +34,19 @@
 }
 
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    
     CGRect newBounds = [super textRectForBounds:bounds];
-    newBounds.size.width -= 10;
-    newBounds.origin.x += 10;
-    return newBounds;
+    return [self bounds:newBounds withMargin:margin];
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    
     CGRect newBounds = [super editingRectForBounds:bounds];
-    newBounds.size.width -= 10;
-    newBounds.origin.x += 10;
-    return newBounds;
+    return [self bounds:newBounds withMargin:margin];
+}
+
+-(CGRect)bounds:(CGRect)bounds withMargin:(CGFloat)margin{
+    bounds.size.width -= margin;
+    bounds.origin.x += margin;
+    return bounds;
 }
 
 @end

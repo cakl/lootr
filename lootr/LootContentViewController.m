@@ -187,12 +187,7 @@ static int const sectionHeaderHeight = 40;
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    switch (section) {
-        case 0:
-            return sectionHeaderHeight;
-        default:
-            return 0;
-    }
+    return (section)?0:sectionHeaderHeight;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

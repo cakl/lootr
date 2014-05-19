@@ -21,8 +21,10 @@
 @end
 
 @implementation LootListViewController
-static const NSUInteger limitedCount = 10;
-static NSString *cellIdentifier = @"DetailCell";
+static NSUInteger const limitedCount = 10;
+static NSString *const cellIdentifier = @"DetailCell";
+static NSString *const tabBarImageIconName = @"ListTabIcon";
+static NSString *const showLootSegueIdentifier = @"showLoot";
 
 #pragma mark - Initialization
 
@@ -56,7 +58,7 @@ static NSString *cellIdentifier = @"DetailCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tabBarItem.selectedImage = [UIImage imageNamed:@"ListTabIcon"];
+    self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.title = @"Loots";
@@ -80,7 +82,7 @@ static NSString *cellIdentifier = @"DetailCell";
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"showLoot"]){
+    if([segue.identifier isEqualToString:showLootSegueIdentifier]){
         LootContentViewController* contentViewController = segue.destinationViewController;
         contentViewController.loot = self.lastSelectedLoot;
     }
@@ -112,7 +114,7 @@ static NSString *cellIdentifier = @"DetailCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     self.lastSelectedLoot = [self.loots objectAtIndex:indexPath.row];
-    [self performSegueWithIdentifier:@"showLoot" sender:self];
+    [self performSegueWithIdentifier:showLootSegueIdentifier sender:self];
 }
 
 #pragma mark - UITabBarControllerDelegate

@@ -10,12 +10,8 @@
 #import <FXForms.h>
 #import "Loot.h"
 
-
 @interface CreateLootForm : NSObject <FXForm>
-
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *summary;
-
 @property (nonatomic, assign) Accuracy accuracy;
- 
 @end

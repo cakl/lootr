@@ -18,7 +18,9 @@
 @end
 
 @implementation LoginViewController
-static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
+static NSString *const keyChainUserServiceName = @"ch.hsr.lootr";
+static NSString *const loginTextFieldIconName = @"LoginUserFieldIcon";
+static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 #pragma mark - Initialization
 
@@ -44,10 +46,10 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.emailTextField.leftViewImage = [UIImage imageNamed:@"LoginUserFieldIcon"];
+    self.emailTextField.leftViewImage = [UIImage imageNamed:loginTextFieldIconName];
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
     self.emailTextField.spellCheckingType = UITextSpellCheckingTypeNo;
-    self.passWordTextField.leftViewImage = [UIImage imageNamed:@"PasswordUserFieldIcon"];
+    self.passWordTextField.leftViewImage = [UIImage imageNamed:passwortTextFieldIconName];
 }
 
 #pragma mark - GUI io messages
@@ -81,13 +83,10 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 -(void)loginUser:(User*)user{
     [SVProgressHUD showApropriateHUD];
     [self.userService loginUser:user onSuccess:^(User *user) {
-        NSLog(@"success");
         [SVProgressHUD dismiss];
         [self performLogin];
     } onFailure:^(NSError *error) {
-        //TODO
-        [SVProgressHUD showErrorWithStatus:@"Login failed"];
-        NSLog(@"%@", error);
+        [SVProgressHUD dismiss];
     }];
 }
 

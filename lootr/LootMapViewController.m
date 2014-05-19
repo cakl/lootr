@@ -23,7 +23,7 @@
 
 @implementation LootMapViewController
 static NSString *const mapMarkerIcon = @"MapsMarker";
-static NSString *const tabBarImageIcon = @"MapTabIconActive";
+static NSString *const tabBarImageIconName = @"MapTabIconActive";
 static NSString *const showLootSegueIdentifier = @"showLoot";
 static NSString *const annotationViewIdentifier = @"loot";
 static double const defaultZoomInLatitude = 47.22693;
@@ -56,7 +56,7 @@ static double const degreeToMetersFactor = 111;
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
-    self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIcon];
+    self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.locateUserButton.backgroundColor = [UIColor clearColor];
     [self zoomIntoUserLocationOnInit];
 }

@@ -18,7 +18,8 @@
 @end
 
 @implementation SettingsViewController
-static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
+static NSString *const keyChainUserServiceName = @"ch.hsr.lootr";
+static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
 
 #pragma mark - Initialization
 
@@ -54,7 +55,7 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tabBarItem.selectedImage = [UIImage imageNamed:@"SettingsTabIconActive"];
+    self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.title = @"Settings";
 }
 
@@ -78,7 +79,6 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 #pragma mark - Loading Data from Server
 
 -(void)performLogout{
-    NSLog(@"logout");
     AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     RootViewController* rootViewController = (RootViewController*) delegate.window.rootViewController;
     [self dismissViewControllerAnimated:NO completion:^{
