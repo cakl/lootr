@@ -12,7 +12,6 @@
 
 @interface Report : NSObject
 @property (nonatomic, strong) NSString* purpose;
-@property (nonatomic, strong) NSDate* reportTime;
 @property (nonatomic, strong) User* creator;
 @property (nonatomic, strong) Loot* loot;
 @end

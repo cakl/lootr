@@ -59,8 +59,7 @@ static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
                                                             }];
     
     [reportMapping addAttributeMappingsFromDictionary:@{
-                                                          @"purpose": @"purpose",
-                                                          @"reportTime": @"reportTime"
+                                                          @"purpose": @"purpose"
                                                           }];
     
     //POST MAPPINGS
