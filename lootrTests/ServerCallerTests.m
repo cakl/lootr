@@ -154,7 +154,37 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
-
+- (void)testServerCallPostReport
+{
+    //given
+    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    RKObjectManager* objectManager = [RKTestFactory objectManager];
+    [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    id <ServerCaller> serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
+    Report* report = [Report new];
+    report.purpose = @"Diese Loot entspricht nicht meinem Gusto!";
+    Loot* loot = [Loot new];
+    loot.identifier = [NSNumber numberWithInt:42];
+    loot.title = @"testloot";
+    User* user = [User new];
+    user.email = @"test@test.com";
+    user.passWord = nil;
+    report.loot = loot;
+    report.creator = user;
+    
+    //when
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    [serverCaller postReport:report onSuccess:^(Report *report) {
+        XCTAssertNotNil(report, @"loaded report is nil");
+        dispatch_semaphore_signal(semaphore);
+    } onFailure:^(NSError *error) {
+        XCTFail(@"Failure returned");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+}
 
 
 @end
