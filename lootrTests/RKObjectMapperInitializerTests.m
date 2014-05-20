@@ -282,8 +282,47 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"purpose" destinationKeyPath:@"purpose"]];
     XCTAssertTrue([test evaluate], @"purpose Mapping failed");
-    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"reportTime" destinationKeyPath:@"reportTime"]];
-    XCTAssertTrue([test evaluate], @"reportTime Mapping failed");
 }
+
+-(void)testNestedCreatorInReportMapping
+{
+    //given
+    User* aUser = [User new];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:reportSingleFileName];
+    id reports = [parsedJSON objectForKey:reportsKeyPath];
+    
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/reports";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    RKObjectMapping* reportsMapping = (RKObjectMapping*) responseDescriptor.mapping;
+    RKRelationshipMapping* creatorRelationshipMapping = [[reportsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"creator"];
+    //when
+    RKMappingTest *test = [RKMappingTest testForMapping:[creatorRelationshipMapping mapping] sourceObject:[reports firstObject] destinationObject:aUser];
+    test.rootKeyPath = @"creator";
+    //then
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"username" destinationKeyPath:@"userName"]];
+    XCTAssertTrue([test evaluate], @"username Mapping failed");
+}
+
+-(void)testNestedLootInReportMapping
+{
+    //given
+    Loot* aUser = [Loot new];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:reportSingleFileName];
+    id reports = [parsedJSON objectForKey:reportsKeyPath];
+    
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/reports";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    RKObjectMapping* reportsMapping = (RKObjectMapping*) responseDescriptor.mapping;
+    RKRelationshipMapping* lootRelationshipMapping = [[reportsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"loot"];
+    //when
+    RKMappingTest *test = [RKMappingTest testForMapping:[lootRelationshipMapping mapping] sourceObject:[reports firstObject] destinationObject:aUser];
+    test.rootKeyPath = @"loot";
+    //then
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"id" destinationKeyPath:@"identifier"]];
+    XCTAssertTrue([test evaluate], @"identifier Mapping failed");
+}
+
 
 @end
