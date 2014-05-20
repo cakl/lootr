@@ -46,7 +46,6 @@
     NSUInteger result = 1;
     result = prime * result + [[self identifier] hash];
     result = prime * result + [[self created] hash];
-    result = prime * result + [[self updated] hash];
     result = prime * result + [[self title] hash];
     result = prime * result + [[self summary] hash];
     result = prime * result + [[self radius] hash];

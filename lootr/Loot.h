@@ -21,7 +21,6 @@ typedef NS_ENUM(int, Accuracy)
 @interface Loot : NSObject
 @property (nonatomic, strong) NSNumber* identifier;
 @property (nonatomic, strong) NSDate* created;
-@property (nonatomic, strong) NSDate* updated;
 @property (nonatomic, strong) NSString* title;
 @property (nonatomic, strong) NSString* summary;
 @property (nonatomic, strong) User* creator;

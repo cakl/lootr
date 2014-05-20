@@ -19,30 +19,23 @@ static NSString* const contentsPathPattern = @"/lootrserver/api/v1/contents";
 static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login";
 static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
 
-+(void) configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager{
++(void)configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager{
     RKObjectMapping* lootsMapping = [RKObjectMapping mappingForClass:[Loot class]];
     RKObjectMapping* userMapping = [RKObjectMapping mappingForClass:[User class]];
     RKObjectMapping* coordinateMapping = [RKObjectMapping mappingForClass:[Coordinate class]];
     RKObjectMapping* contentMapping = [RKObjectMapping mappingForClass:[Content class]];
     RKObjectMapping* lootsPostMapping = [RKObjectMapping mappingForClass:[Loot class]];
     RKObjectMapping* userPostMapping = [RKObjectMapping mappingForClass:[User class]];
-    RKObjectMapping* reportPostMapping = [RKObjectMapping mappingForClass:[Report class]];
+    RKObjectMapping* reportMapping = [RKObjectMapping mappingForClass:[Report class]];
     RKObjectMapping* lootReportsPostMapping = [RKObjectMapping mappingForClass:[Loot class]];
     
     [lootsMapping addAttributeMappingsFromDictionary:@{
                                                       @"id": @"identifier",
                                                       @"dateCreated": @"created",
-                                                      @"dateUpdated": @"updated",
                                                       @"summary": @"summary",
                                                       @"title" : @"title",
                                                       @"radius" : @"radius"
                                                       }];
-    
-    [lootsPostMapping addAttributeMappingsFromDictionary:@{
-                                                       @"summary": @"summary",
-                                                       @"title" : @"title",
-                                                       @"radius" : @"radius"
-                                                       }];
     
     [userMapping addAttributeMappingsFromDictionary:@{
                                                     @"username": @"userName",
@@ -50,11 +43,6 @@ static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
                                                     @"password": @"passWord",
                                                     @"token": @"token"
                                                     }];
-    
-    [userPostMapping addAttributeMappingsFromDictionary:@{
-                                                     @"email": @"email",
-                                                     @"password": @"passWord"
-                                                     }];
     
     [coordinateMapping addAttributeMappingsFromDictionary:@{
                                                              @"latitude": @"latitude",
@@ -70,15 +58,27 @@ static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
                                                             @"dateCreated": @"created"
                                                             }];
     
-    [reportPostMapping addAttributeMappingsFromDictionary:@{
+    [reportMapping addAttributeMappingsFromDictionary:@{
                                                           @"purpose": @"purpose",
                                                           @"reportTime": @"reportTime"
                                                           }];
     
-    [lootReportsPostMapping addAttributeMappingsFromDictionary:@{
-                                                           @"id": @"identifier",
-                                                           @"title": @"title"
+    //POST MAPPINGS
+    [lootsPostMapping addAttributeMappingsFromDictionary:@{
+                                                           @"summary": @"summary",
+                                                           @"title" : @"title",
+                                                           @"radius" : @"radius"
                                                            }];
+    
+    [userPostMapping addAttributeMappingsFromDictionary:@{
+                                                          @"email": @"email",
+                                                          @"password": @"passWord"
+                                                          }];
+    
+    [lootReportsPostMapping addAttributeMappingsFromDictionary:@{
+                                                                 @"id": @"identifier",
+                                                                 @"title": @"title"
+                                                                 }];
     
     
     
@@ -90,28 +90,26 @@ static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
     [lootsPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"coordinate" toKeyPath:@"coord" withMapping:coordinateMapping]];
     [lootsPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:userMapping]];
     
-    [reportPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:userMapping]];
-    [reportPostMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"loot" toKeyPath:@"loot" withMapping:lootReportsPostMapping]];
+    [reportMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"creator" toKeyPath:@"creator" withMapping:userMapping]];
+    [reportMapping addPropertyMapping:[RKRelationshipMapping relationshipMappingFromKeyPath:@"loot" toKeyPath:@"loot" withMapping:lootReportsPostMapping]];
     
     RKResponseDescriptor* lootsByDistanceResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByDistancePathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsByIdResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByIdPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsPostResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodPOST pathPattern:lootsPostPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* lootsByCountResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByCountPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    RKResponseDescriptor* contentResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:contentMapping method:RKRequestMethodPOST pathPattern:contentsPathPattern keyPath:@"contents" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* userResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping method:RKRequestMethodPOST pathPattern:usersLoginPathPattern keyPath:@"users" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    RKResponseDescriptor* reportResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:reportPostMapping method:RKRequestMethodPOST pathPattern:reportsPathPattern keyPath:@"reports" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor* reportResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:reportMapping method:RKRequestMethodPOST pathPattern:reportsPathPattern keyPath:@"reports" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:lootsByDistanceResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByIdResponseDescriptor];
     [objectManager addResponseDescriptor:lootsPostResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByCountResponseDescriptor];
-    [objectManager addResponseDescriptor:contentResponseDescriptor];
     [objectManager addResponseDescriptor:userResponseDescriptor];
     [objectManager addResponseDescriptor:reportResponseDescriptor];
     
     RKRequestDescriptor* lootPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[lootsPostMapping inverseMapping] objectClass:[Loot class] rootKeyPath:@"loots" method:RKRequestMethodPOST];
     RKRequestDescriptor* userPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[userPostMapping inverseMapping] objectClass:[User class] rootKeyPath:@"users" method:RKRequestMethodPOST];
-    RKRequestDescriptor* reportPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[reportPostMapping inverseMapping] objectClass:[Report class] rootKeyPath:@"reports" method:RKRequestMethodPOST];
+    RKRequestDescriptor* reportPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[reportMapping inverseMapping] objectClass:[Report class] rootKeyPath:@"reports" method:RKRequestMethodPOST];
     
     [objectManager addRequestDescriptor:lootPostRequestDescriptor];
     [objectManager addRequestDescriptor:userPostRequestDescriptor];

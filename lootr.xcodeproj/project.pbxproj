@@ -40,6 +40,8 @@
 		27A971D419056A4D00F26A87 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A971D319056A4D00F26A87 /* Accelerate.framework */; };
 		27A971D619056C0E00F26A87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A971D519056C0E00F26A87 /* QuartzCore.framework */; };
 		27AEF43F18E45ADD004C18A9 /* RKObjectManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */; };
+		27B7CF64192AF27200E9F3C2 /* reportsSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B7CF63192AF27200E9F3C2 /* reportsSingle.json */; };
+		27B7CF68192AF2A400E9F3C2 /* usersSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B7CF67192AF2A400E9F3C2 /* usersSingle.json */; };
 		27C7BF3C18D7498100761C84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3B18D7498100761C84 /* Foundation.framework */; };
 		27C7BF3E18D7498100761C84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3D18D7498100761C84 /* CoreGraphics.framework */; };
 		27C7BF4018D7498100761C84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3F18D7498100761C84 /* UIKit.framework */; };
@@ -143,6 +145,8 @@
 		27A971D519056C0E00F26A87 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		27AEF43D18E45ADD004C18A9 /* RKObjectManagerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RKObjectManagerHelper.h; sourceTree = "<group>"; };
 		27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectManagerHelper.m; sourceTree = "<group>"; };
+		27B7CF63192AF27200E9F3C2 /* reportsSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = reportsSingle.json; path = Fixtures/reportsSingle.json; sourceTree = "<group>"; };
+		27B7CF67192AF2A400E9F3C2 /* usersSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersSingle.json; path = Fixtures/usersSingle.json; sourceTree = "<group>"; };
 		27C7BF3818D7498100761C84 /* lootr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lootr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C7BF3B18D7498100761C84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27C7BF3D18D7498100761C84 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -266,6 +270,8 @@
 			children = (
 				2732B94218DFC0F20068E18B /* lootList.json */,
 				272758BF18E73886003939AA /* lootSingle.json */,
+				27B7CF63192AF27200E9F3C2 /* reportsSingle.json */,
+				27B7CF67192AF2A400E9F3C2 /* usersSingle.json */,
 			);
 			name = Fixtures;
 			sourceTree = "<group>";
@@ -590,6 +596,8 @@
 				27C7BF6518D7498200761C84 /* InfoPlist.strings in Resources */,
 				2732B94318DFC0F20068E18B /* lootList.json in Resources */,
 				272758C018E73886003939AA /* lootSingle.json in Resources */,
+				27B7CF64192AF27200E9F3C2 /* reportsSingle.json in Resources */,
+				27B7CF68192AF2A400E9F3C2 /* usersSingle.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

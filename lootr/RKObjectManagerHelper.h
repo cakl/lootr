@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface RKObjectManagerHelper : NSObject
-+(void) configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager;
++(void)configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager;
 @end

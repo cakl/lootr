@@ -15,8 +15,8 @@
 @interface UserService : NSObject
 @property (nonatomic, strong, readonly) NSString* keyChainServiceName;
 @property (nonatomic, strong, readonly) NSUserDefaults* userDefaults;
-- (instancetype)initWithKeyChainServiceName:(NSString*)serviceName userDefaults:(NSUserDefaults*)userDefaults;
-- (instancetype)initWithKeyChainServiceName:(NSString*)serviceName userDefaults:(NSUserDefaults*)userDefaults serverCaller:(id<ServerCaller>)serverCaller;
+-(instancetype)initWithKeyChainServiceName:(NSString*)serviceName userDefaults:(NSUserDefaults*)userDefaults;
+-(instancetype)initWithKeyChainServiceName:(NSString*)serviceName userDefaults:(NSUserDefaults*)userDefaults serverCaller:(id<ServerCaller>)serverCaller;
 -(BOOL)setLoggedInUser:(User*)user error:(NSError**)error;
 -(User*)getLoggedInUserWithError:(NSError**)error;
 -(void)deleteLoggedInUser;

@@ -11,6 +11,7 @@
 #import <RestKit/Testing.h>
 #import "RKObjectManagerHelper.h"
 #import "Loot.h"
+#import "Report.h"
 
 @interface RKObjectMapperInitializerTests : XCTestCase
 -(RKResponseDescriptor*)getResponseDescriptorByPathPattern:(NSString*)pathPattern onObjectManager:(RKObjectManager*)objectManager;
@@ -21,8 +22,12 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
 static NSString* const bundleIdentifier = @"ch.hsr.lootrTests";
 static NSString* const lootsKeyPath = @"loots";
 static NSString* const contentsKeyPath = @"contents";
+static NSString* const usersKeyPath = @"users";
+static NSString* const reportsKeyPath = @"reports";
 static NSString* const lootsListJsonFileName = @"lootList.json";
 static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
+static NSString* const usersSingleFileName = @"usersSingle.json";
+static NSString* const reportSingleFileName = @"reportsSingle.json";
 
 - (void)setUp
 {
@@ -233,6 +238,52 @@ static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
     XCTAssertTrue([test evaluate], @"thumb Mapping failed");
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"dateCreated" destinationKeyPath:@"created"]];
     XCTAssertTrue([test evaluate], @"dateCreated Mapping failed");
+}
+
+-(void)testUserMapping
+{
+    //given
+    User* aUser = [User new];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:usersSingleFileName];
+    id parsedUsers = [parsedJSON objectForKey:usersKeyPath];
+    
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/users/login";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    RKObjectMapping* usersMapping = (RKObjectMapping*) responseDescriptor.mapping;
+    
+    //when
+    RKMappingTest *test = [RKMappingTest testForMapping:usersMapping sourceObject:[parsedUsers firstObject] destinationObject:aUser];
+    //then
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"username" destinationKeyPath:@"userName"]];
+    XCTAssertTrue([test evaluate], @"username Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"email" destinationKeyPath:@"email"]];
+    XCTAssertTrue([test evaluate], @"email Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"password" destinationKeyPath:@"passWord"]];
+    XCTAssertTrue([test evaluate], @"password Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"token" destinationKeyPath:@"token"]];
+    XCTAssertTrue([test evaluate], @"token Mapping failed");
+}
+
+-(void)testReportMapping
+{
+    //given
+    Report* aReport = [Report new];
+    id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:reportSingleFileName];
+    id parsedReports = [parsedJSON objectForKey:reportsKeyPath];
+    
+    NSString* pathPatternUnderTest = @"/lootrserver/api/v1/reports";
+    RKObjectManager* objectManager = [RKObjectManager sharedManager];
+    RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
+    RKObjectMapping* reportsMapping = (RKObjectMapping*) responseDescriptor.mapping;
+    
+    //when
+    RKMappingTest *test = [RKMappingTest testForMapping:reportsMapping sourceObject:[parsedReports firstObject] destinationObject:aReport];
+    //then
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"purpose" destinationKeyPath:@"purpose"]];
+    XCTAssertTrue([test evaluate], @"purpose Mapping failed");
+    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"reportTime" destinationKeyPath:@"reportTime"]];
+    XCTAssertTrue([test evaluate], @"reportTime Mapping failed");
 }
 
 @end

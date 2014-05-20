@@ -1,0 +1,15 @@
+{
+    "reports": [
+        {
+            "id": 3,
+            "reportTime": "2014-03-23T21:30:10.178",
+            "purpose": "copyright bilder",
+            "loot": {
+                "id": 3
+            },
+            "creator": {
+                "username": "Fotostudio Brünzli"
+            }
+        }
+    ]
+}
