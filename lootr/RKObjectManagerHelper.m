@@ -98,6 +98,7 @@ static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
     RKResponseDescriptor* lootsByCountResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:lootsMapping method:RKRequestMethodGET pathPattern:lootsByCountPathPattern keyPath:@"loots" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* userResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:userMapping method:RKRequestMethodPOST pathPattern:usersLoginPathPattern keyPath:@"users" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     RKResponseDescriptor* reportResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:reportMapping method:RKRequestMethodPOST pathPattern:reportsPathPattern keyPath:@"reports" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor* contentResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:contentMapping method:RKRequestMethodPOST pathPattern:contentsPathPattern keyPath:@"contents" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     
     [objectManager addResponseDescriptor:lootsByDistanceResponseDescriptor];
     [objectManager addResponseDescriptor:lootsByIdResponseDescriptor];
@@ -105,6 +106,7 @@ static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
     [objectManager addResponseDescriptor:lootsByCountResponseDescriptor];
     [objectManager addResponseDescriptor:userResponseDescriptor];
     [objectManager addResponseDescriptor:reportResponseDescriptor];
+    [objectManager addResponseDescriptor:contentResponseDescriptor];
     
     RKRequestDescriptor* lootPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[lootsPostMapping inverseMapping] objectClass:[Loot class] rootKeyPath:@"loots" method:RKRequestMethodPOST];
     RKRequestDescriptor* userPostRequestDescriptor = [RKRequestDescriptor requestDescriptorWithMapping:[userPostMapping inverseMapping] objectClass:[User class] rootKeyPath:@"users" method:RKRequestMethodPOST];
