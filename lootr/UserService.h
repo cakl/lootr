@@ -21,5 +21,4 @@
 -(User*)getLoggedInUserWithError:(NSError**)error;
 -(void)deleteLoggedInUser;
 -(void)loginUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure;
--(void)logoutUser:(User*)user;
 @end

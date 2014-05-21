@@ -10,6 +10,7 @@
 #import "UserService.h"
 #import <SSKeychain.h>
 #import "User.h"
+#import "Errors.h"
 
 @interface UserServiceTest : XCTestCase
 @property (nonatomic, strong) UserService* userService;
@@ -40,6 +41,7 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
 -(void)resetUserDefaults
 {
     [self.userDefaults removeObjectForKey:@"username"];
+    [self.userDefaults removeObjectForKey:@"email"];
 }
 
 -(void)resetKeyChain
@@ -51,7 +53,7 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     }];
 }
 
-- (void)testSetLoggedInUser
+- (void)testSetLoggedInUserSuccess
 {
     //given
     User* mario = [User new];
@@ -64,12 +66,26 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     XCTAssertTrue(returnValue, @"set logged in user failed");
 }
 
--(void)testGetLoggedInUserWithNoUserSet
+- (void)testSetLoggedInUserWithNoUsernameAndNoPasswortFail
+{
+    //given
+    User* mario = [User new];
+    NSError* error = nil;
+    //when
+    BOOL returnValue = [self.userService setLoggedInUser:mario error:&error];
+    //then
+    XCTAssertNotNil(error, @"should return an error");
+    XCTAssertTrue(([error code] == userServiceInvalidArgumentError), @"retuning wrong error code");
+    XCTAssertFalse(returnValue, @"set empty user succeeded");
+}
+
+-(void)testGetLoggedInUserWithNoUserSetFail
 {
     NSError* error = nil;
     User* nilUser = [self.userService getLoggedInUserWithError:&error];
     XCTAssertNotNil(error, @"No Error thrown while no user exists");
-    XCTAssertNil(nilUser, @"User is not nil");
+    XCTAssertNil(nilUser, @"user should be nil");
+    XCTAssertTrue(([error code] == userServiceUserRecoveryError), @"retuning wrong error code");
 }
 
 //-(void)testDeleteLoggedInUser{
@@ -89,7 +105,7 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
 //    XCTAssertNil([self.userDefaults objectForKey:@"username"], @"deleting username in userdefaults failed");
 //}
 
--(void)testSetAndGetUser
+-(void)testSetAndGetUserSuccess
 {
     //given
     User* mario = [User new];
@@ -106,6 +122,22 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     XCTAssertTrue([gotMario.token isEqualToString:@"234324nj23n4b23j4b213j4bjbh213v4"], @"different tokens");
 }
 
+-(void)testAuthorizationHeaderSetAndGetSuccess
+{
+    //given
+    User* mario = [User new];
+    mario.userName = @"mario";
+    mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
+    NSError* setError = nil;
+    NSError* getError = nil;
+    //when
+    [self.userService setLoggedInUser:mario error:&setError];
+    User* gotMario = [self.userService getLoggedInUserWithError:&getError];
+    //then
+    XCTAssertEqual(gotMario.userName, @"mario", @"different usernames");
+    XCTAssertTrue([gotMario.userName isEqualToString:@"mario"], @"different usernames");
+    XCTAssertTrue([gotMario.token isEqualToString:@"234324nj23n4b23j4b213j4bjbh213v4"], @"different tokens");
+}
 
 
 @end

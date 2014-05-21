@@ -1,0 +1,14 @@
+/* 
+  Errors.strings
+  lootr
+
+  Created by Sebastian Bock on 21.05.14.
+  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
+
+  Add Error Code and the following suffixes:
+    _d for error description
+    _rs for error recovery suggestion
+    _fr for error failure reason
+*/
+"1000_d" = "Failed to set a user, no username or token provided";
+"1001_d" = "Failed to recover logged in user";

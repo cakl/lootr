@@ -42,6 +42,8 @@
 		27AEF43F18E45ADD004C18A9 /* RKObjectManagerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */; };
 		27B7CF64192AF27200E9F3C2 /* reportsSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B7CF63192AF27200E9F3C2 /* reportsSingle.json */; };
 		27B7CF68192AF2A400E9F3C2 /* usersSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 27B7CF67192AF2A400E9F3C2 /* usersSingle.json */; };
+		27BEC13E192C0D6800720A00 /* Errors.m in Sources */ = {isa = PBXBuildFile; fileRef = 27BEC13D192C0D6800720A00 /* Errors.m */; };
+		27BEC141192C12CF00720A00 /* Errors.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27BEC143192C12CF00720A00 /* Errors.strings */; };
 		27C7BF3C18D7498100761C84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3B18D7498100761C84 /* Foundation.framework */; };
 		27C7BF3E18D7498100761C84 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3D18D7498100761C84 /* CoreGraphics.framework */; };
 		27C7BF4018D7498100761C84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3F18D7498100761C84 /* UIKit.framework */; };
@@ -147,6 +149,9 @@
 		27AEF43E18E45ADD004C18A9 /* RKObjectManagerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RKObjectManagerHelper.m; sourceTree = "<group>"; };
 		27B7CF63192AF27200E9F3C2 /* reportsSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = reportsSingle.json; path = Fixtures/reportsSingle.json; sourceTree = "<group>"; };
 		27B7CF67192AF2A400E9F3C2 /* usersSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersSingle.json; path = Fixtures/usersSingle.json; sourceTree = "<group>"; };
+		27BEC13C192C0D6800720A00 /* Errors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Errors.h; sourceTree = "<group>"; };
+		27BEC13D192C0D6800720A00 /* Errors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Errors.m; sourceTree = "<group>"; };
+		27BEC142192C12CF00720A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Errors.strings; sourceTree = "<group>"; };
 		27C7BF3818D7498100761C84 /* lootr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lootr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C7BF3B18D7498100761C84 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		27C7BF3D18D7498100761C84 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -290,6 +295,8 @@
 				2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */,
 				27DAA9EF19181605006B329D /* UserService.h */,
 				27DAA9F019181605006B329D /* UserService.m */,
+				27BEC13C192C0D6800720A00 /* Errors.h */,
+				27BEC13D192C0D6800720A00 /* Errors.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -443,6 +450,7 @@
 				27FD6FDA19291C5300734F11 /* Images.xcassets */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
 				2761D845192A90F100386D8D /* Localizable.strings */,
+				27BEC143192C12CF00720A00 /* Errors.strings */,
 			);
 			path = lootr;
 			sourceTree = "<group>";
@@ -582,6 +590,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2761D843192A90F100386D8D /* Localizable.strings in Resources */,
+				27BEC141192C12CF00720A00 /* Errors.strings in Resources */,
 				27C7BF7E18D749F800761C84 /* UNIA.gpx in Resources */,
 				27FD6FDB19291C5300734F11 /* Images.xcassets in Resources */,
 				27346CE9190DA3100085B556 /* Storyboard.storyboard in Resources */,
@@ -651,6 +660,7 @@
 				274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */,
 				27C7BF4E18D7498100761C84 /* AppDelegate.m in Sources */,
 				27C7BF7C18D749B600761C84 /* User.m in Sources */,
+				27BEC13E192C0D6800720A00 /* Errors.m in Sources */,
 				272758C318E74018003939AA /* RestKitServerCaller.m in Sources */,
 				27A7731D18F4CF790041EE05 /* Content.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
@@ -706,6 +716,14 @@
 				2761D844192A90F100386D8D /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		27BEC143192C12CF00720A00 /* Errors.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27BEC142192C12CF00720A00 /* en */,
+			);
+			name = Errors.strings;
 			sourceTree = "<group>";
 		};
 		27C7BF4618D7498100761C84 /* InfoPlist.strings */ = {

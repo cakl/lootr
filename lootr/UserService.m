@@ -10,6 +10,7 @@
 #import "ServerCallerFactory.h"
 #import <SDWebImageDownloader.h>
 #import <SDWebImageManager.h>
+#import "Errors.h"
 
 @interface UserService ()
 @property (nonatomic, strong) id<ServerCaller> serverCaller;
@@ -19,6 +20,8 @@
 static NSString *const userDefaultsUserNameKey = @"username";
 static NSString *const userDefaultsEmailKey = @"email";
 static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
+
+#pragma mark - Initialization
 
 -(id <ServerCaller>)serverCaller{
     if (_serverCaller == nil)
@@ -44,6 +47,8 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
     return self;
 }
 
+#pragma mark - Write User
+
 -(BOOL)setLoggedInUser:(User*)user error:(NSError**)error{
     if(user.token && user.userName){
         [SSKeychain setPassword:user.token forService:self.keyChainServiceName account:user.userName error:error];
@@ -54,9 +59,11 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
             return YES;
         }
     }
-    *error = [NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
+    *error = [Errors produceErrorWithErrorCode:userServiceInvalidArgumentError withUnderlyingError:nil]; //[NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
     return NO;
 }
+
+#pragma mark - Read User
 
 -(User*)getLoggedInUserWithError:(NSError**)error{
     NSString* userName = [self.userDefaults objectForKey:userDefaultsUserNameKey];
@@ -71,9 +78,19 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
             return loggedInUser;
         }
     }
-    *error = [NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
+    *error = [Errors produceErrorWithErrorCode:userServiceUserRecoveryError withUnderlyingError:nil];
     return nil;
 }
+
+#pragma mark - Delete User
+
+-(void)deleteLoggedInUser{
+    [self.userDefaults removeObjectForKey:userDefaultsUserNameKey];
+    [self.userDefaults removeObjectForKey:userDefaultsEmailKey];
+    [self clearKeyChain];
+}
+
+#pragma mark - Helpers
 
 -(NSString*)getPasswordForUsername:(NSString*)userName error:(NSError**)error{
     return [SSKeychain passwordForService:self.keyChainServiceName account:userName error:error];
@@ -87,12 +104,6 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
     }];
 }
 
--(void)deleteLoggedInUser{
-    [self.userDefaults removeObjectForKey:userDefaultsUserNameKey];
-    [self.userDefaults removeObjectForKey:userDefaultsEmailKey];
-    [self clearKeyChain];
-}
-
 -(void)setAuthorizationToken:(NSString*)token
 {
     [self.serverCaller setAuthorizationToken:token];
@@ -104,6 +115,8 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
     [self.serverCaller clearAuthorizationToken];
     [[SDWebImageManager.sharedManager imageDownloader] setValue:@"" forHTTPHeaderField:AFNetworkingAuthorizationHeaderKey];
 }
+
+#pragma mark - Server Login
 
 -(void)loginUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure{
     [self.serverCaller postUser:user onSuccess:^(User *user) {
@@ -120,9 +133,6 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
     }];
 }
 
--(void)logoutUser:(User*)user
-{
-    [self deleteLoggedInUser];
-}
+
 
 @end
