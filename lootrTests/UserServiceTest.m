@@ -11,6 +11,10 @@
 #import <SSKeychain.h>
 #import "User.h"
 #import "Errors.h"
+#define HC_SHORTHAND
+#import <OCHamcrest/OCHamcrest.h>
+#define MOCKITO_SHORTHAND
+#import <OCMockito/OCMockito.h>
 
 @interface UserServiceTest : XCTestCase
 @property (nonatomic, strong) UserService* userService;
@@ -27,14 +31,14 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
 - (void)setUp
 {
     [super setUp];
-    NSUserDefaults* userDefaults = [[NSUserDefaults alloc] initWithSuiteName:userDefaultsSuiteName];
-    self.userService = [[UserService alloc] initWithKeyChainServiceName:keyChainServiceName userDefaults:userDefaults];
+    self.userDefaults = [[NSUserDefaults alloc] initWithSuiteName:userDefaultsSuiteName];
+    self.userService = [[UserService alloc] initWithKeyChainServiceName:keyChainServiceName userDefaults:self.userDefaults];
 }
 
 - (void)tearDown
 {
     [self resetUserDefaults];
-    [self resetKeyChain];
+    [self resetKeyChain:keyChainServiceName];
     [super tearDown];
 }
 
@@ -44,7 +48,7 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     [self.userDefaults removeObjectForKey:@"email"];
 }
 
--(void)resetKeyChain
+-(void)resetKeyChain:(NSString*)keyChainServiceName
 {
     NSArray* accounts = [SSKeychain allAccounts];
     [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -124,19 +128,22 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
 
 -(void)testAuthorizationHeaderSetAndGetSuccess
 {
+    static NSString *const keyChainServiceName = @"temporaryKeyChain";
     //given
+    id<ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
+    UserService* aUserService = [[UserService alloc] initWithKeyChainServiceName:keyChainServiceName userDefaults:self.userDefaults serverCaller:serverCaller];
+    
     User* mario = [User new];
     mario.userName = @"mario";
     mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
     NSError* setError = nil;
     NSError* getError = nil;
     //when
-    [self.userService setLoggedInUser:mario error:&setError];
-    User* gotMario = [self.userService getLoggedInUserWithError:&getError];
+    [aUserService setLoggedInUser:mario error:&setError];
+    [aUserService getLoggedInUserWithError:&getError];
     //then
-    XCTAssertEqual(gotMario.userName, @"mario", @"different usernames");
-    XCTAssertTrue([gotMario.userName isEqualToString:@"mario"], @"different usernames");
-    XCTAssertTrue([gotMario.token isEqualToString:@"234324nj23n4b23j4b213j4bjbh213v4"], @"different tokens");
+    [verify(serverCaller) setAuthorizationToken:mario.token];
+    [self resetKeyChain:keyChainServiceName];
 }
 
 
