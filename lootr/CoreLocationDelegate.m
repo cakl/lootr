@@ -21,6 +21,8 @@
 static const double updateDistance = 20.0;
 static const double geocodeUpdateDistance = 1000;
 
+#pragma mark - Initialization
+
 +(CoreLocationDelegate*)sharedInstance
 {
     static CoreLocationDelegate* sharedInstance;
@@ -44,6 +46,21 @@ static const double geocodeUpdateDistance = 1000;
     return self;
 }
 
+- (instancetype)initWithLocationManager:(CLLocationManager*)locationManager geocoder:(CLGeocoder*)geocoder
+{
+    self = [super init];
+    if (self) {
+        self.locationManager = locationManager;
+        self.locationManager.delegate = self;
+        self.locationManager.distanceFilter = updateDistance;
+        self.geocoder = geocoder;
+        self.lastLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
+    }
+    return self;
+}
+
+#pragma mark - CoreLocation Messages
+
 -(void)startUpdatingLocation{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -54,6 +71,8 @@ static const double geocodeUpdateDistance = 1000;
 -(void)stopUpdatingLocation{
     [self.locationManager stopUpdatingLocation];
 }
+
+#pragma mark - Getting Location Info
 
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error{
     if(!self.locationManager.location){
@@ -79,6 +98,8 @@ static const double geocodeUpdateDistance = 1000;
     return (CLLocationManager.authorizationStatus == kCLAuthorizationStatusAuthorized);
 }
 
+#pragma mark - CoreLocation Delegate Messages
+
 -(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
@@ -89,6 +110,8 @@ static const double geocodeUpdateDistance = 1000;
         self.lastLocation = self.location;
     }
 }
+
+#pragma mark - Geocode Helper
 
 -(void)geocodeCityByLocation:(CLLocation*)location
 {
