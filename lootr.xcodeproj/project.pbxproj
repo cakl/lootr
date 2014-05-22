@@ -27,6 +27,8 @@
 		274C941818E8EF15006A50F7 /* Loot+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 274C941718E8EF15006A50F7 /* Loot+Annotation.m */; };
 		27514508191AAF6100846E36 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27514507191AAF6100846E36 /* RootViewController.m */; };
 		2751450C191AB56C00846E36 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2751450B191AB56C00846E36 /* TabBarViewController.m */; };
+		27549009192E8A4B009D5490 /* LocationDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27549008192E8A4B009D5490 /* LocationDelegateTests.m */; };
+		2754900F192E97BE009D5490 /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2754900E192E97BE009D5490 /* TestsAppDelegate.m */; };
 		2761D843192A90F100386D8D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2761D845192A90F100386D8D /* Localizable.strings */; };
 		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
 		27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27707C5E18F994240018DC10 /* ServerCallerFactory.m */; };
@@ -124,6 +126,9 @@
 		27514507191AAF6100846E36 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		2751450A191AB56C00846E36 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
 		2751450B191AB56C00846E36 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
+		27549008192E8A4B009D5490 /* LocationDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDelegateTests.m; sourceTree = "<group>"; };
+		2754900D192E97BE009D5490 /* TestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsAppDelegate.h; sourceTree = "<group>"; };
+		2754900E192E97BE009D5490 /* TestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsAppDelegate.m; sourceTree = "<group>"; };
 		2761D844192A90F100386D8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
 		27707C5D18F994240018DC10 /* ServerCallerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFactory.h; sourceTree = "<group>"; };
@@ -451,6 +456,8 @@
 				27C7BF4418D7498100761C84 /* Supporting Files */,
 				2761D845192A90F100386D8D /* Localizable.strings */,
 				27BEC143192C12CF00720A00 /* Errors.strings */,
+				2754900D192E97BE009D5490 /* TestsAppDelegate.h */,
+				2754900E192E97BE009D5490 /* TestsAppDelegate.m */,
 			);
 			path = lootr;
 			sourceTree = "<group>";
@@ -478,6 +485,7 @@
 				27CF77BF18F22EDA0000C91C /* MKMapViewMock.h */,
 				27CF77C018F22EDA0000C91C /* MKMapViewMock.m */,
 				27DAA9F619182773006B329D /* UserServiceTest.m */,
+				27549008192E8A4B009D5490 /* LocationDelegateTests.m */,
 			);
 			path = lootrTests;
 			sourceTree = "<group>";
@@ -678,6 +686,7 @@
 				272F805A1900577E00D1A0AB /* LootContentViewController.m in Sources */,
 				274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */,
 				27FBCFA3190FE38200677436 /* CoreLocationDelegate.m in Sources */,
+				2754900F192E97BE009D5490 /* TestsAppDelegate.m in Sources */,
 				27F316131910319B0066D304 /* LocationService.m in Sources */,
 				279105521920418B00B1B44E /* ServiceCheckViewController.m in Sources */,
 				2751450C191AB56C00846E36 /* TabBarViewController.m in Sources */,
@@ -692,6 +701,7 @@
 			files = (
 				2739454318E37ABB00677E60 /* RKObjectMapperInitializerTests.m in Sources */,
 				2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */,
+				27549009192E8A4B009D5490 /* LocationDelegateTests.m in Sources */,
 				27DAA9F719182773006B329D /* UserServiceTest.m in Sources */,
 				27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */,
 				272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */,
