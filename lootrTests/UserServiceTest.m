@@ -11,6 +11,11 @@
 #import <SSKeychain.h>
 #import "User.h"
 #import "Errors.h"
+#import "RKObjectManagerHelper.h"
+#import "RestKitServerCaller.h"
+#import <RestKit/RestKit.h>
+#import <RestKit/Testing.h>
+#import "ServerCaller.h"
 #define HC_SHORTHAND
 #import <OCHamcrest/OCHamcrest.h>
 #define MOCKITO_SHORTHAND
@@ -19,26 +24,31 @@
 @interface UserServiceTest : XCTestCase
 @property (nonatomic, strong) UserService* userService;
 @property (nonatomic, strong) NSUserDefaults* userDefaults;
+@property (nonatomic, strong) id<ServerCaller> serverCaller;
 @end
 
 @implementation UserServiceTest
 static NSString* const keyChainServiceName = @"lootrKeyChainTest";
 static NSString* const userDefaultsSuiteName = @"testUserDefaults";
-
-//TODO: describe in SAD why I'm using white tests: Keychain access is static and so its not easy mockable. best way is a white system test in my opinion. test exactly the functionality used in upper layers.
-//TODO: Error handling in UserService and test this error handling
+static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
 
 - (void)setUp
 {
     [super setUp];
+    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    RKObjectManager* objectManager = [RKTestFactory objectManager];
+    [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
+    self.serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
     self.userDefaults = [[NSUserDefaults alloc] initWithSuiteName:userDefaultsSuiteName];
-    self.userService = [[UserService alloc] initWithKeyChainServiceName:keyChainServiceName userDefaults:self.userDefaults];
+    self.userService = [[UserService alloc] initWithKeyChainServiceName:keyChainServiceName userDefaults:self.userDefaults serverCaller:self.serverCaller];
 }
 
 - (void)tearDown
 {
     [self resetUserDefaults];
     [self resetKeyChain:keyChainServiceName];
+    [RKTestFactory tearDown];
+    self.serverCaller = nil;
     [super tearDown];
 }
 
@@ -92,22 +102,22 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     XCTAssertTrue(([error code] == userServiceUserRecoveryError), @"retuning wrong error code");
 }
 
-//-(void)testDeleteLoggedInUser{
-//    //given
-//    User* mario = [User new];
-//    mario.userName = @"mario";
-//    mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
-//    NSError* error1 = nil;
-//    [self.userService setLoggedInUser:mario error:&error1];
-//    if(error1) XCTFail(@"failed saving user");
-//    //when
-//    NSError* error = nil;
-//    [self.userService deleteLoggedInUser];
-//    //then
-//    XCTAssertNil(error, @"error occured deleting user");
-//    XCTAssertEqual([[SSKeychain allAccounts] count], 0, @"deleting keychain failed");
-//    XCTAssertNil([self.userDefaults objectForKey:@"username"], @"deleting username in userdefaults failed");
-//}
+-(void)testDeleteLoggedInUserSuccess{
+    //given
+    User* mario = [User new];
+    mario.userName = @"mario";
+    mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
+    NSError* error1 = nil;
+    [self.userService setLoggedInUser:mario error:&error1];
+    if(error1) XCTFail(@"failed saving user");
+    //when
+    NSError* error = nil;
+    [self.userService deleteLoggedInUser];
+    //then
+    XCTAssertNil(error, @"error occured deleting user");
+    XCTAssertEqual([[SSKeychain allAccounts] count], 0, @"deleting keychain failed");
+    XCTAssertNil([self.userDefaults objectForKey:@"username"], @"deleting username in userdefaults failed");
+}
 
 -(void)testSetAndGetUserSuccess
 {
@@ -121,7 +131,6 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     [self.userService setLoggedInUser:mario error:&setError];
     User* gotMario = [self.userService getLoggedInUserWithError:&getError];
     //then
-    XCTAssertEqual(gotMario.userName, @"mario", @"different usernames");
     XCTAssertTrue([gotMario.userName isEqualToString:@"mario"], @"different usernames");
     XCTAssertTrue([gotMario.token isEqualToString:@"234324nj23n4b23j4b213j4bjbh213v4"], @"different tokens");
 }
@@ -144,6 +153,41 @@ static NSString* const userDefaultsSuiteName = @"testUserDefaults";
     //then
     [verify(serverCaller) setAuthorizationToken:mario.token];
     [self resetKeyChain:keyChainServiceName];
+}
+
+-(void)testClearKeyChainSuccess{
+    //given
+    User* mario = [User new];
+    mario.userName = @"mario";
+    mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
+    NSError* error = nil;
+    //when
+    [self.userService setLoggedInUser:mario error:&error];
+    if(error) XCTFail(@"failed saving user");
+    NSArray* accounts = [SSKeychain allAccounts];
+    [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString* account = [obj objectForKey:@"acct"];
+        [SSKeychain deletePasswordForService:keyChainServiceName account:account];
+    }];
+    //then
+    XCTAssertEqual([[SSKeychain allAccounts] count], 0, @"clearing keychain failed");
+}
+
+-(void)testLoginUserSuccess{
+    //given
+    User* mario = [User new];
+    mario.userName = @"mario";
+    mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
+    //when
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self.userService loginUser:mario onSuccess:^(User *user) {
+        XCTAssertTrue([user.userName isEqualToString:mario.userName], @"login return different username");
+        dispatch_semaphore_signal(semaphore);
+    } onFailure:^(NSError *error) {
+        XCTFail(@"login user failed");
+        dispatch_semaphore_signal(semaphore);
+    }];
+    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
 
 
