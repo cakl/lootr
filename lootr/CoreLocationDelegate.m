@@ -7,6 +7,7 @@
 //
 
 #import "CoreLocationDelegate.h"
+#import "Errors.h"
 
 @interface CoreLocationDelegate ()
 @property (strong, nonatomic) CLLocationManager* locationManager;
@@ -17,8 +18,6 @@
 @end
 
 @implementation CoreLocationDelegate
-static NSString* errorDomain = @"ch.hsr.lootr";
-static const NSInteger errorCode = 1000;
 static const double updateDistance = 20.0;
 static const double geocodeUpdateDistance = 1000;
 
@@ -58,7 +57,7 @@ static const double geocodeUpdateDistance = 1000;
 
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error{
     if(!self.locationManager.location){
-        *error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:nil];
+        *error = [Errors produceErrorWithErrorCode:locationDeterminationError withUnderlyingError:nil];
         return nil;
     }
     if(!self.location){
@@ -70,7 +69,7 @@ static const double geocodeUpdateDistance = 1000;
 
 -(NSString*)getCurrentCityWithError:(NSError**)error{
     if(!self.city){
-        *error = [NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
+        *error = [Errors produceErrorWithErrorCode:geocodeDeterminationError withUnderlyingError:nil];
         return nil;
     }
     return self.city;

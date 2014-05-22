@@ -12,3 +12,5 @@
 */
 "1000_d" = "Failed to set a user, no username or token provided";
 "1001_d" = "Failed to recover logged in user";
+"1002_d" = "Failed to determine the current location";
+"1003_d" = "Failed to determine the name of the current location";
