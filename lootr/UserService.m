@@ -101,7 +101,8 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
     NSArray* accounts = [SSKeychain allAccounts];
     [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString* account = [obj objectForKey:@"acct"];
-        [SSKeychain deletePasswordForService:self.keyChainServiceName account:account];
+        NSString* service = [obj objectForKey:@"svce"];
+        [SSKeychain deletePasswordForService:service account:account];
     }];
 }
 
