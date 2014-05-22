@@ -63,7 +63,8 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     NSArray* accounts = [SSKeychain allAccounts];
     [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSString* account = [obj objectForKey:@"acct"];
-        [SSKeychain deletePasswordForService:keyChainServiceName account:account];
+        NSString* service = [obj objectForKey:@"svce"];
+        [SSKeychain deletePasswordForService:service account:account];
     }];
 }
 
