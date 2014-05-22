@@ -88,6 +88,7 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
     [self.userDefaults removeObjectForKey:userDefaultsUserNameKey];
     [self.userDefaults removeObjectForKey:userDefaultsEmailKey];
     [self clearKeyChain];
+    [self clearAuthorizationToken];
 }
 
 #pragma mark - Helpers
