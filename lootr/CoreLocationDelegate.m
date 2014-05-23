@@ -81,7 +81,7 @@ static const double geocodeUpdateDistance = 1000;
     }
     if(!self.location){
         [self.locationManager startUpdatingLocation];
-        return self.locationManager.location;
+        _location = self.locationManager.location;
     }
     return self.location;
 }

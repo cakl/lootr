@@ -70,15 +70,38 @@
 {
     //given
     CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
-    CLLocationManager* locationManager = mock([CLLocationManager class]);
-    CLGeocoder* geocoder = mock([CLGeocoder class]);
-    [given([locationManager location]) willReturn:aLocation];
-    CoreLocationDelegate* locationDelegate = [[CoreLocationDelegate alloc] initWithLocationManager:locationManager geocoder:geocoder];
+    [given([self.locationManager location]) willReturn:aLocation];
     NSError* error = nil;
     //when
-    CLLocation* returnedLocation = [locationDelegate getCurrentLocationWithError:&error];
+    CLLocation* returnedLocation = [self.locationDelegate getCurrentLocationWithError:&error];
     //then
     XCTAssertEqualObjects(returnedLocation, aLocation, @"should be the same locations");
+}
+
+-(void)testGetCurrentLocationWithSettingLocationSuccess
+{
+    //given
+    CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
+    [given([self.locationManager location]) willReturn:aLocation];
+    NSError* error = nil;
+    //when
+    [self.locationDelegate getCurrentLocationWithError:&error];
+    //then
+    [verify(self.locationManager) startUpdatingLocation];
+}
+
+-(void)testGetCurrentLocationWithUpdatedLocationSuccess
+{
+    //given
+    CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
+    CLLocation* anotherLocation = [[CLLocation alloc] initWithLatitude:42.0 longitude:7.0];
+    [given([self.locationManager location]) willReturn:aLocation];
+    [self.locationDelegate locationManager:self.locationManager didUpdateLocations:@[anotherLocation]];
+    NSError* error = nil;
+    //when
+    CLLocation* returnedLocation = [self.locationDelegate getCurrentLocationWithError:&error];
+    //then
+    XCTAssertEqualObjects(returnedLocation, anotherLocation, @"should be the same locations");
 }
 
 
