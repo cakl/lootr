@@ -120,7 +120,7 @@ static const double geocodeUpdateDistance = 1000;
             if(error){
                 self.city = nil;
             } else {
-                self.city = [[placemarks firstObject] locality];
+                self.city = [[placemarks firstObject] subLocality];
             }
         }];
     }
