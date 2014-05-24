@@ -117,7 +117,7 @@
     XCTAssertFalse(isCurrentLocationInRadiusOfLoot, @"Current Location should not be in radius of loot");
 }
 
--(void)testIsCurrentLocationInRadiusOfLootWithNoLootFailure
+-(void)testIsCurrentLocationInRadiusOfLootWithNilLootFailure
 {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
@@ -128,6 +128,24 @@
     BOOL isCurrentLocationInRadiusOfLoot = [locationService isCurrentLocationInRadiusOfLoot:nil];
     //then
     XCTAssertFalse(isCurrentLocationInRadiusOfLoot, @"Current Location should not be in radius of nil loot");
+}
+
+-(void)testIsCurrentLocationInRadiusOfLootWithNilCurrentLocationFailure
+{
+    //given
+    CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:nil];
+    LocationService* locationService = [[LocationService alloc] initWithLocationDelegate:locationDelegateStub];
+    Coordinate* lootCordinate = [[Coordinate alloc] init];
+    lootCordinate.latitude = [NSNumber numberWithDouble:46.957896];
+    lootCordinate.longitude = [NSNumber numberWithDouble:7.435332];
+    Loot* loot = [[Loot alloc] init];
+    loot.coord = lootCordinate;
+    loot.radius = [NSNumber numberWithInt:AccuracyNear];
+    
+    //when
+    BOOL isCurrentLocationInRadiusOfLoot = [locationService isCurrentLocationInRadiusOfLoot:loot];
+    //then
+    XCTAssertFalse(isCurrentLocationInRadiusOfLoot, @"Nil Location can not be in radius of loot");
 }
 
 @end
