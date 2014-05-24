@@ -15,6 +15,7 @@
 #import <OCMockito/OCMockito.h>
 
 @interface LocationServiceTests : XCTestCase
+@property (nonatomic, strong) Loot* loot;
 @end
 
 @implementation LocationServiceTests
@@ -22,11 +23,16 @@
 - (void)setUp
 {
     [super setUp];
+    Coordinate* lootCordinate = [[Coordinate alloc] init];
+    lootCordinate.latitude = [NSNumber numberWithDouble:47.223313];
+    lootCordinate.longitude = [NSNumber numberWithDouble:8.817265];
+    self.loot = [[Loot alloc] init];
+    self.loot.coord = lootCordinate;
 }
 
 - (void)tearDown
 {
-    
+    self.loot = nil;
     [super tearDown];
 }
 
@@ -36,14 +42,9 @@
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
     LocationService* locationService = [[LocationService alloc] initWithLocationDelegate:locationDelegateStub];
-    Coordinate* lootCordinate = [[Coordinate alloc] init];
-    lootCordinate.latitude = [NSNumber numberWithDouble:47.223313];
-    lootCordinate.longitude = [NSNumber numberWithDouble:8.817265];
-    Loot* loot = [[Loot alloc] init];
-    loot.coord = lootCordinate;
 
     //when
-    DistanceTreshold distanceThreshold = [locationService getDistanceThresholdfromCurrentLocationToLoot:loot];
+    DistanceTreshold distanceThreshold = [locationService getDistanceThresholdfromCurrentLocationToLoot:self.loot];
     //then
     XCTAssertTrue(distanceThreshold == DistanceTresholdFiveMeters, @"Wrong distance threshold returned");
 }
@@ -54,14 +55,9 @@
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:46.957896 longitude:7.435332];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
     LocationService* locationService = [[LocationService alloc] initWithLocationDelegate:locationDelegateStub];
-    Coordinate* lootCordinate = [[Coordinate alloc] init];
-    lootCordinate.latitude = [NSNumber numberWithDouble:47.223313];
-    lootCordinate.longitude = [NSNumber numberWithDouble:8.817265];
-    Loot* loot = [[Loot alloc] init];
-    loot.coord = lootCordinate;
     
     //when
-    DistanceTreshold distanceThreshold = [locationService getDistanceThresholdfromCurrentLocationToLoot:loot];
+    DistanceTreshold distanceThreshold = [locationService getDistanceThresholdfromCurrentLocationToLoot:self.loot];
     //then
     XCTAssertTrue(distanceThreshold == DistanceTresholdMoreThanFiveHundredMeters, @"Wrong distance threshold returned");
 }
@@ -85,15 +81,10 @@
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
     LocationService* locationService = [[LocationService alloc] initWithLocationDelegate:locationDelegateStub];
-    Coordinate* lootCordinate = [[Coordinate alloc] init];
-    lootCordinate.latitude = [NSNumber numberWithDouble:47.223313];
-    lootCordinate.longitude = [NSNumber numberWithDouble:8.817265];
-    Loot* loot = [[Loot alloc] init];
-    loot.coord = lootCordinate;
-    loot.radius = [NSNumber numberWithInt:AccuracyNear];
+    self.loot.radius = [NSNumber numberWithInt:AccuracyNear];
     
     //when
-    BOOL isCurrentLocationInRadiusOfLoot = [locationService isCurrentLocationInRadiusOfLoot:loot];
+    BOOL isCurrentLocationInRadiusOfLoot = [locationService isCurrentLocationInRadiusOfLoot:self.loot];
     //then
     XCTAssertTrue(isCurrentLocationInRadiusOfLoot, @"Current Location should be in radius of loot");
 }
