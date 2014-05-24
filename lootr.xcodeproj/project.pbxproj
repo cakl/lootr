@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2707D8F719116375009C8669 /* ServerCallerFacadeFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */; };
+		2724298D1930037C00AB7CE6 /* LocationServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724298C1930037C00AB7CE6 /* LocationServiceTests.m */; };
+		272429901930171100AB7CE6 /* CoreLocationDelegateStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724298F1930171100AB7CE6 /* CoreLocationDelegateStub.m */; };
 		272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758BD18E732B8003939AA /* ServerCallerTests.m */; };
 		272758C018E73886003939AA /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 272758BF18E73886003939AA /* lootSingle.json */; };
 		272758C318E74018003939AA /* RestKitServerCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758C218E74018003939AA /* RestKitServerCaller.m */; };
@@ -93,6 +95,9 @@
 		13391FF8791D4B9BB6C83794 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		2707D8F519116375009C8669 /* ServerCallerFacadeFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFacadeFactory.h; sourceTree = "<group>"; };
 		2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFacadeFactory.m; sourceTree = "<group>"; };
+		2724298C1930037C00AB7CE6 /* LocationServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationServiceTests.m; sourceTree = "<group>"; };
+		2724298E1930171100AB7CE6 /* CoreLocationDelegateStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreLocationDelegateStub.h; sourceTree = "<group>"; };
+		2724298F1930171100AB7CE6 /* CoreLocationDelegateStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreLocationDelegateStub.m; sourceTree = "<group>"; };
 		272758BD18E732B8003939AA /* ServerCallerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerTests.m; sourceTree = "<group>"; };
 		272758BF18E73886003939AA /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootSingle.json; path = Fixtures/lootSingle.json; sourceTree = "<group>"; };
 		272758C118E74018003939AA /* RestKitServerCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestKitServerCaller.h; sourceTree = "<group>"; };
@@ -241,6 +246,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		272429911930171400AB7CE6 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				2724298E1930171100AB7CE6 /* CoreLocationDelegateStub.h */,
+				2724298F1930171100AB7CE6 /* CoreLocationDelegateStub.m */,
+			);
+			name = Stubs;
+			sourceTree = "<group>";
+		};
 		2732A36118F59E7D00C2A544 /* Technical Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -486,6 +500,8 @@
 				27CF77C018F22EDA0000C91C /* MKMapViewMock.m */,
 				27DAA9F619182773006B329D /* UserServiceTest.m */,
 				27549008192E8A4B009D5490 /* LocationDelegateTests.m */,
+				2724298C1930037C00AB7CE6 /* LocationServiceTests.m */,
+				272429911930171400AB7CE6 /* Stubs */,
 			);
 			path = lootrTests;
 			sourceTree = "<group>";
@@ -705,7 +721,9 @@
 				27DAA9F719182773006B329D /* UserServiceTest.m in Sources */,
 				27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */,
 				272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */,
+				2724298D1930037C00AB7CE6 /* LocationServiceTests.m in Sources */,
 				27C7BF6718D7498200761C84 /* lootrTests.m in Sources */,
+				272429901930171100AB7CE6 /* CoreLocationDelegateStub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,6 @@
 //
 
 #import "LocationService.h"
-#import "CoreLocationDelegate.h"
 
 @interface LocationService ()
 @property (nonatomic, strong) CoreLocationDelegate* locationDelegate;
@@ -50,7 +49,7 @@
     NSError* error = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&error];
     CLLocation* lootLocation = [loot.coord asCLLocation];
-    if(currentLocation){
+    if(currentLocation && lootLocation){
         int distance = (int) [lootLocation distanceFromLocation:currentLocation];
         if(distance < DistanceTresholdFiveMeters){
             return DistanceTresholdFiveMeters;

@@ -95,7 +95,7 @@
 {
     //given
     CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
-    CLLocation* anotherLocation = [[CLLocation alloc] initWithLatitude:42.0 longitude:7.0];
+    CLLocation* anotherLocation = [[CLLocation alloc] initWithLatitude:47.224225 longitude:8.825461];
     [given([self.locationManager location]) willReturn:aLocation];
     [self.locationDelegate locationManager:self.locationManager didUpdateLocations:@[anotherLocation]];
     NSError* error = nil;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "CoreLocationDelegate.h"
 #import "Loot.h"
 
 typedef NS_ENUM(int, DistanceTreshold)
@@ -22,7 +23,7 @@ typedef NS_ENUM(int, DistanceTreshold)
 };
 
 @interface LocationService : NSObject
-
+-(instancetype)initWithLocationDelegate:(CoreLocationDelegate*)locationDelegate;
 -(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLoot:(Loot*)loot;
 -(BOOL)isCurrentLocationInRadiusOfLoot:(Loot*)loot;
 -(void)startLocationService;
