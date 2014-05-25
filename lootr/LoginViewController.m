@@ -60,6 +60,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
     User* loginUser = [User new];
     loginUser.email = self.emailTextField.text;
     loginUser.passWord = self.passwordTextField.text;
+    [self.view endEditing:YES];
     [self loginUser:loginUser];
 }
 
