@@ -11,10 +11,11 @@
 
 @interface CoreLocationDelegate : NSObject <CLLocationManagerDelegate>
 +(CoreLocationDelegate*)sharedInstance;
-- (instancetype)initWithLocationManager:(CLLocationManager*)locationManager geocoder:(CLGeocoder*)geocoder;
+-(instancetype)initWithLocationManager:(CLLocationManager*)locationManager geocoder:(CLGeocoder*)geocoder;
 -(void)startUpdatingLocation;
 -(void)stopUpdatingLocation;
 -(CLLocation*)getCurrentLocationWithError:(NSError**)error;
 -(NSString*)getCurrentCityWithError:(NSError**)error;
 -(BOOL)isAuthorized;
+
 @end

@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 
 @interface LootMapViewController : UIViewController <MKMapViewDelegate, UITabBarControllerDelegate>
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *addBarButton;
+@property (weak, nonatomic) IBOutlet MKMapView* mapView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem* addBarButton;
+
 @end

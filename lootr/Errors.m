@@ -8,12 +8,12 @@
 
 #import "Errors.h"
 
-NSString * const errorDomain = @"ch.hsr.lootr";
+NSString *const errorDomain = @"ch.hsr.lootr";
 
 @implementation Errors
 
-+(NSError*) produceErrorWithErrorCode:(int)ErrorCode withUnderlyingError:(NSError*)underlyingError{
-    NSDictionary *userInfo;
++(NSError*)produceErrorWithErrorCode:(int)ErrorCode withUnderlyingError:(NSError*)underlyingError {
+    NSDictionary* userInfo;
     if(underlyingError) {
         userInfo = @{
             NSLocalizedDescriptionKey:ERROR_DESCRIPTION(ErrorCode),

@@ -11,8 +11,9 @@
 #import "Content.h"
 
 @interface ImageViewTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *footerLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *fullImageView;
-@property (weak, nonatomic) IBOutlet FXBlurView *blurFooterView;
-@property (weak, nonatomic) IBOutlet FXBlurView *blurOverlayView;
+@property (weak, nonatomic) IBOutlet UILabel* footerLabel;
+@property (weak, nonatomic) IBOutlet UIImageView* fullImageView;
+@property (weak, nonatomic) IBOutlet FXBlurView* blurFooterView;
+@property (weak, nonatomic) IBOutlet FXBlurView* blurOverlayView;
+
 @end

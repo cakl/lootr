@@ -10,8 +10,7 @@
 
 @implementation Loot (Annotation)
 
--(CLLocationCoordinate2D)coordinate
-{
+-(CLLocationCoordinate2D)coordinate {
     return CLLocationCoordinate2DMake([self.coord.latitude doubleValue], [self.coord.longitude doubleValue]);
 }
 

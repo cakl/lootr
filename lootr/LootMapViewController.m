@@ -13,15 +13,16 @@
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
 
-
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
 @property (nonatomic, strong) id<Facade> facade;
-@property (weak, nonatomic) IBOutlet UIButton *locateUserButton;
+@property (weak, nonatomic) IBOutlet UIButton* locateUserButton;
 @property (nonatomic, strong) Loot* lastSelectedLoot;
+
 @end
 
 @implementation LootMapViewController
+
 static NSString *const mapMarkerIcon = @"MapsMarker";
 static NSString *const tabBarImageIconName = @"MapTabIconActive";
 static NSString *const showLootSegueIdentifier = @"showLoot";
@@ -32,18 +33,16 @@ static double const degreeToMetersFactor = 111;
 
 #pragma mark - Initialization
 
--(id <Facade>)facade{
-    if(_facade == nil)
-    {
+-(id <Facade>)facade {
+    if(_facade == nil) {
         _facade = [ServerCallerFacadeFactory createFacade];
     }
     return _facade;
 }
 
-- (instancetype)initWithFacade:(id <Facade>)facade
-{
+-(instancetype)initWithFacade:(id <Facade>)facade {
     self = [super init];
-    if (self) {
+    if(self) {
         self.facade = facade;
     }
     return self;
@@ -51,8 +50,7 @@ static double const degreeToMetersFactor = 111;
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
@@ -63,20 +61,18 @@ static double const degreeToMetersFactor = 111;
     [self zoomIntoUserLocationOnInit];
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated {
     self.tabBarController.delegate = self;
 }
 
--(void)viewDidDisappear:(BOOL)animated{
-    [[self.mapView selectedAnnotations] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+-(void)viewDidDisappear:(BOOL)animated {
+    [[self.mapView selectedAnnotations] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         [self.mapView deselectAnnotation:obj animated:NO];
     }];
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([segue.identifier isEqualToString:showLootSegueIdentifier]){
+-(void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:showLootSegueIdentifier]) {
         LootContentViewController* contentViewController = segue.destinationViewController;
         contentViewController.loot = self.lastSelectedLoot;
     }
@@ -84,27 +80,26 @@ static double const degreeToMetersFactor = 111;
 
 #pragma mark - User Interaction
 
-- (IBAction)buttonPressed:(id)sender {
+-(IBAction)buttonPressed:(id)sender {
     CLLocationCoordinate2D userCoordinate = self.mapView.userLocation.coordinate;
     if([self isValidCenterCoordinate:userCoordinate]) {
         CLLocationCoordinate2D newCenterCoordinate = [self zoomIntoLocation:self.mapView.userLocation.coordinate];
         [self loadLootsAtCoordinate:newCenterCoordinate];
     } else {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil) message:NSLocalizedString(@"lootmapviewcontroller.alert.gpsnotready.message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil) message:NSLocalizedString(@"lootmapviewcontroller.alert.gpsnotready.message", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitles:nil];
         [alertView show];
     }
 }
 
-- (IBAction)addLootButtonPressed:(id)sender {
-    CreateLootViewController *viewController = [[CreateLootViewController alloc] init];
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
+-(IBAction)addLootButtonPressed:(id)sender {
+    CreateLootViewController* viewController = [[CreateLootViewController alloc] init];
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self.navigationController presentViewController:navigationController animated:YES completion:nil];
 }
 
 #pragma mark - MapView Setup
 
--(void)zoomIntoUserLocationOnInit
-{
+-(void)zoomIntoUserLocationOnInit {
     CLLocationCoordinate2D defaultZoomInCoordinate = CLLocationCoordinate2DMake(defaultZoomInLatitude, defaultZoomInLongitude);
     CLLocationCoordinate2D userCoordinate = self.mapView.userLocation.coordinate;
     CLLocationCoordinate2D newCenterCoordinate;
@@ -116,13 +111,11 @@ static double const degreeToMetersFactor = 111;
     [self loadLootsAtCoordinate:newCenterCoordinate];
 }
 
--(BOOL)isValidCenterCoordinate:(CLLocationCoordinate2D)coordinate
-{
+-(BOOL)isValidCenterCoordinate:(CLLocationCoordinate2D)coordinate {
     return (coordinate.latitude <= 0.1 && coordinate.longitude <= 0.1)?false:CLLocationCoordinate2DIsValid(coordinate);
 }
 
--(CLLocationCoordinate2D)zoomIntoLocation:(CLLocationCoordinate2D)coordinate
-{
+-(CLLocationCoordinate2D)zoomIntoLocation:(CLLocationCoordinate2D)coordinate {
     MKCoordinateRegion region;
     MKCoordinateSpan span;
     span.latitudeDelta = 0.05;
@@ -138,8 +131,7 @@ static double const degreeToMetersFactor = 111;
 
 #pragma mark - MKMapViewDelegate
 
--(void)mapView:(MKMapView *)mapView regionWillChangeAnimated:(BOOL)animated
-{
+-(void)mapView:(MKMapView*)mapView regionWillChangeAnimated:(BOOL)animated {
     
 //    [self DEBUGlootCreatorAtCoordinate:self.mapView.centerCoordinate];
 //    NSLog(@"regionDidChangeAnimated");
@@ -162,8 +154,7 @@ static double const degreeToMetersFactor = 111;
     CLLocation* lastLocation = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
     double distanceBetween = [lastLocation distanceFromLocation:centerLocation];
     NSLog(@"widhofviewport = %f --- distancebetween = %f", widthOfViewPort, distanceBetween);
-    if(widthOfViewPort < distanceBetween)
-    {
+    if(widthOfViewPort < distanceBetween) {
         NSLog(@"Center Latitude: %f Longitude: %f", [self.mapView centerCoordinate].latitude, [self.mapView centerCoordinate].longitude);
         [self loadLootsAtCoordinate:[self.mapView centerCoordinate]];
         
@@ -193,16 +184,16 @@ static double const degreeToMetersFactor = 111;
 //    }];
 //}
 
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
-    if ([annotation isKindOfClass:[Loot class]]) {
-        MKAnnotationView *annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
-        if (annotationView == nil) {
+-(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+    if([annotation isKindOfClass:[Loot class]]) {
+        MKAnnotationView* annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationViewIdentifier];
+        if(annotationView == nil) {
             annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:annotationViewIdentifier];
             annotationView.enabled = YES;
             annotationView.canShowCallout = YES;
             annotationView.image = [UIImage imageNamed:mapMarkerIcon];
             
-            UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
             [rightButton setTitle:annotation.title forState:UIControlStateNormal];
             [annotationView setRightCalloutAccessoryView:rightButton];
             
@@ -214,8 +205,8 @@ static double const degreeToMetersFactor = 111;
     return nil;
 }
 
-- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
-    if ([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure){
+-(void)mapView:(MKMapView*)mapView annotationView:(MKAnnotationView*)view calloutAccessoryControlTapped:(UIControl*)control {
+    if([(UIButton*)control buttonType] == UIButtonTypeDetailDisclosure) {
         self.lastSelectedLoot = [view annotation];
         [self performSegueWithIdentifier:showLootSegueIdentifier sender:self];
     }
@@ -223,9 +214,8 @@ static double const degreeToMetersFactor = 111;
 
 #pragma mark - UITabBarControllerDelegate
 
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
-{
-    if(viewController != self.navigationController){
+-(BOOL)tabBarController:(UITabBarController*)tabBarController shouldSelectViewController:(UIViewController*)viewController {
+    if(viewController != self.navigationController) {
         [self.navigationController popToRootViewControllerAnimated:NO];
     }
     return YES;
@@ -235,18 +225,17 @@ static double const degreeToMetersFactor = 111;
 
 -(void)loadLootsAtCoordinate:(CLLocationCoordinate2D)coordinate {
     int updateDistance = [self radiusOfVisibleRegion:self.mapView.region.span];
-    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:updateDistance] onSuccess:^(NSArray *loots) {
+    [self.facade getLootsAtCoordinate:coordinate inDistance:[NSNumber numberWithInt:updateDistance] onSuccess:^(NSArray* loots) {
         NSMutableArray* newLoots = [NSMutableArray arrayWithArray:loots];
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:newLoots];
-    } onFailure:^(NSError *error) {
+    } onFailure:^(NSError* error) {
         NSLog(@"%@", error);
     }];
 }
 
--(int)radiusOfVisibleRegion:(MKCoordinateSpan)visibleRegion
-{
-    return (visibleRegion.latitudeDelta*degreeToMetersFactor / 2)*1000;
+-(int)radiusOfVisibleRegion:(MKCoordinateSpan)visibleRegion {
+    return (visibleRegion.latitudeDelta*degreeToMetersFactor/2)*1000;
 }
 
 @end

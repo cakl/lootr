@@ -10,6 +10,7 @@
 #import "Loot.h"
 
 @interface LootContentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) Loot* loot;
+
 @end

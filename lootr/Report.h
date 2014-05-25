@@ -14,4 +14,5 @@
 @property (nonatomic, strong) NSString* purpose;
 @property (nonatomic, strong) User* creator;
 @property (nonatomic, strong) Loot* loot;
+
 @end

@@ -9,7 +9,8 @@
 #import "JCRBlurView.h"
 
 @interface LootContentHeader : JCRBlurView
-@property (nonatomic, strong) UILabel *distanceToLootLabel;
-@property (nonatomic, strong) UIButton *infoButton;
-@property (nonatomic, strong) UIButton *reportButton;
+@property (nonatomic, strong) UILabel* distanceToLootLabel;
+@property (nonatomic, strong) UIButton* infoButton;
+@property (nonatomic, strong) UIButton* reportButton;
+
 @end

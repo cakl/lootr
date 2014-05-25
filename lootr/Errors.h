@@ -15,7 +15,7 @@
 #define ERROR_RECOVERY_SUGGESTION(code)  NSLocalizedStringFromTable(FORMAT_RECOVERY_SUGGESTION(code), @"Errors", nil)
 #define ERROR_FAILURE_REASON(code)  NSLocalizedStringFromTable(FORMAT_FAILURE_REASON(code), @"Errors", nil)
 
-extern NSString * const errorDomain;
+extern NSString *const errorDomain;
 
 //TODO: refactor error names
 enum {
@@ -27,6 +27,6 @@ enum {
 
 @interface Errors : NSObject
 
-+(NSError*) produceErrorWithErrorCode:(int)ErrorCode withUnderlyingError:(NSError*)underlyingError;
++(NSError*)produceErrorWithErrorCode:(int)ErrorCode withUnderlyingError:(NSError*)underlyingError;
 
 @end

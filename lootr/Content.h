@@ -16,4 +16,5 @@
 @property (nonatomic, strong) NSURL* thumb;
 @property (nonatomic, strong) User* creator;
 @property (nonatomic, strong) NSDate* created;
+
 @end

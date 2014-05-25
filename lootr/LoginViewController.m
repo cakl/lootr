@@ -15,27 +15,27 @@
 
 @interface LoginViewController ()
 @property (nonatomic, strong) UserService* userService;
+
 @end
 
 @implementation LoginViewController
+
 static NSString *const keyChainUserServiceName = @"ch.hsr.lootr";
 static NSString *const loginTextFieldIconName = @"LoginUserFieldIcon";
 static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 #pragma mark - Initialization
 
--(UserService*)userService{
-    if(_userService == nil)
-    {
+-(UserService*)userService {
+    if(_userService == nil) {
         _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
 }
 
-- (instancetype)initWithUserService:(UserService*)userService
-{
+-(instancetype)initWithUserService:(UserService*)userService {
     self = [super init];
-    if (self) {
+    if(self) {
         self.userService = userService;
     }
     return self;
@@ -43,8 +43,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     self.emailTextField.leftViewImage = [UIImage imageNamed:loginTextFieldIconName];
     self.emailTextField.keyboardType = UIKeyboardTypeEmailAddress;
@@ -57,7 +56,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 #pragma mark - GUI io messages
 
-- (IBAction)loginButtonTouchUpInside:(id)sender {
+-(IBAction)loginButtonTouchUpInside:(id)sender {
     User* loginUser = [User new];
     loginUser.email = self.emailTextField.text;
     loginUser.passWord = self.passwordTextField.text;
@@ -66,13 +65,12 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 #pragma mark - GUI helper
 
--(void)clearTextFields
-{
+-(void)clearTextFields {
     self.emailTextField.text = nil;
     self.passwordTextField.text = nil;
 }
 
--(void)performLogin{
+-(void)performLogin {
     AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     RootViewController* rootViewController = (RootViewController*) delegate.window.rootViewController;
     [self dismissViewControllerAnimated:NO completion:^{
@@ -83,15 +81,14 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 #pragma mark - interact with User Service
 
--(void)loginUser:(User*)user{
+-(void)loginUser:(User*)user {
     [SVProgressHUD showApropriateHUD];
-    [self.userService loginUser:user onSuccess:^(User *user) {
+    [self.userService loginUser:user onSuccess:^(User* user) {
         [SVProgressHUD dismiss];
         [self performLogin];
-    } onFailure:^(NSError *error) {
+    } onFailure:^(NSError* error) {
         [SVProgressHUD dismiss];
     }];
 }
-
 
 @end

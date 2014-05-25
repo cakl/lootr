@@ -10,4 +10,5 @@
 
 @interface LoginTextField : UITextField
 @property (nonatomic, strong) UIImage* leftViewImage;
+
 @end

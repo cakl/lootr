@@ -10,7 +10,7 @@
 
 @implementation Coordinate
 
--(CLLocation*)asCLLocation{
+-(CLLocation*)asCLLocation {
     return [[CLLocation alloc] initWithLatitude:[self.latitude doubleValue] longitude:[self.longitude doubleValue]];
 }
 
