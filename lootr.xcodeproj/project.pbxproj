@@ -39,6 +39,7 @@
 		279105521920418B00B1B44E /* ServiceCheckViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279105511920418B00B1B44E /* ServiceCheckViewController.m */; };
 		279284EE18E8652B002CB07A /* LootListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284ED18E8652B002CB07A /* LootListViewController.m */; };
 		279284F118E8668A002CB07A /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 279284F018E8668A002CB07A /* SettingsViewController.m */; };
+		279C49261932885F00398948 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 279C49251932885F00398948 /* Constants.m */; };
 		279CD99C192824B1008DAA4B /* SVProgressHUD+Lootr.m in Sources */ = {isa = PBXBuildFile; fileRef = 279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */; };
 		27A7731D18F4CF790041EE05 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A7731C18F4CF790041EE05 /* Content.m */; };
 		27A971D419056A4D00F26A87 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A971D319056A4D00F26A87 /* Accelerate.framework */; };
@@ -146,6 +147,8 @@
 		279284ED18E8652B002CB07A /* LootListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootListViewController.m; sourceTree = "<group>"; };
 		279284EF18E8668A002CB07A /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		279284F018E8668A002CB07A /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		279C49241932885F00398948 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		279C49251932885F00398948 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Lootr.h"; sourceTree = "<group>"; };
 		279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Lootr.m"; sourceTree = "<group>"; };
 		279CD99D192834E4008DAA4B /* Linsebuehl.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Linsebuehl.gpx; sourceTree = "<group>"; };
@@ -343,6 +346,8 @@
 			children = (
 				27514506191AAF6100846E36 /* RootViewController.h */,
 				27514507191AAF6100846E36 /* RootViewController.m */,
+				279105501920418B00B1B44E /* ServiceCheckViewController.h */,
+				279105511920418B00B1B44E /* ServiceCheckViewController.m */,
 				2751450A191AB56C00846E36 /* TabBarViewController.h */,
 				2751450B191AB56C00846E36 /* TabBarViewController.m */,
 			);
@@ -398,8 +403,6 @@
 			isa = PBXGroup;
 			children = (
 				27346CE8190DA3100085B556 /* Storyboard.storyboard */,
-				279105501920418B00B1B44E /* ServiceCheckViewController.h */,
-				279105511920418B00B1B44E /* ServiceCheckViewController.m */,
 				27740E381906DCC7004C85D9 /* LootMap */,
 				27740E391906DCD0004C85D9 /* LootList */,
 				27740E3A1906DCD9004C85D9 /* Settings */,
@@ -460,6 +463,10 @@
 			children = (
 				27C7BF4C18D7498100761C84 /* AppDelegate.h */,
 				27C7BF4D18D7498100761C84 /* AppDelegate.m */,
+				2754900D192E97BE009D5490 /* TestsAppDelegate.h */,
+				2754900E192E97BE009D5490 /* TestsAppDelegate.m */,
+				279C49241932885F00398948 /* Constants.h */,
+				279C49251932885F00398948 /* Constants.m */,
 				2776D33B18F4AD940012934A /* UI */,
 				2732B94118DFBA100068E18B /* Domain */,
 				2732A36118F59E7D00C2A544 /* Technical Services */,
@@ -467,8 +474,6 @@
 				27C7BF4418D7498100761C84 /* Supporting Files */,
 				2761D845192A90F100386D8D /* Localizable.strings */,
 				27BEC143192C12CF00720A00 /* Errors.strings */,
-				2754900D192E97BE009D5490 /* TestsAppDelegate.h */,
-				2754900E192E97BE009D5490 /* TestsAppDelegate.m */,
 			);
 			path = lootr;
 			sourceTree = "<group>";
@@ -711,6 +716,7 @@
 				279284F118E8668A002CB07A /* SettingsViewController.m in Sources */,
 				27C7BF7B18D749B600761C84 /* Loot.m in Sources */,
 				272F805A1900577E00D1A0AB /* LootContentViewController.m in Sources */,
+				279C49261932885F00398948 /* Constants.m in Sources */,
 				274C06D118FB625200B0429A /* CreateLootViewController.m in Sources */,
 				27FBCFA3190FE38200677436 /* CoreLocationDelegate.m in Sources */,
 				2754900F192E97BE009D5490 /* TestsAppDelegate.m in Sources */,

@@ -11,4 +11,5 @@
 
 @interface ServerCallerFacadeFactory : NSObject
 +(id <Facade>)createFacade;
+
 @end

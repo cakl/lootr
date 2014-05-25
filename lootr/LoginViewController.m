@@ -20,7 +20,6 @@
 
 @implementation LoginViewController
 
-static NSString *const keyChainUserServiceName = @"ch.hsr.lootr";
 static NSString *const loginTextFieldIconName = @"LoginUserFieldIcon";
 static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
@@ -28,7 +27,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
 
 -(UserService*)userService {
     if(_userService == nil) {
-        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keychainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
 }

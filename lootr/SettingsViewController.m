@@ -20,14 +20,13 @@
 
 @implementation SettingsViewController
 
-static NSString *const keyChainUserServiceName = @"ch.hsr.lootr";
 static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
 
 #pragma mark - Initialization
 
 -(UserService*)userService {
     if(_userService == nil) {
-        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keychainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
 }

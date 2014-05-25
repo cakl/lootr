@@ -11,11 +11,10 @@
 @interface RootViewController ()
 @property (nonatomic, strong) UserService* userService;
 @property (nonatomic, strong) LocationService* locationService;
+
 @end
 
 @implementation RootViewController
-
-static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 
 #pragma mark - Initialization
 
@@ -46,7 +45,7 @@ static NSString* keyChainUserServiceName = @"ch.hsr.lootr";
 
 -(UserService*)userService {
     if(_userService == nil) {
-        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keychainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
 }

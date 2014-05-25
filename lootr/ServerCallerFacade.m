@@ -21,8 +21,6 @@
 
 @implementation ServerCallerFacade
 
-static NSString *keyChainUserServiceName = @"ch.hsr.lootr";
-
 #pragma mark - Initialization
 
 -(CoreLocationDelegate*)locationDelegate {
@@ -40,7 +38,7 @@ static NSString *keyChainUserServiceName = @"ch.hsr.lootr";
 
 -(UserService*)userService {
     if(_userService == nil) {
-        _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
+        _userService = [[UserService alloc] initWithKeyChainServiceName:keychainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
 }
