@@ -160,9 +160,7 @@ static double const degreeToMetersFactor = 111;
         
         self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
     }
-    
 }
-
 //-(void)DEBUGlootCreatorAtCoordinate:(CLLocationCoordinate2D)coordinate
 //{
 //    id<ServerCaller> serverCaller = [ServerCallerFactory createServerCaller];

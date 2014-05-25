@@ -10,4 +10,5 @@
 
 @interface RKObjectManagerHelper : NSObject
 +(void)configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager;
+
 @end

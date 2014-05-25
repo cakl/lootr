@@ -15,35 +15,34 @@
 @interface SettingsViewController ()
 @property (nonatomic, strong) UserService* userService;
 @property (nonatomic, strong) SettingsForm* settingsForm;
+
 @end
 
 @implementation SettingsViewController
+
 static NSString *const keyChainUserServiceName = @"ch.hsr.lootr";
 static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
 
 #pragma mark - Initialization
 
--(UserService*)userService{
-    if(_userService == nil)
-    {
+-(UserService*)userService {
+    if(_userService == nil) {
         _userService = [[UserService alloc] initWithKeyChainServiceName:keyChainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
 }
 
-- (instancetype)initWithUserService:(UserService*)userService
-{
+-(instancetype)initWithUserService:(UserService*)userService {
     self = [super init];
-    if (self) {
+    if(self) {
         self.userService = userService;
     }
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
+-(instancetype)initWithCoder:(NSCoder*)coder {
     self = [super initWithCoder:coder];
-    if (self) {
+    if(self) {
         self.settingsForm = [[SettingsForm alloc] init];
         self.formController.form = self.settingsForm;
     }
@@ -52,24 +51,22 @@ static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     self.tabBarItem.selectedImage = [UIImage imageNamed:tabBarImageIconName];
     self.title = NSLocalizedString(@"settingsviewcontroller.title", nil);
 }
 
--(void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated {
     [self setFormData:self.settingsForm];
 }
 
 #pragma mark - GUI Helper
 
--(void)setFormData:(SettingsForm*)settingsForm
-{
+-(void)setFormData:(SettingsForm*)settingsForm {
     NSError* error = nil;
     User* user = [self.userService getLoggedInUserWithError:&error];
-    if(!error){
+    if(!error) {
         self.settingsForm.userName = user.userName;
         self.settingsForm.email = user.email;
         [self.tableView reloadData];
@@ -78,7 +75,7 @@ static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
 
 #pragma mark - Loading Data from Server
 
--(void)performLogout{
+-(void)performLogout {
     AppDelegate* delegate = [[UIApplication sharedApplication] delegate];
     RootViewController* rootViewController = (RootViewController*) delegate.window.rootViewController;
     [self dismissViewControllerAnimated:NO completion:^{
@@ -86,7 +83,5 @@ static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
         [self.userService deleteLoggedInUser];
     }];
 }
-
-
 
 @end

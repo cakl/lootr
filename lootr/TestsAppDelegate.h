@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface TestsAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
-- (NSURL *)applicationDocumentsDirectory;
+@property (strong, nonatomic) UIWindow* window;
+-(NSURL*)applicationDocumentsDirectory;
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation SVProgressHUD (Lootr)
 
-+(void)showApropriateHUD{
++(void)showApropriateHUD {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
 }
 

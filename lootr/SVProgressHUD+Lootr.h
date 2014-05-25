@@ -10,4 +10,5 @@
 
 @interface SVProgressHUD (Lootr)
 +(void)showApropriateHUD;
+
 @end

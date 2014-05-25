@@ -15,66 +15,63 @@
 
 @interface RKObjectMapperInitializerTests : XCTestCase
 -(RKResponseDescriptor*)getResponseDescriptorByPathPattern:(NSString*)pathPattern onObjectManager:(RKObjectManager*)objectManager;
+
 @end
 
 @implementation RKObjectMapperInitializerTests
-static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
-static NSString* const bundleIdentifier = @"ch.hsr.lootrTests";
-static NSString* const lootsKeyPath = @"loots";
-static NSString* const contentsKeyPath = @"contents";
-static NSString* const usersKeyPath = @"users";
-static NSString* const reportsKeyPath = @"reports";
-static NSString* const lootsListJsonFileName = @"lootList.json";
-static NSString* const lootsSingleJsonFileName = @"lootSingle.json";
-static NSString* const usersSingleFileName = @"usersSingle.json";
-static NSString* const reportSingleFileName = @"reportsSingle.json";
 
-- (void)setUp
-{
+static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
+static NSString *const bundleIdentifier = @"ch.hsr.lootrTests";
+static NSString *const lootsKeyPath = @"loots";
+static NSString *const contentsKeyPath = @"contents";
+static NSString *const usersKeyPath = @"users";
+static NSString *const reportsKeyPath = @"reports";
+static NSString *const lootsListJsonFileName = @"lootList.json";
+static NSString *const lootsSingleJsonFileName = @"lootSingle.json";
+static NSString *const usersSingleFileName = @"usersSingle.json";
+static NSString *const reportSingleFileName = @"reportsSingle.json";
+
+-(void)setUp {
     [super setUp];
-    NSBundle *testTargetBundle = [NSBundle bundleWithIdentifier:bundleIdentifier];
+    NSBundle* testTargetBundle = [NSBundle bundleWithIdentifier:bundleIdentifier];
     [RKTestFixture setFixtureBundle:testTargetBundle];
     [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
     RKObjectManager* objectManager = [RKTestFactory objectManager];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
 }
 
-- (void)tearDown
-{
+-(void)tearDown {
     [RKTestFactory tearDown];
     [super tearDown];
 }
 
--(RKResponseDescriptor*)getResponseDescriptorByPathPattern:(NSString*)pathPattern onObjectManager:(RKObjectManager*)objectManager
-{
-    NSUInteger idx = [[objectManager responseDescriptors] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        if([[obj pathPattern] isEqualToString:pathPattern]){
+-(RKResponseDescriptor*)getResponseDescriptorByPathPattern:(NSString*)pathPattern onObjectManager:(RKObjectManager*)objectManager {
+    NSUInteger idx = [[objectManager responseDescriptors] indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL* stop) {
+        if([[obj pathPattern] isEqualToString:pathPattern]) {
             *stop = YES;
             return YES;
         }
         return NO;
     }];
-    if(idx == NSNotFound){
+    if(idx == NSNotFound) {
         return nil;
     }
     return [[objectManager responseDescriptors] objectAtIndex:idx];
 }
 
--(void)testResponseDescriptorsWithLootById
-{
+-(void)testResponseDescriptorsWithLootById {
     //given
     NSString* pathUnderTest = @"/lootrserver/api/v1/loots/3";
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/:id";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
-    
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
     } else {
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",apiUrlTest,pathUnderTest]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:[URL absoluteURL]];
-        RKObjectRequestOperation *requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", apiUrlTest, pathUnderTest]];
+        NSURLRequest* request = [NSURLRequest requestWithURL:[URL absoluteURL]];
+        RKObjectRequestOperation* requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
         //when
         [requestOperation start];
         [requestOperation waitUntilFinished];
@@ -86,21 +83,19 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     }
 }
 
--(void)testResponseDescriptorsWithLootsInDistanceCall
-{
+-(void)testResponseDescriptorsWithLootsInDistanceCall {
     //given
     NSString* pathUnderTest = @"/lootrserver/api/v1/loots/latitude/47.22693/longitude/8.8189/distance/200";
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
-    
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
     } else {
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",apiUrlTest,pathUnderTest]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:[URL absoluteURL]];
-        RKObjectRequestOperation *requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", apiUrlTest, pathUnderTest]];
+        NSURLRequest* request = [NSURLRequest requestWithURL:[URL absoluteURL]];
+        RKObjectRequestOperation* requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
         //when
         [requestOperation start];
         [requestOperation waitUntilFinished];
@@ -110,21 +105,19 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     }
 }
 
--(void)testResponseDescriptorsWithLootsByCountCall
-{
+-(void)testResponseDescriptorsWithLootsByCountCall {
     //given
     NSString* pathUnderTest = @"/lootrserver/api/v1/loots/latitude/47.22693/longitude/8.8189/count/6";
     NSString* pathPatternUnderTest = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/count/:count";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
-    
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
     } else {
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",apiUrlTest,pathUnderTest]];
-        NSURLRequest *request = [NSURLRequest requestWithURL:[URL absoluteURL]];
-        RKObjectRequestOperation *requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
+        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", apiUrlTest, pathUnderTest]];
+        NSURLRequest* request = [NSURLRequest requestWithURL:[URL absoluteURL]];
+        RKObjectRequestOperation* requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
         //when
         [requestOperation start];
         [requestOperation waitUntilFinished];
@@ -134,8 +127,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     }
 }
 
--(void)testLootsMapping
-{
+-(void)testLootsMapping {
     //given
     Loot* loot = [Loot new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsListJsonFileName];
@@ -145,12 +137,11 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectManager* objectManager = [RKObjectManager sharedManager];
     
     RKResponseDescriptor* responseDescriptor = [self getResponseDescriptorByPathPattern:pathPatternUnderTest onObjectManager:objectManager];
-    
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on Object Manager under Test");
     } else {
         //when
-        RKMappingTest *test = [RKMappingTest testForMapping:responseDescriptor.mapping sourceObject:[loots firstObject] destinationObject:loot];
+        RKMappingTest* test = [RKMappingTest testForMapping:responseDescriptor.mapping sourceObject:[loots firstObject] destinationObject:loot];
         //then
         [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"id" destinationKeyPath:@"identifier"]];
         XCTAssertTrue([test evaluate], @"id Mapping failed");
@@ -165,8 +156,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     }
 }
 
--(void)testNestedCreatorInLootsMapping
-{
+-(void)testNestedCreatorInLootsMapping {
     //given
     User* user = [User new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsListJsonFileName];
@@ -178,7 +168,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;
     RKRelationshipMapping* creatorRelationshipMapping = [[lootsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"creator"];
     
-    RKMappingTest *test = [RKMappingTest testForMapping:[creatorRelationshipMapping mapping] sourceObject:[loots firstObject] destinationObject:user];
+    RKMappingTest* test = [RKMappingTest testForMapping:[creatorRelationshipMapping mapping] sourceObject:[loots firstObject] destinationObject:user];
     test.rootKeyPath = @"creator";
     //when
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"username" destinationKeyPath:@"userName"]];
@@ -186,8 +176,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     XCTAssertTrue([test evaluate], @"user Mapping failed");
 }
 
--(void)testNestedCoordinateInLootsMapping
-{
+-(void)testNestedCoordinateInLootsMapping {
     //given
     Coordinate* coordinate = [Coordinate new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:lootsListJsonFileName];
@@ -199,7 +188,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;
     RKRelationshipMapping* coordinateRelationshipMapping = [[lootsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"coord"];
     //when
-    RKMappingTest *test = [RKMappingTest testForMapping:[coordinateRelationshipMapping mapping] sourceObject:[loots firstObject] destinationObject:coordinate];
+    RKMappingTest* test = [RKMappingTest testForMapping:[coordinateRelationshipMapping mapping] sourceObject:[loots firstObject] destinationObject:coordinate];
     test.rootKeyPath = @"coordinate";
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"latitude" destinationKeyPath:@"latitude"]];
@@ -210,8 +199,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     XCTAssertTrue([test evaluate], @"location Mapping failed");
 }
 
--(void)testNestedContentsInLootsMapping
-{
+-(void)testNestedContentsInLootsMapping {
     //given
     Content* aContent = [Content new];
     NSSet* contents = [NSSet setWithObject:aContent];
@@ -226,7 +214,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* lootsMapping = (RKObjectMapping*) responseDescriptor.mapping;
     RKRelationshipMapping* contentsRelationshipMapping = [[lootsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"contents"];
     //when
-    RKMappingTest *test = [RKMappingTest testForMapping:[contentsRelationshipMapping mapping] sourceObject:parsedContent destinationObject:contents];
+    RKMappingTest* test = [RKMappingTest testForMapping:[contentsRelationshipMapping mapping] sourceObject:parsedContent destinationObject:contents];
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"id" destinationKeyPath:@"identifier"]];
     XCTAssertTrue([test evaluate], @"identifier Mapping failed");
@@ -240,8 +228,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     XCTAssertTrue([test evaluate], @"dateCreated Mapping failed");
 }
 
--(void)testUserMapping
-{
+-(void)testUserMapping {
     //given
     User* aUser = [User new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:usersSingleFileName];
@@ -253,7 +240,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* usersMapping = (RKObjectMapping*) responseDescriptor.mapping;
     
     //when
-    RKMappingTest *test = [RKMappingTest testForMapping:usersMapping sourceObject:[parsedUsers firstObject] destinationObject:aUser];
+    RKMappingTest* test = [RKMappingTest testForMapping:usersMapping sourceObject:[parsedUsers firstObject] destinationObject:aUser];
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"username" destinationKeyPath:@"userName"]];
     XCTAssertTrue([test evaluate], @"username Mapping failed");
@@ -265,8 +252,7 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     XCTAssertTrue([test evaluate], @"token Mapping failed");
 }
 
--(void)testReportMapping
-{
+-(void)testReportMapping {
     //given
     Report* aReport = [Report new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:reportSingleFileName];
@@ -278,14 +264,13 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* reportsMapping = (RKObjectMapping*) responseDescriptor.mapping;
     
     //when
-    RKMappingTest *test = [RKMappingTest testForMapping:reportsMapping sourceObject:[parsedReports firstObject] destinationObject:aReport];
+    RKMappingTest* test = [RKMappingTest testForMapping:reportsMapping sourceObject:[parsedReports firstObject] destinationObject:aReport];
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"purpose" destinationKeyPath:@"purpose"]];
     XCTAssertTrue([test evaluate], @"purpose Mapping failed");
 }
 
--(void)testNestedCreatorInReportMapping
-{
+-(void)testNestedCreatorInReportMapping {
     //given
     User* aUser = [User new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:reportSingleFileName];
@@ -297,15 +282,14 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* reportsMapping = (RKObjectMapping*) responseDescriptor.mapping;
     RKRelationshipMapping* creatorRelationshipMapping = [[reportsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"creator"];
     //when
-    RKMappingTest *test = [RKMappingTest testForMapping:[creatorRelationshipMapping mapping] sourceObject:[reports firstObject] destinationObject:aUser];
+    RKMappingTest* test = [RKMappingTest testForMapping:[creatorRelationshipMapping mapping] sourceObject:[reports firstObject] destinationObject:aUser];
     test.rootKeyPath = @"creator";
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"username" destinationKeyPath:@"userName"]];
     XCTAssertTrue([test evaluate], @"username Mapping failed");
 }
 
--(void)testNestedLootInReportMapping
-{
+-(void)testNestedLootInReportMapping {
     //given
     Loot* aUser = [Loot new];
     id parsedJSON = [RKTestFixture parsedObjectWithContentsOfFixture:reportSingleFileName];
@@ -317,12 +301,11 @@ static NSString* const reportSingleFileName = @"reportsSingle.json";
     RKObjectMapping* reportsMapping = (RKObjectMapping*) responseDescriptor.mapping;
     RKRelationshipMapping* lootRelationshipMapping = [[reportsMapping propertyMappingsByDestinationKeyPath] objectForKey:@"loot"];
     //when
-    RKMappingTest *test = [RKMappingTest testForMapping:[lootRelationshipMapping mapping] sourceObject:[reports firstObject] destinationObject:aUser];
+    RKMappingTest* test = [RKMappingTest testForMapping:[lootRelationshipMapping mapping] sourceObject:[reports firstObject] destinationObject:aUser];
     test.rootKeyPath = @"loot";
     //then
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"id" destinationKeyPath:@"identifier"]];
     XCTAssertTrue([test evaluate], @"identifier Mapping failed");
 }
-
 
 @end

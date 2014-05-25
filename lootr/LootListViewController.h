@@ -11,4 +11,5 @@
 
 @interface LootListViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITabBarControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
+
 @end

@@ -10,7 +10,7 @@
 
 @implementation MKMapViewMock
 
--(CLLocationCoordinate2D)centerCoordinate{
+-(CLLocationCoordinate2D)centerCoordinate {
     return self.mockCenterCoordinate;
 }
 

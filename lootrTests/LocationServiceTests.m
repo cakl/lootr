@@ -16,12 +16,12 @@
 
 @interface LocationServiceTests : XCTestCase
 @property (nonatomic, strong) Loot* loot;
+
 @end
 
 @implementation LocationServiceTests
 
-- (void)setUp
-{
+-(void)setUp {
     [super setUp];
     Coordinate* lootCordinate = [[Coordinate alloc] init];
     lootCordinate.latitude = [NSNumber numberWithDouble:47.223313];
@@ -30,14 +30,12 @@
     self.loot.coord = lootCordinate;
 }
 
-- (void)tearDown
-{
+-(void)tearDown {
     self.loot = nil;
     [super tearDown];
 }
 
-- (void)testGetDistanceThresholdfromCurrentLocationToLootWithFiveMetersDistance
-{
+-(void)testGetDistanceThresholdfromCurrentLocationToLootWithFiveMetersDistance {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
@@ -49,8 +47,7 @@
     XCTAssertTrue(distanceThreshold == DistanceTresholdFiveMeters, @"Wrong distance threshold returned");
 }
 
-- (void)testGetDistanceThresholdfromCurrentLocationToLootWithMoreThanFiveHundredMetersDistance
-{
+-(void)testGetDistanceThresholdfromCurrentLocationToLootWithMoreThanFiveHundredMetersDistance {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:46.957896 longitude:7.435332];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
@@ -62,8 +59,7 @@
     XCTAssertTrue(distanceThreshold == DistanceTresholdMoreThanFiveHundredMeters, @"Wrong distance threshold returned");
 }
 
-- (void)testGetDistanceThresholdfromCurrentLocationToLootWithNilLootFailure
-{
+-(void)testGetDistanceThresholdfromCurrentLocationToLootWithNilLootFailure {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
@@ -75,8 +71,7 @@
     XCTAssertTrue(distanceThreshold == DistanceTresholdUndetermined, @"Wrong distance threshold returned");
 }
 
--(void)testIsCurrentLocationInRadiusOfLootWithRadiusNearSuccess
-{
+-(void)testIsCurrentLocationInRadiusOfLootWithRadiusNearSuccess {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
@@ -89,8 +84,7 @@
     XCTAssertTrue(isCurrentLocationInRadiusOfLoot, @"Current Location should be in radius of loot");
 }
 
--(void)testIsCurrentLocationInRadiusOfLootWithRadiusNearFailure
-{
+-(void)testIsCurrentLocationInRadiusOfLootWithRadiusNearFailure {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
@@ -108,8 +102,7 @@
     XCTAssertFalse(isCurrentLocationInRadiusOfLoot, @"Current Location should not be in radius of loot");
 }
 
--(void)testIsCurrentLocationInRadiusOfLootWithNilLootFailure
-{
+-(void)testIsCurrentLocationInRadiusOfLootWithNilLootFailure {
     //given
     CLLocation* currentLocation = [[CLLocation alloc] initWithLatitude:47.223314 longitude:8.817265];
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:currentLocation];
@@ -121,8 +114,7 @@
     XCTAssertFalse(isCurrentLocationInRadiusOfLoot, @"Current Location should not be in radius of nil loot");
 }
 
--(void)testIsCurrentLocationInRadiusOfLootWithNilCurrentLocationFailure
-{
+-(void)testIsCurrentLocationInRadiusOfLootWithNilCurrentLocationFailure {
     //given
     CoreLocationDelegateStub* locationDelegateStub = [[CoreLocationDelegateStub alloc] initWithCurrentLocation:nil];
     LocationService* locationService = [[LocationService alloc] initWithLocationDelegate:locationDelegateStub];

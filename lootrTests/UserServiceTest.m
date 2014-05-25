@@ -25,15 +25,16 @@
 @property (nonatomic, strong) UserService* userService;
 @property (nonatomic, strong) NSUserDefaults* userDefaults;
 @property (nonatomic, strong) id<ServerCaller> serverCaller;
+
 @end
 
 @implementation UserServiceTest
-static NSString* const keyChainServiceName = @"lootrKeyChainTest";
-static NSString* const userDefaultsSuiteName = @"testUserDefaults";
-static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
 
-- (void)setUp
-{
+static NSString *const keyChainServiceName = @"lootrKeyChainTest";
+static NSString *const userDefaultsSuiteName = @"testUserDefaults";
+static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
+
+-(void)setUp {
     [super setUp];
     [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
     RKObjectManager* objectManager = [RKTestFactory objectManager];
@@ -43,8 +44,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     self.userService = [[UserService alloc] initWithKeyChainServiceName:keyChainServiceName userDefaults:self.userDefaults serverCaller:self.serverCaller];
 }
 
-- (void)tearDown
-{
+-(void)tearDown {
     [self resetUserDefaults];
     [self resetKeyChain:keyChainServiceName];
     [RKTestFactory tearDown];
@@ -52,24 +52,21 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     [super tearDown];
 }
 
--(void)resetUserDefaults
-{
+-(void)resetUserDefaults {
     [self.userDefaults removeObjectForKey:@"username"];
     [self.userDefaults removeObjectForKey:@"email"];
 }
 
--(void)resetKeyChain:(NSString*)keyChainServiceName
-{
+-(void)resetKeyChain:(NSString*)keyChainServiceName {
     NSArray* accounts = [SSKeychain allAccounts];
-    [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         NSString* account = [obj objectForKey:@"acct"];
         NSString* service = [obj objectForKey:@"svce"];
         [SSKeychain deletePasswordForService:service account:account];
     }];
 }
 
-- (void)testSetLoggedInUserSuccess
-{
+-(void)testSetLoggedInUserSuccess {
     //given
     User* mario = [User new];
     mario.userName = @"mario";
@@ -81,8 +78,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     XCTAssertTrue(returnValue, @"set logged in user failed");
 }
 
-- (void)testSetLoggedInUserWithNoUsernameAndNoPasswortFail
-{
+-(void)testSetLoggedInUserWithNoUsernameAndNoPasswortFail {
     //given
     User* mario = [User new];
     NSError* error = nil;
@@ -94,8 +90,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     XCTAssertFalse(returnValue, @"set empty user succeeded");
 }
 
--(void)testGetLoggedInUserWithNoUserSetFail
-{
+-(void)testGetLoggedInUserWithNoUserSetFail {
     NSError* error = nil;
     User* nilUser = [self.userService getLoggedInUserWithError:&error];
     XCTAssertNotNil(error, @"No Error thrown while no user exists");
@@ -103,7 +98,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     XCTAssertTrue(([error code] == userServiceUserRecoveryError), @"retuning wrong error code");
 }
 
--(void)testDeleteLoggedInUserSuccess{
+-(void)testDeleteLoggedInUserSuccess {
     //given
     User* mario = [User new];
     mario.userName = @"mario";
@@ -120,8 +115,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     XCTAssertNil([self.userDefaults objectForKey:@"username"], @"deleting username in userdefaults failed");
 }
 
--(void)testSetAndGetUserSuccess
-{
+-(void)testSetAndGetUserSuccess {
     //given
     User* mario = [User new];
     mario.userName = @"mario";
@@ -136,8 +130,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     XCTAssertTrue([gotMario.token isEqualToString:@"234324nj23n4b23j4b213j4bjbh213v4"], @"different tokens");
 }
 
--(void)testAuthorizationHeaderSetAndGetSuccess
-{
+-(void)testAuthorizationHeaderSetAndGetSuccess {
     static NSString *const keyChainServiceName = @"temporaryKeyChain";
     //given
     id<ServerCaller> serverCaller = mockProtocol(@protocol(ServerCaller));
@@ -156,7 +149,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     [self resetKeyChain:keyChainServiceName];
 }
 
--(void)testClearKeyChainSuccess{
+-(void)testClearKeyChainSuccess {
     //given
     User* mario = [User new];
     mario.userName = @"mario";
@@ -166,7 +159,7 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     [self.userService setLoggedInUser:mario error:&error];
     if(error) XCTFail(@"failed saving user");
     NSArray* accounts = [SSKeychain allAccounts];
-    [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    [accounts enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop) {
         NSString* account = [obj objectForKey:@"acct"];
         [SSKeychain deletePasswordForService:keyChainServiceName account:account];
     }];
@@ -174,22 +167,21 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     XCTAssertEqual([[SSKeychain allAccounts] count], 0, @"clearing keychain failed");
 }
 
--(void)testLoginUserSuccess{
+-(void)testLoginUserSuccess {
     //given
     User* mario = [User new];
     mario.userName = @"mario";
     mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
     //when
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    [self.userService loginUser:mario onSuccess:^(User *user) {
+    [self.userService loginUser:mario onSuccess:^(User* user) {
         XCTAssertTrue([user.userName isEqualToString:mario.userName], @"login return different username");
         dispatch_semaphore_signal(semaphore);
-    } onFailure:^(NSError *error) {
+    } onFailure:^(NSError* error) {
         XCTFail(@"login user failed");
         dispatch_semaphore_signal(semaphore);
     }];
-    while (dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
+    while(dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
 }
-
 
 @end

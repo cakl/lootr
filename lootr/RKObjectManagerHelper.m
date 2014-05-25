@@ -11,15 +11,16 @@
 #import "Report.h"
 
 @implementation RKObjectManagerHelper
-static NSString* const lootsByDistancePathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
-static NSString* const lootsByCountPathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/count/:count";
-static NSString* const lootsByIdPathPattern = @"/lootrserver/api/v1/loots/:id";
-static NSString* const lootsPostPathPattern = @"/lootrserver/api/v1/loots";
-static NSString* const contentsPathPattern = @"/lootrserver/api/v1/contents";
-static NSString* const usersLoginPathPattern = @"/lootrserver/api/v1/users/login";
-static NSString* const reportsPathPattern = @"/lootrserver/api/v1/reports";
 
-+(void)configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager{
+static NSString *const lootsByDistancePathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/distance/:dist";
+static NSString *const lootsByCountPathPattern = @"/lootrserver/api/v1/loots/latitude/:lat/longitude/:long/count/:count";
+static NSString *const lootsByIdPathPattern = @"/lootrserver/api/v1/loots/:id";
+static NSString *const lootsPostPathPattern = @"/lootrserver/api/v1/loots";
+static NSString *const contentsPathPattern = @"/lootrserver/api/v1/contents";
+static NSString *const usersLoginPathPattern = @"/lootrserver/api/v1/users/login";
+static NSString *const reportsPathPattern = @"/lootrserver/api/v1/reports";
+
++(void)configureRKObjectManagerWithRequestRescriptors:(RKObjectManager*)objectManager {
     RKObjectMapping* lootsMapping = [RKObjectMapping mappingForClass:[Loot class]];
     RKObjectMapping* userMapping = [RKObjectMapping mappingForClass:[User class]];
     RKObjectMapping* coordinateMapping = [RKObjectMapping mappingForClass:[Coordinate class]];

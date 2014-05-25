@@ -10,21 +10,20 @@
 
 @interface CoreLocationDelegateStub ()
 @property (nonatomic, strong) CLLocation* location;
+
 @end
 
 @implementation CoreLocationDelegateStub
 
-- (instancetype)initWithCurrentLocation:(CLLocation*)location
-{
+-(instancetype)initWithCurrentLocation:(CLLocation*)location {
     self = [super init];
-    if (self) {
+    if(self) {
         _location = location;
     }
     return self;
 }
 
--(CLLocation*)getCurrentLocationWithError:(NSError**)error
-{
+-(CLLocation*)getCurrentLocationWithError:(NSError**)error {
     return self.location;
 }
 

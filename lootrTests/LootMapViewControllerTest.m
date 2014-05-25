@@ -19,56 +19,55 @@
 #import "LootMapViewController.h"
 #import "Loot.h"
 
-@interface LootMapViewControllerTest : XCTestCase
-@property (nonatomic, strong) Loot *exampleLootOne, *exampleLootTwo, *exampleLootThree;
-@property (nonatomic, strong) MKTArgumentCaptor *latitudeArgument, *longitudeArgument, *distanceArgument, *successBlockArgument, *failureBlockArgument;
-@end
-
-typedef void (^success)(NSArray* a);
-
-@implementation LootMapViewControllerTest
-static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
-
-- (void)setUp
-{
-    [super setUp];
-    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
-    [RKTestFactory objectManager];
-    self.exampleLootOne = [Loot new];
-    self.exampleLootOne.identifier = [NSNumber numberWithInt:42];
-    self.exampleLootOne.coord = [Coordinate new];
-    self.exampleLootOne.coord.latitude = [NSNumber numberWithDouble:47.22732];
-    self.exampleLootOne.coord.longitude = [NSNumber numberWithDouble:8.8189];
-    self.exampleLootTwo = [Loot new];
-    self.exampleLootTwo.identifier = [NSNumber numberWithInt:43];
-    self.exampleLootTwo.coord = [Coordinate new];
-    self.exampleLootTwo.coord.latitude = [NSNumber numberWithDouble:42.22732];
-    self.exampleLootTwo.coord.longitude = [NSNumber numberWithDouble:7.8189];
-    self.exampleLootThree = [Loot new];
-    self.exampleLootThree.identifier = [NSNumber numberWithInt:44];
-    self.exampleLootThree.coord = [Coordinate new];
-    self.exampleLootThree.coord.latitude = [NSNumber numberWithDouble:41.22732];
-    self.exampleLootThree.coord.longitude = [NSNumber numberWithDouble:4.8189];
-    self.latitudeArgument = [MKTArgumentCaptor new];
-    self.longitudeArgument = [MKTArgumentCaptor new];
-    self.distanceArgument = [MKTArgumentCaptor new];
-    self.successBlockArgument = [MKTArgumentCaptor new];
-    self.failureBlockArgument = [MKTArgumentCaptor new];
-}
-
-- (void)tearDown
-{
-    [RKTestFactory tearDown];
-    self.exampleLootOne = nil;
-    self.exampleLootTwo = nil;
-    self.exampleLootThree = nil;
-    self.latitudeArgument = nil;
-    self.longitudeArgument = nil;
-    self.distanceArgument = nil;
-    self.successBlockArgument = nil;
-    self.failureBlockArgument = nil;
-    [super tearDown];
-}
+//@interface LootMapViewControllerTest : XCTestCase
+//@property (nonatomic, strong) Loot* exampleLootOne, * exampleLootTwo, * exampleLootThree;
+//@property (nonatomic, strong) MKTArgumentCaptor* latitudeArgument, *longitudeArgument, *distanceArgument, *successBlockArgument, *failureBlockArgument;
+//@end
+//
+//typedef void (^success)(NSArray* a);
+//
+//@implementation LootMapViewControllerTest
+//static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
+//
+//-(void)setUp {
+//    [super setUp];
+//    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+//    [RKTestFactory objectManager];
+//    self.exampleLootOne = [Loot new];
+//    self.exampleLootOne.identifier = [NSNumber numberWithInt:42];
+//    self.exampleLootOne.coord = [Coordinate new];
+//    self.exampleLootOne.coord.latitude = [NSNumber numberWithDouble:47.22732];
+//    self.exampleLootOne.coord.longitude = [NSNumber numberWithDouble:8.8189];
+//    self.exampleLootTwo = [Loot new];
+//    self.exampleLootTwo.identifier = [NSNumber numberWithInt:43];
+//    self.exampleLootTwo.coord = [Coordinate new];
+//    self.exampleLootTwo.coord.latitude = [NSNumber numberWithDouble:42.22732];
+//    self.exampleLootTwo.coord.longitude = [NSNumber numberWithDouble:7.8189];
+//    self.exampleLootThree = [Loot new];
+//    self.exampleLootThree.identifier = [NSNumber numberWithInt:44];
+//    self.exampleLootThree.coord = [Coordinate new];
+//    self.exampleLootThree.coord.latitude = [NSNumber numberWithDouble:41.22732];
+//    self.exampleLootThree.coord.longitude = [NSNumber numberWithDouble:4.8189];
+//    self.latitudeArgument = [MKTArgumentCaptor new];
+//    self.longitudeArgument = [MKTArgumentCaptor new];
+//    self.distanceArgument = [MKTArgumentCaptor new];
+//    self.successBlockArgument = [MKTArgumentCaptor new];
+//    self.failureBlockArgument = [MKTArgumentCaptor new];
+//}
+//
+//- (void)tearDown
+//{
+//    [RKTestFactory tearDown];
+//    self.exampleLootOne = nil;
+//    self.exampleLootTwo = nil;
+//    self.exampleLootThree = nil;
+//    self.latitudeArgument = nil;
+//    self.longitudeArgument = nil;
+//    self.distanceArgument = nil;
+//    self.successBlockArgument = nil;
+//    self.failureBlockArgument = nil;
+//    [super tearDown];
+//}
 
 //- (void)testViewDidLoad
 //{
@@ -205,4 +204,4 @@ static NSString* const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
 //    [verify(serverCaller) getLootsAtLatitude:[self.latitudeArgument capture]  andLongitude:[self.longitudeArgument capture] inDistance:[self.distanceArgument capture] onSuccess:[self.successBlockArgument capture] onFailure:[self.failureBlockArgument capture]];
 //}
 
-@end
+//@end

@@ -10,4 +10,5 @@
 
 @interface MKMapViewMock : MKMapView
 @property (nonatomic) CLLocationCoordinate2D mockCenterCoordinate;
+
 @end

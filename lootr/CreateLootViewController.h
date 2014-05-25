@@ -11,4 +11,5 @@
 #import <MapKit/MapKit.h>
 
 @interface CreateLootViewController : FXFormViewController
+
 @end

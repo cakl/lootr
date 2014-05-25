@@ -99,7 +99,7 @@ static int const sectionHeaderHeight = 40;
 }
 
 -(void)reportButtonPressed {
-    UIAlertView *dialog = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lootcontentviewcontroller.report.alert.title", nil)
+    UIAlertView* dialog = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lootcontentviewcontroller.report.alert.title", nil)
                                                     message:NSLocalizedString(@"lootcontentviewcontroller.report.alert.message", nil)
                                                    delegate:self
                                            cancelButtonTitle:NSLocalizedString(@"cancel", nil)

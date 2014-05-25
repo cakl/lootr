@@ -11,8 +11,7 @@
 
 @implementation ServerCallerFactory
 
-+(id <ServerCaller>)createServerCaller
-{
++(id <ServerCaller>)createServerCaller {
     return [[RestKitServerCaller alloc] initWithObjectManager:[RKObjectManager sharedManager]];
 }
 

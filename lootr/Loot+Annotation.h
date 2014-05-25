@@ -11,4 +11,5 @@
 
 @interface Loot (Annotation) <MKAnnotation>
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
+
 @end

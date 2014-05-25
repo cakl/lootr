@@ -9,13 +9,12 @@
 #import "ServiceCheckViewController.h"
 
 @interface ServiceCheckViewController ()
+
 @end
 
 @implementation ServiceCheckViewController
 
-
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     self.serviceCheckLabel.text = NSLocalizedString(@"servicecheckviewcontroller.label", nil);
 }

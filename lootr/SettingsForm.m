@@ -10,8 +10,7 @@
 
 @implementation SettingsForm
 
-- (NSArray *)fields
-{
+-(NSArray*)fields {
     return @[
              @{FXFormFieldKey: @"userName",
                FXFormFieldType: FXFormFieldTypeLabel,
@@ -25,8 +24,7 @@
     
 }
 
-- (NSArray *)extraFields
-{
+-(NSArray*)extraFields {
     return @[
              @{FXFormFieldTitle: NSLocalizedString(@"settingsform.logout", nil),
                FXFormFieldHeader: @"",

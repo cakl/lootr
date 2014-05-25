@@ -18,28 +18,26 @@
 @property (nonatomic, strong) CLLocationManager* locationManager;
 @property (nonatomic, strong) CLGeocoder* geocoder;
 @property (nonatomic, strong) CoreLocationDelegate* locationDelegate;
+
 @end
 
 @implementation LocationDelegateTests
 
-- (void)setUp
-{
+-(void)setUp {
     [super setUp];
     self.locationManager = mock([CLLocationManager class]);
     self.geocoder = mock([CLGeocoder class]);
     self.locationDelegate = [[CoreLocationDelegate alloc] initWithLocationManager:self.locationManager geocoder:self.geocoder];
 }
 
-- (void)tearDown
-{
+-(void)tearDown {
     self.locationManager = nil;
     self.geocoder = nil;
     self.locationDelegate = nil;
     [super tearDown];
 }
 
-- (void)testStartUpdatingLocationJustOnce
-{
+-(void)testStartUpdatingLocationJustOnce {
     //when
     [self.locationDelegate startUpdatingLocation];
     [self.locationDelegate startUpdatingLocation];
@@ -47,16 +45,14 @@
     [verifyCount(self.locationManager, times(1)) startUpdatingLocation];
 }
 
-- (void)testStopUpdatingLocationSuccess
-{
+-(void)testStopUpdatingLocationSuccess {
     //when
     [self.locationDelegate stopUpdatingLocation];
     //then
     [verify(self.locationManager) stopUpdatingLocation];
 }
 
--(void)testGetCurrentLocationFailure
-{
+-(void)testGetCurrentLocationFailure {
     //given
     NSError* error = nil;
     //when
@@ -67,8 +63,7 @@
     XCTAssertNil(returnedLocation, @"In case of error message should return nil");
 }
 
--(void)testGetCurrentLocationWithLocationManagerLocationSuccess
-{
+-(void)testGetCurrentLocationWithLocationManagerLocationSuccess {
     //given
     CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     [given([self.locationManager location]) willReturn:aLocation];
@@ -79,8 +74,7 @@
     XCTAssertEqualObjects(returnedLocation, aLocation, @"should be the same locations");
 }
 
--(void)testGetCurrentLocationWithSettingLocationSuccess
-{
+-(void)testGetCurrentLocationWithSettingLocationSuccess {
     //given
     CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     [given([self.locationManager location]) willReturn:aLocation];
@@ -91,8 +85,7 @@
     [verify(self.locationManager) startUpdatingLocation];
 }
 
--(void)testGetCurrentLocationWithUpdatedLocationSuccess
-{
+-(void)testGetCurrentLocationWithUpdatedLocationSuccess {
     //given
     CLLocation* aLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     CLLocation* anotherLocation = [[CLLocation alloc] initWithLatitude:47.224225 longitude:8.825461];
@@ -105,8 +98,7 @@
     XCTAssertEqualObjects(returnedLocation, anotherLocation, @"should be the same locations");
 }
 
--(void)testGetCurrentCityFailure
-{
+-(void)testGetCurrentCityFailure {
     //given
     NSError* error = nil;
     //when
@@ -117,8 +109,7 @@
     XCTAssertNil(returnedCity, @"In case of error message should return nil");
 }
 
--(void)testDidUpdateLocationTwice
-{
+-(void)testDidUpdateLocationTwice {
     //given
     CLLocation* firstLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     CLLocation* secondLocation = [[CLLocation alloc] initWithLatitude:47.224225 longitude:8.825461];
@@ -133,7 +124,7 @@
     XCTAssertEqualObjects(returnedLocation, thirdLocation, @"returned location should be last updated location");
 }
 
--(void)testGeocodeCityByLocationWithOneUpdateSuccess{
+-(void)testGeocodeCityByLocationWithOneUpdateSuccess {
     //given
     CLLocation* firstLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     CLLocation* secondLocation = [[CLLocation alloc] initWithLatitude:47.224225 longitude:8.825461];
@@ -141,8 +132,8 @@
     CLPlacemark* placemark = mock([CLPlacemark class]);
     NSString* givenCity = @"Rapperswil";
     [given([placemark subLocality]) willReturn:givenCity];
-    MKTArgumentCaptor *locationArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *completionHandlerArgument = [[MKTArgumentCaptor alloc] init];
+    MKTArgumentCaptor* locationArgument = [[MKTArgumentCaptor alloc] init];
+    MKTArgumentCaptor* completionHandlerArgument = [[MKTArgumentCaptor alloc] init];
     NSError* cityError = nil;
     //when
     [self.locationDelegate locationManager:self.locationManager didUpdateLocations:@[secondLocation]];
@@ -156,7 +147,7 @@
     XCTAssertEqualObjects(returnedCity, givenCity, @"given and returned city should be the same");
 }
 
--(void)testGeocodeCityByLocationWithTwoUpdateSuccess{
+-(void)testGeocodeCityByLocationWithTwoUpdateSuccess {
     //given
     CLLocation* firstLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     CLLocation* secondLocation = [[CLLocation alloc] initWithLatitude:47.224225 longitude:8.825461];
@@ -165,8 +156,8 @@
     CLPlacemark* placemark = mock([CLPlacemark class]);
     NSString* givenCity = @"Montpellier";
     [given([placemark subLocality]) willReturn:givenCity];
-    MKTArgumentCaptor *locationArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *completionHandlerArgument = [[MKTArgumentCaptor alloc] init];
+    MKTArgumentCaptor* locationArgument = [[MKTArgumentCaptor alloc] init];
+    MKTArgumentCaptor* completionHandlerArgument = [[MKTArgumentCaptor alloc] init];
     NSError* cityError = nil;
     //when
     [self.locationDelegate locationManager:self.locationManager didUpdateLocations:@[secondLocation]];
@@ -181,7 +172,7 @@
     XCTAssertEqualObjects(returnedCity, givenCity, @"given and returned city should be the same");
 }
 
--(void)testGeocodeCityByLocationWithTwoUpdateAndNotEnoughUpdateDistance{
+-(void)testGeocodeCityByLocationWithTwoUpdateAndNotEnoughUpdateDistance {
     //given
     CLLocation* firstLocation = [[CLLocation alloc] initWithLatitude:0.0 longitude:0.0];
     CLLocation* secondLocation = [[CLLocation alloc] initWithLatitude:47.224225 longitude:8.825461];
@@ -190,8 +181,8 @@
     CLPlacemark* placemark = mock([CLPlacemark class]);
     NSString* givenCity = @"Rapperswil";
     [given([placemark subLocality]) willReturn:givenCity];
-    MKTArgumentCaptor *locationArgument = [[MKTArgumentCaptor alloc] init];
-    MKTArgumentCaptor *completionHandlerArgument = [[MKTArgumentCaptor alloc] init];
+    MKTArgumentCaptor* locationArgument = [[MKTArgumentCaptor alloc] init];
+    MKTArgumentCaptor* completionHandlerArgument = [[MKTArgumentCaptor alloc] init];
     //when
     [self.locationDelegate locationManager:self.locationManager didUpdateLocations:@[secondLocation]];
     [self.locationDelegate locationManager:self.locationManager didUpdateLocations:@[thirdLocation]];

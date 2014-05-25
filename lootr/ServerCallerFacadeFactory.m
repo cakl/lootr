@@ -11,8 +11,7 @@
 
 @implementation ServerCallerFacadeFactory
 
-+(id <Facade>)createFacade
-{
++(id <Facade>)createFacade {
     return [[ServerCallerFacade alloc] init];
 }
 

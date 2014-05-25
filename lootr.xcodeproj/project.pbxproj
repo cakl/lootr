@@ -55,7 +55,6 @@
 		27C7BF4818D7498100761C84 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 27C7BF4618D7498100761C84 /* InfoPlist.strings */; };
 		27C7BF4A18D7498100761C84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF4918D7498100761C84 /* main.m */; };
 		27C7BF4E18D7498100761C84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF4D18D7498100761C84 /* AppDelegate.m */; };
-		27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */; };
 		27C7BF5A18D7498100761C84 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF5918D7498100761C84 /* XCTest.framework */; };
 		27C7BF5B18D7498100761C84 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3B18D7498100761C84 /* Foundation.framework */; };
 		27C7BF5C18D7498100761C84 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C7BF3F18D7498100761C84 /* UIKit.framework */; };
@@ -173,7 +172,6 @@
 		27C7BF4B18D7498100761C84 /* lootr-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lootr-Prefix.pch"; sourceTree = "<group>"; };
 		27C7BF4C18D7498100761C84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		27C7BF4D18D7498100761C84 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		27C7BF5018D7498100761C84 /* lootr.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lootr.xcdatamodel; sourceTree = "<group>"; };
 		27C7BF5818D7498100761C84 /* lootrTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = lootrTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C7BF5918D7498100761C84 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		27C7BF6218D7498100761C84 /* lootrTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "lootrTests-Info.plist"; sourceTree = "<group>"; };
@@ -465,7 +463,6 @@
 				2776D33B18F4AD940012934A /* UI */,
 				2732B94118DFBA100068E18B /* Domain */,
 				2732A36118F59E7D00C2A544 /* Technical Services */,
-				27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */,
 				27FD6FDA19291C5300734F11 /* Images.xcassets */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
 				2761D845192A90F100386D8D /* Localizable.strings */,
@@ -704,7 +701,6 @@
 				27A7731D18F4CF790041EE05 /* Content.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
 				27514508191AAF6100846E36 /* RootViewController.m in Sources */,
-				27C7BF5118D7498100761C84 /* lootr.xcdatamodeld in Sources */,
 				279284EE18E8652B002CB07A /* LootListViewController.m in Sources */,
 				27FD6FDE1929676E00734F11 /* LootContentHeader.m in Sources */,
 				27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */,
@@ -997,19 +993,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		27C7BF4F18D7498100761C84 /* lootr.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				27C7BF5018D7498100761C84 /* lootr.xcdatamodel */,
-			);
-			currentVersion = 27C7BF5018D7498100761C84 /* lootr.xcdatamodel */;
-			path = lootr.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 27C7BF3018D7498100761C84 /* Project object */;
 }

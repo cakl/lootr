@@ -10,16 +10,14 @@
 
 @implementation TestsAppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
+-(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     return YES;
 }
 
 #pragma mark - Application's Documents directory
 
 // Returns the URL to the application's Documents directory.
-- (NSURL *)applicationDocumentsDirectory
-{
+-(NSURL*)applicationDocumentsDirectory {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 

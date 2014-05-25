@@ -9,5 +9,6 @@
 #import "CoreLocationDelegate.h"
 
 @interface CoreLocationDelegateStub : CoreLocationDelegate
-- (instancetype)initWithCurrentLocation:(CLLocation*)location;
+-(instancetype)initWithCurrentLocation:(CLLocation*)location;
+
 @end
