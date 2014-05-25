@@ -79,7 +79,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
         XCTAssertTrue(requestOperation.HTTPRequestOperation.response.statusCode == 200, @"Expected 200 response");
         XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)1, @"Expected to load exactly one loot");
         Loot* aLoot = [[requestOperation.mappingResult array] firstObject];
-        XCTAssertEqual([[aLoot contents] count], 6, @"Expected to load 6 contents on the loot");
+        XCTAssertEqual([[aLoot contents] count], 3, @"Expected to load 3 contents on the loot");
     }
 }
 
@@ -101,7 +101,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
         [requestOperation waitUntilFinished];
         //then
         XCTAssertTrue(requestOperation.HTTPRequestOperation.response.statusCode == 200, @"Expected 200 response");
-        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)6, @"Expected to load 6 loots");
+        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)10, @"Expected to load 10 loots");
     }
 }
 
@@ -123,7 +123,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
         [requestOperation waitUntilFinished];
         //then
         XCTAssertTrue(requestOperation.HTTPRequestOperation.response.statusCode == 200, @"Expected 200 response");
-        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)6, @"Expected to load 6 loots");
+        XCTAssertEqual([requestOperation.mappingResult count], (NSUInteger)10, @"Expected to load 6 loots");
     }
 }
 
@@ -246,8 +246,6 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
     XCTAssertTrue([test evaluate], @"username Mapping failed");
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"email" destinationKeyPath:@"email"]];
     XCTAssertTrue([test evaluate], @"email Mapping failed");
-    [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"password" destinationKeyPath:@"passWord"]];
-    XCTAssertTrue([test evaluate], @"password Mapping failed");
     [test addExpectation:[RKPropertyMappingTestExpectation expectationWithSourceKeyPath:@"token" destinationKeyPath:@"token"]];
     XCTAssertTrue([test evaluate], @"token Mapping failed");
 }

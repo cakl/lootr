@@ -170,7 +170,7 @@ static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
 -(void)testLoginUserSuccess {
     //given
     User* mario = [User new];
-    mario.userName = @"mario";
+    mario.userName = @"Mario";
     mario.token = @"234324nj23n4b23j4b213j4bjbh213v4";
     //when
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);

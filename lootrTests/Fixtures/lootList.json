@@ -1,100 +1,174 @@
 {
     "loots": [
         {
-            "radius": 25,
-            "creator": {
-                "username": "Baristamaniac"
+            "coordinate": {
+                "id": 1,
+                "latitude": 47.22348,
+                "location": "Rapperswil",
+                "longitude": 8.817509
             },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "Share your delicious drinks",
+            "countAccess": 0,
+            "creator": {
+                "username": "Mario"
+            },
+            "dateCreated": "2014-01-01T00:00:00",
             "id": 1,
-            "title": "Starbucks",
-            "coordinate": {
-                "latitude": 47.22693,
-                "longitude": 8.8189,
-                "location": "Rapperswil"
-            }
+            "radius": 25,
+            "summary": "Wie sieht das HSR Logo aus?",
+            "title": "HSR Gebaeude 1"
         },
         {
-            "radius": 25,
-            "creator": {
-                "username": "Surfer"
+            "coordinate": {
+                "id": 2,
+                "latitude": 47.225452,
+                "location": "Rapperswil",
+                "longitude": 8.815605
             },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "S läbe isch schön i Rappi",
+            "countAccess": 0,
+            "creator": {
+                "username": "Mario"
+            },
+            "dateCreated": "2014-05-10T00:00:00",
             "id": 2,
-            "title": "Rappi Hangout",
-            "coordinate": {
-                "latitude": 47.22254,
-                "longitude": 8.81624,
-                "location": "Rapperswil"
-            }
+            "radius": 50,
+            "summary": "Restaurants am Fischermarktplatz",
+            "title": "Fischermarktplatz"
         },
         {
-            "radius": 25,
-            "creator": {
-                "username": "HSR"
+            "coordinate": {
+                "id": 3,
+                "latitude": 47.227013,
+                "location": "Rapperswil",
+                "longitude": 8.819006
             },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "All what's important for students",
+            "countAccess": 0,
+            "creator": {
+                "username": "Fabio"
+            },
+            "dateCreated": "2014-05-06T00:00:00",
             "id": 3,
-            "title": "Life@HSR",
-            "coordinate": {
-                "latitude": 47.22732,
-                "longitude": 8.81609,
-                "location": "Rapperswil"
-            }
+            "radius": 25,
+            "summary": "Was gibt es wohl bei der Unia?",
+            "title": "UNIA"
         },
         {
-            "radius": 25,
-            "creator": {
-                "username": "BrummiDriver91"
-            },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "The hot cars from Rapperswil",
-            "id": 4,
-            "title": "Cars and stuff",
             "coordinate": {
-                "latitude": 47.22378,
-                "longitude": 8.81725,
-                "location": "Rapperswil"
-            }
-        },
-        {
-            "radius": 25,
-            "creator": {
-                "username": "ZuriCity"
+                "id": 5,
+                "latitude": 47.230183,
+                "location": "Jona",
+                "longitude": 8.837137
             },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "Zurich Is Geil",
+            "countAccess": 0,
+            "creator": {
+                "username": "Fabio"
+            },
+            "dateCreated": "2014-05-15T00:00:00",
             "id": 5,
-            "title": "Cars and stuff",
-            "coordinate": {
-                "latitude": 47.36864,
-                "longitude": 8.53918,
-                "location": "Zürich"
-            }
+            "radius": 100,
+            "summary": "Ein Panorama des Kreisels 360 Grad",
+            "title": "Jona Kreisel"
         },
         {
-            "radius": 25,
-            "creator": {
-                "username": "buuurebueb"
-            },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "sang galle isch lääääs",
-            "id": 6,
-            "title": "Cars and stuff",
             "coordinate": {
-                "latitude": 47.4178667,
-                "longitude": 9.37013626,
-                "location": "St. Gallen"
-            }
+                "id": 4,
+                "latitude": 47.231,
+                "location": "Jona",
+                "longitude": 8.834519
+            },
+            "countAccess": 0,
+            "creator": {
+                "username": "Sebastian"
+            },
+            "dateCreated": "2014-05-11T00:00:00",
+            "id": 4,
+            "radius": 50,
+            "summary": "Fahrplan gesucht? Here you go!",
+            "title": "Bahnhof Jona"
+        },
+        {
+            "coordinate": {
+                "id": 6,
+                "latitude": 47.316685,
+                "location": "Wetzikon",
+                "longitude": 8.800509
+            },
+            "countAccess": 0,
+            "creator": {
+                "username": "Sebastian"
+            },
+            "dateCreated": "2014-05-03T00:00:00",
+            "id": 6,
+            "radius": 100,
+            "summary": "Erkunde den Grund des Pools",
+            "title": "Badi Wetzikon"
+        },
+        {
+            "coordinate": {
+                "id": 7,
+                "latitude": 47.317898,
+                "location": "Wetzikon",
+                "longitude": 8.796196
+            },
+            "countAccess": 0,
+            "creator": {
+                "username": "Mario"
+            },
+            "dateCreated": "2014-05-22T00:00:00",
+            "id": 7,
+            "radius": 25,
+            "summary": "Was ist die KZO?",
+            "title": "KZO"
+        },
+        {
+            "coordinate": {
+                "id": 8,
+                "latitude": 47.367176,
+                "location": "ZÃ¼rich",
+                "longitude": 8.545109
+            },
+            "countAccess": 0,
+            "creator": {
+                "username": "Fabio"
+            },
+            "dateCreated": "2014-05-10T00:00:00",
+            "id": 8,
+            "radius": 50,
+            "summary": "Was passiert hier?",
+            "title": "Bellevue"
+        },
+        {
+            "coordinate": {
+                "id": 9,
+                "latitude": 47.37039,
+                "location": "ZÃ¼rich",
+                "longitude": 8.543838
+            },
+            "countAccess": 0,
+            "creator": {
+                "username": "Fabio"
+            },
+            "dateCreated": "2014-05-12T00:00:00",
+            "id": 9,
+            "radius": 25,
+            "summary": "Einfach atemberaubend",
+            "title": "Grossmuenster"
+        },
+        {
+            "coordinate": {
+                "id": 10,
+                "latitude": 47.378635,
+                "location": "ZÃ¼rich",
+                "longitude": 8.537856
+            },
+            "countAccess": 0,
+            "creator": {
+                "username": "Sebastian"
+            },
+            "dateCreated": "2014-05-13T00:00:00",
+            "id": 10,
+            "radius": 100,
+            "summary": "Es gibt viele versteckte Dinge zu entlueften!",
+            "title": "HB"
         }
     ]
 }

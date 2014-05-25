@@ -1,82 +1,53 @@
 {
     "loots": [
         {
-            "radius": 25,
-            "creator": {
-                "username": "HSR"
-            },
-            "dateCreated": "2014-03-23T21:30:10.178",
-            "dateUpdated": "2014-03-23T21:30:10.178",
-            "summary": "All what's important for students",
-            "id": 3,
-            "title": "Life@HSR",
-            "coordinate": {
-                "latitude": 47.22732,
-                "longitude": 8.81609,
-                "location": "Rapperswil"
-            },
             "contents": [
                 {
-                    "id": 453,
+                    "creator": {
+                        "username": "Sebastian"
+                    },
+                    "dateCreated": "2014-05-15T00:00:00",
+                    "id": 6,
+                    "thumb": "http://152.96.56.70:8080/lootrserver/api/v1/contents/4/thumb",
                     "type": "image/png",
-                    "url": "https://www.lootrapp.com/api/v1/contents/453/full",
-                    "thumb": "http://lorempixel.com/640/380/sports/Irgend-was-steht-hier/",
-                    "creator": {
-                        "username": "ivana"
-                    },
-                    "dateCreated": "2014-03-25T21:30:10.178"
+                    "url": "http://152.96.56.70:8080/lootrserver/api/v1/contents/4/image"
                 },
                 {
-                    "id": 172,
+                    "creator": {
+                        "username": "Sebastian"
+                    },
+                    "dateCreated": "2014-05-13T00:00:00",
+                    "id": 7,
+                    "thumb": "http://152.96.56.70:8080/lootrserver/api/v1/contents/4/thumb",
                     "type": "image/png",
-                    "url": "https://www.lootrapp.com/api/v1/contents/172/full",
-                    "thumb": "http://lorempixel.com/640/380/people/sexy-humans-to-meet/",
-                    "creator": {
-                        "username": "ivana"
-                    },
-                    "dateCreated": "2014-03-28T21:30:10.178"
+                    "url": "http://152.96.56.70:8080/lootrserver/api/v1/contents/4/image"
                 },
                 {
-                    "id": 162,
+                    "creator": {
+                        "username": "Sebastian"
+                    },
+                    "dateCreated": "2014-05-12T00:00:00",
+                    "id": 5,
+                    "thumb": "http://152.96.56.70:8080/lootrserver/api/v1/contents/4/thumb",
                     "type": "image/png",
-                    "url": "https://www.lootrapp.com/api/v1/contents/162/full",
-                    "thumb": "https://www.lootrapp.com/api/v1/contents/162/thumb",
-                    "creator": {
-                        "username": "hippies"
-                    },
-                    "dateCreated": "2014-03-28T21:30:10.178"
-                },
-                {
-                    "id": 169,
-                    "type": "image/jpeg",
-                    "url": "https://www.lootrapp.com/api/v1/contents/169/full",
-                    "thumb": "https://www.lootrapp.com/api/v1/contents/169/thumb",
-                    "creator": {
-                        "username": "gmuesler"
-                    },
-                    "dateCreated": "2014-03-28T21:30:10.178"
-                },
-                {
-                    "id": 179,
-                    "type": "image/jpeg",
-                    "url": "https://www.lootrapp.com/api/v1/contents/179/full",
-                    "thumb": "https://www.lootrapp.com/api/v1/contents/179/thumb",
-                    "creator": {
-                        "username": "anonymous"
-                    },
-                    "dateCreated": "2014-03-28T21:30:10.178"
-                },
-                {
-                    "id": 182,
-                    "type": "text/text",
-                    "url": "https://www.lootrapp.com/api/v1/contents/182/full",
-                    "thumb": "https://www.lootrapp.com/api/v1/contents/182/thumb",
-                    "creator": {
-                        "username": "hippies"
-                    },
-                    "dateCreated": "2014-03-28T21:30:10.178"
+                    "url": "http://152.96.56.70:8080/lootrserver/api/v1/contents/4/image"
                 }
-            ]
+            ],
+            "coordinate": {
+                "id": 4,
+                "latitude": 47.231,
+                "location": "Jona",
+                "longitude": 8.834519
+            },
+            "countAccess": 1,
+            "creator": {
+                "username": "Sebastian"
+            },
+            "dateCreated": "2014-05-11T00:00:00",
+            "id": 4,
+            "radius": 50,
+            "summary": "Fahrplan gesucht? Here you go!",
+            "title": "Bahnhof Jona"
         }
     ]
 }

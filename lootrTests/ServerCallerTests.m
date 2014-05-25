@@ -45,7 +45,7 @@ static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     
     [self.serverCaller getLootsAtLatitude:[NSNumber numberWithFloat:3.14] andLongitude:[NSNumber numberWithFloat:3.14] inDistance:[NSNumber numberWithInt:100] onSuccess:^(NSArray* loots) {
     //then
-        XCTAssertEqual([loots count], 6, @"6 Loots were excpeted to load");
+        XCTAssertEqual([loots count], 10, @"10 Loots were excpeted to load");
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError* error) {
         XCTFail(@"Failure returned");
@@ -81,7 +81,7 @@ static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
     [self.serverCaller getLootsAtLatitude:[NSNumber numberWithInt:6] andLongitude:[NSNumber numberWithFloat:3.14] withLimitedCount:[NSNumber numberWithInt:100] onSuccess:^(NSArray* loots) {
-        XCTAssertEqual([loots count], 6, @"6 Loots were excpeted to load");
+        XCTAssertEqual([loots count], 10, @"6 Loots were excpeted to load");
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError* error) {
         XCTFail(@"Failure returned");

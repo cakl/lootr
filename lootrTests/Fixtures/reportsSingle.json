@@ -1,15 +1,28 @@
 {
     "reports": [
         {
-            "id": 3,
-            "reportTime": "2014-03-23T21:30:10.178",
-            "purpose": "copyright bilder",
-            "loot": {
-                "id": 3
-            },
             "creator": {
-                "username": "Fotostudio Brünzli"
-            }
+                "username": "Mario"
+            },
+            "loot": {
+                "coordinate": {
+                    "id": 3,
+                    "latitude": 47.227013,
+                    "location": "Rapperswil",
+                    "longitude": 8.819006
+                },
+                "countAccess": 0,
+                "creator": {
+                    "username": "Fabio"
+                },
+                "dateCreated": "2014-05-06T00:00:00",
+                "id": 3,
+                "radius": 25,
+                "summary": "Was gibt es wohl bei der Unia?",
+                "title": "UNIA"
+            },
+            "purpose": "DieseLootentsprichtnichtmeinemGusto",
+            "reportTime": "2014-05-15T00: 00: 00"
         }
     ]
 }
