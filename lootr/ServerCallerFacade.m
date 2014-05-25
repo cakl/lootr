@@ -11,11 +11,14 @@
 #import "ServerCaller.h"
 #import "ServerCallerFactory.h"
 #import "UserService.h"
+#import "Errors.h"
+#import "LocationService.h"
 
 @interface ServerCallerFacade ()
 @property (nonatomic, strong) CoreLocationDelegate* locationDelegate;
 @property (nonatomic, strong) id<ServerCaller> serverCaller;
 @property (nonatomic, strong) UserService* userService;
+@property (nonatomic, strong) LocationService* locationService;
 
 @end
 
@@ -41,6 +44,13 @@
         _userService = [[UserService alloc] initWithKeyChainServiceName:keychainUserServiceName userDefaults:[NSUserDefaults standardUserDefaults]];
     }
     return _userService;
+}
+
+-(LocationService*)locationService {
+    if(_locationService == nil) {
+        _locationService = [[LocationService alloc] init];
+    }
+    return _locationService;
 }
 
 -(instancetype)initWithLocationDelegate:(CoreLocationDelegate*)locationDelegate andServerCaller:(id<ServerCaller>)serverCaller {
@@ -122,12 +132,10 @@
 }
 
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image onSuccess:(void(^)(Content* loot))success onFailure:(void (^)(NSError* error))failure {
-    NSError* positionError = nil;
     NSError* userError = nil;
-    CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&positionError];
     User* currentUser = [self.userService getLoggedInUserWithError:&userError];
-    if(!userError && !positionError) {
-        if([self checkIfCurrentLocation:currentLocation isInRadiusOfLoot:loot]) {
+    if(!userError) {
+        if([self.locationService isCurrentLocationInRadiusOfLoot:loot]) {
             content.creator = currentUser;
             [self.serverCaller postContent:content onLoot:loot withImage:image onSuccess:^(Content* content) {
                 success(content);
@@ -139,7 +147,7 @@
             failure(distanceError);
         }
     } else {
-        (positionError)?failure(positionError):failure(userError);
+        failure(userError);
     }
 }
 
@@ -156,13 +164,6 @@
     } else {
         failure(userError);
     }
-}
-
-#pragma mark - Location Helper
-
--(BOOL)checkIfCurrentLocation:(CLLocation*)currentLocation isInRadiusOfLoot:(Loot*)loot {
-    CLLocation* lootLocation = [[CLLocation alloc] initWithLatitude:[loot.coord.latitude doubleValue] longitude:[loot.coord.longitude doubleValue]];
-    return ([lootLocation distanceFromLocation:currentLocation] <= [loot.radius doubleValue]);
 }
 
 @end

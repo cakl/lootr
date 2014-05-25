@@ -151,6 +151,7 @@
 		279C493019329AE400398948 /* lootSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lootSingle.json; path = Fixtures/lootSingle.json; sourceTree = "<group>"; };
 		279C493119329AE400398948 /* reportsSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = reportsSingle.json; path = Fixtures/reportsSingle.json; sourceTree = "<group>"; };
 		279C493219329AE400398948 /* usersSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersSingle.json; path = Fixtures/usersSingle.json; sourceTree = "<group>"; };
+		279C49371932A5A800398948 /* Linsebuehl_5m.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Linsebuehl_5m.gpx; sourceTree = "<group>"; };
 		279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Lootr.h"; sourceTree = "<group>"; };
 		279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Lootr.m"; sourceTree = "<group>"; };
 		279CD99D192834E4008DAA4B /* Linsebuehl.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Linsebuehl.gpx; sourceTree = "<group>"; };
@@ -523,6 +524,7 @@
 				27C7BF7D18D749F800761C84 /* UNIA.gpx */,
 				2734E74219168A7B00DD7F18 /* Fischermarktplatz.gpx */,
 				279CD99D192834E4008DAA4B /* Linsebuehl.gpx */,
+				279C49371932A5A800398948 /* Linsebuehl_5m.gpx */,
 			);
 			name = Resources;
 			sourceTree = "<group>";

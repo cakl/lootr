@@ -41,7 +41,6 @@
     return [self.locationDelegate isAuthorized];
 }
 
-//TODO: erklaeren warum kupplung an pure data object loot sinn macht: zuviel distance checks in GUI
 -(DistanceTreshold)getDistanceThresholdfromCurrentLocationToLoot:(Loot*)loot {
     NSError* error = nil;
     CLLocation* currentLocation = [self.locationDelegate getCurrentLocationWithError:&error];
