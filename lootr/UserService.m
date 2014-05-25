@@ -77,7 +77,7 @@ static NSString *const AFNetworkingAuthorizationHeaderKey = @"Authorization";
             return loggedInUser;
         }
     }
-    *error = [Errors produceErrorWithErrorCode:userServiceUserRecoveryError withUnderlyingError:nil];
+    *error = [Errors produceErrorWithErrorCode:userServiceUserRecoveryError withUnderlyingError:*error];
     return nil;
 }
 

@@ -119,7 +119,7 @@
         currentCoordinate.longitude = [NSNumber numberWithDouble:currentLocation.coordinate.longitude];
         NSString* currentCity = [self.locationDelegate getCurrentCityWithError:&cityError];
         loot.coord = currentCoordinate;
-        loot.coord.location = (cityError)?@"unknown":currentCity;
+        loot.coord.location = (cityError)?NSLocalizedString(@"servercallerfacade.cityunknown", nil):currentCity;
         loot.creator = currentUser;
         [self.serverCaller postLoot:loot onSuccess:^(Loot* loot) {
             success(loot);
@@ -143,7 +143,7 @@
                 failure(error);
             }];
         } else {
-            NSError* distanceError = [NSError errorWithDomain:@"ch.hsr.lootr" code:1000 userInfo:nil];
+            NSError* distanceError = [Errors produceErrorWithErrorCode:outofradiusError withUnderlyingError:nil];
             failure(distanceError);
         }
     } else {
@@ -164,6 +164,10 @@
     } else {
         failure(userError);
     }
+}
+
+-(void)handleFailure:(void (^)(NSError* error))failure withError:(NSError*) error{
+    
 }
 
 @end

@@ -22,7 +22,8 @@ enum {
     userServiceInvalidArgumentError = 1000,
     userServiceUserRecoveryError = 1001,
     locationDeterminationError = 1002,
-    geocodeDeterminationError = 1003
+    geocodeDeterminationError = 1003,
+    outofradiusError = 1004
 };
 
 @interface Errors : NSObject

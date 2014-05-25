@@ -14,3 +14,4 @@
 "1001_d" = "Failed to recover logged in user";
 "1002_d" = "Failed to determine the current location";
 "1003_d" = "Failed to determine the name of the current location";
+"1004_d" = "Failed to complete the action because you are out of the radius of this loot";
