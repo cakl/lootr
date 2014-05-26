@@ -76,6 +76,7 @@
 		27DAA9EE1918148B006B329D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAA9ED1918148B006B329D /* Security.framework */; };
 		27DAA9F119181605006B329D /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DAA9F019181605006B329D /* UserService.m */; };
 		27DAA9F719182773006B329D /* UserServiceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 27DAA9F619182773006B329D /* UserServiceTest.m */; };
+		27EB552D193386D900EBA41A /* DistanceTextFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 27EB552C193386D900EBA41A /* DistanceTextFormatter.m */; };
 		27F3160F190FEF9B0066D304 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77B218F217750000C91C /* CoreLocation.framework */; };
 		27F316131910319B0066D304 /* LocationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 27F316121910319B0066D304 /* LocationService.m */; };
 		27FBCFA3190FE38200677436 /* CoreLocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 27FBCFA2190FE38200677436 /* CoreLocationDelegate.m */; };
@@ -207,6 +208,8 @@
 		27DAA9EF19181605006B329D /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
 		27DAA9F019181605006B329D /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
 		27DAA9F619182773006B329D /* UserServiceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserServiceTest.m; sourceTree = "<group>"; };
+		27EB552B193386D900EBA41A /* DistanceTextFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistanceTextFormatter.h; sourceTree = "<group>"; };
+		27EB552C193386D900EBA41A /* DistanceTextFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistanceTextFormatter.m; sourceTree = "<group>"; };
 		27F316101910062A0066D304 /* Facade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facade.h; sourceTree = "<group>"; };
 		27F316111910319B0066D304 /* LocationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationService.h; sourceTree = "<group>"; };
 		27F316121910319B0066D304 /* LocationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationService.m; sourceTree = "<group>"; };
@@ -419,6 +422,8 @@
 				27514509191AAF6600846E36 /* Root */,
 				279C493B1932DD4B00398948 /* UIErrorHandler.h */,
 				279C493C1932DD4B00398948 /* UIErrorHandler.m */,
+				27EB552B193386D900EBA41A /* DistanceTextFormatter.h */,
+				27EB552C193386D900EBA41A /* DistanceTextFormatter.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -703,6 +708,7 @@
 				272758C318E74018003939AA /* RestKitServerCaller.m in Sources */,
 				27A7731D18F4CF790041EE05 /* Content.m in Sources */,
 				27C7BF4A18D7498100761C84 /* main.m in Sources */,
+				27EB552D193386D900EBA41A /* DistanceTextFormatter.m in Sources */,
 				27514508191AAF6100846E36 /* RootViewController.m in Sources */,
 				279284EE18E8652B002CB07A /* LootListViewController.m in Sources */,
 				27FD6FDE1929676E00734F11 /* LootContentHeader.m in Sources */,

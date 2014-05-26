@@ -13,6 +13,7 @@
 #import "LocationService.h"
 #import "LootContentViewController.h"
 #import "UIErrorHandler.h"
+#import "DistanceTextFormatter.h"
 
 @interface LootListViewController ()
 @property (nonatomic, strong) NSArray* loots;
@@ -101,7 +102,7 @@ static NSString *const showLootSegueIdentifier = @"showLoot";
     }
     
     cell.textLabel.text = loot.title;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"< %im", distanceThreshold];
+    cell.detailTextLabel.text = [DistanceTextFormatter distanceTextOfThreshold:distanceThreshold];
     return cell;
 }
 

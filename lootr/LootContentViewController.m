@@ -17,6 +17,7 @@
 #import <URBMediaFocusViewController.h>
 #import "LootContentHeader.h"
 #import "UIErrorHandler.h"
+#import "DistanceTextFormatter.h"
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
@@ -204,26 +205,8 @@ static int const sectionHeaderHeight = 40;
 #pragma mark - GUI Helper LocationService based
 
 -(void)setDistanceToLootLabelText {
-    NSString* distanceText = NSLocalizedString(@"lootcontentviewcontroller.content.distancelabel", nil);
-    NSString* distanceUnknownText = NSLocalizedString(@"lootcontentviewcontroller.content.distanceundeterminedlabel", nil);
     DistanceTreshold distanceThreshold = [self.locationService getDistanceThresholdfromCurrentLocationToLoot:self.loot];
-    switch(distanceThreshold) {
-        case DistanceTresholdUndetermined:
-        {
-            self.contentHeader.distanceToLootLabel.text = [NSString stringWithFormat:@"%@ %@", distanceText, distanceUnknownText];
-        }
-            break;
-        case DistanceTresholdMoreThanFiveHundredMeters:
-        {
-            self.contentHeader.distanceToLootLabel.text = [NSString stringWithFormat:@">%im %@", DistanceTresholdFiveHundredMeters, distanceText];
-        }
-            break;
-        default:
-        {
-            self.contentHeader.distanceToLootLabel.text = [NSString stringWithFormat:@"<%im %@", distanceThreshold, distanceText];
-        }
-            break;
-    }
+    self.contentHeader.distanceToLootLabel.text = [DistanceTextFormatter longDistanceTextOfThreshold:distanceThreshold];
 }
 
 -(void)blurContentOverlay:(FXBlurView*)blurOverlay {
