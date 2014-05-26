@@ -420,10 +420,7 @@
 				27740E3A1906DCD9004C85D9 /* Settings */,
 				2734E746191694F200DD7F18 /* Login */,
 				27514509191AAF6600846E36 /* Root */,
-				279C493B1932DD4B00398948 /* UIErrorHandler.h */,
-				279C493C1932DD4B00398948 /* UIErrorHandler.m */,
-				27EB552B193386D900EBA41A /* DistanceTextFormatter.h */,
-				27EB552C193386D900EBA41A /* DistanceTextFormatter.m */,
+				27EB552E193392A400EBA41A /* Util */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -542,6 +539,17 @@
 				279C49371932A5A800398948 /* Linsebuehl_5m.gpx */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		27EB552E193392A400EBA41A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				279C493B1932DD4B00398948 /* UIErrorHandler.h */,
+				279C493C1932DD4B00398948 /* UIErrorHandler.m */,
+				27EB552B193386D900EBA41A /* DistanceTextFormatter.h */,
+				27EB552C193386D900EBA41A /* DistanceTextFormatter.m */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 		27FD6FDF1929747300734F11 /* Elements */ = {
