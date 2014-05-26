@@ -12,6 +12,7 @@
 #import "AppDelegate.h"
 #import "RootViewController.h"
 #import "SVProgressHUD+Lootr.h"
+#import "UIErrorHandler.h"
 
 @interface LoginViewController ()
 @property (nonatomic, strong) UserService* userService;
@@ -88,6 +89,7 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
         [self performLogin];
     } onFailure:^(NSError* error) {
         [SVProgressHUD dismiss];
+        [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
     }];
 }
 

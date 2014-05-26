@@ -42,6 +42,8 @@
 		279C493419329AE400398948 /* lootSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 279C493019329AE400398948 /* lootSingle.json */; };
 		279C493519329AE400398948 /* reportsSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 279C493119329AE400398948 /* reportsSingle.json */; };
 		279C493619329AE400398948 /* usersSingle.json in Resources */ = {isa = PBXBuildFile; fileRef = 279C493219329AE400398948 /* usersSingle.json */; };
+		279C493A1932C9E100398948 /* ServerErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 279C49391932C9E100398948 /* ServerErrorHandler.m */; };
+		279C493D1932DD4B00398948 /* UIErrorHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 279C493C1932DD4B00398948 /* UIErrorHandler.m */; };
 		279CD99C192824B1008DAA4B /* SVProgressHUD+Lootr.m in Sources */ = {isa = PBXBuildFile; fileRef = 279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */; };
 		27A7731D18F4CF790041EE05 /* Content.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A7731C18F4CF790041EE05 /* Content.m */; };
 		27A971D419056A4D00F26A87 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27A971D319056A4D00F26A87 /* Accelerate.framework */; };
@@ -152,6 +154,10 @@
 		279C493119329AE400398948 /* reportsSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = reportsSingle.json; path = Fixtures/reportsSingle.json; sourceTree = "<group>"; };
 		279C493219329AE400398948 /* usersSingle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = usersSingle.json; path = Fixtures/usersSingle.json; sourceTree = "<group>"; };
 		279C49371932A5A800398948 /* Linsebuehl_5m.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Linsebuehl_5m.gpx; sourceTree = "<group>"; };
+		279C49381932C9E100398948 /* ServerErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerErrorHandler.h; sourceTree = "<group>"; };
+		279C49391932C9E100398948 /* ServerErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerErrorHandler.m; sourceTree = "<group>"; };
+		279C493B1932DD4B00398948 /* UIErrorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIErrorHandler.h; sourceTree = "<group>"; };
+		279C493C1932DD4B00398948 /* UIErrorHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIErrorHandler.m; sourceTree = "<group>"; };
 		279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SVProgressHUD+Lootr.h"; sourceTree = "<group>"; };
 		279CD99B192824B1008DAA4B /* SVProgressHUD+Lootr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SVProgressHUD+Lootr.m"; sourceTree = "<group>"; };
 		279CD99D192834E4008DAA4B /* Linsebuehl.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Linsebuehl.gpx; sourceTree = "<group>"; };
@@ -267,6 +273,8 @@
 				272758C218E74018003939AA /* RestKitServerCaller.m */,
 				27707C5D18F994240018DC10 /* ServerCallerFactory.h */,
 				27707C5E18F994240018DC10 /* ServerCallerFactory.m */,
+				279C49381932C9E100398948 /* ServerErrorHandler.h */,
+				279C49391932C9E100398948 /* ServerErrorHandler.m */,
 			);
 			name = "Technical Services";
 			sourceTree = "<group>";
@@ -409,6 +417,8 @@
 				27740E3A1906DCD9004C85D9 /* Settings */,
 				2734E746191694F200DD7F18 /* Login */,
 				27514509191AAF6600846E36 /* Root */,
+				279C493B1932DD4B00398948 /* UIErrorHandler.h */,
+				279C493C1932DD4B00398948 /* UIErrorHandler.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -552,7 +562,6 @@
 				27C7BF3518D7498100761C84 /* Frameworks */,
 				27C7BF3618D7498100761C84 /* Resources */,
 				0EBEC9B7B478497685E1C561 /* Copy Pods Resources */,
-				279C49231932798100398948 /* Objclean */,
 			);
 			buildRules = (
 			);
@@ -657,20 +666,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		279C49231932798100398948 /* Objclean */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Objclean;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then\n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"?!Pods\nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\"\nfi\nfi";
-		};
 		C7B0774FB6C04AEAA0C76387 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -694,6 +689,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				279CD99C192824B1008DAA4B /* SVProgressHUD+Lootr.m in Sources */,
+				279C493D1932DD4B00398948 /* UIErrorHandler.m in Sources */,
 				2707D8F719116375009C8669 /* ServerCallerFacadeFactory.m in Sources */,
 				2734E745191694ED00DD7F18 /* LoginViewController.m in Sources */,
 				2747BE77191C15F800135648 /* SettingsForm.m in Sources */,
@@ -712,6 +708,7 @@
 				27FD6FDE1929676E00734F11 /* LootContentHeader.m in Sources */,
 				27C7BF7218D7499F00761C84 /* LootMapViewController.m in Sources */,
 				278153241917C62E00D9B1A1 /* loginTextField.m in Sources */,
+				279C493A1932C9E100398948 /* ServerErrorHandler.m in Sources */,
 				2730DE261902E61900436E15 /* ImageViewTableViewCell.m in Sources */,
 				274C06D418FB631200B0429A /* CreateLootForm.m in Sources */,
 				27346CEC190DDD4E0085B556 /* ServerCallerFacade.m in Sources */,

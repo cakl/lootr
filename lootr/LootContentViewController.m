@@ -16,6 +16,7 @@
 #import "SVProgressHUD+Lootr.h"
 #import <URBMediaFocusViewController.h>
 #import "LootContentHeader.h"
+#import "UIErrorHandler.h"
 
 @interface LootContentViewController () <UIViewControllerTransitioningDelegate>
 @property (nonatomic, strong) NSArray* lootContents;
@@ -295,7 +296,7 @@ static int const sectionHeaderHeight = 40;
         self.lootContents = [self.loot.contents allObjects];
         [self.tableView reloadData];
     } onFailure:^(NSError* error) {
-        NSLog(@"%@", error);
+        [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
     }];
 }
 
@@ -306,7 +307,7 @@ static int const sectionHeaderHeight = 40;
         [self reloadLootWithContents];
     } onFailure:^(NSError* error) {
         [SVProgressHUD dismiss];
-        NSLog(@"%@", error);
+        [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
     }];
 }
 
@@ -317,7 +318,7 @@ static int const sectionHeaderHeight = 40;
         NSLog(@"success");
     } onFailure:^(NSError* error) {
         [SVProgressHUD dismiss];
-        NSLog(@"failure");
+        [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
     }];
 }
 

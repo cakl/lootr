@@ -12,6 +12,7 @@
 #import "ServerCallerFacadeFactory.h"
 #import "LocationService.h"
 #import "LootContentViewController.h"
+#import "UIErrorHandler.h"
 
 @interface LootListViewController ()
 @property (nonatomic, strong) NSArray* loots;
@@ -125,7 +126,7 @@ static NSString *const showLootSegueIdentifier = @"showLoot";
         self.loots = loots;
         [self.tableView reloadData];
     } onFailure:^(NSError* error) {
-        NSLog(@"%@", error);
+        [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
     }];
 }
 

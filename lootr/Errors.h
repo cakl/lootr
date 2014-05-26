@@ -17,13 +17,17 @@
 
 extern NSString *const errorDomain;
 
-//TODO: refactor error names
 enum {
     userServiceInvalidArgumentError = 1000,
     userServiceUserRecoveryError = 1001,
     locationDeterminationError = 1002,
     geocodeDeterminationError = 1003,
-    outofradiusError = 1004
+    outofradiusError = 1004,
+    unauthorizedHTTPRequestError = 1005,
+    forbiddenHTTPRequestError = 1006,
+    serverSideError = 1007,
+    defaultServerCallerError = 1008,
+    notConnectedToInternetError = 1009
 };
 
 @interface Errors : NSObject

@@ -10,6 +10,7 @@
 #import "CreateLootForm.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
+#import "UIErrorHandler.h"
 #import <SVProgressHUD.h>
 
 @interface CreateLootViewController ()
@@ -106,8 +107,8 @@
         [self dismissSelfViewController];
         [SVProgressHUD dismiss];
     } onFailure:^(NSError* error) {
-        NSLog(@"%@", error);
         [SVProgressHUD dismiss];
+        [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
     }];
 }
 

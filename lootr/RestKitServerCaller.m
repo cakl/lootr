@@ -7,6 +7,7 @@
 //
 
 #import "RestKitServerCaller.h"
+#import "ServerErrorHandler.h"
 
 @interface RestKitServerCaller ()
 @property (nonatomic, strong) RKObjectManager* objectManager;
@@ -38,42 +39,58 @@ static CGFloat const compressionQuality = 0.8;
     return self;
 }
 
+-(void)getObjectsAtPath:(NSString*)path parameters:(NSDictionary *)parameters success:(void (^)(RKObjectRequestOperation *operation, RKMappingResult *mappingResult))success failure:(void (^)(RKObjectRequestOperation *operation, NSError *error))failure {
+    [self.objectManager getObjectsAtPath:path parameters:parameters success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success(operation, mappingResult);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(operation, [ServerErrorHandler selectErrorByOperation:operation andError:error]);
+    }];
+}
+
+-(void)postObject:(id)object path:(NSString*)path parameters:(NSDictionary *)parameters success:(void (^)(RKObjectRequestOperation *operation, RKMappingResult *mappingResult))success failure:(void (^)(RKObjectRequestOperation *operation, NSError *error))failure{
+    [self.objectManager postObject:object path:path parameters:parameters success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        success(operation, mappingResult);
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        failure(operation, [ServerErrorHandler selectErrorByOperation:operation andError:error]);
+    }];
+}
+
 -(void)getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude inDistance:(NSNumber*)distance onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure {
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:lootsByDistanceFormat, apiPath, latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
+    [self getObjectsAtPath:[NSString stringWithFormat:lootsByDistanceFormat, apiPath, latitude, longitude, distance] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([mappingResult array]);
-    } failure:^(RKObjectRequestOperation* operation, NSError* error) {
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
 
 -(void)getLootByIdentifier:(NSNumber*)identifier onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure {
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:lootByIdentifierFormat, apiPath, identifier] parameters:nil success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
+    [self getObjectsAtPath:[NSString stringWithFormat:lootByIdentifierFormat, apiPath, identifier] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
-    } failure:^(RKObjectRequestOperation* operation, NSError* error) {
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
 
 -(void)getLootsAtLatitude:(NSNumber*)latitude andLongitude:(NSNumber*)longitude withLimitedCount:(NSNumber*)count onSuccess:(void(^)(NSArray* loots))success onFailure:(void(^)(NSError* error))failure {
-    [self.objectManager getObjectsAtPath:[NSString stringWithFormat:lootByCountFormat, apiPath, latitude, longitude, count] parameters:nil success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
+    [self getObjectsAtPath:[NSString stringWithFormat:lootByCountFormat, apiPath, latitude, longitude, count] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([mappingResult array]);
-    } failure:^(RKObjectRequestOperation* operation, NSError* error) {
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
 
 -(void)postLoot:(Loot*)loot onSuccess:(void(^)(Loot* loot))success onFailure:(void(^)(NSError* error))failure {
-    [self.objectManager postObject:loot path:[NSString stringWithFormat:postLootFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
+    [self postObject:loot path:[NSString stringWithFormat:postLootFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
-    } failure:^(RKObjectRequestOperation* operation, NSError* error) {
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
 
 -(void)postUser:(User*)user onSuccess:(void(^)(User* user))success onFailure:(void(^)(NSError* error))failure {
-    [self.objectManager postObject:user path:[NSString stringWithFormat:postUserFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
+    [self postObject:user path:[NSString stringWithFormat:postUserFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
-    } failure:^(RKObjectRequestOperation* operation, NSError* error) {
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }
@@ -89,15 +106,15 @@ static CGFloat const compressionQuality = 0.8;
     RKObjectRequestOperation* operation = [self.objectManager objectRequestOperationWithRequest:request success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
         success([[mappingResult array] firstObject]);
     } failure:^(RKObjectRequestOperation* operation, NSError* error) {
-        failure(error);
+        failure([ServerErrorHandler selectErrorByOperation:operation andError:error]);
     }];
     [self.objectManager enqueueObjectRequestOperation:operation];
 }
 
 -(void)postReport:(Report*)report onSuccess:(void(^)(Report* report))success onFailure:(void(^)(NSError* error))failure {
-    [self.objectManager postObject:report path:[NSString stringWithFormat:postReportFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation* operation, RKMappingResult* mappingResult) {
+    [self postObject:report path:[NSString stringWithFormat:postReportFormat, apiPath] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         success([[mappingResult array] firstObject]);
-    } failure:^(RKObjectRequestOperation* operation, NSError* error) {
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         failure(error);
     }];
 }

@@ -12,6 +12,7 @@
 #import "CreateLootViewController.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
+#import "UIErrorHandler.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;
@@ -228,7 +229,7 @@ static double const degreeToMetersFactor = 111;
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:newLoots];
     } onFailure:^(NSError* error) {
-        NSLog(@"%@", error);
+        //TODO:log
     }];
 }
 
