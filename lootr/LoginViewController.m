@@ -23,6 +23,7 @@
 
 static NSString *const loginTextFieldIconName = @"LoginUserFieldIcon";
 static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
+static NSString *const registerURL = @"http://lootrapp.com/registerWebView.html";
 
 #pragma mark - Initialization
 
@@ -62,6 +63,10 @@ static NSString *const passwortTextFieldIconName = @"PasswordUserFieldIcon";
     loginUser.passWord = self.passwordTextField.text;
     [self.view endEditing:YES];
     [self loginUser:loginUser];
+}
+
+-(IBAction)registerButtonTouchUpInside:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:registerURL]];
 }
 
 #pragma mark - GUI helper

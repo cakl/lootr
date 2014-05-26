@@ -273,6 +273,18 @@
                                     <action selector="loginButtonTouchUpInside:" destination="pjX-ha-KRj" eventType="touchUpInside" id="IaH-eD-BAO"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zV3-U5-BBP">
+                                <rect key="frame" x="30" y="215" width="260" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                <state key="normal" title="Register ❯">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerButtonTouchUpInside:" destination="pjX-ha-KRj" eventType="touchUpInside" id="X5u-0l-cwf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -280,6 +292,7 @@
                         <outlet property="emailTextField" destination="mpp-iX-pms" id="6ce-uP-VbT"/>
                         <outlet property="loginButton" destination="Tu5-yC-sCs" id="lmc-CS-4IC"/>
                         <outlet property="passwordTextField" destination="yn8-06-3nQ" id="WeE-nD-al1"/>
+                        <outlet property="registerButton" destination="zV3-U5-BBP" id="vJJ-pX-fQY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhS-Ur-ZRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
