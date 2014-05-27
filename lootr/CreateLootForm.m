@@ -12,14 +12,17 @@
 
 -(NSArray*)fields {
     return @[
-             @"title",
+             //@"title",
+             @{FXFormFieldKey: @"title",
+               FXFormFieldTitle: NSLocalizedString(@"createlootform.title", nil)
+               },
              @{FXFormFieldKey: @"summary",
                FXFormFieldType: FXFormFieldTypeLongText,
                FXFormFieldFooter: NSLocalizedString(@"createlootform.summary.footer", nil),
-               FXFormFieldTitle: @"Description"
+               FXFormFieldTitle: NSLocalizedString(@"createlootform.summary.title", nil)
                },
              @{FXFormFieldKey: @"accuracy",
-               FXFormFieldHeader: @"Accurary",
+               FXFormFieldHeader: NSLocalizedString(@"createlootform.accuracy.formheader", nil),
                FXFormFieldOptions: @[@(AccuracyNear), @(AccuracyDefault), @(AccuracyWide)],
                FXFormFieldInline :@YES , FXFormFieldFooter: NSLocalizedString(@"createlootform.accuracy.footer", nil),
                FXFormFieldValueTransformer: ^(id input){
