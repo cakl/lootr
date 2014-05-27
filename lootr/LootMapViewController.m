@@ -133,55 +133,17 @@ static double const degreeToMetersFactor = 111;
 #pragma mark - MKMapViewDelegate
 
 -(void)mapView:(MKMapView*)mapView regionWillChangeAnimated:(BOOL)animated {
-    
-//    [self DEBUGlootCreatorAtCoordinate:self.mapView.centerCoordinate];
-//    NSLog(@"regionDidChangeAnimated");
-//    NSLog(@"Span latDelta:%f, longDelta:%f", self.mapView.region.span.latitudeDelta, self.mapView.region.span.longitudeDelta);
     MKCoordinateRegion mapRegion;
     mapRegion.center = mapView.centerCoordinate;
-//    mapRegion.span.latitudeDelta = 0.3;
-//    mapRegion.span.longitudeDelta = 0.3;
-//    double lat = mapRegion.center.latitude;
-//    double lng = mapRegion.center.longitude;
-//    CLLocation *before = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
-//    CLLocation *now = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-//
-//    CLLocationDistance distance = ([before distanceFromLocation:now]);
-//    NSLog(@"Scrolled distance: %@", [NSString stringWithFormat:@"%.02f", distance]);
-    
-    //if( distance > scrollUpdateDistance )
     double widthOfViewPort = self.mapView.region.span.longitudeDelta/4*111*1000;
     CLLocation* centerLocation = [[CLLocation alloc] initWithLatitude:self.mapView.centerCoordinate.latitude longitude:self.mapView.centerCoordinate.longitude];
     CLLocation* lastLocation = [[CLLocation alloc] initWithLatitude:self.lastLocationCoordinate.latitude longitude:self.lastLocationCoordinate.longitude];
     double distanceBetween = [lastLocation distanceFromLocation:centerLocation];
-    NSLog(@"widhofviewport = %f --- distancebetween = %f", widthOfViewPort, distanceBetween);
     if(widthOfViewPort < distanceBetween) {
-        NSLog(@"Center Latitude: %f Longitude: %f", [self.mapView centerCoordinate].latitude, [self.mapView centerCoordinate].longitude);
         [self loadLootsAtCoordinate:[self.mapView centerCoordinate]];
-        
         self.lastLocationCoordinate = CLLocationCoordinate2DMake(mapRegion.center.latitude, mapRegion.center.longitude);
     }
 }
-//-(void)DEBUGlootCreatorAtCoordinate:(CLLocationCoordinate2D)coordinate
-//{
-//    id<ServerCaller> serverCaller = [ServerCallerFactory createServerCaller];
-//    Loot* tempLoot = [Loot new];
-//    tempLoot.title = @"AUTOMATIC";
-//    tempLoot.summary = @"blaablalblba";
-//    tempLoot.created = [NSDate date];
-//    tempLoot.radius = [NSNumber numberWithInt:50];
-//    User* user = [User new];
-//    user.userName = @"Mario";
-//    user.email = @"mario@test.ch";
-//    tempLoot.creator = user;
-//    Coordinate* coord = [[Coordinate alloc] initWithCoordinate2D:coordinate];
-//    tempLoot.coord = coord;
-//    [serverCaller postLoot:tempLoot onSuccess:^(Loot *loot) {
-//        NSLog(@"ROBOT SUCCESSFULL");
-//    } onFailure:^(NSError *error) {
-//        
-//    }];
-//}
 
 -(MKAnnotationView*)mapView:(MKMapView*)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
     if([annotation isKindOfClass:[Loot class]]) {
@@ -229,7 +191,6 @@ static double const degreeToMetersFactor = 111;
         [self.mapView removeAnnotations:self.mapView.annotations];
         [self.mapView addAnnotations:newLoots];
     } onFailure:^(NSError* error) {
-        //TODO:log
     }];
 }
 

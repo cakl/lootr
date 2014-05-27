@@ -63,7 +63,6 @@ static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     
     [self.serverCaller getLootByIdentifier:[NSNumber numberWithInt:1] onSuccess:^(Loot* loot) {
         //then
-        NSLog(@"%@", loot);
         XCTAssertNotNil(loot, @"loaded loot is nil");
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError* error) {
@@ -100,11 +99,9 @@ static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     
     [self.serverCaller postLoot:aLoot onSuccess:^(Loot* loot) {
         XCTAssertNotNil(loot, @"loaded loot is nil");
-        NSLog(@"%@", loot);
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError* error) {
         XCTFail(@"Failure returned");
-        NSLog(@"%@", error);
         dispatch_semaphore_signal(semaphore);
     }];
     while(dispatch_semaphore_wait(semaphore, DISPATCH_TIME_NOW)) [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate dateWithTimeIntervalSinceNow:10]];
@@ -121,11 +118,9 @@ static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
     
     [self.serverCaller postUser:user onSuccess:^(User* user) {
         XCTAssertNotNil(user, @"loaded loot is nil");
-        NSLog(@"%@", user);
         dispatch_semaphore_signal(semaphore);
     } onFailure:^(NSError* error) {
         XCTFail(@"Failure returned");
-        NSLog(@"%@", error);
         dispatch_semaphore_signal(semaphore);
     }];
     

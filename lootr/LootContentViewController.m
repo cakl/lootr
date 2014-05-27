@@ -298,7 +298,6 @@ static int const sectionHeaderHeight = 40;
     [SVProgressHUD showApropriateHUD];
     [self.facade postReport:report onSuccess:^(Report* loot) {
         [SVProgressHUD dismiss];
-        NSLog(@"success");
     } onFailure:^(NSError* error) {
         [SVProgressHUD dismiss];
         [[UIErrorHandler generateAlertViewWithError:error delegate:self cancelButtonTitle:NSLocalizedString(@"ok", nil) otherButtonTitle:nil] show];
