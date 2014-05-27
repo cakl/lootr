@@ -30,7 +30,6 @@
 		27549009192E8A4B009D5490 /* LocationDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 27549008192E8A4B009D5490 /* LocationDelegateTests.m */; };
 		2754900F192E97BE009D5490 /* TestsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2754900E192E97BE009D5490 /* TestsAppDelegate.m */; };
 		2761D843192A90F100386D8D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2761D845192A90F100386D8D /* Localizable.strings */; };
-		2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */; };
 		27707C5F18F994240018DC10 /* ServerCallerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 27707C5E18F994240018DC10 /* ServerCallerFactory.m */; };
 		277BCE838753443FA7C58FE1 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 694B1DA0DB63438A954FE498 /* libPods.a */; };
 		278153241917C62E00D9B1A1 /* loginTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 278153231917C62E00D9B1A1 /* loginTextField.m */; };
@@ -70,7 +69,6 @@
 		27C7BF7E18D749F800761C84 /* UNIA.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 27C7BF7D18D749F800761C84 /* UNIA.gpx */; };
 		27CF77B118F215A10000C91C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27491F4618D74C0C005E3F38 /* MapKit.framework */; };
 		27CF77B318F217750000C91C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77B218F217750000C91C /* CoreLocation.framework */; };
-		27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */ = {isa = PBXBuildFile; fileRef = 27CF77C018F22EDA0000C91C /* MKMapViewMock.m */; };
 		27CF77C418F2309F0000C91C /* libPods-OCHamcrest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77C218F2309F0000C91C /* libPods-OCHamcrest.a */; };
 		27CF77C518F2309F0000C91C /* libPods-OCMockito.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 27CF77C318F2309F0000C91C /* libPods-OCMockito.a */; };
 		27DAA9EE1918148B006B329D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27DAA9ED1918148B006B329D /* Security.framework */; };
@@ -136,7 +134,6 @@
 		2754900D192E97BE009D5490 /* TestsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestsAppDelegate.h; sourceTree = "<group>"; };
 		2754900E192E97BE009D5490 /* TestsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestsAppDelegate.m; sourceTree = "<group>"; };
 		2761D844192A90F100386D8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootMapViewControllerTest.m; sourceTree = "<group>"; };
 		27707C5D18F994240018DC10 /* ServerCallerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerCallerFactory.h; sourceTree = "<group>"; };
 		27707C5E18F994240018DC10 /* ServerCallerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerFactory.m; sourceTree = "<group>"; };
 		278153221917C62E00D9B1A1 /* loginTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = loginTextField.h; sourceTree = "<group>"; };
@@ -200,8 +197,6 @@
 		27CF77B618F217F70000C91C /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		27CF77B818F218650000C91C /* libPods-OCHamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCHamcrest.a"; path = "Pods/build/Debug-iphoneos/libPods-OCHamcrest.a"; sourceTree = "<group>"; };
 		27CF77B918F218650000C91C /* libPods-OCMockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMockito.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMockito.a"; sourceTree = "<group>"; };
-		27CF77BF18F22EDA0000C91C /* MKMapViewMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MKMapViewMock.h; sourceTree = "<group>"; };
-		27CF77C018F22EDA0000C91C /* MKMapViewMock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKMapViewMock.m; sourceTree = "<group>"; };
 		27CF77C218F2309F0000C91C /* libPods-OCHamcrest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCHamcrest.a"; path = "Pods/build/Debug-iphoneos/libPods-OCHamcrest.a"; sourceTree = "<group>"; };
 		27CF77C318F2309F0000C91C /* libPods-OCMockito.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-OCMockito.a"; path = "Pods/build/Debug-iphoneos/libPods-OCMockito.a"; sourceTree = "<group>"; };
 		27DAA9ED1918148B006B329D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -516,9 +511,6 @@
 				27C7BF6118D7498100761C84 /* Supporting Files */,
 				2739454218E37ABB00677E60 /* RKObjectMapperInitializerTests.m */,
 				272758BD18E732B8003939AA /* ServerCallerTests.m */,
-				2764653218F1E45F0030F6EC /* LootMapViewControllerTest.m */,
-				27CF77BF18F22EDA0000C91C /* MKMapViewMock.h */,
-				27CF77C018F22EDA0000C91C /* MKMapViewMock.m */,
 				27DAA9F619182773006B329D /* UserServiceTest.m */,
 				27549008192E8A4B009D5490 /* LocationDelegateTests.m */,
 				2724298C1930037C00AB7CE6 /* LocationServiceTests.m */,
@@ -754,10 +746,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2739454318E37ABB00677E60 /* RKObjectMapperInitializerTests.m in Sources */,
-				2764653318F1E45F0030F6EC /* LootMapViewControllerTest.m in Sources */,
 				27549009192E8A4B009D5490 /* LocationDelegateTests.m in Sources */,
 				27DAA9F719182773006B329D /* UserServiceTest.m in Sources */,
-				27CF77C118F22EDA0000C91C /* MKMapViewMock.m in Sources */,
 				272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */,
 				2724298D1930037C00AB7CE6 /* LocationServiceTests.m in Sources */,
 				27C7BF6718D7498200761C84 /* lootrTests.m in Sources */,

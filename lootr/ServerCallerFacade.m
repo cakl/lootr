@@ -166,8 +166,4 @@
     }
 }
 
--(void)handleFailure:(void (^)(NSError* error))failure withError:(NSError*) error{
-    
-}
-
 @end
