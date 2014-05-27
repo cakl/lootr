@@ -15,3 +15,7 @@ open lootr.xcworkspace
 more information on http://lootrapp.com
 
 Icons used from http://icons8.com/
+
+Coveralls Script copied from [Jon Reid](http://qualitycoding.org/) of [OCMockito](https://github.com/jonreid/OCMockito)
+
+The Pods that are used can be looked up in the Podfile
