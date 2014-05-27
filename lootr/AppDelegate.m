@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RKObjectManagerHelper.h"
 #import "RootViewController.h"
+#import "Constants.h"
 
 @interface AppDelegate ()
 
@@ -17,7 +18,7 @@
 @implementation AppDelegate
 
 -(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-    RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:@"http://152.96.56.70:8080"]];
+    RKObjectManager* objectManager = [RKObjectManager managerWithBaseURL:[NSURL URLWithString:serverURL]];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
     [self.window makeKeyAndVisible];
     return YES;

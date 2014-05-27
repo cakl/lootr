@@ -11,5 +11,6 @@
 @implementation Constants
 
 NSString *const keychainUserServiceName = @"ch.hsr.lootr";
+NSString *const serverURL = @"http://152.96.56.70:8080";
 
 @end

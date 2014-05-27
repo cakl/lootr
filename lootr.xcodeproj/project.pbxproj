@@ -266,6 +266,17 @@
 			name = Stubs;
 			sourceTree = "<group>";
 		};
+		272DF0B21935107900E4D950 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				279C49241932885F00398948 /* Constants.h */,
+				279C49251932885F00398948 /* Constants.m */,
+				27BEC13C192C0D6800720A00 /* Errors.h */,
+				27BEC13D192C0D6800720A00 /* Errors.m */,
+			);
+			name = Foundation;
+			sourceTree = "<group>";
+		};
 		2732A36118F59E7D00C2A544 /* Technical Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,8 +296,6 @@
 		2732B94118DFBA100068E18B /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				274C941618E8EF15006A50F7 /* Loot+Annotation.h */,
-				274C941718E8EF15006A50F7 /* Loot+Annotation.m */,
 				27C7BF7718D749B600761C84 /* Loot.h */,
 				27C7BF7818D749B600761C84 /* Loot.m */,
 				27C7BF7918D749B600761C84 /* User.h */,
@@ -297,7 +306,6 @@
 				27A7731C18F4CF790041EE05 /* Content.m */,
 				273D918B19241CB0003B53DB /* Report.h */,
 				273D918C19241CB0003B53DB /* Report.m */,
-				27346CED190DDD530085B556 /* Services */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -327,8 +335,6 @@
 				2707D8F619116375009C8669 /* ServerCallerFacadeFactory.m */,
 				27DAA9EF19181605006B329D /* UserService.h */,
 				27DAA9F019181605006B329D /* UserService.m */,
-				27BEC13C192C0D6800720A00 /* Errors.h */,
-				27BEC13D192C0D6800720A00 /* Errors.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -478,11 +484,11 @@
 				27C7BF4D18D7498100761C84 /* AppDelegate.m */,
 				2754900D192E97BE009D5490 /* TestsAppDelegate.h */,
 				2754900E192E97BE009D5490 /* TestsAppDelegate.m */,
-				279C49241932885F00398948 /* Constants.h */,
-				279C49251932885F00398948 /* Constants.m */,
 				2776D33B18F4AD940012934A /* UI */,
-				2732B94118DFBA100068E18B /* Domain */,
+				27346CED190DDD530085B556 /* Services */,
 				2732A36118F59E7D00C2A544 /* Technical Services */,
+				2732B94118DFBA100068E18B /* Domain */,
+				272DF0B21935107900E4D950 /* Foundation */,
 				27FD6FDA19291C5300734F11 /* Images.xcassets */,
 				27C7BF4418D7498100761C84 /* Supporting Files */,
 				2761D845192A90F100386D8D /* Localizable.strings */,
@@ -555,6 +561,8 @@
 		27FD6FDF1929747300734F11 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				274C941618E8EF15006A50F7 /* Loot+Annotation.h */,
+				274C941718E8EF15006A50F7 /* Loot+Annotation.m */,
 				27FD6FDC1929676E00734F11 /* LootContentHeader.h */,
 				27FD6FDD1929676E00734F11 /* LootContentHeader.m */,
 				279CD99A192824B1008DAA4B /* SVProgressHUD+Lootr.h */,

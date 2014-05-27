@@ -11,5 +11,6 @@
 @interface Constants : NSObject
 
 extern NSString *const keychainUserServiceName;
+extern NSString *const serverURL;
 
 @end
