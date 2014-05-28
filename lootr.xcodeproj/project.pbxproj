@@ -12,6 +12,7 @@
 		272429901930171100AB7CE6 /* CoreLocationDelegateStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 2724298F1930171100AB7CE6 /* CoreLocationDelegateStub.m */; };
 		272758BE18E732B8003939AA /* ServerCallerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758BD18E732B8003939AA /* ServerCallerTests.m */; };
 		272758C318E74018003939AA /* RestKitServerCaller.m in Sources */ = {isa = PBXBuildFile; fileRef = 272758C218E74018003939AA /* RestKitServerCaller.m */; };
+		272989AC1936729E0085761C /* TestConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 272989AB1936729E0085761C /* TestConstants.m */; };
 		272F805A1900577E00D1A0AB /* LootContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 272F80591900577E00D1A0AB /* LootContentViewController.m */; };
 		2730DE261902E61900436E15 /* ImageViewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2730DE251902E61900436E15 /* ImageViewTableViewCell.m */; };
 		2732B94018DFB8130068E18B /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2732B93F18DFB8130068E18B /* Coordinate.m */; };
@@ -102,6 +103,8 @@
 		272758BD18E732B8003939AA /* ServerCallerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerCallerTests.m; sourceTree = "<group>"; };
 		272758C118E74018003939AA /* RestKitServerCaller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestKitServerCaller.h; sourceTree = "<group>"; };
 		272758C218E74018003939AA /* RestKitServerCaller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestKitServerCaller.m; sourceTree = "<group>"; };
+		272989AA1936729E0085761C /* TestConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConstants.h; sourceTree = "<group>"; };
+		272989AB1936729E0085761C /* TestConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConstants.m; sourceTree = "<group>"; };
 		272F80581900577E00D1A0AB /* LootContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LootContentViewController.h; sourceTree = "<group>"; };
 		272F80591900577E00D1A0AB /* LootContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LootContentViewController.m; sourceTree = "<group>"; };
 		2730DE241902E61900436E15 /* ImageViewTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewTableViewCell.h; sourceTree = "<group>"; };
@@ -515,6 +518,8 @@
 				27549008192E8A4B009D5490 /* LocationDelegateTests.m */,
 				2724298C1930037C00AB7CE6 /* LocationServiceTests.m */,
 				272429911930171400AB7CE6 /* Stubs */,
+				272989AA1936729E0085761C /* TestConstants.h */,
+				272989AB1936729E0085761C /* TestConstants.m */,
 			);
 			path = lootrTests;
 			sourceTree = "<group>";
@@ -752,6 +757,7 @@
 				2724298D1930037C00AB7CE6 /* LocationServiceTests.m in Sources */,
 				27C7BF6718D7498200761C84 /* lootrTests.m in Sources */,
 				272429901930171100AB7CE6 /* CoreLocationDelegateStub.m in Sources */,
+				272989AC1936729E0085761C /* TestConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

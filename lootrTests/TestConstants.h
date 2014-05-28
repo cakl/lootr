@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface TestConstants : NSObject
+extern NSString *const mockingServerURL;
 
 @end

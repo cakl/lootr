@@ -12,6 +12,7 @@
 #import "RKObjectManagerHelper.h"
 #import "Loot.h"
 #import "Report.h"
+#import "TestConstants.h"
 
 @interface RKObjectMapperInitializerTests : XCTestCase
 -(RKResponseDescriptor*)getResponseDescriptorByPathPattern:(NSString*)pathPattern onObjectManager:(RKObjectManager*)objectManager;
@@ -20,7 +21,6 @@
 
 @implementation RKObjectMapperInitializerTests
 
-static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com/";
 static NSString *const bundleIdentifier = @"ch.hsr.lootrTests";
 static NSString *const lootsKeyPath = @"loots";
 static NSString *const contentsKeyPath = @"contents";
@@ -35,7 +35,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
     [super setUp];
     NSBundle* testTargetBundle = [NSBundle bundleWithIdentifier:bundleIdentifier];
     [RKTestFixture setFixtureBundle:testTargetBundle];
-    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    [RKTestFactory setBaseURL:[NSURL URLWithString:mockingServerURL]];
     RKObjectManager* objectManager = [RKTestFactory objectManager];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
 }
@@ -69,7 +69,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
     } else {
-        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", apiUrlTest, pathUnderTest]];
+        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", mockingServerURL, pathUnderTest]];
         NSURLRequest* request = [NSURLRequest requestWithURL:[URL absoluteURL]];
         RKObjectRequestOperation* requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
         //when
@@ -93,7 +93,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
     } else {
-        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", apiUrlTest, pathUnderTest]];
+        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", mockingServerURL, pathUnderTest]];
         NSURLRequest* request = [NSURLRequest requestWithURL:[URL absoluteURL]];
         RKObjectRequestOperation* requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
         //when
@@ -115,7 +115,7 @@ static NSString *const reportSingleFileName = @"reportsSingle.json";
     if(responseDescriptor == nil) {
         XCTFail(@"Reponse Descriptor under Test was not found on object Manager under Test");
     } else {
-        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", apiUrlTest, pathUnderTest]];
+        NSURL* URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", mockingServerURL, pathUnderTest]];
         NSURLRequest* request = [NSURLRequest requestWithURL:[URL absoluteURL]];
         RKObjectRequestOperation* requestOperation = [[RKObjectRequestOperation alloc] initWithRequest:request responseDescriptors:@[ responseDescriptor ]];
         //when

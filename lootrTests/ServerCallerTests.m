@@ -13,6 +13,7 @@
 #import "RestKitServerCaller.h"
 #import "ServerCaller.h"
 #import "Loot.h"
+#import "TestConstants.h"
 
 @interface ServerCallerTests : XCTestCase
 @property (nonatomic, strong) id<ServerCaller> serverCaller;
@@ -21,11 +22,9 @@
 
 @implementation ServerCallerTests
 
-static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
-
 -(void)setUp {
     [super setUp];
-    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    [RKTestFactory setBaseURL:[NSURL URLWithString:mockingServerURL]];
     RKObjectManager* objectManager = [RKTestFactory objectManager];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
     self.serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];

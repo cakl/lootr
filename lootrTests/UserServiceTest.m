@@ -20,6 +20,7 @@
 #import <OCHamcrest/OCHamcrest.h>
 #define MOCKITO_SHORTHAND
 #import <OCMockito/OCMockito.h>
+#import "TestConstants.h"
 
 @interface UserServiceTest : XCTestCase
 @property (nonatomic, strong) UserService* userService;
@@ -32,11 +33,10 @@
 
 static NSString *const keyChainServiceName = @"lootrKeyChainTest";
 static NSString *const userDefaultsSuiteName = @"testUserDefaults";
-static NSString *const apiUrlTest = @"http://salty-shelf-8389.herokuapp.com";
 
 -(void)setUp {
     [super setUp];
-    [RKTestFactory setBaseURL:[NSURL URLWithString:apiUrlTest]];
+    [RKTestFactory setBaseURL:[NSURL URLWithString:mockingServerURL]];
     RKObjectManager* objectManager = [RKTestFactory objectManager];
     [RKObjectManagerHelper configureRKObjectManagerWithRequestRescriptors:objectManager];
     self.serverCaller = [[RestKitServerCaller alloc] initWithObjectManager:objectManager];
