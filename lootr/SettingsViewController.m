@@ -66,8 +66,8 @@ static NSString *const tabBarImageIconName = @"SettingsTabIconActive";
     NSError* error = nil;
     User* user = [self.userService getLoggedInUserWithError:&error];
     if(!error) {
-        self.settingsForm.userName = user.userName;
-        self.settingsForm.email = user.email;
+        settingsForm.userName = user.userName;
+        settingsForm.email = user.email;
         [self.tableView reloadData];
     }
 }

@@ -285,7 +285,7 @@ static int const sectionHeaderHeight = 40;
 
 -(void)postContent:(Content*)content onLoot:(Loot*)loot withImage:(UIImage*)image {
     [SVProgressHUD showApropriateHUD];
-    [self.facade postContent:content onLoot:self.loot withImage:image onSuccess:^(Content* loot) {
+    [self.facade postContent:content onLoot:loot withImage:image onSuccess:^(Content* loot) {
         [SVProgressHUD dismiss];
         [self reloadLootWithContents];
     } onFailure:^(NSError* error) {
