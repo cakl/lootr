@@ -12,10 +12,10 @@
 @implementation ServerErrorHandler
 
 +(NSError*)selectErrorByOperation:(RKObjectRequestOperation*)operation andError:(NSError*)error {
-    if([operation.error.domain isEqualToString:RKErrorDomain]){
+    if([operation.error.domain isEqualToString:RKErrorDomain]) {
         NSHTTPURLResponse* urlResponse = operation.HTTPRequestOperation.response;
-        if(urlResponse){
-            switch (urlResponse.statusCode) {
+        if(urlResponse) {
+            switch(urlResponse.statusCode) {
                 case 401:
                     return [Errors produceErrorWithErrorCode:unauthorizedHTTPRequestError withUnderlyingError:operation.error];
                 case 403:
@@ -26,8 +26,8 @@
                     return [Errors produceErrorWithErrorCode:defaultServerCallerError withUnderlyingError:operation.error];
             }
         }
-    } else if([operation.error.domain isEqualToString:NSURLErrorDomain]){
-        if(operation.error.code == NSURLErrorNotConnectedToInternet){
+    } else if ([operation.error.domain isEqualToString:NSURLErrorDomain]) {
+        if(operation.error.code == NSURLErrorNotConnectedToInternet) {
             return [Errors produceErrorWithErrorCode:notConnectedToInternetError withUnderlyingError:operation.error];
         }
         return operation.error;

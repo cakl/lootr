@@ -9,6 +9,7 @@
 #import "TestConstants.h"
 
 @implementation TestConstants
+
 NSString *const mockingServerURL = @"http://salty-shelf-8389.herokuapp.com";
 
 @end

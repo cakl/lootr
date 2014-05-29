@@ -10,8 +10,8 @@
 
 @implementation UIErrorHandler
 
-+(UIAlertView*) generateAlertViewWithError:(NSError*)error delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitle:(NSString*)otherButtonTitle {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
++(UIAlertView*)generateAlertViewWithError:(NSError*)error delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitle:(NSString*)otherButtonTitle {
+    UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"error", nil)
                                                         message:error.localizedDescription
                                                        delegate:delegate
                                               cancelButtonTitle:cancelButtonTitle

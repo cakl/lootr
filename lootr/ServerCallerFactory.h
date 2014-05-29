@@ -11,4 +11,5 @@
 
 @interface ServerCallerFactory : NSObject
 +(id <ServerCaller>)createServerCaller;
+
 @end

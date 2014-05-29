@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface UIErrorHandler : NSObject
-+(UIAlertView*) generateAlertViewWithError:(NSError*)error delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitle:(NSString*)otherButtonTitle;
++(UIAlertView*)generateAlertViewWithError:(NSError*)error delegate:(id)delegate cancelButtonTitle:(NSString*)cancelButtonTitle otherButtonTitle:(NSString*)otherButtonTitle;
 
 @end
