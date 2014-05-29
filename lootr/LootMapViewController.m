@@ -12,7 +12,6 @@
 #import "CreateLootViewController.h"
 #import "Facade.h"
 #import "ServerCallerFacadeFactory.h"
-#import "UIErrorHandler.h"
 
 @interface LootMapViewController ()
 @property (nonatomic, assign, readwrite) CLLocationCoordinate2D lastLocationCoordinate;

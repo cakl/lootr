@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Hochschule Rapperswil. All rights reserved.
 //
 
-#import "Constants.h"
-
 @implementation Constants
 
 NSString *const keychainUserServiceName = @"ch.hsr.lootr";

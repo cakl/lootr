@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "RKObjectManagerHelper.h"
 #import "RootViewController.h"
-#import "Constants.h"
 
 @interface AppDelegate ()
 
